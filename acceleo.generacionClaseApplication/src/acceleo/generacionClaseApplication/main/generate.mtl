@@ -1,0 +1,37 @@
+[comment encoding = UTF-8 /]
+[module generate('http://www.application.org','http://www.eclipse.org/uml2/5.0.0/UML')/]
+
+[import acceleo::generacionClaseApplication::main::helperApplication /]
+
+[template public generateElement(aClass : Application)]
+[comment @main /]
+        [let anApp : Application = aClass]
+                [file(aClass.name.concat('App.php'), false, 'UTF-8')]
+                        Routes: [aClass.getRoutes()/]
+                        AppType: [aClass.getAppType() /]
+                        Locale: [aClass.getLocale() /]
+                        Model: [aClass.aPackageModel.toString() /]
+                        View : [aClass.aPackageView.toString() /]
+                        Controller: [aClass.aPackageController.toString() /]
+                [/file]
+        [/let]
+
+        [comment]
+        [let aPM :PackageModel = aClass.aPackageModel]
+                [file(aPM.name.concat('Model.php'), false, 'UTF-8')]
+
+                [/file]
+        [/let]
+        [let aPV : PackageView = aClass.aPackageView]
+                [file(aPV.name.concat('View.php'), false, 'UTF-8')]
+
+                [/file]
+        [/let]
+        [let aPC :PackageController = aClass.aPackageController]
+                [file(aPC.name.concat('Controller.php'), false, 'UTF-8')]
+
+                [/file]
+        [/let]
+        [/comment]
+
+[/template]
