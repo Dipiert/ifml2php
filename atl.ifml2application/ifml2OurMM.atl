@@ -5,7 +5,7 @@
 module tinyRule;
 create ourm : ourMM from uml : UMLMM, ifml : IFMLMM;
 
--- comentarios
+-- comentario
 
 rule IFMLModel2ApplicationClass{
         from
