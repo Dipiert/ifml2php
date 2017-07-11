@@ -277,7 +277,21 @@ rule IFMLForm2Form{
 			tagName <- 'form',
 			isPairedTag <- true,
 			isEmpty <- false,
-			method <- 'POST'
+			method <- 'POST',
+			htmlElements <- frm.viewComponentParts->select(e | e.oclIsTypeOf(extMM!SimpleField))
+		)
+}
+
+lazy rule SimpleField2Input{
+	from
+		sf : extMM!SimpleField
+	to
+		f : ourMM!Input(
+			name <- sf.name,
+			tagName <- 'input',
+			isPairedTag <- true,
+			isEmpty <- false,
+			type <- 'text'
 		)
 }
 
