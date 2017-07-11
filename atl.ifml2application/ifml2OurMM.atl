@@ -117,8 +117,22 @@ rule ViewContainer2View{
 		vc : IFMLMM!ViewContainer
 	to
 		v  : ourMM!View(
-				name <- vc.name				
+				name <- vc.name,
+				viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(extMM!Form))
 			)
+}
+
+rule View2Form{
+	from
+		frm : extMM!Form
+	to
+		f : ourMM!Form(
+			name <- frm.name,
+			tagName <- 'form',
+			isPairedTag <- true,
+			isEmpty <- false,
+			method <- 'POST'
+		)
 }
 
 
