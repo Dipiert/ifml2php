@@ -3,7 +3,7 @@
 -- @nsURI extMM=http://www.omg.org/spec/20130218/ext
 
 module test;
-create ourm : OurMM from ifmlm : ifmlMM, extm : extMM;
+create ourm : OurMM from ifmlm : ifmlMM, extm : extMM
 
 rule ViewElement2Anchor{
 	from
