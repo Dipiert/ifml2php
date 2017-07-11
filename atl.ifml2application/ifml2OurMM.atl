@@ -1,9 +1,10 @@
 -- @nsURI ourMM=http://www.application.org
 -- @nsURI UMLMM=http://www.eclipse.org/uml2/5.0.0/UML
 -- @nsURI IFMLMM=http://www.omg.org/spec/20130218/core
+-- @nsURI extMM=http://www.omg.org/spec/20130218/ext
 
 module tinyRule;
-create ourm : ourMM from uml : UMLMM, ifml : IFMLMM;
+create ourm : ourMM from uml : UMLMM, ifml : IFMLMM, extm : extMM;
 
 rule IFMLModel2ApplicationClass{
         from
@@ -118,4 +119,16 @@ rule ViewContainer2View{
 		v  : ourMM!View(
 				name <- vc.name				
 			)
+}
+
+
+rule ViewElement2Anchor{
+	from
+		ifmlm : extMM!OnSelectEvent
+	to
+		ourm : OurMM!Anchor(
+				hypRef <- extMM!OnSelectEvent.allInstances()->collect(e | e.outInteractionFlows
+															            ->collect(f | f.targetInteractionFlowElement)
+																				  ->collect(g | g.name))
+		)
 }
