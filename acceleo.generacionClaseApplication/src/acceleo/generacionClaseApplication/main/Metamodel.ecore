@@ -85,4 +85,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="outAttributes" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OnSubmit" eSuperTypes="#//Event"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OnSelect" eSuperTypes="#//Event"/>
 </ecore:EPackage>
