@@ -135,14 +135,159 @@ rule View2Form{
 		)
 }
 
-
 rule ViewElement2Anchor{
 	from
 		ifmlm : extMM!OnSelectEvent
 	to
 		ourm : OurMM!Anchor(
 				hypRef <- extMM!OnSelectEvent.allInstances()->collect(e | e.outInteractionFlows
-															            ->collect(f | f.targetInteractionFlowElement)
-																				  ->collect(g | g.name))
+													->collect(f | f.targetInteractionFlowElement)
+													->collect(g | g.name))
+		)
+-- @nsURI ourMM=http://www.application.org
+-- @nsURI UMLMM=http://www.eclipse.org/uml2/5.0.0/UML
+-- @nsURI IFMLMM=http://www.omg.org/spec/20130218/core
+-- @nsURI extMM=http://www.omg.org/spec/20130218/ext
+
+module tinyRule;
+create ourm : ourMM from uml : UMLMM, ifml : IFMLMM, extm : extMM;
+
+rule IFMLModel2ApplicationClass{
+        from
+ 	       ifmlModel : IFMLMM!IFMLModel
+        to
+           app : ourMM!Application(
+                    name <- ifmlModel.name,
+                    aPackageModel <- ifmlModel.domainModel,
+                    aPackageView <- ifmlModel.interactionFlowModel,         
+                    aPackageController <- thisModule.IFMLModel2PackageController(ifmlModel)
+                )		   			
+}
+
+unique lazy rule IFMLModel2PackageController{
+        from
+            ifmlModel : IFMLMM!IFMLModel
+        to
+            pc  : ourMM!PackageController(
+					name <- ifmlModel.domainModel.name,
+					controllers <- UMLMM!Class.allInstances()
+								->select(r|r.oclIsKindOf(UMLMM!Class))
+								->collect(r|thisModule.createController(r))
+				)	
+}
+
+lazy rule createController{
+	from
+		class : UMLMM!Class
+	to
+		cont : ourMM!Controller(
+			name <- class.name,
+			methods <- IFMLMM!IFMLAction.allInstances()
+						->select(b|b.name.toLower().endsWith(class.name.toLower())
+			))				
+}
+
+rule createMethod{
+	from
+		ifmla : IFMLMM!IFMLAction
+	to
+		a : ourMM!Method(
+			name <- ifmla.name,
+			inAttributes <- ifmla.parameters
+								->select(b|b.direction = #"in" or b.direction = #inout)
+								->collect(b|b.name.toLower()),
+			outAttributes <- ifmla.parameters
+								->select(b|b.direction = #out or b.direction = #inout)
+								->collect(b|b.name.toLower())
+		)		
+}
+
+rule DomainModel2PackageModel{
+        from
+            dm : IFMLMM!DomainModel
+        to
+            pm : ourMM!PackageModel(
+                    name <- dm.name,
+                    models <- UMLMM!Class.allInstances()
+						   ->select(e | e.oclIsKindOf(UMLMM!Class))
+						   ->collect(e| e)	
+                 )
+}
+
+rule UMLClass2Model{
+	from
+		class : UMLMM!Class
+	to
+		model : ourMM!Model(
+			name<-class.name,
+			modelAttributes <- UMLMM!Property.allInstances()
+							->select(e | e.namespace.name = class.name)
+							->collect(e| e)			
+		)
+}
+
+rule UMLproperty2ModelAttribute{
+	from
+		prop : UMLMM!Property
+	to
+		modAt : ourMM!ModelAttribute(
+				name<-prop.name,
+				scope <- prop.visibility.name
+			)
+}
+
+
+lazy rule getDomainElement{
+        from
+            dm : IFMLMM!DomainConcept
+        to
+            mc : ourMM!Model(
+                    name <- dm.name
+                )
+}
+
+rule InteractionFlowModel2PackageView{
+        from
+            ifm : IFMLMM!InteractionFlowModel
+        to
+             pv : ourMM!PackageView(
+                     name <- ifm.name,
+					 views <- IFMLMM!ViewContainer.allInstances()
+						   ->select(e | e.oclIsKindOf(IFMLMM!ViewContainer))
+						   ->collect(e| e)
+                )
+}
+
+rule ViewContainer2View{
+	from
+		vc : IFMLMM!ViewContainer
+	to
+		v  : ourMM!View(
+				name <- vc.name,
+				viewComponents <- vc.viewElements->select(e |e.oclIsTypeOf(extMM!Form))
+			)
+}
+
+rule IFMLForm2Form{
+	from
+		frm : extMM!Form
+	to
+		f : ourMM!Form(
+			name <- frm.name,
+			tagName <- 'form',
+			isPairedTag <- true,
+			isEmpty <- false,
+			method <- 'POST'
+		)
+}
+
+rule OnSelectEvent2Anchor{
+	from
+		ifmlm : extMM!OnSelectEvent
+	to
+		ourm : ourMM!Anchor(
+				hypRef <- extMM!OnSelectEvent.allInstances()->collect(e | e.outInteractionFlows
+													->collect(f | f.targetInteractionFlowElement)
+													->collect(g | g.name))
 		)
 }
