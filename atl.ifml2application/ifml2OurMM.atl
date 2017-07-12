@@ -46,7 +46,7 @@ rule createMethod{
 		ifmla : IFMLMM!IFMLAction
 	to
 		a : ourMM!Method(
-			name <- ifmla.name,
+			name <- thisModule.firstLetterToLower(ifmla.name),
 			inAttributes <- ifmla.parameters
 								->select(b|b.direction = #"in" or b.direction = #inout)
 								->collect(b|b.name.toLower()),
@@ -154,11 +154,18 @@ rule SimpleField2Input{
 		sf : extMM!SimpleField
 	to
 		f : ourMM!Input(
-			name <- sf.name,
+			name <- thisModule.firstLetterToLower(sf.name),
 			tagName <- 'input',
 			isPairedTag <- true,
 			isEmpty <- false,
 			type <- 'text'
 		)
 }
+
+helper def : firstLetterToLower(name : String) : String =
+	if name.size () > 1 then
+		name.substring(1,1).toLower().concat(name.substring(2,name.size()))
+	else
+		name.substring(1,1).toLower()
+	endif;
 
