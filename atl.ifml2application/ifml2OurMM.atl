@@ -118,9 +118,11 @@ rule ViewContainer2View{
 	to
 		v  : ourMM!View(
 				name <- vc.name,
-				viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(extMM!Form))
+				viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(extMM!Form)) -- ver Alternativa Herencia Múltiple
+				-- viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(extMM!Form)) se puede append?
 			)
 }
+
 
 rule IFMLForm2Form{
 	from
@@ -159,3 +161,4 @@ rule SimpleField2Input{
 			type <- 'text'
 		)
 }
+
