@@ -130,7 +130,7 @@ rule IFMLForm2Form{
 	to
 		f : ourMM!Form(
 			name <- frm.name,
-			tagName <- 'form',
+			tagName <- f.getTagName(),
 			isPairedTag <- true,
 			isEmpty <- false,
 			method <- 'POST',
@@ -139,16 +139,16 @@ rule IFMLForm2Form{
 		)
 }
 
-rule OnSelectEvent2Anchor{
-	from
-		ifmlm : extMM!OnSelectEvent
-	to
-		ourm : ourMM!Anchor(
-				hypRef <- extMM!OnSelectEvent.allInstances()->collect(e | e.outInteractionFlows
-													->collect(f | f.targetInteractionFlowElement)
-													->collect(g | g.name))
-		)
-}
+--rule OnSelectEvent2Anchor{
+--	from
+--		ifmlm : extMM!OnSelectEvent
+--	to
+--		ourm : ourMM!Anchor(
+--				hypRef <- extMM!OnSelectEvent.allInstances()->collect(e | e.outInteractionFlows
+--													->collect(f | f.targetInteractionFlowElement)
+--													->collect(g | g.name))
+--		)
+--}
 		
 rule SimpleField2Input{
 	from
@@ -156,7 +156,7 @@ rule SimpleField2Input{
 	to
 		f : ourMM!Input(
 			name <- thisModule.decapitalize(sf.name),
-			tagName <- 'input',
+			tagName <- f.getTagName(),
 			isPairedTag <- true,
 			isEmpty <- false,
 			type <- 'text'
@@ -168,7 +168,7 @@ from
 	ose : extMM!OnSubmitEvent,
 	n	: String
 to	
-	e : OurMM!Event(
+	e : ourMM!Event(
 		handler <- extMM!OnSubmitEvent.allInstances()->select(d | d.viewElement.name.toLower() = n.toLower())	
 													->collect(e | e.outInteractionFlows
 													->collect(f | f.targetInteractionFlowElement)
@@ -184,3 +184,6 @@ helper def : decapitalize(name : String) : String =
 	else
 		name.substring(1,1).toLower()
 	endif;
+
+helper context ourMM!HTMLElement def : getTagName() : String =
+	 self.oclType().toString().split('!').at(2).toLower();
