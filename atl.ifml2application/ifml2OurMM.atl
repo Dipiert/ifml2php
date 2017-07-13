@@ -46,7 +46,7 @@ rule createMethod{
 		ifmla : IFMLMM!IFMLAction
 	to
 		a : ourMM!Method(
-			name <- thisModule.firstLetterToLower(ifmla.name),
+			name <- thisModule.decapitalize(ifmla.name),
 			inAttributes <- ifmla.parameters
 								->select(b|b.direction = #"in" or b.direction = #inout)
 								->collect(b|b.name.toLower()),
@@ -134,7 +134,8 @@ rule IFMLForm2Form{
 			isPairedTag <- true,
 			isEmpty <- false,
 			method <- 'POST',
-			htmlElements <- frm.viewComponentParts->select(e | e.oclIsTypeOf(extMM!SimpleField))
+			htmlElements <- frm.viewComponentParts->select(e | e.oclIsTypeOf(extMM!SimpleField)),
+			events <- thisModule.onSubmitEvent2Event(extMM!OnSubmitEvent, f.name)
 		)
 }
 
@@ -154,7 +155,7 @@ rule SimpleField2Input{
 		sf : extMM!SimpleField
 	to
 		f : ourMM!Input(
-			name <- thisModule.firstLetterToLower(sf.name),
+			name <- thisModule.decapitalize(sf.name),
 			tagName <- 'input',
 			isPairedTag <- true,
 			isEmpty <- false,
@@ -162,10 +163,24 @@ rule SimpleField2Input{
 		)
 }
 
-helper def : firstLetterToLower(name : String) : String =
+lazy rule onSubmitEvent2Event{
+from
+	ose : extMM!OnSubmitEvent,
+	n	: String
+to	
+	e : OurMM!Event(
+		handler <- extMM!OnSubmitEvent.allInstances()->select(d | d.viewElement.name.toLower() = n.toLower())	
+													->collect(e | e.outInteractionFlows
+													->collect(f | f.targetInteractionFlowElement)
+													->collect(g | g.name)), --assuming one Submit per Form
+		type <- 'OnSubmit' -- in the actual implementation
+	)	
+}
+
+
+helper def : decapitalize(name : String) : String =
 	if name.size () > 1 then
 		name.substring(1,1).toLower().concat(name.substring(2,name.size()))
 	else
 		name.substring(1,1).toLower()
 	endif;
-
