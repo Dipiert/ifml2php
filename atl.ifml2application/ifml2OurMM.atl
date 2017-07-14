@@ -14,7 +14,7 @@ rule IFMLModel2ApplicationClass{
                     name <- ifmlModel.name,
                     aPackageModel <- ifmlModel.domainModel,
                     aPackageView <- ifmlModel.interactionFlowModel,         
-                    aPackageController <- thisModule.IFMLModel2PackageController(ifmlModel.domainModel)
+                    aPackageController <- thisModule.DomainModel2PackageController(ifmlModel.domainModel)
                 )		   			
 }
 
@@ -132,6 +132,7 @@ rule ConditionalExpression2Text{ --Falta completar atributos
 	to
 		t : ourMM!Text(
 			name <- ce.name,
+			language <- ce.language,			
 			body <- ce.body
 		)
 }
