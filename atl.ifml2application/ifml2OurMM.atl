@@ -14,18 +14,18 @@ rule IFMLModel2ApplicationClass{
                     name <- ifmlModel.name,
                     aPackageModel <- ifmlModel.domainModel,
                     aPackageView <- ifmlModel.interactionFlowModel,         
-                    aPackageController <- thisModule.IFMLModel2PackageController(ifmlModel)
+                    aPackageController <- thisModule.IFMLModel2PackageController(ifmlModel.domainModel)
                 )		   			
 }
 
-unique lazy rule IFMLModel2PackageController{
+unique lazy rule DomainModel2PackageController{
         from
-            ifmlModel : IFMLMM!IFMLModel
+            domainModel : IFMLMM!DomainModel
         to
             pc  : ourMM!PackageController(
-					name <- ifmlModel.domainModel.name,
+					name <- domainModel.name,
 					controllers <- UMLMM!Class.allInstances()
-								->select(r|r.oclIsKindOf(UMLMM!Class)) -- no puede ponerse esta condición en el from?
+								->select(r|r.oclIsKindOf(UMLMM!Class))
 								->collect(r|thisModule.createController(r))
 				)	
 }
