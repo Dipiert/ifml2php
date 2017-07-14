@@ -117,13 +117,12 @@ rule ViewContainer2View{
 				name <- vc.name,
 				viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(extMM!Form)),-- ver Alternativa Herencia Múltiple
 				viewComponents <- vc.viewElements->select(f | f.oclIsTypeOf(IFMLMM!ViewComponent))
-												->collect(h|h.viewComponentParts),
-				viewComponents <- IFMLMM!ViewContainer.allInstances()->collect(f|thisModule.Landmarks2MenuItems(f))							
+												 ->collect(h|h.viewComponentParts),
+				viewComponents <- IFMLMM!ViewContainer.allInstances()->collect(f|thisModule.Landmarks2MenuItems(f)),
+				viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(IFMLMM!ViewElement))
+												 ->collect(f|thisModule.ViewElement2Image(f))
 			)
 }
-
-
-
 
 rule ConditionalExpression2Text{ 
 	from
@@ -144,13 +143,12 @@ rule IFMLForm2Form{
 		f : ourMM!Form(
 			name <- frm.name,
 			tagName <- f.getTagName(),
-			isPairedTag <- true,
-			isEmpty <- false,
-			method <- 'POST',
+			method <- f.getDefaultMethod(),
 			htmlElements <- frm.viewComponentParts->select(e | e.oclIsTypeOf(extMM!SimpleField)),
 			events <- thisModule.onSubmitEvent2Event(extMM!OnSubmitEvent, f.name)
 		)
 }
+
 
 --rule OnSelectEvent2Anchor{
 --	from
@@ -170,9 +168,7 @@ rule SimpleField2Input{
 		f : ourMM!Input(
 			name <- thisModule.decapitalize(sf.name),
 			tagName <- f.getTagName(),
-			isPairedTag <- true,
-			isEmpty <- false,
-			type <- 'text'
+			type <- f.getDefaultType()
 		)
 }
 
@@ -204,6 +200,16 @@ lazy rule Landmarks2MenuItems{
 		)	
 }
 
+lazy rule ViewElement2Image{
+	from
+		ve : IFMLMM!ViewElement
+	to
+		i : ourMM!Image(
+				source <- ve.id,
+				name <- ve.name,
+				tagName <- 'img'
+			)	
+}
 
 helper def : decapitalize(name : String) : String =
 	if name.size () > 1 then
@@ -216,3 +222,7 @@ helper context ourMM!HTMLElement def : getTagName() : String =
 	 self.oclType().toString().split('!').at(2).toLower();
 
 helper context ourMM!Anchor def : getDefaultTarget() : String = 'self';
+
+helper context ourMM!Form def : getDefaultMethod() : String = 'POST';
+
+helper context ourMM!Input def : getDefaultType() : String = 'text'; 
