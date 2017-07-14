@@ -117,10 +117,12 @@ rule ViewContainer2View{
 				name <- vc.name,
 				viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(extMM!Form)),-- ver Alternativa Herencia Múltiple
 				viewComponents <- vc.viewElements->select(f | f.oclIsTypeOf(IFMLMM!ViewComponent))
-												 ->collect(h|h.viewComponentParts
-												 	->select(j|j.oclIsTypeOf(IFMLMM!ConditionalExpression)))				
+												->collect(h|h.viewComponentParts),
+				viewComponents <- IFMLMM!ViewContainer.allInstances()->collect(f|thisModule.Landmarks2MenuItems(f))							
 			)
 }
+
+
 
 
 rule ConditionalExpression2Text{ 
@@ -188,6 +190,20 @@ to
 	)	
 }
 
+lazy rule Landmarks2MenuItems{
+	from
+		vc	: IFMLMM!ViewContainer(
+			not vc.isLandmark 	
+		)
+	to
+		an	: ourMM!Anchor(
+			name <- thisModule.decapitalize(vc.name),
+			hypRef <- vc.name,
+			target <- an.getDefaultTarget(),
+			tagName <- an.getTagName().substring(1,1)
+		)	
+}
+
 
 helper def : decapitalize(name : String) : String =
 	if name.size () > 1 then
@@ -198,3 +214,5 @@ helper def : decapitalize(name : String) : String =
 
 helper context ourMM!HTMLElement def : getTagName() : String =
 	 self.oclType().toString().split('!').at(2).toLower();
+
+helper context ourMM!Anchor def : getDefaultTarget() : String = 'self';
