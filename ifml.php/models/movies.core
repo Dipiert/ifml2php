@@ -7,7 +7,6 @@
         <parameters id="_4Fxrgs7mEeOGsv3AxEnrmw" name="SelectedMovie">
           <type xsi:type="uml:Class" href="model.uml#__W1boJ6PEeGdnpRmAZh-dQ"/>
         </parameters>
-        
         <viewElementEvents xsi:type="ext:OnSelectEvent" id="_js4hwM7QEeOGsv3AxEnrmw" name="Select a movie" viewElement="//@interactionFlowModel/@interactionFlowModelElements.0/@viewElements.0">
           <outInteractionFlows xsi:type="core:NavigationFlow" id="_4iMR0M7SEeOGsv3AxEnrmw" targetInteractionFlowElement="//@interactionFlowModel/@interactionFlowModelElements.1/@viewElements.0">
             <parameterBindingGroup id="_EYtHoM7lEeOGsv3AxEnrmw">
@@ -15,7 +14,6 @@
             </parameterBindingGroup>
           </outInteractionFlows>
         </viewElementEvents>
-        
         <viewElementEvents id="_39BQwM7pEeOGsv3AxEnrmw" name="Add a movie" viewElement="//@interactionFlowModel/@interactionFlowModelElements.0/@viewElements.0">
           <outInteractionFlows xsi:type="core:NavigationFlow" id="_KOqcIM7qEeOGsv3AxEnrmw" targetInteractionFlowElement="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0"/>
         </viewElementEvents>
@@ -51,6 +49,11 @@
         <viewComponentParts xsi:type="ext:SimpleField" id="_rRyJsM7oEeOGsv3AxEnrmw" name="Year" direction="out">
           <type xsi:type="uml:PrimitiveType" href="model.uml#_YGTmEJ6QEeGdnpRmAZh-dQ"/>
         </viewComponentParts>
+      </viewElements>
+      <viewElements xsi:type="core:ViewComponent" id="_jUwBPWiPEeeDIZih2lyfmg" name="messages">
+        <viewComponentParts xsi:type="core:ConditionalExpression" id="_ovkEHmiPEeeDIZih2lyfmg" language="es" body="Hola Mundo" name="welcome_message"/>
+        <viewComponentParts xsi:type="core:ConditionalExpression" id="_933TjmiPEeeDIZih2lyfmg" language="es" body="Supercalifragilisticoespialidoso" name="title"/>
+        <viewComponentParts xsi:type="core:VisualizationAttribute" id="_n0ouH2ipEeeDIZih2lyfmg" name="visualization"/>
       </viewElements>
     </interactionFlowModelElements>
     <interactionFlowModelElements xsi:type="core:IFMLAction" id="_U2ZFQM7pEeOGsv3AxEnrmw" name="AddMovie" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0/@viewElementEvents.0/@outInteractionFlows.0">
