@@ -62,8 +62,7 @@ rule DomainModel2PackageModel{
         to
             pm : ourMM!PackageModel(
                     name <- dm.name,
-                    models <- UMLMM!Class.allInstances()
-						   ->select(e | e.oclIsKindOf(UMLMM!Class)) -- no puede ponerse esta condición en el from?
+                    models <- UMLMM!Class.allInstances() 
 						   ->collect(e| e)	
                  )
 }
@@ -107,8 +106,6 @@ rule InteractionFlowModel2PackageView{
              pv : ourMM!PackageView(
                      name <- ifm.name,
 					 views <- IFMLMM!ViewContainer.allInstances()
-						   ->select(e | e.oclIsKindOf(IFMLMM!ViewContainer)) -- no puede ponerse esta condición en el from?
-						   ->collect(e| e)
                 )
 }
 
@@ -126,7 +123,7 @@ rule ViewContainer2View{
 }
 
 
-rule ConditionalExpression2Text{ --Falta completar atributos
+rule ConditionalExpression2Text{ 
 	from
 		ce : IFMLMM!ConditionalExpression
 	to
