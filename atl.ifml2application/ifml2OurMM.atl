@@ -25,7 +25,7 @@ unique lazy rule IFMLModel2PackageController{
             pc  : ourMM!PackageController(
 					name <- ifmlModel.domainModel.name,
 					controllers <- UMLMM!Class.allInstances()
-								->select(r|r.oclIsKindOf(UMLMM!Class))
+								->select(r|r.oclIsKindOf(UMLMM!Class)) -- no puede ponerse esta condición en el from?
 								->collect(r|thisModule.createController(r))
 				)	
 }
@@ -63,7 +63,7 @@ rule DomainModel2PackageModel{
             pm : ourMM!PackageModel(
                     name <- dm.name,
                     models <- UMLMM!Class.allInstances()
-						   ->select(e | e.oclIsKindOf(UMLMM!Class))
+						   ->select(e | e.oclIsKindOf(UMLMM!Class)) -- no puede ponerse esta condición en el from?
 						   ->collect(e| e)	
                  )
 }
@@ -107,7 +107,7 @@ rule InteractionFlowModel2PackageView{
              pv : ourMM!PackageView(
                      name <- ifm.name,
 					 views <- IFMLMM!ViewContainer.allInstances()
-						   ->select(e | e.oclIsKindOf(IFMLMM!ViewContainer))
+						   ->select(e | e.oclIsKindOf(IFMLMM!ViewContainer)) -- no puede ponerse esta condición en el from?
 						   ->collect(e| e)
                 )
 }
