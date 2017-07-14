@@ -118,9 +118,22 @@ rule ViewContainer2View{
 	to
 		v  : ourMM!View(
 				name <- vc.name,
-				viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(extMM!Form)) -- ver Alternativa Herencia Múltiple
+				viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(extMM!Form)),-- ver Alternativa Herencia Múltiple
+				viewComponents <- vc.viewElements->select(f | f.oclIsTypeOf(IFMLMM!ViewComponent))
+												->collect(h|h.viewComponentParts)				
 				-- viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(extMM!Form)) se puede append?
 			)
+}
+
+
+rule ConditionalExpression2Text{ --Falta completar atributos
+	from
+		ce : IFMLMM!ConditionalExpression
+	to
+		t : ourMM!Text(
+			name <- ce.name,
+			body <- ce.body
+		)
 }
 
 

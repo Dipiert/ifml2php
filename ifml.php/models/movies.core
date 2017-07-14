@@ -53,7 +53,6 @@
       <viewElements xsi:type="core:ViewComponent" id="_jUwBPWiPEeeDIZih2lyfmg" name="messages">
         <viewComponentParts xsi:type="core:ConditionalExpression" id="_ovkEHmiPEeeDIZih2lyfmg" language="es" body="Hola Mundo" name="welcome_message"/>
         <viewComponentParts xsi:type="core:ConditionalExpression" id="_933TjmiPEeeDIZih2lyfmg" language="es" body="Supercalifragilisticoespialidoso" name="title"/>
-        <viewComponentParts xsi:type="core:VisualizationAttribute" id="_n0ouH2ipEeeDIZih2lyfmg" name="visualization"/>
       </viewElements>
     </interactionFlowModelElements>
     <interactionFlowModelElements xsi:type="core:IFMLAction" id="_U2ZFQM7pEeOGsv3AxEnrmw" name="AddMovie" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0/@viewElementEvents.0/@outInteractionFlows.0">
