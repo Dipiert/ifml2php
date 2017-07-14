@@ -117,8 +117,8 @@ rule ViewContainer2View{
 				name <- vc.name,
 				viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(extMM!Form)),-- ver Alternativa Herencia Múltiple
 				viewComponents <- vc.viewElements->select(f | f.oclIsTypeOf(IFMLMM!ViewComponent))
-												->collect(h|h.viewComponentParts)				
-				-- viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(extMM!Form)) se puede append?
+												 ->collect(h|h.viewComponentParts
+												 	->select(j|j.oclIsTypeOf(IFMLMM!ConditionalExpression)))				
 			)
 }
 
