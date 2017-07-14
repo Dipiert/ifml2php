@@ -9,4 +9,4 @@ This project intended to facilitate the adoption of the MDD approach by Web Deve
 * [Eclipse Luna](https://eclipse.org/luna/)
 * [IFML Editor](https://github.com/ifml/ifml-editor)
 * [Sirius](https://eclipse.org/sirius/)
-* [Un caso de estudio sobre la aplicación de UWE para la generación de sistemas web](http://sedici.unlp.edu.ar/bitstream/handle/10915/58143/Documento_completo.pdf-PDFA.pdf?sequence=1)
+* [Un caso de estudio sobre la aplicación de UWE para la generación de sistemas web](https://goo.gl/dozG7N)
