@@ -2,7 +2,6 @@
 <core:IFMLModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://www.omg.org/spec/20130218/core" xmlns:ext="http://www.omg.org/spec/20130218/ext" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" id="_QwKrAM7OEeOGsv3AxEnrmw" name="Movies">
   <interactionFlowModel id="_YON7gM7PEeOGsv3AxEnrmw" name="InteractionFlowModel">
     <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_BTIDUM7QEeOGsv3AxEnrmw" name="MovieList" isDefault="true">
-      <viewElementEvents id="_SCkB_mNQEeeTtugCy5jPOg"/>
       <viewElements xsi:type="ext:List" id="_LjeRwM7QEeOGsv3AxEnrmw" name="MovieList" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.3/@outInteractionFlows.0">
         <parameters id="_4Fxrgs7mEeOGsv3AxEnrmw" name="SelectedMovie">
           <type xsi:type="uml:Class" href="model.uml#__W1boJ6PEeGdnpRmAZh-dQ"/>
@@ -54,6 +53,7 @@
         <viewComponentParts xsi:type="core:ConditionalExpression" id="_ovkEHmiPEeeDIZih2lyfmg" language="es" body="Hola Mundo" name="welcome_message"/>
         <viewComponentParts xsi:type="core:ConditionalExpression" id="_933TjmiPEeeDIZih2lyfmg" language="es" body="Supercalifragilisticoespialidoso" name="title"/>
       </viewElements>
+      <viewElements id="/img/smd" name="img_prueba"/>
     </interactionFlowModelElements>
     <interactionFlowModelElements xsi:type="core:IFMLAction" id="_U2ZFQM7pEeOGsv3AxEnrmw" name="AddMovie" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0/@viewElementEvents.0/@outInteractionFlows.0">
       <parameters id="_nak7cv33EeOlue9C3AA28A" name="Year">
