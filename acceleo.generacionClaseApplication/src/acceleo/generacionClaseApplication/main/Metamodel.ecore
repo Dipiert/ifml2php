@@ -49,6 +49,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPartial" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="viewComponents" upperBound="-1"
         eType="#//ViewComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="innerViews" upperBound="-1"
+        eType="#//View" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Controller">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

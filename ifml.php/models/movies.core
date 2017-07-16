@@ -20,6 +20,9 @@
         <viewComponentParts xsi:type="core:VisualizationAttribute" id="_-0rev9wnEeOqpair1RTJJg" name="Title" featureConcept="//@domainModel/@domainElements.1"/>
         <viewComponentParts xsi:type="core:VisualizationAttribute" id="_L9A8D9wqEeOkXZCL_xSeWQ" name="Year" featureConcept="//@domainModel/@domainElements.2"/>
       </viewElements>
+      <viewElements xsi:type="ext:IFMLWindow" id="_IaUU22lwEeeY5Mo0OtH2sg" name="testWindow">
+        <viewElements xsi:type="ext:IFMLWindow" id="_e52vUWm4EeeY5Mo0OtH2sg" name="anotherTestWindow"/>
+      </viewElements>
     </interactionFlowModelElements>
     <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_ozHbwM7QEeOGsv3AxEnrmw" name="Movie">
       <viewElements xsi:type="ext:Details" id="_3WzcwM7SEeOGsv3AxEnrmw" name="Movie" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.0/@viewElements.0/@viewElementEvents.0/@outInteractionFlows.0">
