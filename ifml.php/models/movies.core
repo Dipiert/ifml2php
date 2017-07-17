@@ -36,6 +36,10 @@
     </interactionFlowModelElements>
     <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_TGGo0M7oEeOGsv3AxEnrmw" name="AddMovieForm">
       <viewElements xsi:type="ext:Form" id="_V_U4sM7oEeOGsv3AxEnrmw" name="AddMovieForm" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.0/@viewElements.0/@viewElementEvents.1/@outInteractionFlows.0">
+        <parameters xsi:type="ext:SelectionField" id="_UH7LVGr4EeeWh8uewFPoJg" name="Sexo">
+          <parameters xsi:type="ext:IFMLSlot" id="_WV6s42r4EeeWh8uewFPoJg" name="Mas"/>
+          <parameters xsi:type="ext:IFMLSlot" id="_ZufyQ2r4EeeWh8uewFPoJg" name="Fem"/>
+        </parameters>
         <viewElementEvents xsi:type="ext:OnSubmitEvent" id="_2uePcM7oEeOGsv3AxEnrmw" name="Add movie" viewElement="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0">
           <outInteractionFlows xsi:type="core:NavigationFlow" id="_aReN4M7pEeOGsv3AxEnrmw" targetInteractionFlowElement="//@interactionFlowModel/@interactionFlowModelElements.3">
             <parameterBindingGroup id="_l9V_IM7pEeOGsv3AxEnrmw">
