@@ -105,22 +105,48 @@ rule InteractionFlowModel2PackageView{
         to
              pv : ourMM!PackageView(
                      name <- ifm.name,
-					 views <- IFMLMM!ViewContainer.allInstances()
+					 --views <- IFMLMM!ViewContainer.allInstances()
+					 views <- ifm.interactionFlowModelElements->select(f|f.oclIsKindOf(IFMLMM!ViewContainer))
                 )
 }
 
 rule ViewContainer2View{
 	from
 		vc : IFMLMM!ViewContainer
+		(not (vc.refImmediateComposite().oclIsKindOf(IFMLMM!ViewContainer)))				
 	to
 		v  : ourMM!View(
 				name <- vc.name,
 				viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(extMM!Form)),-- ver Alternativa Herencia Múltiple
 				viewComponents <- vc.viewElements->select(f | f.oclIsTypeOf(IFMLMM!ViewComponent))
-												 ->collect(h|h.viewComponentParts),
-				viewComponents <- IFMLMM!ViewContainer.allInstances()->collect(f|thisModule.Landmarks2MenuItems(f)),
+												 ->collect(h|h.viewComponentParts
+												 	->select(b|b.oclIsTypeOf(IFMLMM!ConditionalExpression))),
+				--viewComponents <- IFMLMM!ViewContainer.allInstances()->collect(f|thisModule.Landmarks2MenuItems(f)),
+				viewComponents <- IFMLMM!ViewContainer.allInstances()
+										->select(a | a.refImmediateComposite() = IFMLMM!InteractionFlowModel.allInstances().first())
+										->collect(f|thisModule.Landmarks2MenuItems(f)),
 				viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(IFMLMM!ViewElement))
-												 ->collect(f|thisModule.ViewElement2Image(f))
+												 ->collect(f|thisModule.ViewElement2Image(f)),
+			 	innerViews <- vc.viewElements->select(e| e.oclIsKindOf(IFMLMM!ViewContainer))
+													->collect(e|thisModule.ViewContainer2InnerView(e))
+			)
+}
+
+lazy rule ViewContainer2InnerView{
+	from
+		vc : IFMLMM!ViewContainer
+		(vc.refImmediateComposite().oclIsKindOf(IFMLMM!ViewContainer))		
+	to
+		v  : ourMM!View(
+				name <- vc.name,
+				viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(extMM!Form)),-- ver Alternativa Herencia Múltiple
+				viewComponents <- vc.viewElements->select(f | f.oclIsTypeOf(IFMLMM!ViewComponent))
+												 ->collect(h|h.viewComponentParts
+												 	->select(b|b.oclIsTypeOf(IFMLMM!ConditionalExpression))),
+				viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(IFMLMM!ViewElement))
+												 ->collect(f|thisModule.ViewElement2Image(f)),
+			 	innerViews <- vc.viewElements->select(e| e.oclIsKindOf(IFMLMM!ViewContainer))
+													->collect(e|thisModule.ViewContainer2InnerView(e))
 			)
 }
 
@@ -145,10 +171,33 @@ rule IFMLForm2Form{
 			tagName <- f.getTagName(),
 			method <- f.getDefaultMethod(),
 			htmlElements <- frm.viewComponentParts->select(e | e.oclIsTypeOf(extMM!SimpleField)),
+			htmlElements <- frm.parameters->select(e | e.oclIsTypeOf(extMM!SelectionField)),
 			events <- thisModule.onSubmitEvent2Event(extMM!OnSubmitEvent, f.name)
 		)
 }
 
+rule SelectionField2Select{
+	from
+		sf : extMM!SelectionField
+	to
+		s : ourMM!Select(
+			name <- sf.name,
+			tagName <- s.getTagName(),
+			multiple <- sf.isMultiSelection,
+			htmlElements <- sf.parameters->select(e | e.oclIsTypeOf(extMM!IFMLSlot))
+		)
+}
+
+rule IFMLSlot2Option{
+	from
+		sl : extMM!IFMLSlot
+	to
+		op : ourMM!Option(
+			name <- sl.name,
+			tagName <- op.getTagName(),
+			value <- sl.name.trim().toLower()
+		)
+}
 
 --rule OnSelectEvent2Anchor{
 --	from
@@ -179,7 +228,7 @@ from
 to	
 	e : ourMM!Event(
 		handler <- extMM!OnSubmitEvent.allInstances()->select(d | d.viewElement.name.toLower() = n.toLower())	
-													->collect(e | e.outInteractionFlows
+													->collect(a | a.outInteractionFlows
 													->collect(f | f.targetInteractionFlowElement)
 													->collect(g | g.name)), --assuming one Submit per Form
 		type <- 'OnSubmit' -- in the actual implementation
@@ -189,7 +238,7 @@ to
 lazy rule Landmarks2MenuItems{
 	from
 		vc	: IFMLMM!ViewContainer(
-			not vc.isLandmark 	
+			(not vc.isLandmark)
 		)
 	to
 		an	: ourMM!Anchor(
@@ -210,6 +259,7 @@ lazy rule ViewElement2Image{
 				tagName <- 'img'
 			)	
 }
+
 
 helper def : decapitalize(name : String) : String =
 	if name.size () > 1 then
