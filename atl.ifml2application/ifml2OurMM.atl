@@ -25,7 +25,7 @@ unique lazy rule DomainModel2PackageController{
             pc  : ourMM!PackageController(
 					name <- domainModel.name,
 					controllers <- UMLMM!Class.allInstances()
-								->select(r|r.oclIsKindOf(UMLMM!Class))
+								->select(r|r.oclIsKindOf(UMLMM!Class)) --Es Necesario?
 								->collect(r|thisModule.createController(r))
 				)	
 }
