@@ -18,7 +18,7 @@ rule IFMLModel2ApplicationClass{
                 )		   			
 }
 
-unique lazy rule DomainModel2PackageController{
+lazy rule DomainModel2PackageController{
         from
             domainModel : IFMLMM!DomainModel
         to
@@ -169,13 +169,16 @@ rule IFMLForm2Form{
 			name <- frm.name,
 			tagName <- f.getTagName(),
 			method <- f.getDefaultMethod(),
-			htmlElements <- frm.viewComponentParts->select(e | e.oclIsTypeOf(extMM!SimpleField)),
+			htmlElements <- frm.viewComponentParts
+										->select(e | e.oclIsTypeOf(extMM!SimpleField)),
 			htmlElements <- extMM!IFMLSlot.allInstances()
-							->select(e|(thisModule.isRadioButton(e, frm.parameters)))
-												->collect(e|thisModule.IFMLSlot2RadioButton(e, e.refImmediateComposite().name)),
+										->select(e|(thisModule.areRelatives(e.refImmediateComposite(), frm.parameters)))
+										->select(e|(not(thisModule.isCheckbox(e.refImmediateComposite()))))
+										->collect(e|thisModule.IFMLSlot2RadioButton(e, e.refImmediateComposite().name)),
 			htmlElements <- extMM!IFMLSlot.allInstances()
-							->select(e|((thisModule.isCheckbox(e, frm.parameters))))
-												->collect(e|thisModule.IFMLSlot2Checkbox(e, e.refImmediateComposite().name)),																				
+										->select(e|(thisModule.areRelatives(e.refImmediateComposite(), frm.parameters)))
+										->select(e|((thisModule.isCheckbox(e.refImmediateComposite()))))							
+										->collect(e|thisModule.IFMLSlot2Checkbox(e, e.refImmediateComposite().name)),																				
 			events <- thisModule.onSubmitEvent2Event(extMM!OnSubmitEvent, f.name)
 		)
 }
@@ -190,7 +193,7 @@ lazy rule IFMLSlot2RadioButton{
 			name <- st,
 			value <- sl.name,
 			tagName <- rb.getTagName(),
-			type <- rb.getDefaultType()
+			type <- 'radio'
 		)
 }
 
@@ -203,7 +206,7 @@ lazy rule IFMLSlot2Checkbox{
 			name <- st,
 			value <- sl.name,
 			tagName <- cb.getTagName(),
-			type <- cb.getDefaultType()
+			type <- 'checkbox'
 		)
 }
 
@@ -274,15 +277,22 @@ helper context ourMM!Form def : getDefaultMethod() : String = 'POST';
 
 helper context ourMM!TextField def : getDefaultType() : String = 'text';
 
-helper def : isuCheckbox(slot : extMM!IFMLSlot, seq : Sequence(extMM!IFMLParameters)) : Boolean =
-	if (seq->includes(slot.refImmediateComposite())) and ((slot.refImmediateComposite().isMultiSelection = true)) then
+helper def : areRelatives(child : OclAny, seq : Sequence(OclAny)) : Boolean =
+	if (seq->includes(child)) then
+		true
+	else
+		false
+	endif;
+
+helper def : isCheckbox(parent : OclAny) : Boolean =
+	if (parent.isMultiSelection = true) then
 		true
 	else
 		false
 	endif;
 
 helper def : isRadioButton(slot : extMM!IFMLSlot, seq : Sequence(extMM!IFMLParameters)) : Boolean =
-	if (seq->includes(slot.refImmediateComposite())) and ((slot.refImmediateComposite().isMultiSelection = false)) then
+	if (thisModule.areRelatives(slot.refImmediateComposite(), seq)) and ((slot.refImmediateComposite().isMultiSelection = false)) then
 		true
 	else
 		false
@@ -290,10 +300,3 @@ helper def : isRadioButton(slot : extMM!IFMLSlot, seq : Sequence(extMM!IFMLParam
 
 helper context ourMM!Input def : getTagName() : String =
 	'input';
-
-helper context ourMM!Input def : getDefaultType() : String =
-	if (self.oclType().toString() = 'Checkbox') then
-		self.oclType().toString().split('!').at(2).toLower()
-	else
-		'radio'
-	endif;
