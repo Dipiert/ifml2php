@@ -36,7 +36,7 @@ We are eager for your contributions:
 If you find a security vulnerability, do NOT open an issue. Email ifml2php@gmail.com instead.
 
 ### Bug Reports
-* It will be useful if you tell us
+It will be useful if you tell us:
 * What version of version of Eclipse, ATL, Acceleo or Java are you using?
 * What operating system and processor architecture are you using?
 * What did you do?
