@@ -25,7 +25,6 @@ unique lazy rule DomainModel2PackageController{
             pc  : ourMM!PackageController(
 					name <- domainModel.name,
 					controllers <- UMLMM!Class.allInstances()
-								->select(r|r.oclIsKindOf(UMLMM!Class)) --Es Necesario?
 								->collect(r|thisModule.createController(r))
 				)	
 }
@@ -172,7 +171,7 @@ rule IFMLForm2Form{
 			method <- f.getDefaultMethod(),
 			htmlElements <- frm.viewComponentParts->select(e | e.oclIsTypeOf(extMM!SimpleField)),
 			htmlElements <- extMM!IFMLSlot.allInstances()
-							->select(e|(not(thisModule.isCheckbox(e, frm.parameters))))
+							->select(e|(thisModule.isRadioButton(e, frm.parameters)))
 												->collect(e|thisModule.IFMLSlot2RadioButton(e, e.refImmediateComposite().name)),
 			htmlElements <- extMM!IFMLSlot.allInstances()
 							->select(e|((thisModule.isCheckbox(e, frm.parameters))))
@@ -191,7 +190,7 @@ lazy rule IFMLSlot2RadioButton{
 			name <- st,
 			value <- sl.name,
 			tagName <- rb.getTagName(),
-			type <- 'radio'
+			type <- rb.getDefaultType()
 		)
 }
 
@@ -204,7 +203,7 @@ lazy rule IFMLSlot2Checkbox{
 			name <- st,
 			value <- sl.name,
 			tagName <- cb.getTagName(),
-			type <- cb.getType()
+			type <- cb.getDefaultType()
 		)
 }
 
@@ -275,8 +274,15 @@ helper context ourMM!Form def : getDefaultMethod() : String = 'POST';
 
 helper context ourMM!TextField def : getDefaultType() : String = 'text';
 
-helper def : isCheckbox(slot : extMM!IFMLSlot, seq : Sequence(extMM!IFMLParameters)) : Boolean =
+helper def : isuCheckbox(slot : extMM!IFMLSlot, seq : Sequence(extMM!IFMLParameters)) : Boolean =
 	if (seq->includes(slot.refImmediateComposite())) and ((slot.refImmediateComposite().isMultiSelection = true)) then
+		true
+	else
+		false
+	endif;
+
+helper def : isRadioButton(slot : extMM!IFMLSlot, seq : Sequence(extMM!IFMLParameters)) : Boolean =
+	if (seq->includes(slot.refImmediateComposite())) and ((slot.refImmediateComposite().isMultiSelection = false)) then
 		true
 	else
 		false
@@ -285,9 +291,9 @@ helper def : isCheckbox(slot : extMM!IFMLSlot, seq : Sequence(extMM!IFMLParamete
 helper context ourMM!Input def : getTagName() : String =
 	'input';
 
-helper context ourMM!Input def : getType() : String =
+helper context ourMM!Input def : getDefaultType() : String =
 	if (self.oclType().toString() = 'Checkbox') then
-		'check'
-	else
 		self.oclType().toString().split('!').at(2).toLower()
+	else
+		'radio'
 	endif;
