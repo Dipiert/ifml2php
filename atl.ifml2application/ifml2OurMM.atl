@@ -105,10 +105,10 @@ rule InteractionFlowModel2PackageView{
         to
              pv : ourMM!PackageView(
                      name <- ifm.name,
-					 --views <- IFMLMM!ViewContainer.allInstances()
 					 views <- ifm.interactionFlowModelElements->select(f|f.oclIsKindOf(IFMLMM!ViewContainer))
                 )
 }
+
 
 rule ViewContainer2View{
 	from
@@ -121,7 +121,6 @@ rule ViewContainer2View{
 				viewComponents <- vc.viewElements->select(f | f.oclIsTypeOf(IFMLMM!ViewComponent))
 												 ->collect(h|h.viewComponentParts
 												 	->select(b|b.oclIsTypeOf(IFMLMM!ConditionalExpression))),
-				--viewComponents <- IFMLMM!ViewContainer.allInstances()->collect(f|thisModule.Landmarks2MenuItems(f)),
 				viewComponents <- IFMLMM!ViewContainer.allInstances()
 										->select(a | a.refImmediateComposite() = IFMLMM!InteractionFlowModel.allInstances().first())
 										->collect(f|thisModule.Landmarks2MenuItems(f)),
@@ -150,6 +149,7 @@ lazy rule ViewContainer2InnerView{
 			)
 }
 
+
 rule ConditionalExpression2Text{ 
 	from
 		ce : IFMLMM!ConditionalExpression
@@ -171,50 +171,48 @@ rule IFMLForm2Form{
 			tagName <- f.getTagName(),
 			method <- f.getDefaultMethod(),
 			htmlElements <- frm.viewComponentParts->select(e | e.oclIsTypeOf(extMM!SimpleField)),
-			htmlElements <- frm.parameters->select(e | e.oclIsTypeOf(extMM!SelectionField)),
+			htmlElements <- extMM!IFMLSlot.allInstances()
+							->select(e|(not(thisModule.isCheckbox(e, frm.parameters))))
+												->collect(e|thisModule.IFMLSlot2RadioButton(e, e.refImmediateComposite().name)),
+			htmlElements <- extMM!IFMLSlot.allInstances()
+							->select(e|((thisModule.isCheckbox(e, frm.parameters))))
+												->collect(e|thisModule.IFMLSlot2Checkbox(e, e.refImmediateComposite().name)),																				
 			events <- thisModule.onSubmitEvent2Event(extMM!OnSubmitEvent, f.name)
 		)
 }
 
-rule SelectionField2Select{
+
+lazy rule IFMLSlot2RadioButton{
 	from
-		sf : extMM!SelectionField
+		sl : extMM!IFMLSlot,
+		st : String
 	to
-		s : ourMM!Select(
-			name <- sf.name,
-			tagName <- s.getTagName(),
-			multiple <- sf.isMultiSelection,
-			htmlElements <- sf.parameters->select(e | e.oclIsTypeOf(extMM!IFMLSlot))
+		rb : ourMM!RadioButton(
+			name <- st,
+			value <- sl.name,
+			tagName <- rb.getTagName(),
+			type <- 'radio'
 		)
 }
 
-rule IFMLSlot2Option{
+lazy rule IFMLSlot2Checkbox{
 	from
-		sl : extMM!IFMLSlot
+		sl : extMM!IFMLSlot,
+		st : String
 	to
-		op : ourMM!Option(
-			name <- sl.name,
-			tagName <- op.getTagName(),
-			value <- sl.name.trim().toLower()
+		cb : ourMM!Checkbox(
+			name <- st,
+			value <- sl.name,
+			tagName <- cb.getTagName(),
+			type <- cb.getType()
 		)
 }
 
---rule OnSelectEvent2Anchor{
---	from
---		ifmlm : extMM!OnSelectEvent
---	to
---		ourm : ourMM!Anchor(
---				hypRef <- extMM!OnSelectEvent.allInstances()->collect(e | e.outInteractionFlows
---													->collect(f | f.targetInteractionFlowElement)
---													->collect(g | g.name))
---		)
---}
-		
-rule SimpleField2Input{
+rule SimpleField2TextField{
 	from
 		sf : extMM!SimpleField
 	to
-		f : ourMM!Input(
+		f : ourMM!TextField(
 			name <- thisModule.decapitalize(sf.name),
 			tagName <- f.getTagName(),
 			type <- f.getDefaultType()
@@ -275,4 +273,21 @@ helper context ourMM!Anchor def : getDefaultTarget() : String = 'self';
 
 helper context ourMM!Form def : getDefaultMethod() : String = 'POST';
 
-helper context ourMM!Input def : getDefaultType() : String = 'text'; 
+helper context ourMM!TextField def : getDefaultType() : String = 'text';
+
+helper def : isCheckbox(slot : extMM!IFMLSlot, seq : Sequence(extMM!IFMLParameters)) : Boolean =
+	if (seq->includes(slot.refImmediateComposite())) and ((slot.refImmediateComposite().isMultiSelection = true)) then
+		true
+	else
+		false
+	endif;
+
+helper context ourMM!Input def : getTagName() : String =
+	'input';
+
+helper context ourMM!Input def : getType() : String =
+	if (self.oclType().toString() = 'Checkbox') then
+		'check'
+	else
+		self.oclType().toString().split('!').at(2).toLower()
+	endif;
