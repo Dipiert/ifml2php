@@ -40,6 +40,10 @@
           <parameters xsi:type="ext:IFMLSlot" id="_WV6s42r4EeeWh8uewFPoJg" name="Mas"/>
           <parameters xsi:type="ext:IFMLSlot" id="_ZufyQ2r4EeeWh8uewFPoJg" name="Fem"/>
         </parameters>
+        <parameters xsi:type="ext:SelectionField" id="_WTUtcmtcEeesSKUJrcw4-w" name="Pepi" isMultiSelection="true">
+          <parameters xsi:type="ext:IFMLSlot" id="_al5V42tcEeesSKUJrcw4-w" name="pepi1"/>
+          <parameters xsi:type="ext:IFMLSlot" id="_dE3Ss2tcEeesSKUJrcw4-w" name="pepi2"/>
+        </parameters>
         <viewElementEvents xsi:type="ext:OnSubmitEvent" id="_2uePcM7oEeOGsv3AxEnrmw" name="Add movie" viewElement="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0">
           <outInteractionFlows xsi:type="core:NavigationFlow" id="_aReN4M7pEeOGsv3AxEnrmw" targetInteractionFlowElement="//@interactionFlowModel/@interactionFlowModelElements.3">
             <parameterBindingGroup id="_l9V_IM7pEeOGsv3AxEnrmw">
