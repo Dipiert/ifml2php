@@ -46,15 +46,11 @@ rule createMethod{
 	to
 		a : ourMM!Method(
 			name <- thisModule.decapitalize(ifmla.name),
-			inAttributes <- ifmla.parameters
-								->select(b|b.direction = #"in" or b.direction = #inout)
-								->collect(b|b.name.toLower()),
-			outAttributes <- ifmla.parameters
-								->select(b|b.direction = #out or b.direction = #inout)
-								->collect(b|b.name.toLower())
+			inAttributes <- ifmla.getInAttributes(),
+			outAttributes <- ifmla.getOutAttributes()
 		)		
 }
-
+					
 rule DomainModel2PackageModel{
         from
             dm : IFMLMM!DomainModel
@@ -116,15 +112,7 @@ rule ViewContainer2View{
 	to
 		v  : ourMM!View(
 				name <- vc.name,
-				viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(extMM!Form)),-- ver Alternativa Herencia Múltiple
-				viewComponents <- vc.viewElements->select(f | f.oclIsTypeOf(IFMLMM!ViewComponent))
-												 ->collect(h|h.viewComponentParts
-												 	->select(b|b.oclIsTypeOf(IFMLMM!ConditionalExpression))),
-				viewComponents <- IFMLMM!ViewContainer.allInstances()
-										->select(a | a.refImmediateComposite() = IFMLMM!InteractionFlowModel.allInstances().first())
-										->collect(f|thisModule.Landmarks2MenuItems(f)),
-				viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(IFMLMM!ViewElement))
-												 ->collect(f|thisModule.ViewElement2Image(f)),
+				viewComponents <- vc.getViewComponents(),					
 			 	innerViews <- vc.viewElements->select(e| e.oclIsKindOf(IFMLMM!ViewContainer))
 													->collect(e|thisModule.ViewContainer2InnerView(e))
 			)
@@ -137,12 +125,7 @@ lazy rule ViewContainer2InnerView{
 	to
 		v  : ourMM!View(
 				name <- vc.name,
-				viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(extMM!Form)),-- ver Alternativa Herencia Múltiple
-				viewComponents <- vc.viewElements->select(f | f.oclIsTypeOf(IFMLMM!ViewComponent))
-												 ->collect(h|h.viewComponentParts
-												 	->select(b|b.oclIsTypeOf(IFMLMM!ConditionalExpression))),
-				viewComponents <- vc.viewElements->select(e | e.oclIsTypeOf(IFMLMM!ViewElement))
-												 ->collect(f|thisModule.ViewElement2Image(f)),
+				viewComponents <- vc.getViewComponents(),
 			 	innerViews <- vc.viewElements->select(e| e.oclIsKindOf(IFMLMM!ViewContainer))
 													->collect(e|thisModule.ViewContainer2InnerView(e))
 			)
@@ -169,20 +152,10 @@ rule IFMLForm2Form{
 			name <- frm.name,
 			tagName <- f.getTagName(),
 			method <- f.getDefaultMethod(),
-			htmlElements <- frm.viewComponentParts
-										->select(e | e.oclIsTypeOf(extMM!SimpleField)),
-			htmlElements <- extMM!IFMLSlot.allInstances()
-										->select(e|(thisModule.areRelatives(e.refImmediateComposite(), frm.parameters)))
-										->select(e|(not(thisModule.isCheckbox(e.refImmediateComposite()))))
-										->collect(e|thisModule.IFMLSlot2RadioButton(e, e.refImmediateComposite().name)),
-			htmlElements <- extMM!IFMLSlot.allInstances()
-										->select(e|(thisModule.areRelatives(e.refImmediateComposite(), frm.parameters)))
-										->select(e|((thisModule.isCheckbox(e.refImmediateComposite()))))							
-										->collect(e|thisModule.IFMLSlot2Checkbox(e, e.refImmediateComposite().name)),																				
+			htmlElements <- frm.getHTMLElements(),
 			events <- thisModule.onSubmitEvent2Event(extMM!OnSubmitEvent, f.name)
 		)
-}
-
+}	
 
 lazy rule IFMLSlot2RadioButton{
 	from
@@ -278,25 +251,53 @@ helper context ourMM!Form def : getDefaultMethod() : String = 'POST';
 helper context ourMM!TextField def : getDefaultType() : String = 'text';
 
 helper def : areRelatives(child : OclAny, seq : Sequence(OclAny)) : Boolean =
-	if (seq->includes(child)) then
-		true
-	else
-		false
-	endif;
+	seq->includes(child);
 
 helper def : isCheckbox(parent : OclAny) : Boolean =
-	if (parent.isMultiSelection = true) then
-		true
-	else
-		false
-	endif;
-
-helper def : isRadioButton(slot : extMM!IFMLSlot, seq : Sequence(extMM!IFMLParameters)) : Boolean =
-	if (thisModule.areRelatives(slot.refImmediateComposite(), seq)) and ((slot.refImmediateComposite().isMultiSelection = false)) then
-		true
-	else
-		false
-	endif;
+	parent.isMultiSelection;
 
 helper context ourMM!Input def : getTagName() : String =
 	'input';
+
+helper context IFMLMM!ViewContainer def : getAnchors() : Sequence(ourMM!Anchor) =
+	IFMLMM!ViewContainer.allInstances()
+			->select(a | a.refImmediateComposite() = IFMLMM!InteractionFlowModel.allInstances().first())
+			->collect(f|thisModule.Landmarks2MenuItems(f));
+
+helper context extMM!Form def : getHTMLElements() : Sequence(ourMM!HTMLElements) =
+	Sequence{self.getSimpleFields(),self.getSelectionFields()};
+
+helper context extMM!Form def : getSimpleFields() : Sequence(ourMM!TextField) =
+	self.viewComponentParts->select(e | e.oclIsTypeOf(extMM!SimpleField));
+			
+helper context extMM!Form def : getSelectionFields() : Sequence(ourMM!Input) =
+	Sequence{extMM!IFMLSlot.allInstances()
+					->select(e|(thisModule.areRelatives(e.refImmediateComposite(), self.parameters)))
+					->select(e|(not(thisModule.isCheckbox(e.refImmediateComposite()))))
+					->collect(e|thisModule.IFMLSlot2RadioButton(e, e.refImmediateComposite().name)),
+			extMM!IFMLSlot.allInstances()
+					->select(e|(thisModule.areRelatives(e.refImmediateComposite(), self.parameters)))
+					->select(e|((thisModule.isCheckbox(e.refImmediateComposite()))))							
+					->collect(e|thisModule.IFMLSlot2Checkbox(e, e.refImmediateComposite().name))};
+					
+helper context IFMLMM!IFMLAction def : getInAttributes() : Sequence(String) =
+	self.parameters->select(b|b.direction = #"in" or b.direction = #inout)
+					->collect(b|b.name.toLower());	
+
+helper context IFMLMM!IFMLAction def : getOutAttributes() : Sequence(String) =
+	self.parameters->select(b|b.direction = #out or b.direction = #inout)
+					->collect(b|b.name.toLower());
+
+helper context IFMLMM!ViewContainer def : getViewComponents() : Sequence(ourMM!ViewComponent) =
+	Sequence{
+	self.viewElements->select(e | e.oclIsTypeOf(extMM!Form)),
+	self.viewElements->select(f | f.oclIsTypeOf(IFMLMM!ViewComponent))
+						->collect(h|h.viewComponentParts
+	       				->select(b|b.oclIsTypeOf(IFMLMM!ConditionalExpression))),
+	self.viewElements->select(e | e.oclIsTypeOf(IFMLMM!ViewElement))
+						->collect(f|thisModule.ViewElement2Image(f)),
+	if (not (self.refImmediateComposite().oclIsKindOf(IFMLMM!ViewContainer))) then
+		self.getAnchors()
+	else
+		Sequence{}
+	endif};
