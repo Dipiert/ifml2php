@@ -153,7 +153,8 @@ rule IFMLForm2Form{
 			tagName <- f.getTagName(),
 			method <- f.getDefaultMethod(),
 			htmlElements <- frm.getHTMLElements(),
-			events <- thisModule.onSubmitEvent2Event(extMM!OnSubmitEvent, f.name)
+			events <- thisModule.onSubmitEvent2Event(f.name)
+			
 		)
 }	
 
@@ -179,7 +180,7 @@ lazy rule IFMLSlot2Checkbox{
 			name <- st,
 			value <- sl.name,
 			tagName <- cb.getTagName(),
-			type <- 'checkbox'
+			type <- cb.getDefaultType()
 		)
 }
 
@@ -195,18 +196,15 @@ rule SimpleField2TextField{
 }
 
 lazy rule onSubmitEvent2Event{
-from
-	ose : extMM!OnSubmitEvent,
-	n	: String
-to	
-	e : ourMM!Event(
-		handler <- extMM!OnSubmitEvent.allInstances()->select(d | d.viewElement.name.toLower() = n.toLower())	
-													->collect(a | a.outInteractionFlows
-													->collect(f | f.targetInteractionFlowElement)
-													->collect(g | g.name)), --assuming one Submit per Form
-		type <- 'OnSubmit' -- in the actual implementation
-	)	
+	from
+		n	: String
+	to	
+		e : ourMM!Event(
+			handler <- thisModule.getHandler(n),
+			type <- thisModule.getDefaultEventType()
+		)	
 }
+	
 
 lazy rule Landmarks2MenuItems{
 	from
@@ -229,10 +227,11 @@ lazy rule ViewElement2Image{
 		i : ourMM!Image(
 				source <- ve.id,
 				name <- ve.name,
-				tagName <- 'img'
+				tagName <- i.getTagName()
 			)	
 }
 
+helper context ourMM!Image def : getTagName() : String = 'img';
 
 helper def : decapitalize(name : String) : String =
 	if name.size () > 1 then
@@ -301,3 +300,13 @@ helper context IFMLMM!ViewContainer def : getViewComponents() : Sequence(ourMM!V
 	else
 		Sequence{}
 	endif};
+	
+helper def : getDefaultEventType() : String = 'OnSubmit'; -- in the actual implementation 
+
+helper def : getHandler (n : String) : String =
+	extMM!OnSubmitEvent.allInstances()->select(d | d.viewElement.name.toLower() = n.toLower())	
+														->collect(a | a.outInteractionFlows
+														->collect(f | f.targetInteractionFlowElement)
+														->collect(g | g.name)); --assuming one Submit per Form
+														
+helper context ourMM!Checkbox def : getDefaultType() : String = 'checkbox';
