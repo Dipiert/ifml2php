@@ -84,7 +84,6 @@ rule UMLproperty2ModelAttribute{
 			)
 }
 
-
 lazy rule getDomainElement{
         from
             dm : IFMLMM!DomainConcept
@@ -103,7 +102,6 @@ rule InteractionFlowModel2PackageView{
 					 views <- ifm.interactionFlowModelElements->select(f|f.oclIsKindOf(IFMLMM!ViewContainer))
                 )
 }
-
 
 rule ViewContainer2View{
 	from
@@ -131,7 +129,6 @@ lazy rule ViewContainer2InnerView{
 			)
 }
 
-
 rule ConditionalExpression2Text{ 
 	from
 		ce : IFMLMM!ConditionalExpression
@@ -142,7 +139,6 @@ rule ConditionalExpression2Text{
 			body <- ce.body
 		)
 }
-
 
 rule IFMLForm2Form{
 	from
@@ -204,7 +200,6 @@ lazy rule onSubmitEvent2Event{
 			type <- thisModule.getDefaultEventType()
 		)	
 }
-	
 
 lazy rule Landmarks2MenuItems{
 	from
@@ -309,4 +304,5 @@ helper def : getHandler (n : String) : String =
 														->collect(f | f.targetInteractionFlowElement)
 														->collect(g | g.name)); --assuming one Submit per Form
 														
+
 helper context ourMM!Checkbox def : getDefaultType() : String = 'checkbox';
