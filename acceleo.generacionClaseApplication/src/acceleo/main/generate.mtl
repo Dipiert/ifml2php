@@ -2,13 +2,30 @@
 [module generate('http://www.application.org','http://www.eclipse.org/uml2/5.0.0/UML')/]
 
 [import acceleo::ifml2OurMM::helperApplication /]
+[import acceleo::ifml2OurMM::helperFileReader /]
+[import acceleo::ifml2OurMM::helperLaravelPaths /]
 
-[template public generateElement(aClass : Application)]
+[template public generateElement(anApp : Application)]
 [comment @main /]
-[file (aClass.name, false, 'UTF-8')]
-[for (line : String | aClass.getAppConfig().tokenize('\n'))]
-	[line.replace('name\' => \'.*\'','name\' => \'' + aClass.name + '\'') /]
+[file ('/laravel5.4/config/app', false, 'UTF-8')]
+[for (line : String | anApp.getAppConfig().tokenize('\n'))]
+	[if (line.contains('name\' =>'))]
+		[line.replace('name\' => \'.*\'','name\' => \'' + anApp.name + '\'') /]
+	[elseif(line.contains('locale\' =>'))]
+		[line.replace('locale\' => \'.*\'','locale\' => \'' + anApp.locale + '\'')/]
+	[else]
+		[line/]
+	[/if]
 [/for]
+
+[comment] 
+Puedo usar la función reflexiva de Java Class.getDeclaredFields() para solicitar, mediante un servicio, los atributos de la clase
+Una vez que los tengo puedo iterar a través de ellos para hacer la sustitución del lado derecho de los Strings en el archivo de configuración.
+Si por alguna razón no quiero traer todos los atributos, podría crear un array de atributos exportados.
+Contra: el nombre del atributo en la clase Java deberá ser igual al parámetro de configuración que se quiere cambiar.
+Solución: Agregar un Adapter que haga el mapeo.  
+[/comment]
+
 [/file]
 [/template]
 

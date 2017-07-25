@@ -2,30 +2,30 @@
 [module helperApplication('http://www.application.org')/]
 
 [query public getRoutes(anOclAny: OclAny) : String 
-	= invoke('preprod.acceleo.ifml2OurMM.Application', 'getRoutes()', Sequence{})
+	= invoke('acceleo.ifml2OurMM.Application', 'getRoutes()', Sequence{})
 /]
 
 [query public setRoutes(arg0 : String) : OclVoid
-	= invoke('preprod.acceleo.ifml2OurMM.Application', 'setRoutes(java.lang.String)', Sequence{arg0})
+	= invoke('acceleo.ifml2OurMM.Application', 'setRoutes(java.lang.String)', Sequence{arg0})
 /]
 
 [query public getLocale(anOclAny: OclAny) : String
-	= invoke('preprod.acceleo.ifml2OurMM.Application', 'getLocale()', Sequence{})
+	= invoke('acceleo.ifml2OurMM.Application', 'getLocale()', Sequence{})
 /]
 
 [query public setLocale(arg0 : String) : OclVoid
-	= invoke('preprod.acceleo.ifml2OurMM.Application', 'setLocale(java.lang.String)', Sequence{arg0})
+	= invoke('acceleo.ifml2OurMM.Application', 'setLocale(java.lang.String)', Sequence{arg0})
 /]
 
 [query public getAppType(anOclAny: OclAny) : String
-	= invoke('preprod.acceleo.ifml2OurMM.Application', 'getAppType()', Sequence{})
+	= invoke('acceleo.ifml2OurMM.Application', 'getAppType()', Sequence{})
 /]
 
 [query public setAppType(arg0 : String) : OclVoid
-	= invoke('preprod.acceleo.ifml2OurMM.Application', 'setAppType(java.lang.String)', Sequence{arg0})
+	= invoke('acceleo.ifml2OurMM.Application', 'setAppType(java.lang.String)', Sequence{arg0})
 /]
 
 [query public getAppConfig(anOclAny: OclAny) : String
-	= invoke('preprod.acceleo.ifml2OurMM.Application', 'getAppConfig()', Sequence{})
+	= invoke('acceleo.ifml2OurMM.Application', 'getAppConfig()', Sequence{})
 /]
 
