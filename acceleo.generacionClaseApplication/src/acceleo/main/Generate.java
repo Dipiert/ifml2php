@@ -1,3 +1,4 @@
+package acceleo.ifml2OurMM;
 /*******************************************************************************
  * Copyright (c) 2008, 2012 Obeo.
  * All rights reserved. This program and the accompanying materials
@@ -8,7 +9,6 @@
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
-package acceleo.generacionClaseApplication.main;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,15 +22,9 @@ import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.BasicExtendedMetaData;
-import org.eclipse.emf.ecore.util.ExtendedMetaData;
-import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.acceleo.common.utils.ModelUtils;
+
 
 /**
  * Entry point of the 'Generate' generation module.
@@ -43,14 +37,14 @@ public class Generate extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public static final String MODULE_FILE_NAME = "/acceleo/generacionClaseApplication/main/generate";
+    public static final String MODULE_FILE_NAME = "/acceleo/ifml2OurMM/generate";
     
     /**
      * The name of the templates that are to be generated.
      *
-     * @generated NOT
+     * @generated
      */
-    public static final String[] TEMPLATE_NAMES = { "generateElement"};
+    public static final String[] TEMPLATE_NAMES = { "generateElement" };
     
     /**
      * The list of properties files from the launch parameters (Launch configuration).
@@ -347,11 +341,11 @@ public class Generate extends AbstractAcceleoGenerator {
      */
     @Override
     public void registerPackages(ResourceSet resourceSet) {
-        super.registerPackages(resourceSet);
-        if (!isInWorkspace(IFML.Core.CorePackage.class)) {
+        super.registerPackages(resourceSet);        
+        /*if (!isInWorkspace(IFML.Core.CorePackage.class)) {
             resourceSet.getPackageRegistry().put(IFML.Core.CorePackage.eINSTANCE.getNsURI(), IFML.Core.CorePackage.eINSTANCE);
-        }
-        File file = new File("/root/workspace/acceleo.generacionClaseApplication/src/acceleo/generacionClaseApplication/main/Metamodel.ecore"); 
+        }*/
+        File file = new File("/home/dam/Escritorio/ws/preprod.acceleo.ifml2OurMM/src/acceleo/generacionClaseApplication/main/Metamodel.ecore");
         EObject obj;
 		try {
 			obj = ModelUtils.load(file, resourceSet);
@@ -361,30 +355,10 @@ public class Generate extends AbstractAcceleoGenerator {
 		} 
         
         
-/*       resourceSet.getPackageRegistry().put(org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eINSTANCE.getNsURI(),
-        		org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage.eINSTANCE);
-
         
-        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-        	    "*", new EcoreResourceFactoryImpl());
-
-        	ResourceSet rs = new ResourceSetImpl();
-        	// enable extended metadata
-        	final ExtendedMetaData extendedMetaData = new BasicExtendedMetaData(rs.getPackageRegistry());
-        	rs.getLoadOptions().put(XMLResource.OPTION_EXTENDED_META_DATA,
-        	    extendedMetaData);
-        	URI baseURI = URI.createURI("http://www.application.org");
-        	
-        	Resource r = rs.getResource(baseURI, true);
-        	EObject eObject = r.getContents().get(0);
-        	if (eObject instanceof EPackage) {
-        	    EPackage p = (EPackage)eObject;
-        	    rs.getPackageRegistry().put(p.getNsURI(), p);
-        	    //EPackage.Registry.INSTANCE.put(p.getNsURI(), p);
-        	}
-        */
-        
-        //resourceSet.getPackageRegistry().put(Application.this.eNS_URI, Application.this.eINSTANCE);
+        /*if (!isInWorkspace(org.eclipse.uml2.uml.UMLPackage.class)) {
+            resourceSet.getPackageRegistry().put(org.eclipse.uml2.uml.UMLPackage.eINSTANCE.getNsURI(), org.eclipse.uml2.uml.UMLPackage.eINSTANCE);
+        }*/
         
         /*
          * If you want to change the content of this method, do NOT forget to change the "@generated"
@@ -428,8 +402,7 @@ public class Generate extends AbstractAcceleoGenerator {
      */
     @Override
     public void registerResourceFactories(ResourceSet resourceSet) {
-        
-        File file = new File("/root/workspace/acceleo.generacionClaseApplication/src/acceleo/generacionClaseApplication/main/Metamodel.ecore"); 
+    	File file = new File("/home/dam/Escritorio/ws/preprod.acceleo.ifml2OurMM/src/acceleo/generacionClaseApplication/main/Metamodel.ecore"); 
         EObject obj;
 		try {
 			obj = ModelUtils.load(file, resourceSet);
@@ -440,7 +413,7 @@ public class Generate extends AbstractAcceleoGenerator {
 		}
     	
     	super.registerResourceFactories(resourceSet);
-        
+       
         /*
          * If you want to change the content of this method, do NOT forget to change the "@generated"
          * tag in the Javadoc of this method to "@generated NOT". Without this new tag, any compilation

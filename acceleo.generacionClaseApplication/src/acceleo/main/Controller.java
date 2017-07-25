@@ -1,4 +1,4 @@
-package acceleo.generacionClaseApplication.main;
+package acceleo.ifml2OurMM;
 
 public class Controller {
 	private boolean isHookeable;

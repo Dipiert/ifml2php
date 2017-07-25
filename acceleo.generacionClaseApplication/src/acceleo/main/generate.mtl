@@ -1,0 +1,14 @@
+[comment encoding = UTF-8 /]
+[module generate('http://www.application.org','http://www.eclipse.org/uml2/5.0.0/UML')/]
+
+[import acceleo::ifml2OurMM::helperApplication /]
+
+[template public generateElement(aClass : Application)]
+[comment @main /]
+[file (aClass.name, false, 'UTF-8')]
+[for (line : String | aClass.getAppConfig().tokenize('\n'))]
+	[line.replace('name\' => \'.*\'','name\' => \'' + aClass.name + '\'') /]
+[/for]
+[/file]
+[/template]
+

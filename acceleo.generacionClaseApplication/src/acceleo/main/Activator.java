@@ -8,7 +8,7 @@
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
-package acceleo.generacionClaseApplication;
+package acceleo.ifml2OurMM;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;

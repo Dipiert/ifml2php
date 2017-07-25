@@ -8,7 +8,7 @@
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
-package acceleo.generacionClaseApplication.main;
+package acceleo.ifml2OurMM;
 
 import java.io.File;
 import java.io.IOException;
@@ -341,9 +341,9 @@ public class GeneratePackageFramework extends AbstractAcceleoGenerator {
     @Override
     public void registerPackages(ResourceSet resourceSet) {
         super.registerPackages(resourceSet);
-        if (!isInWorkspace(IFML.Core.CorePackage.class)) {
+        /*if (!isInWorkspace(IFML.Core.CorePackage.class)) {
             resourceSet.getPackageRegistry().put(IFML.Core.CorePackage.eINSTANCE.getNsURI(), IFML.Core.CorePackage.eINSTANCE);
-        }
+        }*/
         File file = new File("/root/workspace/acceleo.generacionClaseApplication/src/acceleo/generacionClaseApplication/main/Metamodel.ecore"); 
         EObject obj;
 		try {
