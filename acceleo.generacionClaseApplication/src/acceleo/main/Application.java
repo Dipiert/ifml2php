@@ -10,9 +10,10 @@ import acceleo.ifml2OurMM.LaravelPaths;
 
 
 public class Application {
-	public String routes = "localhost/site1";
+	//public String routes = "localhost/site1";
 	public String locale = "es-ES";
-	public String AppType = "web";
+	//public String AppType = "web";
+	
 	
 	public String getRoutes() {
 		return routes;
