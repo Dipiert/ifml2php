@@ -50,7 +50,16 @@ rule createMethod{
 			outAttributes <- ifmla.getOutAttributes()
 		)		
 }
-					
+
+lazy rule parameter2Attribute{
+	from
+		st : String
+	to
+		at : ourMM!Attribute(
+			name <- st.toLower()	
+		)
+}
+
 rule DomainModel2PackageModel{
         from
             dm : IFMLMM!DomainModel
@@ -68,7 +77,7 @@ rule UMLClass2Model{
 	to
 		model : ourMM!Model(
 			name<-class.name,
-			modelAttributes <- UMLMM!Property.allInstances()
+			attributes <- UMLMM!Property.allInstances()
 							->select(e | e.namespace.name = class.name)
 							->collect(e| e)			
 		)
@@ -78,9 +87,8 @@ rule UMLproperty2ModelAttribute{
 	from
 		prop : UMLMM!Property
 	to
-		modAt : ourMM!ModelAttribute(
-				name<-prop.name,
-				scope <- prop.visibility.name
+		modAt : ourMM!Attribute(
+				name<-prop.name
 			)
 }
 
@@ -274,13 +282,13 @@ helper context extMM!Form def : getSelectionFields() : Sequence(ourMM!Input) =
 					->select(e|((thisModule.isCheckbox(e.refImmediateComposite()))))							
 					->collect(e|thisModule.IFMLSlot2Checkbox(e, e.refImmediateComposite().name))};
 					
-helper context IFMLMM!IFMLAction def : getInAttributes() : Sequence(String) =
+helper context IFMLMM!IFMLAction def : getInAttributes() : Sequence(ourMM!Attribute) =
 	self.parameters->select(b|b.direction = #"in" or b.direction = #inout)
-					->collect(b|b.name.toLower());	
+					->collect(b|thisModule.parameter2Attribute(b.name));	
 
-helper context IFMLMM!IFMLAction def : getOutAttributes() : Sequence(String) =
+helper context IFMLMM!IFMLAction def : getOutAttributes() : Sequence(ourMM!Attribute) =
 	self.parameters->select(b|b.direction = #out or b.direction = #inout)
-					->collect(b|b.name.toLower());
+					->collect(b|thisModule.parameters2Attributes(b.name));
 
 helper context IFMLMM!ViewContainer def : getViewComponents() : Sequence(ourMM!ViewComponent) =
 	Sequence{

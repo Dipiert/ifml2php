@@ -19,33 +19,41 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
           eType="#//coreMVC/Model" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Method">
+    <eClassifiers xsi:type="ecore:EClass" name="PackageView">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="inAttributes" upperBound="-1"
-          eType="#//coreMVC/Attribute" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="outAttribute" upperBound="-1"
-          eType="#//coreMVC/Attribute" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
+          eType="#//coreMVC/View" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PackageController">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="controllers" upperBound="-1"
           eType="#//coreMVC/Controller" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="PackageView">
+    <eClassifiers xsi:type="ecore:EClass" name="MVCClass" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+          eType="#//coreMVC/Attribute" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
-          eType="#//coreMVC/View" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Model"/>
-    <eClassifiers xsi:type="ecore:EClass" name="View">
+    <eClassifiers xsi:type="ecore:EClass" name="Attribute">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//coreMVC/MVCClass"/>
+    <eClassifiers xsi:type="ecore:EClass" name="View" eSuperTypes="#//coreMVC/MVCClass">
       <eStructuralFeatures xsi:type="ecore:EReference" name="viewComponents" upperBound="-1"
           eType="#//coreMVC/ViewComponent" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="innerViews" upperBound="-1"
           eType="#//coreMVC/View" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Controller">
+    <eClassifiers xsi:type="ecore:EClass" name="Controller" eSuperTypes="#//coreMVC/MVCClass">
       <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1"
           eType="#//coreMVC/Method" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Method">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inAttributes" upperBound="-1"
+          eType="#//coreMVC/Attribute" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outAttributes" upperBound="-1"
+          eType="#//coreMVC/Attribute" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ViewComponent" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -55,14 +63,6 @@
     <eClassifiers xsi:type="ecore:EClass" name="Event">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="handler" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="MVCClass" abstract="true">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" upperBound="-1"
-          eType="#//coreMVC/Attribute" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Attribute">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="extPHP" nsURI="http://www.application.org/extPHP" nsPrefix="extPHP">
