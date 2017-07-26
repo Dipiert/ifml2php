@@ -24,6 +24,7 @@ Una vez que los tengo puedo iterar a través de ellos para hacer la sustitución
 Si por alguna razón no quiero traer todos los atributos, podría crear un array de atributos exportados.
 Contra: el nombre del atributo en la clase Java deberá ser igual al parámetro de configuración que se quiere cambiar.
 Solución: Agregar un Adapter que haga el mapeo.  
+Sin embargo: cuántos menos cosas puedan ir mal, menos cosas lo harán. Buscamos minimizar las dependencias, de alguna manera ya existen bastantes.
 [/comment]
 
 [/file]
