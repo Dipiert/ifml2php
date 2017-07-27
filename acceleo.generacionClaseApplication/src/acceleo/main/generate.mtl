@@ -1,5 +1,5 @@
 [comment encoding = UTF-8 /]
-[module generate('http://www.application.org','http://www.eclipse.org/uml2/5.0.0/UML')/]
+[module generate('http://www.application.org/coreMVC', 'http://www.application.org/extPHP','http://www.eclipse.org/uml2/5.0.0/UML')/]
 
 [import acceleo::ifml2OurMM::helperApplication /]
 [import acceleo::ifml2OurMM::helperFileReader /]

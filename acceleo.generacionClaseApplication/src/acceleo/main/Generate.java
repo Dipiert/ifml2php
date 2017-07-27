@@ -22,6 +22,8 @@ import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.acceleo.common.utils.ModelUtils;
 
@@ -344,17 +346,23 @@ public class Generate extends AbstractAcceleoGenerator {
         super.registerPackages(resourceSet);        
         /*if (!isInWorkspace(IFML.Core.CorePackage.class)) {
             resourceSet.getPackageRegistry().put(IFML.Core.CorePackage.eINSTANCE.getNsURI(), IFML.Core.CorePackage.eINSTANCE);
-        }*/
-        File file = new File("/home/dam/Escritorio/ws/preprod.acceleo.ifml2OurMM/src/acceleo/generacionClaseApplication/main/Metamodel.ecore");
+        }
+        File file = new File("/home/dam/Escritorio/ws/preprod.acceleo.ifml2OurMM/src/acceleo/generacionClaseApplication/main/acceleo/ifml2OurMM/Metamodel.ecore");
         EObject obj;
-		try {
-			obj = ModelUtils.load(file, resourceSet);
-			resourceSet.getPackageRegistry().put("http://www.application.org", obj); 
-		} catch (IOException e) {
-			e.printStackTrace();
-		} 
+        try {
+            obj = ModelUtils.load(file, resourceSet);
+            resourceSet.getPackageRegistry().put("http://www.application.org", obj); 
+         } catch (IOException e) {
+             e.printStackTrace();
+         }*/ 
         
-        
+        URI uri = URI.createFileURI("/home/dam/Escritorio/ws/preprod.acceleo.ifml2OurMM/src/acceleo/generacionClaseApplication/main/acceleo/ifml2OurMM/Metamodel.ecore");
+        Resource resource = resourceSet.getResource(uri, true);         
+        EPackage PHPMVC = (EPackage) resource.getContents().get(0);
+        List<EPackage> subPackages = PHPMVC.getESubpackages();
+        for(EPackage subPack : subPackages){
+           EPackage.Registry.INSTANCE.put(subPack.getNsURI(), subPack);
+        }      
         
         /*if (!isInWorkspace(org.eclipse.uml2.uml.UMLPackage.class)) {
             resourceSet.getPackageRegistry().put(org.eclipse.uml2.uml.UMLPackage.eINSTANCE.getNsURI(), org.eclipse.uml2.uml.UMLPackage.eINSTANCE);
@@ -402,17 +410,29 @@ public class Generate extends AbstractAcceleoGenerator {
      */
     @Override
     public void registerResourceFactories(ResourceSet resourceSet) {
-    	File file = new File("/home/dam/Escritorio/ws/preprod.acceleo.ifml2OurMM/src/acceleo/generacionClaseApplication/main/Metamodel.ecore"); 
+      /*File file = new File("/home/dam/Escritorio/ws/preprod.acceleo.ifml2OurMM/src/acceleo/generacionClaseApplication/main/acceleo/ifml2OurMM/Metamodel.ecore"); 
         EObject obj;
-		try {
-			obj = ModelUtils.load(file, resourceSet);
-			resourceSet.getPackageRegistry().put("http://www.application.org", obj); 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    	super.registerResourceFactories(resourceSet);
+       try {
+         obj = ModelUtils.load(file, resourceSet);
+         resourceSet.getPackageRegistry().put("http://www.application.org", obj);
+       }
+       catch (IOException e) {
+          TODO Auto-generated catch block
+          e.printStackTrace();
+        }*/
+         //El fragmento anterior funcionaba sin Packages. Culto cargo
+       
+         super.registerResourceFactories(resourceSet);
+         URI uri = URI.createFileURI("/home/dam/Escritorio/ws/preprod.acceleo.ifml2OurMM/src/acceleo/generacionClaseApplication/main/acceleo/ifml2OurMM/Metamodel.ecore");
+         Resource resource = resourceSet.getResource(uri, true);         
+         EPackage PHPMVC = (EPackage) resource.getContents().get(0);
+         List<EPackage> subPackages = PHPMVC.getESubpackages();
+         for(EPackage subPack : subPackages){
+            EPackage.Registry.INSTANCE.put(subPack.getNsURI(), subPack);
+         }
+                  
+
+
        
         /*
          * If you want to change the content of this method, do NOT forget to change the "@generated"
