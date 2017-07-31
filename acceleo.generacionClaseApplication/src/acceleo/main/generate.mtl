@@ -9,6 +9,10 @@
 [comment @main /]
 [file ('/laravel5.4/config/app', false, 'UTF-8')]
 [for (line : String | anApp.getAppConfig().tokenize('\n'))]
+[comment] 
+TODO: crear un método Java que devuelva solo determinadas lineas del archivo, que pueda ser invocado de la manera
+getAppConfig("'name' =>")
+[/comment]
 	[if (line.contains('name\' =>'))]
 		[line.replace('name\' => \'.*\'','name\' => \'' + anApp.name + '\'') /]
 	[elseif(line.contains('locale\' =>'))]
