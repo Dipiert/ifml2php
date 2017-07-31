@@ -1,16 +1,16 @@
 package acceleo.ifml2OurMM;
 
 public class LaravelPaths {
-	String configApp = "/var/www/html/learning/config/app.php";
+   String baseDir = "/var/www/html/";
 
-   public String getConfigApp() {
-      return configApp;
+   public String getBaseDir() {
+      return baseDir;
    }
 
-   public void setConfigApp(String configApp) {
-      this.configApp = configApp;
+   public void setBaseDir(String baseDir) {
+      this.baseDir = baseDir;
    }
-	
-	
-	
+
+   
+   
 }

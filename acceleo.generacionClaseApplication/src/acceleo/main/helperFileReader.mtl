@@ -5,3 +5,11 @@
 	= invoke('acceleo.ifml2OurMM.FileReader', 'getFile(java.lang.String)', Sequence{arg0})
 /]
 
+[query public getFile(arg0 : String, arg1 : String) : String
+	= invoke('acceleo.ifml2OurMM.FileReader', 'getFile(java.lang.String, java.lang.String)', Sequence{arg0, arg1})
+/]
+
+[query public makeFolder(arg0 : String) : OclVoid
+	= invoke('acceleo.ifml2OurMM.FileReader', 'makeFolder(java.lang.String)', Sequence{arg0})
+/]
+

@@ -3,24 +3,22 @@
 
 [import acceleo::ifml2OurMM::helperApplication /]
 [import acceleo::ifml2OurMM::helperFileReader /]
-[import acceleo::ifml2OurMM::helperLaravelPaths /]
+[import acceleo::ifml2OurMM::helperLaravelInputPaths /]
 
-[template public generateElement(anApp : Application)]
+[template public generateElement(anApp : Application) post(trim())]
 [comment @main /]
-[file ('/laravel5.4/config/app', false, 'UTF-8')]
+
+[file ('/laravel5.4.15/config/app', false, 'UTF-8')]
 [for (line : String | anApp.getAppConfig().tokenize('\n'))]
-[comment] 
-TODO: crear un método Java que devuelva solo determinadas lineas del archivo, que pueda ser invocado de la manera
-getAppConfig("'name' =>")
-[/comment]
 	[if (line.contains('name\' =>'))]
 		[line.replace('name\' => \'.*\'','name\' => \'' + anApp.name + '\'') /]
 	[elseif(line.contains('locale\' =>'))]
-		[line.replace('locale\' => \'.*\'','locale\' => \'' + anApp.locale + '\'')/]
+		[line.replace('locale\' => \'.*\'','locale\' => \'' + anApp.getLocale() + '\'')/]
 	[else]
 		[line/]
 	[/if]
 [/for]
+[/file]
 
 [comment] 
 Puedo usar la función reflexiva de Java Class.getDeclaredFields() para solicitar, mediante un servicio, los atributos de la clase
@@ -31,6 +29,44 @@ Solución: Agregar un Adapter que haga el mapeo.
 Sin embargo: cuántos menos cosas puedan ir mal, menos cosas lo harán. Buscamos minimizar las dependencias, de alguna manera ya existen bastantes.
 [/comment]
 
-[/file]
+[ makeModels(aPackageModel) /]
+[ makeViews(aPackageView) /]
+[ makeControllers(aPackageController) /]
+
 [/template]
 
+[template private makeModels(pm : PackageModel)]
+    [let base_dir : String = 'FHS/var/www/html/' ]
+	[let path : String = 'laravel5.4.15/app/' + pm.name + 'Models/']
+      [ makeFolder(base_dir + path) /]
+      [for (model : Model | pm.models)]
+         [file (path + model.name, false, 'UTF-8')]
+	     [/file]
+      [/for]
+   [/let]
+[/let]
+[/template]
+
+[template private makeViews(pv : PackageView)]
+    [let base_dir : String = 'FHS/var/www/html/' ] [comment]FHS + getBaseDir()[/comment] 
+	[let path : String = 'laravel5.4.15/resources/' + pv.name + 'Views/']
+      [ makeFolder(base_dir + path) /]
+      [for (view : View | pv.views )]
+         [file (path + view.name, false, 'UTF-8')]
+	     [/file]
+      [/for]
+   [/let]
+[/let]
+[/template]
+
+[template private makeControllers(pc : PackageController)]
+    [let base_dir : String = 'FHS/var/www/html/' ]
+	[let path : String = 'laravel5.4.15/app/Http/Controllers/' + pc.name + 'Controllers/']
+      [ makeFolder(base_dir + path) /]
+      [for (controller : Controller | pc.controllers )]
+         [file (path + controller.name + 'Controller', false, 'UTF-8')]
+	     [/file]
+      [/for]
+   [/let]
+[/let]
+[/template]
