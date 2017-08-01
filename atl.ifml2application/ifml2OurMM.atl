@@ -46,8 +46,8 @@ rule createMethod{
 	to
 		a : ourMM!Method(
 			name <- thisModule.decapitalize(ifmla.name),
-			inAttributes <- ifmla.getInAttributes(),
-			outAttributes <- ifmla.getOutAttributes()
+			inParameters <- ifmla.getInParameters(),
+			outParameters <- ifmla.getOutParameters()
 		)		
 }
 
@@ -282,11 +282,11 @@ helper context extMM!Form def : getSelectionFields() : Sequence(ourMM!Input) =
 					->select(e|((thisModule.isCheckbox(e.refImmediateComposite()))))							
 					->collect(e|thisModule.IFMLSlot2Checkbox(e, e.refImmediateComposite().name))};
 					
-helper context IFMLMM!IFMLAction def : getInAttributes() : Sequence(ourMM!Attribute) =
+helper context IFMLMM!IFMLAction def : getInParameters() : Sequence(ourMM!Attribute) =
 	self.parameters->select(b|b.direction = #"in" or b.direction = #inout)
 					->collect(b|thisModule.parameter2Attribute(b.name));	
 
-helper context IFMLMM!IFMLAction def : getOutAttributes() : Sequence(ourMM!Attribute) =
+helper context IFMLMM!IFMLAction def : getOutParameters() : Sequence(ourMM!Attribute) =
 	self.parameters->select(b|b.direction = #out or b.direction = #inout)
 					->collect(b|thisModule.parameters2Attributes(b.name));
 
