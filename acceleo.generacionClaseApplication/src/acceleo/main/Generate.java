@@ -356,6 +356,10 @@ public class Generate extends AbstractAcceleoGenerator {
              e.printStackTrace();
          }*/ 
         
+        /*Por cambios en la plataforma de Eclipse en la versión Luna, la estrategia de usar Acceleo plug-in como launcher
+        no funciona. La alternativa es usar Java como launcher, como aplicación stand alone. Para estos casos EMF no descubrirá
+        ni registrará los paquetes disponibles y por ello debe hacer esto manualmente*/
+        
         URI uri = URI.createFileURI("/home/dam/Escritorio/ws/preprod.acceleo.ifml2OurMM/src/acceleo/generacionClaseApplication/main/acceleo/ifml2OurMM/Metamodel.ecore");
         Resource resource = resourceSet.getResource(uri, true);         
         EPackage PHPMVC = (EPackage) resource.getContents().get(0);
