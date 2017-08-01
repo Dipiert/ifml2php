@@ -410,34 +410,13 @@ public class Generate extends AbstractAcceleoGenerator {
      * 
      * @param resourceSet
      *            The resource set which registry has to be updated.
-     * @generated NOT
+     * @generated
      */
     @Override
     public void registerResourceFactories(ResourceSet resourceSet) {
-      /*File file = new File("/home/dam/Escritorio/ws/preprod.acceleo.ifml2OurMM/src/acceleo/generacionClaseApplication/main/acceleo/ifml2OurMM/Metamodel.ecore"); 
-        EObject obj;
-       try {
-         obj = ModelUtils.load(file, resourceSet);
-         resourceSet.getPackageRegistry().put("http://www.application.org", obj);
-       }
-       catch (IOException e) {
-          TODO Auto-generated catch block
-          e.printStackTrace();
-        }*/
-         //El fragmento anterior funcionaba sin Packages. Culto cargo
-       
          super.registerResourceFactories(resourceSet);
-         URI uri = URI.createFileURI("/home/dam/Escritorio/ws/preprod.acceleo.ifml2OurMM/src/acceleo/generacionClaseApplication/main/acceleo/ifml2OurMM/Metamodel.ecore");
-         Resource resource = resourceSet.getResource(uri, true);         
-         EPackage PHPMVC = (EPackage) resource.getContents().get(0);
-         List<EPackage> subPackages = PHPMVC.getESubpackages();
-         for(EPackage subPack : subPackages){
-            EPackage.Registry.INSTANCE.put(subPack.getNsURI(), subPack);
-         }
-                  
-
-
-       
+    }
+    
         /*
          * If you want to change the content of this method, do NOT forget to change the "@generated"
          * tag in the Javadoc of this method to "@generated NOT". Without this new tag, any compilation
