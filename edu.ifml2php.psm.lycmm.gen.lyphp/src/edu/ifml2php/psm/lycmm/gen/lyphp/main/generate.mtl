@@ -60,14 +60,14 @@ use Illuminate\Database\Eloquent\Model;
 class [model.name /] extends Model
 {
 	protected $table = '[model.name.toLowerCase().concat('s') /]' ; 
-	/*
-	TODO:
+	
+	[comment]TODO:
 	* protected $fillable = ['['/][']'/]; TODO: este vector podría obtenerse desde IFMLModel	
 	* se podrían generar las relaciones entre modelos para la persistencia:
 		public function othermodel(){
 			return $this->typeRelation(othermodelUri)...
-		}
-	*/
+		}[/comment]
+	
 }
 [/file]
 [/template]
@@ -109,16 +109,17 @@ class [controller.name/] extends Controller
 {
 [for (method : Method | controller.methods)]
 
-   protected function [ method.name /] (  
-    [let parameters : Sequence(String) = Sequence{''}]
-	[for (parameter : Attribute | method.inParameters)]
-		[parameters->append('$'+parameter.name+', ')/]
-	[/for]
-	[/let]
-	[comment][parameters->last().toString().replace(', ', '')/][/comment] )
-{   
-        
- 		}
+   protected function [ method.name /]([for (parameter : Attribute | method.inParameters) separator(', ' )]$[parameter.name/][/for])
+   {   
+    [if ( method.outParameters->size() > 0)]
+    	//Los parámetros ([for (parameter : Attribute | method.outParameters) separator(', ' )]$[parameter.name/][/for]) fueron modelados como de salida. Verifique si son retornados al módulo llamador o pasado a otro 
+    [else]
+    	[comment]Formatting Purpose Blank line[/comment]
+	[/if] 
+   }
+	[comment]TODO:
+		* Ver como obtener el scope de los métodos. No encontramos manera de hacerlo desde IFML-Metamodel aún.
+		* Usar los outParameters de manera más precisa obteniendo información de los Interaction Flows.[/comment]
 [/for]	
 
     /**
@@ -197,10 +198,10 @@ class [controller.name/] extends Controller
         //
     }
 
-	/*
-	TODO: *Podrían usarse 2 templates, uno que coloque los métodos personalizados al comienzo y otro que los coloque al final.
-    Incluso, se podría poner a los métodos en un orden tal que sea significativo para facilitar la lectura.  
-	*/ 
+	
+	[comment]TODO: *Podrían usarse 2 templates, uno que coloque los métodos personalizados al comienzo y otro que los coloque al final.
+    Incluso, se podría poner a los métodos en un orden tal que sea significativo para facilitar la lectura.[/comment]  
+	 
 }
 [/file]
 [/template]
