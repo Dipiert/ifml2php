@@ -35,17 +35,7 @@ Sin embargo: cuántos menos cosas puedan ir mal, menos cosas lo harán. Buscamos
 
 [/template]
 
-[template private makeModels(pm : PackageModel)]
-    [let base_dir : String = 'FHS/var/www/html/' ]
-	[let path : String = 'laravel5.4.15/app/' + pm.name + 'Models/']
-      [ makeFolder(base_dir + path) /]
-      [for (model : Model | pm.models)]
-         [file (path + model.name, false, 'UTF-8')]
-	     [/file]
-      [/for]
-   [/let]
-[/let]
-[/template]
+[comment]La plantilla utilizada para los modelos y los controladores es la generada por el uso del comando php artisan make:[controller|model] <name> --resource[/comment]
 
 [template private makeViews(pv : PackageView)]
     [let base_dir : String = 'FHS/var/www/html/' ] [comment]FHS + getBaseDir()[/comment] 
@@ -59,14 +49,155 @@ Sin embargo: cuántos menos cosas puedan ir mal, menos cosas lo harán. Buscamos
 [/let]
 [/template]
 
+[template public writeModelSkeleton(path : String, model : Model)]
+[file (path + model.name + '.php', false, 'UTF-8')]
+<?php
+
+namespace App\[(path.tokenize('/'))->asSequence()->last() /];
+	
+use Illuminate\Database\Eloquent\Model;
+		
+class [model.name /] extends Model
+{
+	protected $table = '[model.name.toLowerCase().concat('s') /]' ; 
+	/*
+	TODO:
+	* protected $fillable = ['['/][']'/]; TODO: este vector podría obtenerse desde IFMLModel	
+	* se podrían generar las relaciones entre modelos para la persistencia:
+		public function othermodel(){
+			return $this->typeRelation(othermodelUri)...
+		}
+	*/
+}
+[/file]
+[/template]
+
+[template private makeModels(pm : PackageModel)]
+    [let base_dir : String = 'FHS/var/www/html/' ]
+	[let path : String = 'laravel5.4.15/app/' + pm.name + 'Models/']
+      [ makeFolder(base_dir + path) /]
+      [for (model : Model | pm.models)]
+	     [writeModelSkeleton(path, model)/]
+      [/for]
+   [/let]
+[/let]
+[/template]
+
 [template private makeControllers(pc : PackageController)]
     [let base_dir : String = 'FHS/var/www/html/' ]
 	[let path : String = 'laravel5.4.15/app/Http/Controllers/' + pc.name + 'Controllers/']
       [ makeFolder(base_dir + path) /]
       [for (controller : Controller | pc.controllers )]
-         [file (path + controller.name + 'Controller', false, 'UTF-8')]
-	     [/file]
+	      [writeControllerSkeleton(path, controller)/]
       [/for]
    [/let]
 [/let]
+[/template]
+
+
+[template public writeControllerSkeleton(path : String, controller : Controller)]
+[file (path + controller.name + '.php', false, 'UTF-8')]
+<?php
+
+namespace App\Http\Controllers\[(path.tokenize('/'))->asSequence()->last() /];
+
+use Illuminate\Http\Request;
+
+
+
+class [controller.name/] extends Controller
+{
+[for (method : Method | controller.methods)]
+
+   protected function [ method.name /] (    [let parameters : Sequence(String) = Sequence{''}]
+	[for (parameter : Attribute | method.inParameters)]
+		[parameters->append('$'+parameter.name+', ')/]
+	[/for]
+	[parameters->last().toString().replace(', ', '')/][/let] ){   
+        
+ 		}
+	[/for]	
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+
+	/*
+	TODO: *Podrían usarse 2 templates, uno que coloque los métodos personalizados al comienzo y otro que los coloque al final.
+    Incluso, se podría poner a los métodos en un orden tal que sea significativo para facilitar la lectura.  
+	*/ 
+}
+[/file]
 [/template]
