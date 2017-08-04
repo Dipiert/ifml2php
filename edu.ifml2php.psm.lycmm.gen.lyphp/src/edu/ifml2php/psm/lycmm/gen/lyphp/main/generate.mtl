@@ -129,7 +129,7 @@ Incluso, se podría poner a los métodos en un orden tal que sea significativo p
 	[for (viewComponent : ViewComponent | view.viewComponents)]
 		[if (viewComponent.oclIsTypeOf(Anchor))]
 			[let anchor : Anchor = viewComponent] [comment]En lugar de usar los pairedTag y emptyTag casteamos el viewComponent a Anchor. Esto simplifica el código y mejora la legibilidad a la vez que permite flexibilidad en la implementación (podría no hacerse el cast y utilizar estos atributos)[/comment]
-<[ anchor.tagName /] ] href="[ anchor.hypRef /]" target="[ anchor.target /]">[ anchor.name /]</[ anchor.tagName /]>
+<[ anchor.tagName /] href="[ anchor.hypRef /]" target="[ anchor.target /]" >[ anchor.name /]</[ anchor.tagName /]>
 [comment]Para no definir exhaustivamente y con código estático los atributos de los HTMLElements, podría utilizarselos como su representación ECore (EAttributes). El problema que surge es que EAttribute no tiene algo así como un value más allá de default (lo cuál es totalmente correcto), por lo cual tendríamos que necesitar aún castear ese HTMLElement a un elemento determinado, por lo cual no se aprovecharía la mayor ventaja de este enfoque: permitir la adición de atributos a los HTMLElement (por ej., conforme a alguna nueva especificación) en el metamodelo, sin tener que modificar las reglas -al menos- M2T. Nótese que también este enfoque aumentaría la abstracción del metamodelo de los frameworks PHP(lo cual no es malo) pero haría perder expresividad a los modelos que lo conformen[/comment]
 			[/let]
 		[/if]

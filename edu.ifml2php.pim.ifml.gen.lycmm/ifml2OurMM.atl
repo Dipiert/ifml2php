@@ -217,7 +217,7 @@ lazy rule Landmarks2MenuItems{
 	to
 		an	: ourMM!Anchor(
 			name <- thisModule.decapitalize(vc.name),
-			hypRef <- vc.name,
+			hypRef <- vc.name + 'Controller',
 			target <- an.getDefaultTarget(),
 			tagName <- an.getTagName().substring(1,1)
 		)	
