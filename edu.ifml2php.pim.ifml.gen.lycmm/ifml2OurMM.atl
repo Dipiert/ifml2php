@@ -25,11 +25,11 @@ lazy rule DomainModel2PackageController{
             pc  : ourMM!PackageController(
 					name <- domainModel.name,
 					controllers <- UMLMM!Class.allInstances()
-								->collect(r|thisModule.createController(r))
+								->collect(r|thisModule.UMLClass2Controller(r))
 				)	
 }
 
-lazy rule createController{
+lazy rule UMLClass2Controller{
 	from
 		class : UMLMM!Class
 	to
@@ -40,7 +40,7 @@ lazy rule createController{
 			))				
 }
 
-rule createMethod{
+rule IFMLAction2Method{
 	from
 		ifmla : IFMLMM!IFMLAction
 	to
@@ -51,7 +51,7 @@ rule createMethod{
 		)		
 }
 
-lazy rule parameter2Attribute{
+lazy rule Parameter2Attribute{
 	from
 		st : String
 	to
@@ -90,15 +90,6 @@ rule UMLproperty2ModelAttribute{
 		modAt : ourMM!Attribute(
 				name<-prop.name
 			)
-}
-
-lazy rule getDomainElement{
-        from
-            dm : IFMLMM!DomainConcept
-        to
-            mc : ourMM!Model(
-                    name <- dm.name
-                )
 }
 
 rule InteractionFlowModel2PackageView{
@@ -157,7 +148,7 @@ rule IFMLForm2Form{
 			tagName <- f.getTagName(),
 			method <- f.getDefaultMethod(),
 			htmlElements <- frm.getHTMLElements(),
-			events <- thisModule.onSubmitEvent2Event(f.name)
+			events <- thisModule.OnSubmitEvent2Event(f.name)
 			
 		)
 }	
@@ -199,7 +190,7 @@ rule SimpleField2TextField{
 		)
 }
 
-lazy rule onSubmitEvent2Event{
+lazy rule OnSubmitEvent2Event{
 	from
 		n	: String
 	to	
@@ -217,7 +208,7 @@ lazy rule Landmarks2MenuItems{
 	to
 		an	: ourMM!Anchor(
 			name <- thisModule.decapitalize(vc.name),
-			hypRef <- vc.name + 'Controller',
+			hypRef <- vc.name,
 			target <- an.getDefaultTarget(),
 			tagName <- an.getTagName().substring(1,1)
 		)	
@@ -284,7 +275,7 @@ helper context extMM!Form def : getSelectionFields() : Sequence(ourMM!Input) =
 					
 helper context IFMLMM!IFMLAction def : getInParameters() : Sequence(ourMM!Attribute) =
 	self.parameters->select(b|b.direction = #"in" or b.direction = #inout)
-					->collect(b|thisModule.parameter2Attribute(b.name));	
+					->collect(b|thisModule.Parameter2Attribute(b.name));	
 
 helper context IFMLMM!IFMLAction def : getOutParameters() : Sequence(ourMM!Attribute) =
 	self.parameters->select(b|b.direction = #out or b.direction = #inout)
