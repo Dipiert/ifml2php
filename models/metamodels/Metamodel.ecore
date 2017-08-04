@@ -104,5 +104,10 @@
     <eClassifiers xsi:type="ecore:EClass" name="TextField" eSuperTypes="#//extPHP/Input"/>
     <eClassifiers xsi:type="ecore:EClass" name="Checkbox" eSuperTypes="#//extPHP/Input"/>
     <eClassifiers xsi:type="ecore:EClass" name="RadioButton" eSuperTypes="#//extPHP/Input"/>
+    <eClassifiers xsi:type="ecore:EEnum" name="ButtonType">
+      <eLiterals name="button"/>
+      <eLiterals name="submit" value="1" literal="submit"/>
+      <eLiterals name="reset" value="2"/>
+    </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>
