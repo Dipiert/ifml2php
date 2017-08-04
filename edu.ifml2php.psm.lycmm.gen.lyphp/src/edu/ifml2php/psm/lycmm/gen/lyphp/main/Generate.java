@@ -123,13 +123,29 @@ public class Generate extends AbstractAcceleoGenerator {
      *            Arguments of the generation.
      * @generated NOT
      */
+    
+    private void setLinuxConf(){
+    	LaravelPaths lp = new LaravelPaths();
+    	lp.setBaseDir("/var/www/html");
+    	System.out.println("Should be /var/www/html and is " + lp.getBaseDir());
+    }
+    
+    private void setWindowsConf(){
+    	LaravelPaths lp = new LaravelPaths();
+    	System.out.println("Laravel Base Dir: ");
+    	Scanner sc = new Scanner(System.in);
+    	lp.setBaseDir(sc.nextLine());
+    	System.out.println("Laravel path is: " + lp.getBaseDir());
+    }
     public static void main(String[] args) {
+    	Generate g = new Generate();
     	if(SystemUtils.IS_OS_LINUX){
-    		System.out.println("Linux!");
+    		g.setLinuxConf();
     	}
-    	if(SystemUtils.IS_OS_WINDOWS){
-    		System.out.println("Windows!");
+    	if(SystemUtils.IS_OS_WINDOWS){    		        	
+    		g.setWindowsConf();
     	}
+    	
         try {
             if (args.length < 2) {
                 System.out.println("Arguments not valid : {model, folder}.");
