@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.eclipse.acceleo.engine.event.IAcceleoTextGenerationListener;
 import org.eclipse.acceleo.engine.generation.strategy.IAcceleoGenerationStrategy;
@@ -26,7 +27,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.acceleo.common.utils.ModelUtils;
-
+import org.apache.commons.lang3.SystemUtils;
 
 /**
  * Entry point of the 'Generate' generation module.
@@ -120,9 +121,15 @@ public class Generate extends AbstractAcceleoGenerator {
      * 
      * @param args
      *            Arguments of the generation.
-     * @generated
+     * @generated NOT
      */
     public static void main(String[] args) {
+    	if(SystemUtils.IS_OS_LINUX){
+    		System.out.println("Linux!");
+    	}
+    	if(SystemUtils.IS_OS_WINDOWS){
+    		System.out.println("Windows!");
+    	}
         try {
             if (args.length < 2) {
                 System.out.println("Arguments not valid : {model, folder}.");
