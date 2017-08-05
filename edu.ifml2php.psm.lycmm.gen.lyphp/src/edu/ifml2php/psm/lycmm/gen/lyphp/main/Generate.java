@@ -127,25 +127,41 @@ public class Generate extends AbstractAcceleoGenerator {
     private void setLinuxConf(){
     	LaravelPaths lp = new LaravelPaths();
     	lp.setBaseDir("/var/www/html");
-    	System.out.println("Should be /var/www/html and is " + lp.getBaseDir());
     }
     
-    private void setWindowsConf(){
+    private void setWindowsConf() {
     	LaravelPaths lp = new LaravelPaths();
     	System.out.println("Laravel Base Dir: ");
     	Scanner sc = new Scanner(System.in);
     	lp.setBaseDir(sc.nextLine());
-    	System.out.println("Laravel path is: " + lp.getBaseDir());
     }
-    public static void main(String[] args) {
-    	Generate g = new Generate();
-    	if(SystemUtils.IS_OS_LINUX){
-    		g.setLinuxConf();
+    
+    private void getPSM(){
+    	Scanner sc = new Scanner(System.in);
+    	System.out.println("PHP Version >= 5.6.4 required");
+    	System.out.println("Target Framework(Laravel|Yii2)[Laravel]");
+    	String targetFramework = sc.nextLine();
+    	System.out.print("Set Web Server Dir ");
+    	if(SystemUtils.IS_OS_LINUX){    		
+    		System.out.print("You're on Linux [/var/www/html/]:");
+    		String webServerDir = sc.nextLine();
     	}
     	if(SystemUtils.IS_OS_WINDOWS){    		        	
-    		g.setWindowsConf();
+    		System.out.print("You're on Windows [C:\\xampp\\htdocs]:");
+    		String webServerDir = sc.nextLine();
     	}
+    	System.out.println("---Application---");
+    	System.out.println("Locale [es-ES]:");
+    	String locale = sc.nextLine();
+    	System.out.println("Type (web|api|console)[web]:");
+    	String typeApp = sc.nextLine();
     	
+    }
+    
+    public static void main(String[] args) {
+    	Generate g = new Generate();
+    	boolean debug = true;
+    	if(debug) g.getPSM();
         try {
             if (args.length < 2) {
                 System.out.println("Arguments not valid : {model, folder}.");
@@ -369,7 +385,7 @@ public class Generate extends AbstractAcceleoGenerator {
         super.registerPackages(resourceSet);        
         /*if (!isInWorkspace(IFML.Core.CorePackage.class)) {
             resourceSet.getPackageRegistry().put(IFML.Core.CorePackage.eINSTANCE.getNsURI(), IFML.Core.CorePackage.eINSTANCE);
-        }
+        }/*
         File file = new File("/home/dam/Escritorio/ws/preprod.acceleo.ifml2OurMM/src/acceleo/generacionClaseApplication/main/acceleo/ifml2OurMM/Metamodel.ecore");
         EObject obj;
         try {
