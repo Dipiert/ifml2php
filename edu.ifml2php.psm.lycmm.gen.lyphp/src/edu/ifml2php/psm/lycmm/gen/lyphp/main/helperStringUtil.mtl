@@ -1,0 +1,7 @@
+[comment encoding = UTF-8 /]
+[module helperStringUtil('http://www.application.org')/]
+
+[query public getSuffix(arg0 : String) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.main.StringUtil', 'getSuffix(java.lang.String)', Sequence{arg0})
+/]
+

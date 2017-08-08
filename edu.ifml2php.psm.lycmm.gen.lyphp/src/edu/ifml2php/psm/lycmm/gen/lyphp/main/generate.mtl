@@ -5,8 +5,10 @@
 [import edu::ifml2php::psm::lycmm::gen::lyphp::main::helperFileReader /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::main::helperLaravelInputPaths /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::main::helperController /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::main::helperStringUtil /]
 
 [template public generateElement(anApp : Application) post(trim())]
+
 [comment @main /]
 
 [file ('/laravel5.4.15/config/app', false, 'UTF-8')]
@@ -111,29 +113,77 @@ class [controller.name/] extends Controller
     	[comment]Formatting Purpose Blank line[/comment]
 	[/if] 
    }
-  
-	
+		
 	[comment]TODO:
 		* Ver como obtener el scope de los métodos. No encontramos manera de hacerlo desde IFML-Metamodel aún.
 		* Usar los outParameters de manera más precisa obteniendo información de los Interaction Flows.[/comment]
 [/for]	
 [ self.getControllerBoilerplate() /]
+[ self.getViewConstructors(controller.name) /]
 [comment]TODO: *Podrían usarse 2 templates, uno que coloque los métodos personalizados al comienzo y otro que los coloque al final.
 Incluso, se podría poner a los métodos en un orden tal que sea significativo para facilitar la lectura.[/comment]  
 }
 [/file]
 [/template]
 
+[template public getViewConstructors(controllerName : String)]
+[ controllerName /]
+--get mi nombre de controlador
+--get todas las vistas que tengan como sufijo mi nombre
+
+
+[/template]
+
 [template public writeView(path : String, view : View)]
 [file (path + view.name + '.php', false, 'UTF-8')]
 	[for (viewComponent : ViewComponent | view.viewComponents)]
 		[if (viewComponent.oclIsTypeOf(Anchor))]
-			[let anchor : Anchor = viewComponent] [comment]En lugar de usar los pairedTag y emptyTag casteamos el viewComponent a Anchor. Esto simplifica el código y mejora la legibilidad a la vez que permite flexibilidad en la implementación (podría no hacerse el cast y utilizar estos atributos)[/comment]
-<[ anchor.tagName /] href="[ anchor.hypRef /]" target="[ anchor.target /]" >[ anchor.name /]</[ anchor.tagName /]>
-[comment]Para no definir exhaustivamente y con código estático los atributos de los HTMLElements, podría utilizarselos como su representación ECore (EAttributes). El problema que surge es que EAttribute no tiene algo así como un value más allá de default (lo cuál es totalmente correcto), por lo cual tendríamos que necesitar aún castear ese HTMLElement a un elemento determinado, por lo cual no se aprovecharía la mayor ventaja de este enfoque: permitir la adición de atributos a los HTMLElement (por ej., conforme a alguna nueva especificación) en el metamodelo, sin tener que modificar las reglas -al menos- M2T. Nótese que también este enfoque aumentaría la abstracción del metamodelo de los frameworks PHP(lo cual no es malo) pero haría perder expresividad a los modelos que lo conformen[/comment]
+			[let a : Anchor = viewComponent] [comment]En lugar de usar los pairedTag y emptyTag casteamos el viewComponent a Anchor. Esto simplifica el código y mejora la legibilidad a la vez que permite flexibilidad en la implementación (podría no hacerse el cast y utilizar estos atributos)[/comment]
+				<[ a.tagName /] href="{{ route([ self.getSuffix(view.name) /].createView[view.name/]) }} [ a.hypRef /]" target="[ a.target /]" >[ a.name /]</[ a.tagName /]>
+				[comment]Para no definir exhaustivamente y con código estático los atributos de los HTMLElements, podría utilizarselos como su representación ECore (EAttributes). El problema que surge es que EAttribute no tiene algo así como un value más allá de default (lo cuál es totalmente correcto), por lo cual tendríamos que necesitar aún castear ese HTMLElement a un elemento determinado, por lo cual no se aprovecharía la mayor ventaja de este enfoque: permitir la adición de atributos a los HTMLElement (por ej., conforme a alguna nueva especificación) en el metamodelo, sin tener que modificar las reglas -al menos- M2T. Nótese que también este enfoque aumentaría la abstracción del metamodelo de los frameworks PHP(lo cual no es malo) pero haría perder expresividad a los modelos que lo conformen[/comment]
 			[/let]
 		[/if]
-		
+		[if (viewComponent.oclIsTypeOf(Button))]
+			[let btn : Button = viewComponent]
+				<[btn.tagName/] type="[btn.type/]" disabled="[btn.disabled/]">[btn.content/]</[btn.tagName/]>
+			[/let]
+		[/if]
+		[if (viewComponent.oclIsTypeOf(Input))]
+			[if (viewComponent.oclIsTypeOf(TextField))]
+			
+			[/if]
+			[if (viewComponent.oclIsTypeOf(Checkbox))]
+			
+			[/if]
+			[if (viewComponent.oclIsTypeOf(RadioButton))]
+			
+			[/if]	
+		[/if]
+		[if (viewComponent.oclIsTypeOf(Text))]
+			
+		[/if]
+		[if (viewComponent.oclIsTypeOf(Image))]
+			
+		[/if]
+		[if (viewComponent.oclIsTypeOf(Form))]
+			[if (viewComponent.oclIsTypeOf(Button))]
+			
+			[/if]
+			[if (viewComponent.oclIsTypeOf(Input))]
+				[if (viewComponent.oclIsTypeOf(TextField))]
+			
+				[/if]
+				[if (viewComponent.oclIsTypeOf(Checkbox))]
+			
+				[/if]
+				[if (viewComponent.oclIsTypeOf(RadioButton))]
+			
+				[/if]
+				[if (viewComponent.oclIsTypeOf(Text))]
+			
+				[/if] [comment]no contemplamos forms que contengan forms ni anchors[/comment]
+			[/if]	
+		[/if]		
 	[/for]
 [/file]
 [/template]
