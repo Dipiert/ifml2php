@@ -146,7 +146,7 @@ rule IFMLForm2Form{
 		f : ourMM!Form(
 			name <- frm.name,
 			tagName <- #form,
-			method <- f.getDefaultMethod(),
+			method <- #post,
 			htmlElements <- frm.getHTMLElements(),
 			events <- thisModule.OnSubmitEvent2Event(f.name)
 			
@@ -234,8 +234,6 @@ helper def : decapitalize(name : String) : String =
 
 helper context ourMM!Anchor def : getDefaultTarget() : String = 'self';
 
-helper context ourMM!Form def : getDefaultMethod() : String = 'POST';
-
 helper def : areRelatives(child : OclAny, seq : Sequence(OclAny)) : Boolean =
 	seq->includes(child);
 
@@ -291,4 +289,4 @@ helper def : getHandler (n : String) : String =
 	extMM!OnSubmitEvent.allInstances()->select(d | d.viewElement.name.toLower() = n.toLower())	
 														->collect(a | a.outInteractionFlows
 														->collect(f | f.targetInteractionFlowElement)
-														->collect(g | g.name)); --assuming one Submit per Form
+														->collect(g | g.name)); --assuming one Submit per Form														
