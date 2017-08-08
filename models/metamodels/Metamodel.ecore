@@ -67,7 +67,7 @@
   </eSubpackages>
   <eSubpackages name="extPHP" nsURI="http://www.application.org/extPHP" nsPrefix="extPHP">
     <eClassifiers xsi:type="ecore:EClass" name="HTMLElement" abstract="true" eSuperTypes="#//coreMVC/ViewComponent">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="tagName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="tagName" eType="#//extPHP/HTMLTag"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPairedTag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
           defaultValueLiteral="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEmpty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
@@ -78,7 +78,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Form" eSuperTypes="#//extPHP/HTMLElement">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="method" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="method" eType="#//extPHP/MethodType"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="target" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Button" eSuperTypes="#//extPHP/HTMLElement">
@@ -98,7 +98,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Input" abstract="true" eSuperTypes="#//extPHP/HTMLElement">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//extPHP/InputType"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TextField" eSuperTypes="#//extPHP/Input"/>
@@ -108,6 +108,23 @@
       <eLiterals name="button"/>
       <eLiterals name="submit" value="1" literal="submit"/>
       <eLiterals name="reset" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="InputType">
+      <eLiterals name="text"/>
+      <eLiterals name="radio" value="1"/>
+      <eLiterals name="checkbox" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="HTMLTag">
+      <eLiterals name="form"/>
+      <eLiterals name="button" value="1"/>
+      <eLiterals name="input" value="2"/>
+      <eLiterals name="a" value="3"/>
+      <eLiterals name="text" value="4"/>
+      <eLiterals name="img" value="5"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="MethodType">
+      <eLiterals name="post"/>
+      <eLiterals name="get"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>
