@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <core:IFMLModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://www.omg.org/spec/20130218/core" xmlns:ext="http://www.omg.org/spec/20130218/ext" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" id="_QwKrAM7OEeOGsv3AxEnrmw" name="Movies">
   <interactionFlowModel id="_YON7gM7PEeOGsv3AxEnrmw" name="InteractionFlowModel">
-    <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_BTIDUM7QEeOGsv3AxEnrmw" name="MovieList" isDefault="true">
+    <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_BTIDUM7QEeOGsv3AxEnrmw" name="ListMovie" isDefault="true">
       <viewElements xsi:type="ext:List" id="_LjeRwM7QEeOGsv3AxEnrmw" name="MovieList" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.3/@outInteractionFlows.0">
         <parameters id="_4Fxrgs7mEeOGsv3AxEnrmw" name="SelectedMovie">
           <type xsi:type="uml:Class" href="model.uml#__W1boJ6PEeGdnpRmAZh-dQ"/>
@@ -34,7 +34,7 @@
         <viewComponentParts xsi:type="core:VisualizationAttribute" id="_OAATr_35EeOlue9C3AA28A" name="Year" featureConcept="//@domainModel/@domainElements.2"/>
       </viewElements>
     </interactionFlowModelElements>
-    <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_TGGo0M7oEeOGsv3AxEnrmw" name="AddMovieForm">
+    <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_TGGo0M7oEeOGsv3AxEnrmw" name="AddFormMovie">
       <viewElements xsi:type="ext:Form" id="_V_U4sM7oEeOGsv3AxEnrmw" name="AddMovieForm" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.0/@viewElements.0/@viewElementEvents.1/@outInteractionFlows.0">
         <parameters xsi:type="ext:SelectionField" id="_UH7LVGr4EeeWh8uewFPoJg" name="Sexo">
           <parameters xsi:type="ext:IFMLSlot" id="_WV6s42r4EeeWh8uewFPoJg" name="Mas"/>
