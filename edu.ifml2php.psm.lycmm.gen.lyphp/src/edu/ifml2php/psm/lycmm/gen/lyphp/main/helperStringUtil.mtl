@@ -5,3 +5,10 @@
 	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.main.StringUtil', 'getSuffix(java.lang.String)', Sequence{arg0})
 /]
 
+[query public getPrefix(arg0 : String) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.main.StringUtil', 'getPrefix(java.lang.String)', Sequence{arg0})
+/]
+
+[query public separatePrefixSuffix(arg0 : String) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.main.StringUtil', 'separatePrefixSuffix(java.lang.String)', Sequence{arg0})
+/]
