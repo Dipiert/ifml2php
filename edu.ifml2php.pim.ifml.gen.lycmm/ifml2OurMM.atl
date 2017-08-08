@@ -145,7 +145,7 @@ rule IFMLForm2Form{
 	to
 		f : ourMM!Form(
 			name <- frm.name,
-			tagName <- f.getTagName(),
+			tagName <- #form,
 			method <- f.getDefaultMethod(),
 			htmlElements <- frm.getHTMLElements(),
 			events <- thisModule.OnSubmitEvent2Event(f.name)
@@ -161,8 +161,8 @@ lazy rule IFMLSlot2RadioButton{
 		rb : ourMM!RadioButton(
 			name <- st,
 			value <- sl.name,
-			tagName <- rb.getTagName(),
-			type <- 'radio'
+			tagName <- #input,
+			type <- #radio
 		)
 }
 
@@ -174,8 +174,8 @@ lazy rule IFMLSlot2Checkbox{
 		cb : ourMM!Checkbox(
 			name <- st,
 			value <- sl.name,
-			tagName <- cb.getTagName(),
-			type <- cb.getDefaultType()
+			tagName <- #input,
+			type <- #checkbox			
 		)
 }
 
@@ -185,8 +185,8 @@ rule SimpleField2TextField{
 	to
 		f : ourMM!TextField(
 			name <- thisModule.decapitalize(sf.name),
-			tagName <- f.getTagName(),
-			type <- f.getDefaultType()
+			tagName <- #input,
+			type <- #text
 		)
 }
 
@@ -210,7 +210,7 @@ lazy rule Landmarks2MenuItems{
 			name <- thisModule.decapitalize(vc.name),
 			hypRef <- vc.name,
 			target <- an.getDefaultTarget(),
-			tagName <- an.getTagName().substring(1,1)
+			tagName <- #a
 		)	
 }
 
@@ -221,11 +221,9 @@ lazy rule ViewElement2Image{
 		i : ourMM!Image(
 				source <- ve.id,
 				name <- ve.name,
-				tagName <- i.getTagName()
+				tagName <- #img
 			)	
 }
-
-helper context ourMM!Image def : getTagName() : String = 'img';
 
 helper def : decapitalize(name : String) : String =
 	if name.size () > 1 then
@@ -234,23 +232,15 @@ helper def : decapitalize(name : String) : String =
 		name.substring(1,1).toLower()
 	endif;
 
-helper context ourMM!HTMLElement def : getTagName() : String =
-	 self.oclType().toString().split('!').at(2).toLower();
-
 helper context ourMM!Anchor def : getDefaultTarget() : String = 'self';
 
 helper context ourMM!Form def : getDefaultMethod() : String = 'POST';
-
-helper context ourMM!TextField def : getDefaultType() : String = 'text';
 
 helper def : areRelatives(child : OclAny, seq : Sequence(OclAny)) : Boolean =
 	seq->includes(child);
 
 helper def : isCheckbox(parent : OclAny) : Boolean =
 	parent.isMultiSelection;
-
-helper context ourMM!Input def : getTagName() : String =
-	'input';
 
 helper context IFMLMM!ViewContainer def : getAnchors() : Sequence(ourMM!Anchor) =
 	IFMLMM!ViewContainer.allInstances()
@@ -302,6 +292,3 @@ helper def : getHandler (n : String) : String =
 														->collect(a | a.outInteractionFlows
 														->collect(f | f.targetInteractionFlowElement)
 														->collect(g | g.name)); --assuming one Submit per Form
-														
-
-helper context ourMM!Checkbox def : getDefaultType() : String = 'checkbox';
