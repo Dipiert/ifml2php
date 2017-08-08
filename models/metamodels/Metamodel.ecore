@@ -115,11 +115,11 @@
       <eLiterals name="checkbox" value="2"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="HTMLTag">
-      <eLiterals name="form"/>
+      <eLiterals name="p"/>
       <eLiterals name="button" value="1"/>
       <eLiterals name="input" value="2"/>
       <eLiterals name="a" value="3"/>
-      <eLiterals name="text" value="4"/>
+      <eLiterals name="form" value="4"/>
       <eLiterals name="img" value="5"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="MethodType">

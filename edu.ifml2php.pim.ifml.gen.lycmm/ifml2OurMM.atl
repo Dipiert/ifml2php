@@ -135,7 +135,8 @@ rule ConditionalExpression2Text{
 		t : ourMM!Text(
 			name <- ce.name,
 			language <- ce.language,			
-			body <- ce.body
+			body <- ce.body,
+			tagName <- #p
 		)
 }
 
@@ -289,4 +290,4 @@ helper def : getHandler (n : String) : String =
 	extMM!OnSubmitEvent.allInstances()->select(d | d.viewElement.name.toLower() = n.toLower())	
 														->collect(a | a.outInteractionFlows
 														->collect(f | f.targetInteractionFlowElement)
-														->collect(g | g.name)); --assuming one Submit per Form														
+														->collect(g | g.name)); --assuming one Submit per Form
