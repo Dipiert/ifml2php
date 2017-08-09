@@ -133,10 +133,10 @@ rule ConditionalExpression2Text{
 		ce : IFMLMM!ConditionalExpression
 	to
 		t : ourMM!Text(
+			tagName <- #p,
 			name <- ce.name,
 			language <- ce.language,			
-			body <- ce.body,
-			tagName <- #p
+			content <- ce.body
 		)
 }
 
@@ -163,7 +163,8 @@ lazy rule IFMLSlot2RadioButton{
 			name <- st,
 			value <- sl.name,
 			tagName <- #input,
-			type <- #radio
+			type <- #radio,
+			isPairedTag <- false
 		)
 }
 
@@ -176,7 +177,8 @@ lazy rule IFMLSlot2Checkbox{
 			name <- st,
 			value <- sl.name,
 			tagName <- #input,
-			type <- #checkbox			
+			type <- #checkbox,
+			isPairedTag <- false
 		)
 }
 
@@ -187,7 +189,8 @@ rule SimpleField2TextField{
 		f : ourMM!TextField(
 			name <- thisModule.decapitalize(sf.name),
 			tagName <- #input,
-			type <- #text
+			type <- #text,
+			isPairedTag <- false
 		)
 }
 
