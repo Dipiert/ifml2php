@@ -106,26 +106,30 @@
     <eClassifiers xsi:type="ecore:EClass" name="Checkbox" eSuperTypes="#//extPHP/Input"/>
     <eClassifiers xsi:type="ecore:EClass" name="RadioButton" eSuperTypes="#//extPHP/Input"/>
     <eClassifiers xsi:type="ecore:EEnum" name="ButtonType">
-      <eLiterals name="button"/>
-      <eLiterals name="submit" value="1" literal="submit"/>
-      <eLiterals name="reset" value="2"/>
+      <eLiterals name="workaround"/>
+      <eLiterals name="button" value="1"/>
+      <eLiterals name="submit" value="2" literal="submit"/>
+      <eLiterals name="reset" value="3"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="InputType">
-      <eLiterals name="text"/>
-      <eLiterals name="radio" value="1"/>
-      <eLiterals name="checkbox" value="2"/>
+      <eLiterals name="workaround"/>
+      <eLiterals name="text" value="1"/>
+      <eLiterals name="radio" value="2"/>
+      <eLiterals name="checkbox" value="3"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="HTMLTag">
-      <eLiterals name="p" literal="p"/>
+      <eLiterals name="workaround"/>
       <eLiterals name="button" value="1"/>
       <eLiterals name="input" value="2"/>
       <eLiterals name="a" value="3"/>
       <eLiterals name="form" value="4"/>
       <eLiterals name="img" value="5"/>
+      <eLiterals name="p" value="6" literal="p"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="MethodType">
-      <eLiterals name="post"/>
-      <eLiterals name="get"/>
+      <eLiterals name="workaround"/>
+      <eLiterals name="get" value="1"/>
+      <eLiterals name="post" value="2"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>
