@@ -168,20 +168,31 @@ Incluso, se podría poner a los métodos en un orden tal que sea significativo p
 		[/if]
 		[if (viewComponent.oclIsTypeOf(Form))]
 			[let f : Form = viewComponent]
-<[ f.tagName /] action="[ self.getSuffix(view.name) + '@' + f.events.handler /]" method="[ f.method /]" name="[ f.name /]">
-				[if (viewComponent.oclIsTypeOf(Button))]			
-				[/if]
-				[if (viewComponent.oclIsTypeOf(Input))]
-					[if (viewComponent.oclIsTypeOf(TextField))]			
+{!! Form::open([ '[' /]'action' => [ self.getSuffix(view.name) + '@' + f.events.handler /], 'method' => '[ f.method /]', 'name' => '[ f.name /]' [ ']' /]) !!}
+
+				[for (event : Event | f.events)]
+					[if (event.type.toString().matches('onSubmit') )]
+{{ Form::submit('Enviar') }}
+					[/if] 
+				[/for]
+				[for (htmle : HTMLElement | f.htmlElements)]
+					[if (htmle.oclIsTypeOf(TextField))]	
+						[let tf : TextField = htmle]
+{{Form::text('[ tf.name /]')}}	
+						[/let]
 					[/if]
+				[/for]
+
+					
+		
 					[if (viewComponent.oclIsTypeOf(Checkbox))]			
 					[/if]
 					[if (viewComponent.oclIsTypeOf(RadioButton))]
 					[/if]
 					[if (viewComponent.oclIsTypeOf(Text))]			
 					[/if] [comment]no contemplamos forms que contengan forms ni anchors[/comment]
-				[/if]
-</[ f.tagName /]>
+		
+{!! Form::close() !!}
 			[/let]			
 		[/if]
 	[/for]
