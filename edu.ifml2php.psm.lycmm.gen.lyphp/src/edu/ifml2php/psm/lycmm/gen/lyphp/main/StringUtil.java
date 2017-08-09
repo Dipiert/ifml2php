@@ -1,25 +1,30 @@
 package edu.ifml2php.psm.lycmm.gen.lyphp.main;
 
 public class StringUtil {
-
-	public String getSuffix(String str){
-		char[] chars = str.toCharArray();
+	char[] chars;
+	
+	public String getSuffix(String str) {
+		chars = str.toCharArray();
 		for(int i = chars.length - 1; i > 0; i--)
 			if(chars[i] == Character.toUpperCase(chars[i]))
-				return str.substring(i).toLowerCase();		
+				return capitalize(str.substring(i));		
 		return "";
 	}
 	
-	public String getPrefix(String str){
-		char[] chars = str.toCharArray();
+	public String getPrefix(String str) {
+		chars = str.toCharArray();
 		for(int i = chars.length - 1; i > 0; i--)
 			if(chars[i] == Character.toUpperCase(chars[i]))
 				return str.substring(0,i);		
 		return "";
 	}
 	
-	public String separatePrefixSuffix(String str){
+	public String separatePrefixSuffix(String str) {
 		return getPrefix(str) + " " + getSuffix(str);
 	}	
+	
+	private String capitalize(String str) {
+		return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase(); 
+	}
 	
 }
