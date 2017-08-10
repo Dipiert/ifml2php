@@ -275,17 +275,18 @@ helper context IFMLMM!IFMLAction def : getOutParameters() : Sequence(ourMM!Attri
 
 helper context IFMLMM!ViewContainer def : getViewComponents() : Sequence(ourMM!ViewComponent) =
 	Sequence{
-	self.viewElements->select(e | e.oclIsTypeOf(extMM!Form)),
-	self.viewElements->select(f | f.oclIsTypeOf(IFMLMM!ViewComponent))
-						->collect(h|h.viewComponentParts
+		if (not (self.refImmediateComposite().oclIsKindOf(IFMLMM!ViewContainer))) then
+			self.getAnchors()
+		else
+			Sequence{}
+		endif,
+		self.viewElements->select(f | f.oclIsTypeOf(IFMLMM!ViewComponent))
+		      			->collect(h|h.viewComponentParts
 	       				->select(b|b.oclIsTypeOf(IFMLMM!ConditionalExpression))),
-	self.viewElements->select(e | e.oclIsTypeOf(IFMLMM!ViewElement))
+		self.viewElements->select(e | e.oclIsTypeOf(IFMLMM!ViewElement))
 						->collect(f|thisModule.ViewElement2Image(f)),
-	if (not (self.refImmediateComposite().oclIsKindOf(IFMLMM!ViewContainer))) then
-		self.getAnchors()
-	else
-		Sequence{}
-	endif};
+		self.viewElements->select(e | e.oclIsTypeOf(extMM!Form))
+	};
 	
 helper def : getDefaultEventType() : ourMM!EventType  = #onSubmit; -- in the actual implementation 
 
