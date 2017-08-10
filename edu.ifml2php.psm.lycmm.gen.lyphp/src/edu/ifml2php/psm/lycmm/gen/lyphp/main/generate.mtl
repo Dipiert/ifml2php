@@ -11,7 +11,7 @@
 
 [comment @main /]
 
-[file ('/laravel5.4.15/config/app', false, 'UTF-8')]
+[file ('/laravel5.4.15/config/app.php', false, 'UTF-8')]
 [for (line : String | anApp.getAppConfig().tokenize('\n'))]
 	[if (line.contains('name\' =>'))]
 		[line.replace('name\' => \'.*\'','name\' => \'' + anApp.name + '\'') /]
