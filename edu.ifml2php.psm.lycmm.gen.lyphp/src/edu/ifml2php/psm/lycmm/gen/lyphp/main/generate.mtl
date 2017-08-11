@@ -7,11 +7,10 @@
 [import edu::ifml2php::psm::lycmm::gen::lyphp::main::helperController /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::main::helperStringUtil /]
 
-[template public generateElement(anApp : Application) post(trim())]
-
+[template public generateElement(anApp : Application)]
 [comment @main /]
 
-[file ('/laravel5.4.15/config/app.php', false, 'UTF-8')]
+[file ('/laravel5.4.15/config/app', false, 'UTF-8')]
 [for (line : String | anApp.getAppConfig().tokenize('\n'))]
 	[if (line.contains('name\' =>'))]
 		[line.replace('name\' => \'.*\'','name\' => \'' + anApp.name + '\'') /]
@@ -27,7 +26,7 @@
 
 [ self.makeModels(aPackageModel) /]
 [ self.makeViews(aPackageView) /]
-[ self.makeControllers(aPackageController) /]
+[ self.makeControllers(aPackageController, aPackageView) /]
 
 [/template]
 
@@ -43,6 +42,19 @@
    [/let]
 [/let]
 [/template]
+
+[template public testMultipleTemplates(app : Application)]
+[comment @main /]
+
+    [let base_dir : String = 'FHS/var/www/html/' ] [comment]FHS + getBaseDir()[/comment] 
+	[let path : String = 'laravel5.4.15/testMultipleTemplates/' + app.name + 'Views/']
+      [ self.makeFolder(base_dir + path) /]
+      Coraje
+   [/let]
+
+[/let]
+[/template]
+
 
 [template public writeModelSkeleton(path : String, model : Model)]
 [file (path + model.name + '.php', false, 'UTF-8')]
@@ -78,7 +90,7 @@ class [model.name /] extends Model
 [/let]
 [/template]
 
-[template private makeControllers(pc : PackageController)]
+[template private makeControllers(pc : PackageController, pv : PackageView)]
     [let base_dir : String = 'FHS/var/www/html/' ]
 	[let path : String = 'laravel5.4.15/app/Http/Controllers/' + pc.name + 'Controllers/']
       [ self.makeFolder(base_dir + path) /]
@@ -97,8 +109,6 @@ class [model.name /] extends Model
 namespace App\Http\Controllers\[(path.tokenize('/'))->asSequence()->last() /];
 
 use Illuminate\Http\Request;
-
-
 
 class [controller.name/] extends Controller
 {
@@ -119,7 +129,7 @@ class [controller.name/] extends Controller
 		* Usar los outParameters de manera más precisa obteniendo información de los Interaction Flows.[/comment]
 [/for]	
 [ self.getControllerBoilerplate() /]
-[ self.getViewConstructors(controller.name) /]
+[ self.getViewConstructors(controller.name ) /]
 [comment]TODO: *Podrían usarse 2 templates, uno que coloque los métodos personalizados al comienzo y otro que los coloque al final.
 Incluso, se podría poner a los métodos en un orden tal que sea significativo para facilitar la lectura.[/comment]  
 }
@@ -131,10 +141,9 @@ Incluso, se podría poner a los métodos en un orden tal que sea significativo p
 --get mi nombre de controlador
 --get todas las vistas que tengan como sufijo mi nombre
 
-
 [/template]
 
-[template public writeView(path : String, view : View) post(replace('php', 'tuvie'))]
+[template public writeView(path : String, view : View)]
 [file (path + view.name + '.php', false, 'UTF-8')]
 
 [for (viewComponent : ViewComponent | view.viewComponents)]
@@ -167,31 +176,33 @@ Incluso, se podría poner a los métodos en un orden tal que sea significativo p
 			[/let]
 		[/if]
 		[if (viewComponent.oclIsTypeOf(Form))]
+
 			[let f : Form = viewComponent]
 {!! Form::open([ '[' /]'action' => [ self.getSuffix(view.name) + '@' + f.events.handler /], 'method' => '[ f.method /]', 'name' => '[ f.name /]' [ ']' /]) !!}
 
+				[for (htmle : HTMLElement | f.htmlElements)]
+					[if (htmle.oclIsTypeOf(TextField))]	
+						[let tf : TextField = htmle]
+{{ Form::text('[ tf.name /]') }}	
+						[/let]
+					[/if]
+					[if (htmle.oclIsTypeOf(Checkbox))]			
+						[let cb : Checkbox = htmle]
+{{ Form::[ cb.type /] ('[cb.name/]', '[cb.value/]') }}
+						[/let]				
+					[/if]
+					[if (htmle.oclIsTypeOf(RadioButton))]
+						[let r :RadioButton = htmle]
+{{ Form::radio('[r.name/]', '[r.value/]') }}
+						[/let]
+					[/if]					 
+				[/for][comment]no contemplamos forms que contengan forms, anchors, textos ni imágenes[/comment]					
 				[for (event : Event | f.events)]
 					[if (event.type.toString().matches('onSubmit') )]
 {{ Form::submit('Enviar') }}
 					[/if] 
-				[/for]
-				[for (htmle : HTMLElement | f.htmlElements)]
-					[if (htmle.oclIsTypeOf(TextField))]	
-						[let tf : TextField = htmle]
-{{Form::text('[ tf.name /]')}}	
-						[/let]
-					[/if]
-				[/for]
+				[/for]		
 
-					
-		
-					[if (viewComponent.oclIsTypeOf(Checkbox))]			
-					[/if]
-					[if (viewComponent.oclIsTypeOf(RadioButton))]
-					[/if]
-					[if (viewComponent.oclIsTypeOf(Text))]			
-					[/if] [comment]no contemplamos forms que contengan forms ni anchors[/comment]
-		
 {!! Form::close() !!}
 			[/let]			
 		[/if]
