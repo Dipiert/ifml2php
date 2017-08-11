@@ -1,0 +1,27 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module generate.
+ */]
+[module controller('http://www.application.org')]
+
+[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperFileReader /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::files::writeControllerSkeleton /]
+
+[**
+ * The documentation of the template generateElement.
+ * @param aModel
+ */]
+
+[comment]La plantilla utilizada para los modelos y los controladores es la generada por el uso del comando php artisan make:[controller|model] <name> --resource[/comment]
+
+[template public makeControllers(pc : PackageController)]
+[comment @main /]    
+[let base_dir : String = 'FHS/var/www/html/' ]
+	[let path : String = 'laravel5.4.15/app/Http/Controllers/' + pc.name + 'Controllers/']
+      [ self.makeFolder(base_dir + path) /]
+      [for (controller : Controller | pc.controllers )]
+	      [self.writeControllerSkeleton(path, controller)/]
+      [/for]
+   [/let]
+[/let]
+[/template]

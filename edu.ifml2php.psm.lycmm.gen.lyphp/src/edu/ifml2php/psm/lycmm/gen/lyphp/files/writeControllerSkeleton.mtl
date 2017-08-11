@@ -1,0 +1,48 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module writeControllerSkeleton.
+ */]
+[module writeControllerSkeleton('http://www.application.org')]
+
+[import edu::ifml2php::psm::lycmm::gen::lyphp::main::view /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperController /]
+
+
+[**
+ * The documentation of the template generateElement.
+ * @param aModel
+ */]
+
+[template public writeControllerSkeleton(path : String, controller : Controller)]
+[file (path + controller.name + '.php', false, 'UTF-8')]
+<?php
+
+namespace App\Http\Controllers\[(path.tokenize('/'))->asSequence()->last() /];
+
+use Illuminate\Http\Request;
+
+class [controller.name/] extends Controller
+{
+[for (method : Method | controller.methods)]
+
+   protected function [ method.name /]([for (parameter : Attribute | method.inParameters) separator(', ' )]$[parameter.name/][/for])
+   {   
+    [if ( method.outParameters->size() > 0)]
+    	//Los parámetros ([for (parameter : Attribute | method.outParameters) separator(', ' )]$[parameter.name/][/for]) fueron modelados como de salida. Verifique si son retornados al módulo llamador o pasado a otro 
+    [else]
+	
+    	[comment]Formatting Purpose Blank line[/comment]
+	[/if] 
+   }
+		
+	[comment]TODO:
+		* Ver como obtener el scope de los métodos. No encontramos manera de hacerlo desde IFML-Metamodel aún.
+		* Usar los outParameters de manera más precisa obteniendo información de los Interaction Flows.[/comment]
+[/for]	
+[ self.getControllerBoilerplate() /]
+[ self.getViewConstructors(controller.name ) /]
+[comment]TODO: *Podrían usarse 2 templates, uno que coloque los métodos personalizados al comienzo y otro que los coloque al final.
+Incluso, se podría poner a los métodos en un orden tal que sea significativo para facilitar la lectura.[/comment]  
+}
+[/file]
+[/template]

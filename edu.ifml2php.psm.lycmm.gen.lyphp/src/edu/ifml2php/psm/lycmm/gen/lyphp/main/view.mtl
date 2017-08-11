@@ -1,0 +1,32 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module generate.
+ */]
+[module view('http://www.application.org')]
+
+[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperFileReader /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::files::writeView /]
+
+[**
+ * The documentation of the template generateElement.
+ * @param aModel
+ */]
+
+[template public makeViews(pv : PackageView)]
+[comment @main /]
+    [let base_dir : String = 'FHS/var/www/html/' ] [comment]FHS + getBaseDir()[/comment] 
+	[let path : String = 'laravel5.4.15/resources/' + pv.name + 'Views/']
+      [ self.makeFolder(base_dir + path) /]
+      [for (view : View | pv.views )]
+	     	[self.writeView(path, view)/]
+      [/for]
+   [/let]
+[/let]
+[/template]
+
+[template public getViewConstructors(controllerName : String)]
+[ controllerName /]
+--get mi nombre de controlador
+--get todas las vistas que tengan como sufijo mi nombre
+
+[/template]

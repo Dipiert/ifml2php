@@ -1,0 +1,34 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module writeModelSkeleton.
+ */]
+[module writeModelSkeleton('http://www.application.org')]
+
+
+[**
+ * The documentation of the template generateElement.
+ * @param aModel
+ */]
+
+[template public writeModelSkeleton(path : String, model : Model)]
+[file (path + model.name + '.php', false, 'UTF-8')]
+<?php
+
+namespace App\[(path.tokenize('/'))->asSequence()->last() /];
+	
+use Illuminate\Database\Eloquent\Model;
+		
+class [model.name /] extends Model
+{
+	protected $table = '[model.name.toLowerCase().concat('s') /]' ; 
+	
+	[comment]TODO:
+	* protected $fillable = ['['/][']'/]; TODO: este vector podría obtenerse desde IFMLModel	
+	* se podrían generar las relaciones entre modelos para la persistencia:
+		public function othermodel(){
+			return $this->typeRelation(othermodelUri)...
+		}[/comment]
+	
+}
+[/file]
+[/template]

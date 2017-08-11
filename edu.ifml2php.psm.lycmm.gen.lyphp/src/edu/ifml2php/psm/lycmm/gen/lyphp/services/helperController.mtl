@@ -1,0 +1,36 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module.
+ */]
+[module helperController('http://www.application.org')/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public Controller(arg0 : Boolean) : OclVoid
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.main.beans.Controller', 'Controller()', Sequence{arg0})
+/]
+
+[**
+ * The documentation of the query
+ */]
+[query public isHookeable(anOclAny: OclAny) : Boolean
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.main.beans.Controller', 'isHookeable()', Sequence{})
+/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public setHookeable(arg0 : Boolean) : OclVoid
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.main.beans.Controller', 'setHookeable()', Sequence{arg0})
+/]
+
+[**
+ * The documentation of the query
+ */]
+[query public getControllerBoilerplate(anOclAny: OclAny) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.main.beans.Controller', 'getControllerBoilerplate()', Sequence{})
+/]
+

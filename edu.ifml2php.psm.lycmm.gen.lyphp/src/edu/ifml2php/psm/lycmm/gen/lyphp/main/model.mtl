@@ -1,0 +1,26 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module model.
+ */]
+[module model('http://www.application.org')]
+
+[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperFileReader /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::files::writeModelSkeleton /]
+
+[**
+ * The documentation of the template generateElement.
+ * @param aModel
+ */]
+
+[template public makeModels(pm : PackageModel)]
+[comment @main/]
+    [let base_dir : String = 'FHS/var/www/html/' ]
+	[let path : String = 'laravel5.4.15/app/' + pm.name + 'Models/']
+      [ self.makeFolder(base_dir + path) /]
+      [for (model : Model | pm.models)]
+	     [ self.writeModelSkeleton(path, model)/]
+      [/for]
+   [/let]
+[/let]
+[/template]
+
