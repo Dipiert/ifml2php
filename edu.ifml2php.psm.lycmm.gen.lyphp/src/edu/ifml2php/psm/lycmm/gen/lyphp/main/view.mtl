@@ -17,16 +17,10 @@
     [let base_dir : String = 'FHS/var/www/html/' ] [comment]FHS + getBaseDir()[/comment] 
 	[let path : String = 'laravel5.4.15/resources/' + pv.name + 'Views/']
       [ self.makeFolder(base_dir + path) /]
-      [for (view : View | pv.views )]
-	     	[self.writeView(path, view)/]
+      [for (view : View | pv.views )]			
+	     	[ self.writeView(path, view) /]
       [/for]
    [/let]
 [/let]
-[/template]
-
-[template public getViewConstructors(controllerName : String)]
-[ controllerName /]
---get mi nombre de controlador
---get todas las vistas que tengan como sufijo mi nombre
-
+[comment][recursive('Asd')/][/comment]
 [/template]

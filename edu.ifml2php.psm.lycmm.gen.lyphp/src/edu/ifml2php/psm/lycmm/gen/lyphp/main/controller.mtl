@@ -5,6 +5,7 @@
 [module controller('http://www.application.org')]
 
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperFileReader /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperStringUtil /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::files::writeControllerSkeleton /]
 
 [**
@@ -14,14 +15,32 @@
 
 [comment]La plantilla utilizada para los modelos y los controladores es la generada por el uso del comando php artisan make:[controller|model] <name> --resource[/comment]
 
-[template public makeControllers(pc : PackageController)]
-[comment @main /]    
+
+[template public makeControllers(anApp : Application)]
+[comment @main/]  
 [let base_dir : String = 'FHS/var/www/html/' ]
-	[let path : String = 'laravel5.4.15/app/Http/Controllers/' + pc.name + 'Controllers/']
-      [ self.makeFolder(base_dir + path) /]
-      [for (controller : Controller | pc.controllers )]
-	      [self.writeControllerSkeleton(path, controller)/]
-      [/for]
-   [/let]
+   [let path : String = 'laravel5.4.15/app/Http/Controllers/' + anApp.aPackageController.name + 'Controllers/']
+       [self.makeFolder(base_dir + path) /]
+       [for (controller : Controller | anApp.aPackageController.controllers)]
+          [ writeControllerSkeleton(path, controller) /]
+		  [ getViewConstructors(path, controller.name, anApp.aPackageView ) /]
+       [/for]
+    [/let]
 [/let]
+[/template]
+
+
+[template private getViewConstructors(path : String, controllerName : String, pv : PackageView)]
+[file (path + controllerName + '.php', true, 'UTF-8')]
+[for (view : View | pv.views) after ('}')]
+	[if (getSuffix(view.name).toString().matches(controllerName))]
+    function createView[ view.name /]()
+    {
+         //
+    }
+
+	[/if]
+[/for]
+
+[/file]
 [/template]

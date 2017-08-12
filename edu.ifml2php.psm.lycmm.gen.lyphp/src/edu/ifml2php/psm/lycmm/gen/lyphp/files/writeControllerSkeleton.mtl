@@ -40,9 +40,8 @@ class [controller.name/] extends Controller
 		* Usar los outParameters de manera más precisa obteniendo información de los Interaction Flows.[/comment]
 [/for]	
 [ self.getControllerBoilerplate() /]
-[ self.getViewConstructors(controller.name ) /]
 [comment]TODO: *Podrían usarse 2 templates, uno que coloque los métodos personalizados al comienzo y otro que los coloque al final.
 Incluso, se podría poner a los métodos en un orden tal que sea significativo para facilitar la lectura.[/comment]  
-}
 [/file]
 [/template]
+
