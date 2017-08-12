@@ -109,7 +109,7 @@ rule ViewContainer2View{
 	to
 		v  : ourMM!View(
 				name <- vc.name,
-				viewComponents <- vc.getViewComponents(),					
+				viewComponents <- vc.getViewComponents(),	--TODO: asegurar que se mantenga el orden de los elementos generados				
 			 	innerViews <- vc.viewElements->select(e| e.oclIsKindOf(IFMLMM!ViewContainer))
 													->collect(e|thisModule.ViewContainer2InnerView(e))
 			)
@@ -277,6 +277,7 @@ helper context IFMLMM!ViewContainer def : getViewComponents() : Sequence(ourMM!V
 	Sequence{
 		if (not (self.refImmediateComposite().oclIsKindOf(IFMLMM!ViewContainer))) then
 			self.getAnchors()
+			
 		else
 			Sequence{}
 		endif,
