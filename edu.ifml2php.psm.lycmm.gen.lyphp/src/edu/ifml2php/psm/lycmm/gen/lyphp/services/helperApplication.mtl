@@ -38,3 +38,7 @@
 	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.main.beans.Application', 'getAppConfigLines(java.lang.String)', Sequence{arg0})
 /]
 
+[query public getRoutes(anOclAny: OclAny) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.main.beans.Application', 'getRoutes()', Sequence{})
+/]
+

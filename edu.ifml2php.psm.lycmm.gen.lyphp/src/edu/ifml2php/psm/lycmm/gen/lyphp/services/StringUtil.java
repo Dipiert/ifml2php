@@ -5,7 +5,7 @@ public class StringUtil {
 	
 	public String getSuffix(String str) {
 		chars = str.toCharArray();
-		for(int i = chars.length - 1; i > 0; i--)
+		for(int i = chars.length - 1; i >= 0; i--)
 			if(chars[i] == Character.toUpperCase(chars[i]))
 				return capitalize(str.substring(i));		
 		return "";
