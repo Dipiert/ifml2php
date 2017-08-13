@@ -11,7 +11,7 @@
  */]
 
 [template public writeView(path : String, view : View)]
-[file (path + view.name + '.php', false, 'UTF-8')]
+[file (path + view.name + '.blade.php', false, 'UTF-8')]
 
 [for (viewComponent : ViewComponent | view.viewComponents)]
 	[if (viewComponent.oclIsTypeOf(Anchor))]
@@ -43,10 +43,9 @@
 			[/let]
 		[/if]
 		[if (viewComponent.oclIsTypeOf(Form))]
-
 			[let f : Form = viewComponent]
-{!! Form::open([ '[' /]'action' => [ self.getSuffix(view.name) + '@' + f.events.handler /], 'method' => '[ f.method /]', 'name' => '[ f.name /]' [ ']' /]) !!}
 
+{!! Form::open([ '[' /]'action' => [ self.getSuffix(view.name) + '@' + f.events.handler /], 'method' => '[ f.method /]', 'name' => '[ f.name /]' [ ']' /]) !!}
 				[for (htmle : HTMLElement | f.htmlElements)]
 					[if (htmle.oclIsTypeOf(TextField))]	
 						[let tf : TextField = htmle]
@@ -64,15 +63,19 @@
 						[/let]
 					[/if]					 
 				[/for][comment]no contemplamos forms que contengan forms, anchors, textos ni imágenes[/comment]					
-				[for (event : Event | f.events)]
-					[if (event.type.toString().matches('onSubmit') )]
+					[for (event : Event | f.events)]
+						[if (event.type.toString().matches('onSubmit') )]
 {{ Form::submit('Enviar') }}
-					[/if] 
-				[/for]		
-
+						[/if] 
+					[/for]		
 {!! Form::close() !!}
 			[/let]			
 		[/if]
 	[/for]
+
+	[for (iv : View | view.innerViews)]
+@include('[ iv.name/].blade.php')
+	[/for]
+
 [/file]
 [/template]

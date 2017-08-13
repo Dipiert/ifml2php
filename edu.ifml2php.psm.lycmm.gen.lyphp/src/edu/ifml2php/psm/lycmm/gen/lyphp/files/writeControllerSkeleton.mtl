@@ -4,15 +4,18 @@
  */]
 [module writeControllerSkeleton('http://www.application.org')]
 
+[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperApplication /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::main::view /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperController /]
-
+[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperLaravelInputPaths /]
 
 [**
  * The documentation of the template generateElement.
  * @param aModel
  */]
 
+
+[comment]quiza pueda traer el path desde el helper y no pasarselo como param[/comment]
 [template public writeControllerSkeleton(path : String, controller : Controller)]
 [file (path + controller.name + '.php', false, 'UTF-8')]
 <?php
@@ -43,5 +46,25 @@ class [controller.name/] extends Controller
 [comment]TODO: *Podrían usarse 2 templates, uno que coloque los métodos personalizados al comienzo y otro que los coloque al final.
 Incluso, se podría poner a los métodos en un orden tal que sea significativo para facilitar la lectura.[/comment]  
 [/file]
+
+[ self.registerController(controller.name) /]
 [/template]
 
+[template private registerController(nameController : String)]
+
+[file (self.getRoutesPath(), false, 'UTF-8')]
+
+[comment][for (line : String | anApp.getAppConfig().tokenize('\n'))]
+	[if (line.contains('name\' =>'))]
+		[line.replace('name\' => \'.*\'','name\' => \'' + anApp.name + '\'') /]
+	[elseif(line.contains('locale\' =>'))]
+		[line.replace('locale\' => \'.*\'','locale\' => \'' + anApp.getLocale() + '\'')/]
+	[else]
+		[line/]
+	[/if]
+[/for][/comment]
+xxxxxxxxxxxx
+
+
+[/file]
+[/template]
