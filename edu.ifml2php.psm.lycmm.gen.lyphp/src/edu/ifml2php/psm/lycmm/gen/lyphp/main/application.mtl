@@ -2,11 +2,12 @@
 [module application('http://www.application.org/coreMVC', 'http://www.application.org/extPHP','http://www.eclipse.org/uml2/5.0.0/UML')/]
 
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperApplication /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperLaravelInputPaths /]
 
 [template public setAppConf(anApp : Application)]
 [comment @main /]
 
-[file ('/laravel5.4.15/config/app', false, 'UTF-8')]
+[file (self.getConfigAppPath(), false, 'UTF-8')]
 [for (line : String | anApp.getAppConfig().tokenize('\n'))]
 	[if (line.contains('name\' =>'))]
 		[line.replace('name\' => \'.*\'','name\' => \'' + anApp.name + '\'') /]

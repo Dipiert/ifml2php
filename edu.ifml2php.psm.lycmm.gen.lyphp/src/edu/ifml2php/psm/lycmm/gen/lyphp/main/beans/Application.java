@@ -4,28 +4,33 @@ import edu.ifml2php.psm.lycmm.gen.lyphp.services.FileReader;
 import edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelInputPaths;
 
 public class Application {
-	//public String routes = "localhost/site1"; podríamos crearlos a la hora de crear los controladores.
+	//Hace falta una clase de Paths? Cada path pertenece a un "concern" y quiza pueda asignarse en la clase correspondiente.
+	//Lo vamos a hacer así porque en caso de que sea ncesario cambiar las rutas por un cambio de versión de Laravel podemos decir que usamos el principio de responsasbilidad simple
+	
    //public String AppType = "web"; lo vamos a descartar por ahora porque no queda comprendido dentro del caso de estudio
 
    public String locale = "es-ES";
+   private FileReader fr = new FileReader();
+   private LaravelInputPaths lip = new LaravelInputPaths();
 
-   public static void main(String[] args) {
-      Application app = new Application();
-      app.getAppConfig();
-   }
-      
+	public String getAppConfigLines(String keyword) {
+      return fr.getFile(lip.getConfigAppPath(), keyword);
+    }
+	
+	public String getAppConfig() {
+		return fr.getFile(lip.getBaseDir() + lip.getConfigAppPath());
+	}
+	
+	public String getRoutes(){
+		return fr.getFile(lip.getBaseDir() + lip.getRoutesPath());
+	}
+		 
 	public String getLocale() {
 		return locale;
 	}
+	
 	public void setLocale(String locale) {
 		this.locale = locale;
 	}
-
-	public String getAppConfig() {
-		return new FileReader().getFile(new LaravelInputPaths().getConfigApp());
-	}
 	
-	public String getAppConfigLines(String keyword) {
-      return new FileReader().getFile(new LaravelInputPaths().getConfigApp(), keyword);
-   }
 }

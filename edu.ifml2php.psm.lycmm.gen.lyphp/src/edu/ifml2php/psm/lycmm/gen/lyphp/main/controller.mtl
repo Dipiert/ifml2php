@@ -24,6 +24,7 @@
        [for (controller : Controller | anApp.aPackageController.controllers)]
           [ writeControllerSkeleton(path, controller) /]
 		  [ getViewConstructors(path, controller.name, anApp.aPackageView ) /]
+		  [ registerController(controller.name, anApp.aPackageController.name) /]
        [/for]
     [/let]
 [/let]

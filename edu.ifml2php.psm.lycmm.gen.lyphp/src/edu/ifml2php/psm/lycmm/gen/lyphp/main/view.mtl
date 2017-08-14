@@ -6,6 +6,7 @@
 
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperFileReader /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::files::writeView /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::files::generateWelcomeView /]
 
 [**
  * The documentation of the template generateElement.
@@ -19,17 +20,18 @@
           [ self.makeFolder(base_dir + path) /]
              [for (view : View | pv.views )]	
 		        [for (inner : View | view.innerViews)]
-			       [ recursive(path, inner) /]
+			       [ makeInnerViews(path, inner) /]
          		[/for]			
-	            [ self.writeView(path, view) /]
+	            [ writeView(path, view) /]
              [/for]
+	   [ self.generateWelcomeView() /]
    	   [/let]
     [/let]
 [/template]
 
-[template public recursive(path : String, view : View)]
-        [ self.writeView(path, view) /]
+[template public makeInnerViews(path : String, view : View)]
+        [ writeView(path, view) /]
    		[for (inner : View | view.innerViews)]
-   			[ recursive(path, inner) /]
+   			[ makeInnerViews(path, inner) /]
    		[/for]
 [/template]

@@ -47,24 +47,18 @@ class [controller.name/] extends Controller
 Incluso, se podría poner a los métodos en un orden tal que sea significativo para facilitar la lectura.[/comment]  
 [/file]
 
-[ self.registerController(controller.name) /]
+[comment][ self.registerController(controller.name) /][/comment]
 [/template]
 
-[template private registerController(nameController : String)]
+[comment][template private registerController(nameController : String)][/comment]
+[template public registerController(nameController : String, namePackage : String)]
+[file (self.getRoutesPath(), true, 'UTF-8')]
+[ self.getRoutes() /]
 
-[file (self.getRoutesPath(), false, 'UTF-8')]
+Route::get('/', function () {
+    return view('welcome');
+});
 
-[comment][for (line : String | anApp.getAppConfig().tokenize('\n'))]
-	[if (line.contains('name\' =>'))]
-		[line.replace('name\' => \'.*\'','name\' => \'' + anApp.name + '\'') /]
-	[elseif(line.contains('locale\' =>'))]
-		[line.replace('locale\' => \'.*\'','locale\' => \'' + anApp.getLocale() + '\'')/]
-	[else]
-		[line/]
-	[/if]
-[/for][/comment]
-xxxxxxxxxxxx
-
-
+Route::resource('[nameController.toLowerCase()/]','[namePackage/]+'Controllers'\[nameController/]');
 [/file]
 [/template]

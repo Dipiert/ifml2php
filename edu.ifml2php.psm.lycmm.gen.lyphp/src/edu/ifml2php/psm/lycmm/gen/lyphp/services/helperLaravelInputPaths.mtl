@@ -1,14 +1,6 @@
 [comment encoding = UTF-8 /]
 [module helperLaravelInputPaths('http://www.application.org')/]
 
-[query public getConfigApp(anOclAny: OclAny) : String
-	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelPaths', 'getConfigApp()', Sequence{})
-/]
-
-[query public setConfigApp(arg0 : String) : OclVoid
-	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelPaths', 'setConfigApp(java.lang.String)', Sequence{arg0})
-/]
-
 [query public getRoutesPath(anOclAny: OclAny) : String
 	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelInputPaths', 'getRoutesPath()', Sequence{})
 /]
@@ -17,3 +9,6 @@
 	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelInputPaths', 'setRoutesPath(java.lang.String)', Sequence{arg0})
 /]
 
+[query public getConfigAppPath(anOclAny: OclAny) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelInputPaths', 'getConfigAppPath()', Sequence{})
+/]
