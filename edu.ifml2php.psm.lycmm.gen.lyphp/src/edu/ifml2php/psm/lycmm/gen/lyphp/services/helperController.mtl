@@ -30,7 +30,4 @@
 [**
  * The documentation of the query
  */]
-[query public getControllerBoilerplate(anOclAny: OclAny) : String
-	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.main.beans.Controller', 'getControllerBoilerplate()', Sequence{})
-/]
 

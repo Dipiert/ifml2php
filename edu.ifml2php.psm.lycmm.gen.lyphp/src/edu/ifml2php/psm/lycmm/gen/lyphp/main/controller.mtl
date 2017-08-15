@@ -22,9 +22,9 @@
    [let path : String = 'laravel5.4.15/app/Http/Controllers/' + anApp.aPackageController.name + 'Controllers/']
        [self.makeFolder(base_dir + path) /]
        [for (controller : Controller | anApp.aPackageController.controllers)]
-          [ writeControllerSkeleton(path, controller) /]
+          [ writeControllerSkeleton(path, controller, anApp.name) /]
 		  [ getViewConstructors(path, controller.name, anApp.aPackageView ) /]
-		  [ registerController(controller.name, anApp.aPackageController.name) /]
+		  [ registerController(controller.name, anApp.aPackageController.name, anApp.aPackageView) /]
        [/for]
     [/let]
 [/let]
@@ -37,7 +37,7 @@
 	[if (getSuffix(view.name).toString().matches(controllerName))]
     function createView[ view.name /]()
     {
-         //
+         return view('[pv.name/]Views.[ view.name /]');
     }
 
 	[/if]

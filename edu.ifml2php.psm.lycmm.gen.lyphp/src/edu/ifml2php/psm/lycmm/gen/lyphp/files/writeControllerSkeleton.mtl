@@ -8,6 +8,8 @@
 [import edu::ifml2php::psm::lycmm::gen::lyphp::main::view /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperController /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperLaravelInputPaths /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperStringUtil /]
+
 
 [**
  * The documentation of the template generateElement.
@@ -16,12 +18,13 @@
 
 
 [comment]quiza pueda traer el path desde el helper y no pasarselo como param[/comment]
-[template public writeControllerSkeleton(path : String, controller : Controller)]
+[template public writeControllerSkeleton(path : String, controller : Controller, appName : String)]
 [file (path + controller.name + '.php', false, 'UTF-8')]
 <?php
 
-namespace App\Http\Controllers\[(path.tokenize('/'))->asSequence()->last() /];
+namespace [appName/]\Http\Controllers\[(path.tokenize('/'))->asSequence()->last() /];
 
+use [appName/]\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class [controller.name/] extends Controller
@@ -42,7 +45,82 @@ class [controller.name/] extends Controller
 		* Ver como obtener el scope de los métodos. No encontramos manera de hacerlo desde IFML-Metamodel aún.
 		* Usar los outParameters de manera más precisa obteniendo información de los Interaction Flows.[/comment]
 [/for]	
-[ self.getControllerBoilerplate() /]
+
+/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        dd("index :)");
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        dd("create :)");
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        dd("request :)");
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+		dd("show :)");
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        dd("edit :)");
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+		dd("update :)");
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        dd("destroy :)");
+    }
 [comment]TODO: *Podrían usarse 2 templates, uno que coloque los métodos personalizados al comienzo y otro que los coloque al final.
 Incluso, se podría poner a los métodos en un orden tal que sea significativo para facilitar la lectura.[/comment]  
 [/file]
@@ -51,14 +129,17 @@ Incluso, se podría poner a los métodos en un orden tal que sea significativo p
 [/template]
 
 [comment][template private registerController(nameController : String)][/comment]
-[template public registerController(nameController : String, namePackage : String)]
+[template public registerController(nameController : String, namePackage : String, pv : PackageView)]
 [file (self.getRoutesPath(), true, 'UTF-8')]
-[ self.getRoutes() /]
-
-Route::get('/', function () {
-    return view('welcome');
+[comment][ self.getRoutes() /][/comment]
+Route::group([ '[' /]'prefix'=>'[nameController.toLowerCase()/]'[ ']' /], function(){  
+   Route::resource('','[namePackage/]Controllers\[nameController/]');
+      [for (view : View | pv.views)]
+	     [if (getSuffix(view.name).toString().matches(nameController))]
+      Route::get('/[view.name/]', '[namePackage/]Controllers\[nameController/]@createView[view.name/]')->name('[nameController.toLowerCase()/].[view.name/]');
+	[/if]
+[/for]
 });
 
-Route::resource('[nameController.toLowerCase()/]','[namePackage/]+'Controllers'\[nameController/]');
 [/file]
 [/template]

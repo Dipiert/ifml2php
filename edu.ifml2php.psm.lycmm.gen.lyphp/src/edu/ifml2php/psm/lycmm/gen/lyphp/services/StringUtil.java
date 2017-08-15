@@ -7,7 +7,7 @@ public class StringUtil {
 		chars = str.toCharArray();
 		for(int i = chars.length - 1; i >= 0; i--)
 			if(chars[i] == Character.toUpperCase(chars[i]))
-				return capitalize(str.substring(i));		
+				return str.substring(i);		
 		return "";
 	}
 	
@@ -22,9 +22,5 @@ public class StringUtil {
 	public String separatePrefixSuffix(String str) {
 		return getPrefix(str) + " " + getSuffix(str);
 	}	
-	
-	private String capitalize(String str) {
-		return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase(); 
-	}
 	
 }

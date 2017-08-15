@@ -18,7 +18,7 @@
 	[let path : String = 'laravel5.4.15/app/' + pm.name + 'Models/']
       [ self.makeFolder(base_dir + path) /]
       [for (model : Model | pm.models)]
-	     [ self.writeModelSkeleton(path, model)/]
+	     [ writeModelSkeleton(path, model)/]
       [/for]
    [/let]
 [/let]

@@ -5,19 +5,20 @@
 [module writeView('http://www.application.org')]
 
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperStringUtil /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperLaravelInputPaths /]
 [**
  * The documentation of the template generateElement.
  * @param aModel
  */]
 
-[template public writeView(path : String, view : View)]
+[template public writeView(path : String, view : View, controllerName : String)]
 [file (path + view.name + '.blade.php', false, 'UTF-8')]
 
 [for (viewComponent : ViewComponent | view.viewComponents)]
 	[if (viewComponent.oclIsTypeOf(Anchor))]
 		[let a : Anchor = viewComponent][comment]En lugar de usar los pairedTag y emptyTag casteamos el viewComponent a Anchor. Esto simplifica el código y mejora la legibilidad a la vez que permite flexibilidad en la implementación (podría no hacerse el cast y utilizar estos atributos)[/comment]
 			[if (view.name.strcmp(a.hypRef) <> 0)]
-<[ a.tagName /] href="{{ route([ self.getSuffix(view.name) /].createView[a.hypRef/]) }}" target="[ a.target /]" >[ a.hypRef.replaceAll('([A-Z])', ' $1' ) /] </[ a.tagName /]> 
+<[ a.tagName /] href="{{ route([ self.getSuffix(view.name.toUpperFirst()) /].createView[a.hypRef/]) }}" target="[ a.target /]" >[ a.hypRef.replaceAll('([A-Z])', ' $1' ) /] </[ a.tagName /]> 
 [comment]Para no definir exhaustivamente y con código estático los atributos de los HTMLElements, podría utilizarselos como su representación ECore (EAttributes). El problema que surge es que EAttribute no tiene algo así como un value más allá de default (lo cuál es totalmente correcto), por lo cual tendríamos que necesitar aún castear ese HTMLElement a un elemento determinado, por lo cual no se aprovecharía la mayor ventaja de este enfoque: permitir la adición de atributos a los HTMLElement (por ej., conforme a alguna nueva especificación) en el metamodelo, sin tener que modificar las reglas -al menos- M2T. Nótese que también este enfoque aumentaría la abstracción del metamodelo de los frameworks PHP(lo cual no es malo) pero haría perder expresividad a los modelos que lo conformen[/comment]
 			[/if]
 		[/let]
@@ -44,9 +45,13 @@
 		[/if]
 		[if (viewComponent.oclIsTypeOf(Form))]
 			[let f : Form = viewComponent]
-
-{!! Form::open([ '[' /]'action' => [ self.getSuffix(view.name) + '@' + f.events.handler /], 'method' => '[ f.method /]', 'name' => '[ f.name /]' [ ']' /]) !!}
-				[for (htmle : HTMLElement | f.htmlElements)]
+				[let actionName : String = f.events.handler]
+					[let formHandler : String = controllerName + 'Controllers\\' + self.getSuffix(view.name.toUpperFirst()) + '@']
+						[registerPostForm(actionName, formHandler)/]		
+{!! Form::open([ '[' /]'action' => '[formHandler + actionName /]', 'method' => '[ f.method /]', 'name' => '[ f.name /]' [ ']' /]) !!}
+					[/let]
+				[/let]		
+		[for (htmle : HTMLElement | f.htmlElements)]
 					[if (htmle.oclIsTypeOf(TextField))]	
 						[let tf : TextField = htmle]
 {{ Form::text('[ tf.name /]') }}	
@@ -78,4 +83,11 @@
 	[/for]
 
 [/file]
+[/template]
+
+[template public registerPostForm(actionName : String, formHandler : String)]
+[file (self.getRoutesPath(), true, 'UTF-8')]
+	Route::post('[ actionName /]', '[ formHandler + actionName /]');
+[/file]
+
 [/template]
