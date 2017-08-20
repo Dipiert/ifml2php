@@ -23,6 +23,9 @@
       <viewElements xsi:type="ext:IFMLWindow" id="_IaUU22lwEeeY5Mo0OtH2sg" name="testWindow">
         <viewElements xsi:type="ext:IFMLWindow" id="_e52vUWm4EeeY5Mo0OtH2sg" name="anotherTestWindow"/>
       </viewElements>
+      <viewElements xsi:type="core:ViewComponent" id="_RnarvYX6EeeVTvMzKUQHpw" name="message">
+        <viewComponentParts xsi:type="core:ConditionalExpression" id="_UH0y_oX6EeeVTvMzKUQHpw" language="es" name="something"/>
+      </viewElements>
     </interactionFlowModelElements>
     <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_ozHbwM7QEeOGsv3AxEnrmw" name="Movie">
       <parameters xsi:type="ext:SelectionField" id="_is04VH1FEeegqaRlWjKUpQ" name="Sexo">

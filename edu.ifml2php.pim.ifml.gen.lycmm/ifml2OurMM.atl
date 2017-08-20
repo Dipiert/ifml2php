@@ -6,6 +6,8 @@
 module tinyRule;
 create ourm : ourMM from uml : UMLMM, ifml : IFMLMM, extm : extMM;
 
+uses ifmlCoreLibrary; uses ifmlExtLibrary; uses mvcLibrary; uses systemLibrary;
+
 rule IFMLModel2ApplicationClass{
         from
  	       ifmlModel : IFMLMM!IFMLModel
@@ -45,7 +47,7 @@ rule IFMLAction2Method{
 		ifmla : IFMLMM!IFMLAction
 	to
 		a : ourMM!Method(
-			name <- thisModule.decapitalize(ifmla.name),
+			name <- ifmla.name.decapitalize(),
 			inParameters <- ifmla.getInParameters(),
 			outParameters <- ifmla.getOutParameters()
 		)		
@@ -110,7 +112,7 @@ rule ViewContainer2View{
 		v  : ourMM!View(
 				name <- vc.name,
 				viewComponents <- vc.getViewComponents(),	--TODO: asegurar que se mantenga el orden de los elementos generados				
-			 	innerViews <- vc.viewElements->select(e| e.oclIsKindOf(IFMLMM!ViewContainer))
+				innerViews <- vc.viewElements->select(e| e.oclIsKindOf(IFMLMM!ViewContainer))
 													->collect(e|thisModule.ViewContainer2InnerView(e))
 			)
 }
@@ -187,7 +189,7 @@ rule SimpleField2TextField{
 		sf : extMM!SimpleField
 	to
 		f : ourMM!TextField(
-			name <- thisModule.decapitalize(sf.name),
+			name <- sf.name.decapitalize(),
 			tagName <- #input,
 			type <- #text,
 			isPairedTag <- false
@@ -199,8 +201,8 @@ lazy rule OnSubmitEvent2Event{
 		n	: String
 	to	
 		e : ourMM!Event(
-			handler <- thisModule.getHandler(n),
-			type <- thisModule.getDefaultEventType()
+			handler <- e.getHandler(n),
+			type <- e.getDefaultEventType()
 		)	
 }
 
@@ -211,7 +213,7 @@ lazy rule Landmarks2MenuItems{
 		)
 	to
 		an	: ourMM!Anchor(
-			name <- thisModule.decapitalize(vc.name),
+			name <- vc.name.decapitalize(),
 			hypRef <- vc.name,
 			target <- an.getDefaultTarget(),
 			tagName <- #a
@@ -229,70 +231,73 @@ lazy rule ViewElement2Image{
 			)	
 }
 
-helper def : decapitalize(name : String) : String =
-	if name.size () > 1 then
-		name.substring(1,1).toLower().concat(name.substring(2,name.size()))
-	else
-		name.substring(1,1).toLower()
-	endif;
+--helper context String def : decapitalize() : String =
+	--if self.size () > 1 then
+		--self.substring(1,1).toLower().concat(self.substring(2,self.size()))
+	--else
+		--self.substring(1,1).toLower()
+	--endif;
 
-helper context ourMM!Anchor def : getDefaultTarget() : String = 'self';
+--helper context ourMM!Anchor def : getDefaultTarget() : String = 'self';
 
-helper def : areRelatives(child : OclAny, seq : Sequence(OclAny)) : Boolean =
-	seq->includes(child);
+--helper context OclAny def : areRelatives(child : OclAny, seq : Sequence(OclAny)) : Boolean =
+	--seq->includes(child);
 
-helper def : isCheckbox(parent : OclAny) : Boolean =
-	parent.isMultiSelection;
+--helper context extMM!Field def : isCheckbox() : Boolean =
+	--self.isMultiSelection;
 
-helper context IFMLMM!ViewContainer def : getAnchors() : Sequence(ourMM!Anchor) =
-	IFMLMM!ViewContainer.allInstances()
-			->select(a | (a.refImmediateComposite() = IFMLMM!InteractionFlowModel.allInstances().first()) and (a <> self))
-			->collect(f|thisModule.Landmarks2MenuItems(f));
+--helper context IFMLMM!ViewContainer def : getAnchors() : Sequence(ourMM!Anchor) =
+	--IFMLMM!ViewContainer.allInstances()
+		--	->select(a | (a.refImmediateComposite() = IFMLMM!InteractionFlowModel.allInstances().first()) and (a <> self))
+		--	->collect(f|thisModule.Landmarks2MenuItems(f));
 
-helper context extMM!Form def : getHTMLElements() : Sequence(ourMM!HTMLElements) =
-	Sequence{self.getSimpleFields(),self.getSelectionFields()};
+--helper context IFMLMM!ViewElement def : getHTMLElements() : Sequence(ourMM!HTMLElements) =
+	--Sequence{self.getSimpleFields(),self.getSelectionFields()};
 
-helper context extMM!Form def : getSimpleFields() : Sequence(ourMM!TextField) =
-	self.viewComponentParts->select(e | e.oclIsTypeOf(extMM!SimpleField));
-			
-helper context extMM!Form def : getSelectionFields() : Sequence(ourMM!Input) =
-	Sequence{extMM!IFMLSlot.allInstances()
-					->select(e|(thisModule.areRelatives(e.refImmediateComposite(), self.parameters)))
-					->select(e|(not(thisModule.isCheckbox(e.refImmediateComposite()))))
-					->collect(e|thisModule.IFMLSlot2RadioButton(e, e.refImmediateComposite().name)),
-			extMM!IFMLSlot.allInstances()
-					->select(e|(thisModule.areRelatives(e.refImmediateComposite(), self.parameters)))
-					->select(e|((thisModule.isCheckbox(e.refImmediateComposite()))))							
-					->collect(e|thisModule.IFMLSlot2Checkbox(e, e.refImmediateComposite().name))};
+--helper context extMM!Form def : getSimpleFields() : Sequence(ourMM!TextField) =
+	--self.viewComponentParts->select(e | e.oclIsTypeOf(extMM!SimpleField));
+
+--helper context extMM!IFMLWindow def : getSimpleFields() : Sequence(ourMM!TextField) =
+	--self.viewElements->select(e | e.oclIsTypeOf(extMM!SimpleField));
+
+--helper context IFMLMM!ViewElement def : getSelectionFields() : Sequence(ourMM!Input) =
+	--Sequence{extMM!IFMLSlot.allInstances()
+		--			->select(e|(e.areRelatives(e.refImmediateComposite(), self.parameters)))
+			--		->select(e|(not(e.refImmediateComposite().isCheckbox())))
+				--	->collect(e|thisModule.IFMLSlot2RadioButton(e, e.refImmediateComposite().name)),
+			--extMM!IFMLSlot.allInstances()
+				--	->select(e|(e.areRelatives(e.refImmediateComposite(), self.parameters)))
+				--	->select(e|((e.refImmediateComposite().isCheckbox())))							
+				--	->collect(e|thisModule.IFMLSlot2Checkbox(e, e.refImmediateComposite().name))};
 					
-helper context IFMLMM!IFMLAction def : getInParameters() : Sequence(ourMM!Attribute) =
-	self.parameters->select(b|b.direction = #"in" or b.direction = #inout)
-					->collect(b|thisModule.Parameter2Attribute(b.name));	
+--helper context IFMLMM!IFMLAction def : getInParameters() : Sequence(ourMM!Attribute) =
+	--self.parameters->select(b|b.direction = #"in" or b.direction = #inout)
+		--			->collect(b|thisModule.Parameter2Attribute(b.name));	
 
-helper context IFMLMM!IFMLAction def : getOutParameters() : Sequence(ourMM!Attribute) =
-	self.parameters->select(b|b.direction = #out or b.direction = #inout)
-					->collect(b|thisModule.parameters2Attributes(b.name));
+--helper context IFMLMM!IFMLAction def : getOutParameters() : Sequence(ourMM!Attribute) =
+	--self.parameters->select(b|b.direction = #out or b.direction = #inout)
+		--			->collect(b|thisModule.parameters2Attributes(b.name));
 
-helper context IFMLMM!ViewContainer def : getViewComponents() : Sequence(ourMM!ViewComponent) =
-	Sequence{
-		if (not (self.refImmediateComposite().oclIsKindOf(IFMLMM!ViewContainer))) then
-			self.getAnchors()
-			
-		else
-			Sequence{}
-		endif,
-		self.viewElements->select(f | f.oclIsTypeOf(IFMLMM!ViewComponent))
-		      			->collect(h|h.viewComponentParts
-	       				->select(b|b.oclIsTypeOf(IFMLMM!ConditionalExpression))),
-		self.viewElements->select(e | e.oclIsTypeOf(IFMLMM!ViewElement))
-						->collect(f|thisModule.ViewElement2Image(f)),
-		self.viewElements->select(e | e.oclIsTypeOf(extMM!Form))
-	};
+--helper context IFMLMM!ViewContainer def : getViewComponents() : Sequence(ourMM!ViewComponent) =
+	--Sequence{
+		--if (not (self.refImmediateComposite().oclIsKindOf(IFMLMM!ViewContainer))) then
+			--self.getAnchors()			
+		--else
+			--Sequence{}
+		--endif,
+		--self.getHTMLElements(),
+		--self.viewElements->select(f | f.oclIsTypeOf(IFMLMM!ViewComponent))
+		  --    			->collect(h|h.viewComponentParts
+	       	--			->select(b|b.oclIsTypeOf(IFMLMM!ConditionalExpression))),
+		--self.viewElements->select(e | e.oclIsTypeOf(IFMLMM!ViewElement))
+			--			->collect(f|thisModule.ViewElement2Image(f)),
+		--self.viewElements->select(e | e.oclIsTypeOf(extMM!Form))
+	--};
 	
-helper def : getDefaultEventType() : ourMM!EventType  = #onSubmit; -- in the actual implementation 
+--helper context ourMM!Event def : getDefaultEventType() : ourMM!EventType  = #onSubmit; -- in the actual implementation 
 
-helper def : getHandler (n : String) : String =
-	extMM!OnSubmitEvent.allInstances()->select(d | d.viewElement.name.toLower() = n.toLower())	
-														->collect(a | a.outInteractionFlows
-														->collect(f | f.targetInteractionFlowElement)
-->collect(g | thisModule.decapitalize(g.name))); --assuming one Submit per Form
+--helper context ourMM!Event def : getHandler (n : String) : String =
+	--extMM!OnSubmitEvent.allInstances()->select(d | d.viewElement.name.toLower() = n.toLower())	
+		--												->collect(a | a.outInteractionFlows
+			--											->collect(f | f.targetInteractionFlowElement)
+				--										->collect(g | g.name.decapitalize())); --assuming one Submit per Form
