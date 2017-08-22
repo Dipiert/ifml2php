@@ -8,7 +8,7 @@ public class StringUtil {
 		for(int i = chars.length - 1; i >= 0; i--)
 			if(chars[i] == Character.toUpperCase(chars[i]))
 				return str.substring(i);		
-		return "";
+		return str;
 	}
 	
 	public String getPrefix(String str) {
@@ -16,7 +16,7 @@ public class StringUtil {
 		for(int i = chars.length - 1; i > 0; i--)
 			if(chars[i] == Character.toUpperCase(chars[i]))
 				return str.substring(0,i);		
-		return "";
+		return str;
 	}
 	
 	public String separatePrefixSuffix(String str) {

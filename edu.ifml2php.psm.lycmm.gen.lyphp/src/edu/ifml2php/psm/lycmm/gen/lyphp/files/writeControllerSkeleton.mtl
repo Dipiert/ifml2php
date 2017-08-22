@@ -132,6 +132,12 @@ Incluso, se podría poner a los métodos en un orden tal que sea significativo p
 [template public registerController(nameController : String, namePackage : String, pv : PackageView)]
 [file (self.getRoutesPath(), true, 'UTF-8')]
 [comment][ self.getRoutes() /][/comment]
+<?php 
+
+Route::get('/', function(){
+        return view('welcome');
+});
+
 Route::group([ '[' /]'prefix'=>'[nameController.toLowerCase()/]'[ ']' /], function(){  
    Route::resource('','[namePackage/]Controllers\[nameController/]');
       [for (view : View | pv.views)]
