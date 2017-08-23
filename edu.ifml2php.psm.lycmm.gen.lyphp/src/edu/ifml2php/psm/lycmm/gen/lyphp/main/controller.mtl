@@ -6,6 +6,7 @@
 
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperFileReader /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperStringUtil /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperApplication /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::files::writeControllerSkeleton /]
 
 [**
@@ -22,7 +23,11 @@
    [let path : String = 'laravel5.4.15/app/Http/Controllers/' + anApp.aPackageController.name + 'Controllers/']
        [self.makeFolder(base_dir + path) /]
        [for (controller : Controller | anApp.aPackageController.controllers)]
-          [ writeControllerSkeleton(path, controller, anApp.name) /]
+        [if (anApp.name.oclIsUndefined() or anApp.name = '')]
+			[ writeControllerSkeleton(path, controller, getDefaultAppName('Laravel')) /]
+		[else]
+        	[ writeControllerSkeleton(path, controller, anApp.name) /]
+        [/if]
 		  [ getViewConstructors(path, controller.name, anApp.aPackageView ) /]
 		  [ registerController(controller.name, anApp.aPackageController.name, anApp.aPackageView) /]
        [/for]

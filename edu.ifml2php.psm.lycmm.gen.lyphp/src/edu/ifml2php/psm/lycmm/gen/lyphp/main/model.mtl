@@ -5,22 +5,36 @@
 [module model('http://www.application.org')]
 
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperFileReader /]
-[import edu::ifml2php::psm::lycmm::gen::lyphp::files::writeModelSkeleton /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperApplication /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::files::writeModelSkeleton  /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::files::writeModelRequest   /]
 
 [**
  * The documentation of the template generateElement.
  * @param aModel
  */]
 
-[template public makeModels(pm : PackageModel)]
+[template public makeModels(anApp : Application)]
 [comment @main/]
+	[let pm : PackageModel = anApp.aPackageModel]
     [let base_dir : String = 'FHS/var/www/html/' ]
-	[let path : String = 'laravel5.4.15/app/' + pm.name + 'Models/']
-      [ self.makeFolder(base_dir + path) /]
+	[let pathModels : String = 'laravel5.4.15/app/' + pm.name + 'Models/']
+	[let pathReq : String = 'laravel5.4.15/app/Http/' + pm.name + 'Requests/']
+      [ self.makeFolder(base_dir + pathModels) /]
+	  [ self.makeFolder(base_dir + pathReq) /]
       [for (model : Model | pm.models)]
-	     [ writeModelSkeleton(path, model)/]
+	  [if (anApp.name = '' or anApp.name.oclIsUndefined())]
+	  	[ writeModelSkeleton(getDefaultAppName('Laravel'), pathModels, model)/]
+		[ writeModelRequest(getDefaultAppName('Laravel'), pathReq, pm.name,model) /]
+	  [else]
+	  	 [ writeModelSkeleton(anApp.name, pathModels, model)/]
+		 [ writeModelRequest(anApp.name, pathReq, pm.name,model) /]	
+	  [/if]
+	    
       [/for]
    [/let]
-[/let]
+   [/let]
+   [/let]
+   [/let]
 [/template]
 

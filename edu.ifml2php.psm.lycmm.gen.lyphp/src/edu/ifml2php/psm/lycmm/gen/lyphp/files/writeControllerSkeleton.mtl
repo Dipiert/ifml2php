@@ -22,16 +22,17 @@
 [file (path + controller.name + '.php', false, 'UTF-8')]
 <?php
 
-namespace [appName/]\Http\Controllers\[(path.tokenize('/'))->asSequence()->last() /];
+namespace [ appName/]\Http\Controllers\[(path.tokenize('/'))->asSequence()->last() /];	
 
 use [appName/]\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+use [appName/]\Http\Requests\[controller.name/]Request;
 
 class [controller.name/] extends Controller
 {
 [for (method : Method | controller.methods)]
 
-   protected function [ method.name /]([for (parameter : Attribute | method.inParameters) separator(', ' )]$[parameter.name/][/for])
+   protected function [ method.name /]([controller.name/]Request $request)
    {   
     [if ( method.outParameters->size() > 0)]
     	//Los parámetros ([for (parameter : Attribute | method.outParameters) separator(', ' )]$[parameter.name/][/for]) fueron modelados como de salida. Verifique si son retornados al módulo llamador o pasado a otro 
@@ -72,7 +73,7 @@ class [controller.name/] extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store([controller.name/]Request $request)
     {
         dd("request :)");
     }
@@ -106,7 +107,7 @@ class [controller.name/] extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update([controller.name/]Request $request, $id)
     {
 		dd("update :)");
     }

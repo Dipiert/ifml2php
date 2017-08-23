@@ -12,7 +12,21 @@ public class Application {
    public String locale = "es-ES";
    private FileReader fr = new FileReader();
    private LaravelInputPaths lip = new LaravelInputPaths();
-
+   private String defaultAppName;
+   
+   public String getDefaultAppName(String framework) {
+	   switch(framework) {
+	      case "Laravel": 
+	    	  return "App";
+	      case "Yii2":
+	    	  return "";
+	      case "CI":
+	    	  return "";
+	      default:
+	    	  return "";
+	   }
+   }
+   
 	public String getAppConfigLines(String keyword) {
       return fr.getFile(lip.getConfigAppPath(), keyword);
     }

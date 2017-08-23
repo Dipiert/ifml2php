@@ -42,3 +42,6 @@
 	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.main.beans.Application', 'getRoutes()', Sequence{})
 /]
 
+[query public getDefaultAppName(arg0: String) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.main.beans.Application', 'getDefaultAppName(java.lang.String)', Sequence{arg0})
+/]

@@ -13,6 +13,7 @@
 
 [template public writeView(path : String, view : View, controllerName : String, pvName : String)]
 [file (path + view.name + '.blade.php', false, 'UTF-8')]
+<!DOCTYPE html>
 [comment]TODO: No es necesario pasarle la vista porque está dentro del package[/comment]
 [for (viewComponent : ViewComponent | view.viewComponents)]
 	[if (viewComponent.oclIsTypeOf(Anchor))]
@@ -24,6 +25,7 @@
 		[/let]
 	[/if]
 		[if (viewComponent.oclIsTypeOf(Text))]
+		
 			[let t : Text = viewComponent]
 <[ t.tagName /] data-language="[ t._language /]" id="[ t.name /]" > [ t.content /] </[ t.tagName /]>
 			[/let]
