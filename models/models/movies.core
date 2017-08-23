@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<core:IFMLModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://www.omg.org/spec/20130218/core" xmlns:ext="http://www.omg.org/spec/20130218/ext" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" id="_QwKrAM7OEeOGsv3AxEnrmw" name="Movies">
+<?xml version="1.0" encoding="ASCII"?>
+<core:IFMLModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://www.omg.org/spec/20130218/core" xmlns:ext="http://www.omg.org/spec/20130218/ext" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" id="_YyyfUIhBEeeeFtdPOMd4Jg">
   <interactionFlowModel id="_YON7gM7PEeOGsv3AxEnrmw" name="InteractionFlowModel">
     <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_BTIDUM7QEeOGsv3AxEnrmw" name="ListMovie" isDefault="true">
       <viewElements xsi:type="ext:List" id="_LjeRwM7QEeOGsv3AxEnrmw" name="MovieList" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.3/@outInteractionFlows.0">
@@ -28,11 +28,6 @@
       </viewElements>
     </interactionFlowModelElements>
     <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_ozHbwM7QEeOGsv3AxEnrmw" name="Movie">
-      <parameters xsi:type="ext:SelectionField" id="_is04VH1FEeegqaRlWjKUpQ" name="Sexo">
-        <parameters xsi:type="ext:IFMLSlot" id="_nYAOA31FEeegqaRlWjKUpQ" name="F"/>
-        <parameters xsi:type="ext:IFMLSlot" id="_pHM6w31FEeegqaRlWjKUpQ" name="M"/>
-        <parameters xsi:type="ext:IFMLSlot" id="_qnVQw31FEeegqaRlWjKUpQ" name="NN"/>
-      </parameters>
       <parameters xsi:type="ext:SelectionField" id="_ttGH1H1FEeegqaRlWjKUpQ" name="Vehiculo" isMultiSelection="true">
         <parameters xsi:type="ext:IFMLSlot" id="_xEKxU31FEeegqaRlWjKUpQ" name="Trenes"/>
         <parameters xsi:type="ext:IFMLSlot" id="_2YtNE31FEeegqaRlWjKUpQ" name="Tractores"/>
@@ -42,7 +37,7 @@
         <parameters id="_9mUi8s7mEeOGsv3AxEnrmw" name="Movie">
           <type xsi:type="uml:Class" href="model.uml#__W1boJ6PEeGdnpRmAZh-dQ"/>
         </parameters>
-        <viewComponentParts xsi:type="core:DataBinding" id="_UYQxkNnbEeObZ68aDe8jUQ" name="Movie" domainConcept="//@domainModel/@domainElements.0"/>
+        <viewComponentParts xsi:type="core:DataBinding" id="_UYQxkNnbEeObZ68aDe8jUQ" name="Movie"/>
         <viewComponentParts xsi:type="core:VisualizationAttribute" id="_K7PiL_35EeOlue9C3AA28A" name="Title" featureConcept="//@domainModel/@domainElements.1"/>
         <viewComponentParts xsi:type="core:VisualizationAttribute" id="_OAATr_35EeOlue9C3AA28A" name="Year" featureConcept="//@domainModel/@domainElements.2"/>
       </viewElements>
@@ -62,6 +57,8 @@
             <parameterBindingGroup id="_l9V_IM7pEeOGsv3AxEnrmw">
               <parameterBindings id="_oPirQM7pEeOGsv3AxEnrmw" sourceParameter="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0/@viewComponentParts.1" targetParameter="//@interactionFlowModel/@interactionFlowModelElements.3/@parameters.1"/>
               <parameterBindings id="_IRegAP34EeOlue9C3AA28A" sourceParameter="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0/@viewComponentParts.2" targetParameter="//@interactionFlowModel/@interactionFlowModelElements.3/@parameters.0"/>
+              <parameterBindings id="_b1toUohCEeeeFtdPOMd4Jg" sourceParameter="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0/@parameters.1" targetParameter="//@interactionFlowModel/@interactionFlowModelElements.3/@parameters.3"/>
+              <parameterBindings id="_l6RoEohDEeeeFtdPOMd4Jg" sourceParameter="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0/@parameters.0" targetParameter="//@interactionFlowModel/@interactionFlowModelElements.3/@parameters.2"/>
             </parameterBindingGroup>
           </outInteractionFlows>
         </viewElementEvents>
@@ -86,18 +83,30 @@
       <parameters id="_ulGBYv33EeOlue9C3AA28A" name="Title">
         <type xsi:type="uml:PrimitiveType" href="model.uml#_VK2hkJ6QEeGdnpRmAZh-dQ"/>
       </parameters>
+      <parameters id="_y9OWcohCEeeeFtdPOMd4Jg" name="Genre">
+        <type xsi:type="uml:PrimitiveType" href="model.uml#_VK2hkJ6QEeGdnpRmAZh-dQ"/>
+      </parameters>
+      <parameters id="_5R71wohCEeeeFtdPOMd4Jg" name="Director">
+        <type xsi:type="uml:PrimitiveType" href="model.uml#_VK2hkJ6QEeGdnpRmAZh-dQ"/>
+      </parameters>
       <outInteractionFlows xsi:type="core:NavigationFlow" id="_kAtTUM7pEeOGsv3AxEnrmw" targetInteractionFlowElement="//@interactionFlowModel/@interactionFlowModelElements.0/@viewElements.0"/>
     </interactionFlowModelElements>
   </interactionFlowModel>
-  <domainModel id="_7A_iA9t0EeOsnrVUDdvbPA" name="domainModel">
-    <domainElements xsi:type="core:UMLDomainConcept" id="_OZNSotwfEeOOS_SwvB-iFQ" name="MovieConcept" dataBinding="//@interactionFlowModel/@interactionFlowModelElements.1/@viewElements.0/@viewComponentParts.0">
+  <domainModel id="_YyyfUYhBEeeeFtdPOMd4Jg">
+    <domainElements xsi:type="core:UMLDomainConcept" id="_Yy07kIhBEeeeFtdPOMd4Jg" name="Movie">
       <classifier xsi:type="uml:Class" href="model.uml#__W1boJ6PEeGdnpRmAZh-dQ"/>
     </domainElements>
-    <domainElements xsi:type="core:UMLStructuralFeature" id="_FOW9mtwoEeOqpair1RTJJg" name="Title" visualizationAttribute="//@interactionFlowModel/@interactionFlowModelElements.0/@viewElements.0/@viewComponentParts.1">
+    <domainElements xsi:type="core:UMLStructuralFeature" id="_Yy07kYhBEeeeFtdPOMd4Jg" name="title">
       <structuralFeature xsi:type="uml:Property" href="model.uml#_jEpi8J6QEeGdnpRmAZh-dQ"/>
     </domainElements>
-    <domainElements xsi:type="core:UMLStructuralFeature" id="_9yZQatwpEeOkXZCL_xSeWQ" name="Year" visualizationAttribute="//@interactionFlowModel/@interactionFlowModelElements.0/@viewElements.0/@viewComponentParts.2">
+    <domainElements xsi:type="core:UMLStructuralFeature" id="_Yy07kohBEeeeFtdPOMd4Jg" name="year">
       <structuralFeature xsi:type="uml:Property" href="model.uml#_jm9l0J6QEeGdnpRmAZh-dQ"/>
+    </domainElements>
+    <domainElements xsi:type="core:UMLStructuralFeature" id="_Yy07k4hBEeeeFtdPOMd4Jg" name="genre">
+      <structuralFeature xsi:type="uml:Property" href="model.uml#__6z5IIhAEeeeFtdPOMd4Jg"/>
+    </domainElements>
+    <domainElements xsi:type="core:UMLStructuralFeature" id="_Yy1ioIhBEeeeFtdPOMd4Jg" name="director">
+      <structuralFeature xsi:type="uml:Property" href="model.uml#_D_QmAIhBEeeeFtdPOMd4Jg"/>
     </domainElements>
   </domainModel>
 </core:IFMLModel>
