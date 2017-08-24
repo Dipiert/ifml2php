@@ -10,11 +10,13 @@
  * @param aModel
  */]
 
-[template public writeModelSkeleton(path : String, model : Model)]
+[template public writeModelSkeleton(appName : String, path : String, model : Model)]
+[if (appName.oclIsUndefined())][appName = 'App' /][/if]
 [file (path + model.name + '.php', false, 'UTF-8')]
+
 <?php
 
-namespace App\[(path.tokenize('/'))->asSequence()->last() /];
+namespace [ appName /]\[(path.tokenize('/'))->asSequence()->last() /];
 	
 use Illuminate\Database\Eloquent\Model;
 		

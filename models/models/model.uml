@@ -7,6 +7,11 @@
       <packagedElement xmi:type="uml:Class" xmi:id="__W1boJ6PEeGdnpRmAZh-dQ" name="Movie">
         <ownedAttribute xmi:id="_jEpi8J6QEeGdnpRmAZh-dQ" name="title" visibility="private" type="_VK2hkJ6QEeGdnpRmAZh-dQ"/>
         <ownedAttribute xmi:id="_jm9l0J6QEeGdnpRmAZh-dQ" name="year" type="_YGTmEJ6QEeGdnpRmAZh-dQ"/>
+        <ownedAttribute xmi:id="__6z5IIhAEeeeFtdPOMd4Jg" name="genre" type="_VK2hkJ6QEeGdnpRmAZh-dQ"/>
+        <ownedAttribute xmi:id="_D_QmAIhBEeeeFtdPOMd4Jg" name="director" type="_VK2hkJ6QEeGdnpRmAZh-dQ">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_OLhlsIhBEeeeFtdPOMd4Jg"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JwPtMIhBEeeeFtdPOMd4Jg" value="*"/>
+        </ownedAttribute>
       </packagedElement>
     </packagedElement>
   </packagedElement>
