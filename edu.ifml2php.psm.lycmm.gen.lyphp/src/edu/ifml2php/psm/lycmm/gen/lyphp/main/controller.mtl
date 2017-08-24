@@ -24,9 +24,9 @@
        [self.makeFolder(base_dir + path) /]
        [for (controller : Controller | anApp.aPackageController.controllers)]
         [if (anApp.name.oclIsUndefined() or anApp.name = '')]
-			[ writeControllerSkeleton(path, controller, getDefaultAppName('Laravel')) /]
+			[ writeControllerSkeleton(path, controller, getDefaultAppName('Laravel'), anApp.aPackageModel.name) /]
 		[else]
-        	[ writeControllerSkeleton(path, controller, anApp.name) /]
+        	[ writeControllerSkeleton(path, controller, anApp.name, anApp.aPackageModel.name) /]
         [/if]
 		  [ getViewConstructors(path, controller.name, anApp.aPackageView ) /]
 		  [ registerController(controller.name, anApp.aPackageController.name, anApp.aPackageView) /]
@@ -37,7 +37,7 @@
 
 
 [template private getViewConstructors(path : String, controllerName : String, pv : PackageView)]
-[file (path + controllerName + '.php', true, 'UTF-8')]
+[file (path + controllerName + 'Controller.php', true, 'UTF-8')]
 [for (view : View | pv.views) after ('}')]
 	[if (getSuffix(view.name).toString().matches(controllerName))]
     function createView[ view.name /]()

@@ -1,5 +1,9 @@
 package edu.ifml2php.psm.lycmm.gen.lyphp.main.beans;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import edu.ifml2php.psm.lycmm.gen.lyphp.services.FileReader;
 import edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelInputPaths;
 
@@ -45,6 +49,28 @@ public class Application {
 	
 	public void setLocale(String locale) {
 		this.locale = locale;
+	}
+	
+	public void setAppName(String pathFramework, String appName) {
+		Runtime r = Runtime.getRuntime();
+		Process p;
+		try {
+			p = r.exec("php " + pathFramework + "/artisan app:name " + appName);
+			p.waitFor();
+			BufferedReader b = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			String line = "";
+			
+			while ((line = b.readLine()) != null) {
+				  System.out.println(line);
+			}
+			
+			b.close();
+			
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		
 	}
 	
 }

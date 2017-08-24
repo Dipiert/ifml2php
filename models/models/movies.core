@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<core:IFMLModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://www.omg.org/spec/20130218/core" xmlns:ext="http://www.omg.org/spec/20130218/ext" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" id="_YyyfUIhBEeeeFtdPOMd4Jg">
+<core:IFMLModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://www.omg.org/spec/20130218/core" xmlns:ext="http://www.omg.org/spec/20130218/ext" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" id="_YyyfUIhBEeeeFtdPOMd4Jg" name="Movies">
   <interactionFlowModel id="_YON7gM7PEeOGsv3AxEnrmw" name="InteractionFlowModel">
     <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_BTIDUM7QEeOGsv3AxEnrmw" name="ListMovie" isDefault="true">
       <viewElements xsi:type="ext:List" id="_LjeRwM7QEeOGsv3AxEnrmw" name="MovieList" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.3/@outInteractionFlows.0">
@@ -92,7 +92,7 @@
       <outInteractionFlows xsi:type="core:NavigationFlow" id="_kAtTUM7pEeOGsv3AxEnrmw" targetInteractionFlowElement="//@interactionFlowModel/@interactionFlowModelElements.0/@viewElements.0"/>
     </interactionFlowModelElements>
   </interactionFlowModel>
-  <domainModel id="_YyyfUYhBEeeeFtdPOMd4Jg">
+  <domainModel id="_YyyfUYhBEeeeFtdPOMd4Jg" name="domainModel">
     <domainElements xsi:type="core:UMLDomainConcept" id="_Yy07kIhBEeeeFtdPOMd4Jg" name="Movie">
       <classifier xsi:type="uml:Class" href="model.uml#__W1boJ6PEeGdnpRmAZh-dQ"/>
     </domainElements>

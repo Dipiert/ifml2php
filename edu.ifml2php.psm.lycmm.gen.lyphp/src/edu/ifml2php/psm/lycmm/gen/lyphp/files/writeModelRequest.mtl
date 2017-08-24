@@ -6,11 +6,8 @@
 [template public writeModelRequest( appName : String, path : String, pmName : String , model : Model)]
 
 [file (path + model.name + 'Request.php', false, 'UTF-8')]
-
 <?php
-
-
-namespace [ appName /]\Http\Requests;
+namespace [ appName /]\Http\Requests\[ pmName /]Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,7 +20,7 @@ class [ model.name /]Request extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return !false;
     }
 
     /**
@@ -36,6 +33,7 @@ class [ model.name /]Request extends FormRequest
         return  [ '[' /]
 			[for (at : Attribute | model.attributes ) separator(',\n')]
 			'[ at.name /]' => ''[/for]	
+
 		[ ']' /];
     } 
 }

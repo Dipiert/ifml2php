@@ -18,17 +18,17 @@
 
 
 [comment]quiza pueda traer el path desde el helper y no pasarselo como param[/comment]
-[template public writeControllerSkeleton(path : String, controller : Controller, appName : String)]
-[file (path + controller.name + '.php', false, 'UTF-8')]
+[template public writeControllerSkeleton(path : String, controller : Controller, appName : String, pmName : String)]
+[file (path + controller.name + 'Controller.php', false, 'UTF-8')]
 <?php
 
-namespace [ appName/]\Http\Controllers\[(path.tokenize('/'))->asSequence()->last() /];	
+namespace [ appName/]\Http\Controllers\[pmName+ 'Controllers'/];	
 
 use [appName/]\Http\Controllers\Controller;
-//use Illuminate\Http\Request;
-use [appName/]\Http\Requests\[controller.name/]Request;
+use [appName/]\Http\Requests\[ pmName /]Requests\[controller.name/]Request;
+use [appName/]\[pmName/]Models\[controller.name/];
 
-class [controller.name/] extends Controller
+class [controller.name/]Controller extends Controller
 {
 [for (method : Method | controller.methods)]
 
@@ -126,27 +126,21 @@ class [controller.name/] extends Controller
 Incluso, se podría poner a los métodos en un orden tal que sea significativo para facilitar la lectura.[/comment]  
 [/file]
 
-[comment][ self.registerController(controller.name) /][/comment]
 [/template]
 
-[comment][template private registerController(nameController : String)][/comment]
 [template public registerController(nameController : String, namePackage : String, pv : PackageView)]
 [file (self.getRoutesPath(), true, 'UTF-8')]
-[comment][ self.getRoutes() /][/comment]
 <?php 
 
 Route::get('/', function(){
         return view('welcome');
 });
-
-Route::group([ '[' /]'prefix'=>'[nameController.toLowerCase()/]'[ ']' /], function(){  
-   Route::resource('','[namePackage/]Controllers\[nameController/]');
-      [for (view : View | pv.views)]
-	     [if (getSuffix(view.name).toString().matches(nameController))]
-      Route::get('/[view.name/]', '[namePackage/]Controllers\[nameController/]@createView[view.name/]')->name('[nameController.toLowerCase()/].[view.name/]');
+[for (view : View | pv.views)]
+	[if (getSuffix(view.name).toString().matches(nameController))]
+Route::get('[nameController.toLowerCase()/]/[view.name/]', '[namePackage/]Controllers\[nameController/]Controller@createView[view.name/]')->name('[nameController.toLowerCase()/].[view.name/]');
 	[/if]
 [/for]
-});
+Route::resource('[nameController.toLowerCase()/]','[namePackage/]Controllers\[nameController/]Controller');
 
 [/file]
 [/template]

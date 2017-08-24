@@ -19,7 +19,7 @@
 	[let pm : PackageModel = anApp.aPackageModel]
     [let base_dir : String = 'FHS/var/www/html/' ]
 	[let pathModels : String = 'laravel5.4.15/app/' + pm.name + 'Models/']
-	[let pathReq : String = 'laravel5.4.15/app/Http/' + pm.name + 'Requests/']
+	[let pathReq : String = 'laravel5.4.15/app/Http/Requests/' + pm.name + 'Requests/']
       [ self.makeFolder(base_dir + pathModels) /]
 	  [ self.makeFolder(base_dir + pathReq) /]
       [for (model : Model | pm.models)]

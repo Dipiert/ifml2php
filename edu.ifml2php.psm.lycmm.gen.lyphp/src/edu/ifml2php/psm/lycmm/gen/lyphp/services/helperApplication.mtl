@@ -45,3 +45,9 @@
 [query public getDefaultAppName(arg0: String) : String
 	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.main.beans.Application', 'getDefaultAppName(java.lang.String)', Sequence{arg0})
 /]
+
+[query public setAppName(arg0: String, arg1:String) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.main.beans.Application', 'setAppName(java.lang.String, java.lang.String)', Sequence{arg0, arg1})
+/]
+
+

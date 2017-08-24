@@ -11,7 +11,7 @@
  * @param aModel
  */]
 
-[template public writeView(path : String, view : View, controllerName : String, pvName : String)]
+[template public writeView(path : String, view : View, pcName : String, pvName : String)]
 [file (path + view.name + '.blade.php', false, 'UTF-8')]
 <!DOCTYPE html>
 [comment]TODO: No es necesario pasarle la vista porque está dentro del package[/comment]
@@ -31,8 +31,8 @@
 			[/let]
 		[/if]
 		[if (viewComponent.oclIsTypeOf(Checkbox))]	
-			[let c : Checkbox = viewComponent]
-<[ c.tagName /] type="[ c.type /]" value="[ c.value /]"/>			
+			[let cb : Checkbox = viewComponent]
+<[ cb.tagName /] name="[ cb.name /]"[ '[' /] [ ']' /] type="[ cb.type /]" value="[ cb.value /]"/>			
 			[/let] 		
 		[/if]
 		[if (viewComponent.oclIsTypeOf(RadioButton))]
@@ -49,8 +49,8 @@
 			[let f : Form = viewComponent]
 				[for (event : Event | f.events)]
 					[let actionName : String = event.handler]
-						[let formHandler : String = controllerName + 'Controllers\\' + self.getSuffix(view.name.toUpperFirst()) + '@']
-							[registerPostForm(actionName, formHandler)/]		
+						[let formHandler : String = pcName + 'Controllers\\' + getSuffix(view.name.toUpperFirst()) + 'Controller' + '@']
+							[registerPostForm(actionName, formHandler, getSuffix(view.name.toUpperFirst()))/]		
 {!! Form::open([ '[' /]'action' => '[formHandler + actionName /]', 'method' => '[ f.method /]', 'name' => '[ f.name /]' [ ']' /]) !!}
 						[/let]
 					[/let]
@@ -63,7 +63,7 @@
 						[/if]
 						[if (htmle.oclIsTypeOf(Checkbox))]			
 							[let cb : Checkbox = htmle]
-{{ Form::[ cb.type /] ('[cb.name/]', '[cb.value/]') }}
+{{ Form::[ cb.type /] ('[cb.name/][ '[' /] [ ']' /]', '[cb.value/]') }}
 							[/let]				
 						[/if]
 						[if (htmle.oclIsTypeOf(RadioButton))]
@@ -88,8 +88,8 @@
 [/file]
 [/template]
 
-[template public registerPostForm(actionName : String, formHandler : String)]
+[template public registerPostForm(actionName : String, formHandler : String, controllerName : String)]
 [file (self.getRoutesPath(), true, 'UTF-8')]
-Route::post('[ actionName /]', '[ formHandler + actionName /]');
+Route::post('[controllerName.toLowerCase()/]/[ actionName /]', '[ formHandler + actionName /]');
 [/file]
 [/template]
