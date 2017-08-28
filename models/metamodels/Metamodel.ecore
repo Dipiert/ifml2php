@@ -84,7 +84,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="Form" eSuperTypes="#//extPHP/HTMLElement">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="method" eType="#//extPHP/MethodType"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="target" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="target" eType="#//extPHP/TargetType"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Button" eSuperTypes="#//extPHP/HTMLElement">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="disabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -96,7 +96,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Anchor" eSuperTypes="#//extPHP/HTMLElement">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="target" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="target" eType="#//extPHP/TargetType"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="hypRef" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
           defaultValueLiteral=""/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -117,6 +117,14 @@
       <eLiterals name="submit" value="2" literal="submit"/>
       <eLiterals name="reset" value="3"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="TargetType">
+      <eLiterals name="workaround"/>
+      <eLiterals name="self" value="1"/>
+      <eLiterals name="blank" value="2"/>
+      <eLiterals name="parent" value="3"/>
+      <eLiterals name="top" value="4"/>
+      <eLiterals name="framename" value="5"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="InputType">
       <eLiterals name="workaround"/>
       <eLiterals name="text" value="1"/>
@@ -136,6 +144,10 @@
       <eLiterals name="workaround"/>
       <eLiterals name="get" value="1"/>
       <eLiterals name="post" value="2"/>
+      <eLiterals name="put"/>
+      <eLiterals name="patch"/>
+      <eLiterals name="head" literal="head"/>
+      <eLiterals name="delete"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

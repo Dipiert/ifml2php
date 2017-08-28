@@ -150,6 +150,7 @@ rule IFMLForm2Form{
 			name <- frm.name,
 			tagName <- #form,
 			method <- #post,
+			target <- f.getDefaultTarget(),
 			htmlElements <- frm.getHTMLElements(),
 			events <- thisModule.OnSubmitEvent2Event(f.name)
 			
