@@ -12,6 +12,7 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_OLhlsIhBEeeeFtdPOMd4Jg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JwPtMIhBEeeeFtdPOMd4Jg" value="*"/>
         </ownedAttribute>
+        <ownedAttribute xmi:id="_VB_OcIw3EeeRs66kVYR6_g" name="id" type="_VK2hkJ6QEeGdnpRmAZh-dQ"/>
       </packagedElement>
     </packagedElement>
   </packagedElement>
