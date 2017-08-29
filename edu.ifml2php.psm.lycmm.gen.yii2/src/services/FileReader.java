@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FileReader {
 
@@ -45,5 +47,10 @@ public String getFile(String path, String keyword) {
 public void makeFolder(String path){
    new File(path).mkdirs();
 }
-	
+
+public void shift(String array, String item, String path) {
+	String file = this.getFile(path);
+	file = file.trim();
+}
+
 }
