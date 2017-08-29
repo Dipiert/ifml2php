@@ -1,0 +1,14 @@
+[comment encoding = UTF-8 /]
+[module helperYii2InputPaths('http://www.application.org')/]
+
+[query public getRoutesPath(anOclAny: OclAny) : String
+	= invoke('services.LaravelInputPaths', 'getRoutesPath()', Sequence{})
+/]
+
+[query public setRoutesPath(arg0 : String) : OclVoid
+	= invoke('services.LaravelInputPaths', 'setRoutesPath(java.lang.String)', Sequence{arg0})
+/]
+
+[query public getConfigAppPath(anOclAny: OclAny) : String
+	= invoke('services.Yii2InputPaths', 'getConfigAppPath()', Sequence{})
+/]

@@ -1,0 +1,57 @@
+[comment encoding = UTF-8 /]
+[module application('http://www.application.org/coreMVC', 'http://www.application.org/extPHP','http://www.eclipse.org/uml2/5.0.0/UML')/]
+
+[import services::helperApplication /]
+[import services::helperYii2InputPaths /]
+
+[template public setAppConf(anApp : Application)]
+[comment @main /]
+
+[comment @main /]
+[file (self.getConfigAppPath(), false, 'UTF-8')]
+	[if (isSet('name'))]
+		[for (line : String | anApp.getAppConfig().tokenize('\n'))]
+			[if (line.contains('name\' =>'))]
+				[if (anApp.name.oclIsUndefined() or anApp.name = '' )]
+					[line.replace('name\' => \'.*\'','name\' => \'' + getDefaultAppName('Yii2') + '\'') /]
+				[else]
+					[line.replace('name\' => \'.*\'','name\' => \'' + anApp.name + '\'') /]			
+				[/if]
+			[else]
+				[line/]		
+			[/if]	
+		[/for]
+	[else]
+		
+	[/if]
+	[if (isSet('language'))]
+		[for (line : String | anApp.getAppConfig().tokenize('\n'))]
+			[if(line.contains('language\' =>'))]
+				[line.replace('language\' => \'.*\'','language\' => \'' + anApp.getLocale() + '\'')/]
+			[else]
+				[line/]
+			[/if]
+		[/for]
+	[else]
+		!tiene	
+	[/if]	
+[/file]
+
+
+
+
+[comment][for (line : String | anApp.getAppConfig().tokenize('\n'))]
+	[if (line.contains('name\' =>'))]
+		[if (anApp.name.oclIsUndefined() or anApp.name = '' )]
+			[line.replace('name\' => \'.*\'','name\' => \'' + getDefaultAppName('Yii2') + '\'') /]
+		[else]
+			[line.replace('name\' => \'.*\'','name\' => \'' + anApp.name + '\'') /]			
+		[/if]
+	[elseif(line.contains('language\' =>'))]
+		[line.replace('language\' => \'.*\'','language\' => \'' + anApp.getLocale() + '\'')/]
+	[else]
+		[line/]
+	[/if]
+[/for][/comment]
+
+[/template]
