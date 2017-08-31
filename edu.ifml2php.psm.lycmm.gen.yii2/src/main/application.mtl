@@ -3,12 +3,15 @@
 
 [import services::helperApplication /]
 [import services::helperYii2InputPaths /]
+[import services::helperFileReader /]
+
 
 [template public setAppConf(anApp : Application)]
 [comment @main /]
-[ self.setNameApp(anApp) /]
-[ self.setLocaleApp(anApp) /]
-[ self.putReturnStmt() /]
+[ removeReturnStmt(anApp.getConfigAppPath(), 'config') /]
+[ setNameApp(anApp) /]
+[ setLocaleApp(anApp) /]
+[ putReturnStmt('config', anApp.getConfigAppPath()) /]
 [/template]
 
 
@@ -53,12 +56,5 @@
 			[/if]
 		[/for]
 	[/if]	
-[/file]
-[/template]
-
-
-[template putReturnStmt()]
-[file (self.getConfigAppPath(), true, 'UTF-8')]
-return $config;
 [/file]
 [/template]

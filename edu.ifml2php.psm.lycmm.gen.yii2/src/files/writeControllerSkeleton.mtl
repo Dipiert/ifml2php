@@ -4,12 +4,14 @@
  */]
 [module writeControllerSkeleton('http://www.application.org')]
 
+[import services::helperYii2InputPaths /]
+[import services::helperFileReader /]
+
 [comment][import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperApplication /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::main::view /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperController /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperLaravelInputPaths /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperStringUtil /][/comment]
-
 
 [**
  * The documentation of the template generateElement.
@@ -41,22 +43,19 @@ class [controller.name/]Controller extends Controller
 [/for]	
 }
 [/file]
-
+[ registerController(controller.name, pmName) /]
 [/template]
 
-[comment][template public registerController(nameController : String, namePackage : String, pv : PackageView)]
-[file (self.getRoutesPath(), true, 'UTF-8')]
-<?php 
-
-Route::get('/', function(){
-        return view('welcome');
-});
-[for (view : View | pv.views)]
-	[if (getSuffix(view.name).toString().matches(nameController))]
-Route::get('[nameController.toLowerCase()/]/[view.name/]', '[namePackage/]Controllers\[nameController/]Controller@createView[view.name/]')->name('[nameController.toLowerCase()/].[view.name/]');
-	[/if]
-[/for]
-Route::resource('[nameController.toLowerCase()/]','[namePackage/]Controllers\[nameController/]Controller');
-
+[template public registerController(nameController : String, namePackage : String)]
+[ removeReturnStmt(getConfigAppPath()) /]
+[file (self.getConfigAppPath(), true, 'UTF-8')]
+$ifmlControllerMap = '[nameController.toLowerCase()/]' => '\app\controllers\[namePackage/]Controllers\[nameController/]Controller'
+$config['['/]'controllerMap'[']'/] = array_merge($ifmlControllerMap, $config['['/]'controllerMap'[']'/]);
 [/file]
-[/template][/comment]
+[ putReturnStmt('config',getConfigAppPath())/]
+[comment]$ifmlControllerMap = 
+['['/]
+  '[nameController.toLowerCase()/]' => '\app\controllers\[namePackage/]Controllers\[nameController/]Controller',
+[']'/];
+$config['['/]'controllerMap'[']'/] = array_merge($ifmlControllerMap, $config['['/]'controllerMap'[']'/]);[/comment]
+[/template]

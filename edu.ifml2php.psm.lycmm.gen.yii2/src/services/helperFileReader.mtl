@@ -1,6 +1,9 @@
 [comment encoding = UTF-8 /]
 [module helperFileReader('http://www.application.org')/]
 
+[import services::helperApplication /]
+[import services::helperYii2InputPaths /]
+
 [query public getFile(arg0 : String) : String
 	= invoke('services.FileReader', 'getFile(java.lang.String)', Sequence{arg0})              
 /] 
@@ -13,3 +16,16 @@
 	= invoke('services.FileReader', 'makeFolder(java.lang.String)', Sequence{arg0})
 /]
 
+[template public removeReturnStmt(varReturn : String, path : String)]
+[file (path, true, 'UTF-8')]
+[for (line : String | getFile(path).tokenize('\n'))]
+[line.replace('return \\$' + varReturn, '')/]
+[/for]
+[/file]
+[/template]
+
+[template public putReturnStmt(varReturn : String, path : String)]
+[file (path, true, 'UTF-8')]
+return $[varReturn/];
+[/file]
+[/template]
