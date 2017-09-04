@@ -16,7 +16,7 @@ public String getFile(String path) {
       FileInputStream fStream = new FileInputStream(path);
       BufferedReader in = new BufferedReader(new InputStreamReader(fStream));
       while (in.ready()) {
-         ret += in.readLine()+"\n";
+         ret += in.readLine()+"\n";         
        }
       in.close();
    }

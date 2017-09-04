@@ -23,6 +23,7 @@ Export-Package: main;
    org.eclipse.emf.common.util,
    org.eclipse.acceleo.engine.service,
    org.eclipse.emf.ecore.resource,
-   org.eclipse.acceleo.engine.generation.strategy"
+   org.eclipse.acceleo.engine.generation.strategy",
+ services
 
 

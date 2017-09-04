@@ -8,12 +8,11 @@
 
 [template public setAppConf(anApp : Application)]
 [comment @main /]
-[ removeReturnStmt(anApp.getConfigAppPath(), 'config') /]
-[ setNameApp(anApp) /]
+[ removeReturnStmt('config', anApp.getConfigAppPath()) /]
+[comment][ setNameApp(anApp) /]
 [ setLocaleApp(anApp) /]
-[ putReturnStmt('config', anApp.getConfigAppPath()) /]
+[ putReturnStmt('config', anApp.getConfigAppPath()) /][/comment]
 [/template]
-
 
 [template public setNameApp(anApp : Application)]
 [file (self.getConfigAppPath(), false, 'UTF-8')]

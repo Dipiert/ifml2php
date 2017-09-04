@@ -73,8 +73,11 @@ if (YII_ENV_DEV) {
         //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 }
-$config['name'] = 'Movies';
+$ifmlControllerMap = [ 'movie' => '\app\controllers\domainModelControllers\MovieController' ] ;
+$config['controllerMap'] = array_merge($ifmlControllerMap, $config['controllerMap']);
+;
 
-$config['language'] = '';
+$ifmlControllerMap = ['movie' => '\app\controllers\domainModelControllers\MovieController'];
+$config['controllerMap'] = array_merge($ifmlControllerMap, $config['controllerMap']);
 
 return $config;

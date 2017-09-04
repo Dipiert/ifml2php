@@ -11,4 +11,4 @@
 
 [query public getConfigAppPath(anOclAny: OclAny) : String
 	= invoke('services.Yii2InputPaths', 'getConfigAppPath()', Sequence{})
-/]
+/] 
