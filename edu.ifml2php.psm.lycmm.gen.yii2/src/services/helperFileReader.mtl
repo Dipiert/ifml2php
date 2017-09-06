@@ -16,13 +16,9 @@
 	= invoke('services.FileReader', 'makeFolder(java.lang.String)', Sequence{arg0})
 /]
 
-[template public removeReturnStmt(path : String, varReturn : String)]
-[file (path, true, 'UTF-8')]
-[for (line : String | getAppConfig().tokenize('\n'))]
-[line.replace('return \\$' + varReturn, '')/]
-[/for]
-[/file]
-[/template]
+[query public removeReturnStmt(arg0 : String, arg1 : String) : OclVoid
+	= invoke('services.FileReader', 'removeReturnStmt(java.lang.String, java.lang.String)', Sequence{arg0, arg1})
+/]
 
 [template public putReturnStmt(varReturn : String, path : String)]
 [file (path, true, 'UTF-8')]

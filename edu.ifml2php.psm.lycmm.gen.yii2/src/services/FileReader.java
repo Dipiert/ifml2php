@@ -1,8 +1,11 @@
 package services;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.regex.Matcher;
@@ -51,6 +54,27 @@ public void makeFolder(String path){
 public void shift(String array, String item, String path) {
 	String file = this.getFile(path);
 	file = file.trim();
+}
+
+public void removeReturnStmt(String varReturn, String path) {
+	String lineToRemove= "return $" + varReturn + ";";
+	String currentLine;
+	File inputFile = new File(path);
+	File tempFile = new File(path+"_temp");
+	try {
+		BufferedReader reader = new BufferedReader(new java.io.FileReader(inputFile));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+		while((currentLine = reader.readLine()) != null) {
+		    //String trimmedLine = currentLine.trim();
+		    if(currentLine.equals(lineToRemove)) continue;
+		    writer.write(currentLine + System.getProperty("line.separator"));
+		}
+		writer.close(); 
+		reader.close(); 
+		tempFile.renameTo(inputFile);
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
 }
 
 }

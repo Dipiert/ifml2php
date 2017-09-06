@@ -19,8 +19,9 @@
 [file (path + controller.name + 'Controller.php', false, 'UTF-8')]
 <?php
 
-namespace [appName/]\controllers\[pmName/]Controllers;
-use \yii\web\Controller;
+namespace app\controllers\[pmName/]Controllers;
+use Yii;
+use yii\web\Controller;
 
 class [controller.name/]Controller extends Controller
 {
@@ -36,14 +37,4 @@ class [controller.name/]Controller extends Controller
    }
 [/for]	
 [/file]
-[ registerController(controller.name, pmName) /]
-[/template]
-
-[template public registerController(nameController : String, namePackage : String)]
-	[ removeReturnStmt(getConfigAppPath(), 'config') /]
-	[file (self.getConfigAppPath(), true, 'UTF-8')]
-$ifmlControllerMap = ['['/]'[nameController.toLowerCase()/]' => '\app\controllers\[namePackage/]Controllers\[nameController/]Controller'[']'/];
-$config['['/]'controllerMap'[']'/] = array_merge($ifmlControllerMap, $config['['/]'controllerMap'[']'/]);
-	[/file]
-	[ putReturnStmt('config',getConfigAppPath())/]
 [/template]

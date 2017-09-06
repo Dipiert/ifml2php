@@ -2,9 +2,9 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:mtl="http://www.eclipse.org/acceleo/mtl/3.0" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore">
   <mtl:Module name="helperYii2InputPaths" nsURI="services::helperYii2InputPaths" startHeaderPosition="29" endHeaderPosition="87">
     <input>
-      <takesTypesFrom href="platform:/resource/edu.ifml2php.psm.lycmm.gen.yii2/bin/Metamodel.ecore#/"/>
-      <takesTypesFrom href="platform:/resource/edu.ifml2php.psm.lycmm.gen.yii2/bin/Metamodel.ecore#//coreMVC"/>
-      <takesTypesFrom href="platform:/resource/edu.ifml2php.psm.lycmm.gen.yii2/bin/Metamodel.ecore#//extPHP"/>
+      <takesTypesFrom href="http://www.application.org/extPHP#/"/>
+      <takesTypesFrom href="http://www.application.org/extPHP#//coreMVC"/>
+      <takesTypesFrom href="http://www.application.org/extPHP#//extPHP"/>
     </input>
     <ownedModuleElement xsi:type="mtl:Query" name="getRoutesPath" visibility="Public">
       <parameter name="anOclAny">
