@@ -27,7 +27,7 @@ class [controller.name/]Controller extends Controller
 {
 [for (method : Method | controller.methods)]
 
-   protected function action[ method.name.toUpperFirst() /]()
+   function action[ method.name.toUpperFirst() /]()
    {   
     [if ( method.outParameters->size() > 0)]
     	//Los parámetros ([for (parameter : Attribute | method.outParameters) separator(', ' )]$[parameter.name/][/for]) fueron modelados como de salida. Verifique si son retornados al módulo llamador o pasado a otro 

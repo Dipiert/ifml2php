@@ -43,20 +43,15 @@ $config = [
         'db' => require(__DIR__ . '/db.php'),
         
         'urlManager' => [
-            'enablePrettyUrl' => true,
+            'enablePrettyUrl' => false,
             'showScriptName' => true,
             'rules' => [
-                'news/<year:\d{4}>/items-list' => 'news/items-list',
-                [
-                    'pattern' => 'news/<category:\w+>/items-list', 
-                    'route' => 'news/items-list',
-                    'defaults' => ['category' => 'shopping']
-                ],
             ],
         ],
         
     ],
     'params' => $params,
+    'controllerMap' => []
 ];
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
@@ -73,10 +68,17 @@ if (YII_ENV_DEV) {
         //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 }
-$ifmlControllerMap = [ 'movie' => '\app\controllers\domainModelControllers\MovieController' ] ;
+$config['name'] = 'Movies';
+$config['language'] = '';
+$ifmlControllerMap = ['movie' => '\app\controllers\domainModelControllers\MovieController'];
 $config['controllerMap'] = array_merge($ifmlControllerMap, $config['controllerMap']);
-;
+$config['name'] = 'Movies';
 
+$config['language'] = '';
+
+if (is_null($config['controllerMap'])){
+        $config['controllerMap'] = [];
+    }
 $ifmlControllerMap = ['movie' => '\app\controllers\domainModelControllers\MovieController'];
 $config['controllerMap'] = array_merge($ifmlControllerMap, $config['controllerMap']);
 

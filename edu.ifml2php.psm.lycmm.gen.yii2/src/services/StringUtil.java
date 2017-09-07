@@ -1,5 +1,8 @@
 package services;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringUtil {
 	char[] chars;
 	
@@ -23,4 +26,10 @@ public class StringUtil {
 		return getPrefix(str) + " " + getSuffix(str);
 	}	
 	
+	public String camelCase2CaterpillarCase(String camelCased) {
+		camelCased.replace("([a-z])([A-Z])", "$1 $2");
+		return camelCased.replace("\\s+|_+", "-").toLowerCase();
+		
+		
+	}
 }
