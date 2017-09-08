@@ -1,0 +1,79 @@
+<?php
+
+namespace app\controllers\domainModelControllers;
+use Yii;
+use yii\web\Controller;
+use yii\db\Connection;
+class MovieController extends Controller
+{
+
+   function actionAddMovie()
+   {
+      $request = Yii::$app->request;
+      $post = $request->post();   
+      $connection = Yii::$app->db;
+      $connection->open();
+      $id = null;
+      $title = $request->post('title');
+      $year = $request->post('year');
+      $genre = $request->post('genre');
+      $director = implode($request->post('Director'), ', ');
+      $connection->createCommand()->insert('movie', [
+        'id' => $id,
+        'title' => $title,
+        'year' => $year,
+        'genre' => $genre,
+        'director' => $director
+      ])->execute();
+   }
+
+   function actionUpdateMovie()
+   {        
+      $request = Yii::$app->request;
+      $post = $request->post(); 
+      $connection = Yii::$app->db;
+      $connection->open();
+      $id = $request->post('id');
+      $title = $request->post('title');
+      $year = $request->post('year');
+      $genre = $request->post('genre');
+      $director = implode($request->post('Director'), ', ');
+      $connection->createCommand()->update('movie', 
+        ['title' => $title,
+         'year' => $year,
+         'genre' => $genre,
+         'director' => $director,
+        ], "id = $id")->execute();
+	 }
+
+   function actionDeleteMovie()
+   {   
+     $request = Yii::$app->request; 
+     $id = $request->post('id');
+     $connection = Yii::$app->db;
+     $connection->open();
+     $connection->createCommand()->delete('movie', "id = $id")->execute();
+   }
+
+   function actionViewListMovie()
+   {
+        return $this->render('/InteractionFlowModelViews/ListMovie');
+   }
+   function actionViewMovie()
+   {
+        return $this->render('/InteractionFlowModelViews/Movie');
+   }
+   function actionViewAddFormMovie()
+   {
+        return $this->render('/InteractionFlowModelViews/AddFormMovie');
+   }
+   function actionViewUpdateFormMovie()
+   {
+        return $this->render('/InteractionFlowModelViews/UpdateFormMovie');
+   }
+   function actionViewDeleteFormMovie()
+   {
+        return $this->render('/InteractionFlowModelViews/DeleteFormMovie');
+   }
+
+}
