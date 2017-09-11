@@ -4,6 +4,8 @@ namespace app\controllers\domainModelControllers;
 use Yii;
 use yii\web\Controller;
 use yii\db\Connection;
+use app\models\domainModelModels\Movie;
+
 class MovieController extends Controller
 {
 
@@ -11,48 +13,30 @@ class MovieController extends Controller
    {
       $request = Yii::$app->request;
       $post = $request->post();   
-      $connection = Yii::$app->db;
-      $connection->open();
-      $id = null;
-      $title = $request->post('title');
-      $year = $request->post('year');
-      $genre = $request->post('genre');
-      $director = implode($request->post('Director'), ', ');
-      $connection->createCommand()->insert('movie', [
-        'id' => $id,
-        'title' => $title,
-        'year' => $year,
-        'genre' => $genre,
-        'director' => $director
-      ])->execute();
+      $post['director'] = implode($post['director'], ', ');
+      $movie = new Movie();
+      $movie->setAttributes($post);
+      $movie->save(false);
    }
 
    function actionUpdateMovie()
    {        
       $request = Yii::$app->request;
-      $post = $request->post(); 
-      $connection = Yii::$app->db;
-      $connection->open();
-      $id = $request->post('id');
-      $title = $request->post('title');
-      $year = $request->post('year');
-      $genre = $request->post('genre');
-      $director = implode($request->post('Director'), ', ');
-      $connection->createCommand()->update('movie', 
-        ['title' => $title,
-         'year' => $year,
-         'genre' => $genre,
-         'director' => $director,
-        ], "id = $id")->execute();
-	 }
+      $post = $request->post();
+      $id = $post['id'];   
+      $post['director'] = implode($post['director'], ', ');
+      $movie = Movie::findOne($id);
+      $movie->setAttributes($post);
+      $movie->update();
+   }
 
    function actionDeleteMovie()
    {   
      $request = Yii::$app->request; 
-     $id = $request->post('id');
-     $connection = Yii::$app->db;
-     $connection->open();
-     $connection->createCommand()->delete('movie', "id = $id")->execute();
+     $post = $request->post();
+     $id = $post['id'];   
+     $movie = Movie::findOne($id);
+     $movie->delete();                
    }
 
    function actionViewListMovie()
