@@ -1,8 +1,4 @@
 library systemLibrary;
 
 helper context String def : decapitalize() : String =
-  if self.size () > 1 then
-    self.substring(1,1).toLower().concat(self.substring(2,self.size()))
-  else
-    self.substring(1,1).toLower()
-  endif;
+  self.substring(1, 1).toLower() + self.substring(2, self.size());
