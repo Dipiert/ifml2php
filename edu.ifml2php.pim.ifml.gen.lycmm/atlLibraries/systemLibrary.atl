@@ -1,6 +1,6 @@
 library systemLibrary;
 
-helper context OclAny def : areRelatives(child : OclAny, seq : Sequence(OclAny)) : Boolean =
+helper def : areRelatives(child : OclAny, seq : Sequence(OclAny)) : Boolean =
   seq->includes(child);
 
 helper context String def : decapitalize() : String =
