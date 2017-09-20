@@ -68,8 +68,7 @@ rule DomainModel2PackageModel{
         to
             pm : ourMM!PackageModel(
                     name <- dm.name,
-                    models <- UMLMM!Class.allInstances() 
-						   ->collect(e| e)	
+                    models <- UMLMM!Class.allInstances() 	
                  )
 }
 
@@ -81,7 +80,6 @@ rule UMLClass2Model{
 			name<-class.name,
 			attributes <- UMLMM!Property.allInstances()
 							->select(e | e.namespace.name = class.name)
-							->collect(e| e)			
 		)
 }
 
