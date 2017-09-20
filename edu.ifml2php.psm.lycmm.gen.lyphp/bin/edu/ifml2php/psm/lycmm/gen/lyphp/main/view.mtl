@@ -1,0 +1,37 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module generate.
+ */]
+[module view('http://www.application.org')]
+
+[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperFileReader /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::files::writeView /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::files::generateWelcomeView /]
+
+[**
+ * The documentation of the template generateElement.
+ * @param aModel
+ */]
+
+[template public makeViews(anApp : Application)]
+[comment @main /]
+    [let base_dir : String = 'FHS/var/www/html/' ] [comment]FHS + getBaseDir()[/comment] 
+	   [let path : String = 'laravel5.4.15/resources/views/' + anApp.aPackageView.name + 'Views/']
+          [ self.makeFolder(base_dir + path) /]
+             [for (view : View | anApp.aPackageView.views )]	
+		        [for (inner : View | view.innerViews)]
+			       [ makeInnerViews(path, inner, anApp.aPackageController.name, anApp.aPackageView.name) /]
+         		[/for]			
+	            [ writeView(path, view, anApp.aPackageController.name, anApp.aPackageView.name) /]
+             [/for]
+	   [ self.generateWelcomeView() /]
+   	   [/let]
+    [/let]
+[/template]
+
+[template public makeInnerViews(path : String, view : View, controllerName : String, pvName : String )]
+        [ writeView(path, view, controllerName, pvName) /]
+   		[for (inner : View | view.innerViews)]
+   			[ makeInnerViews(path, inner, controllerName, pvName) /]
+   		[/for]
+[/template]

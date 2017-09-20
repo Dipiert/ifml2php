@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="PHPMVC" nsURI="http://www.application.org" nsPrefix="PHPMVC">
+  <eSubpackages name="coreMVC" nsURI="http://www.application.org/coreMVC" nsPrefix="coreMVC">
+    <eClassifiers xsi:type="ecore:EClass" name="Application">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="routes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="locale" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="aPackageModel" eType="#//coreMVC/PackageModel"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="aPackageView" eType="#//coreMVC/PackageView"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="aPackageController" eType="#//coreMVC/PackageController"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PackageModel">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
+          eType="#//coreMVC/Model" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PackageView">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
+          eType="#//coreMVC/View" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PackageController">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="controllers" upperBound="-1"
+          eType="#//coreMVC/Controller" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MVCClass" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+          eType="#//coreMVC/Attribute" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Attribute">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//coreMVC/MVCClass"/>
+    <eClassifiers xsi:type="ecore:EClass" name="View" eSuperTypes="#//coreMVC/MVCClass">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="viewComponents" upperBound="-1"
+          eType="#//coreMVC/ViewComponent" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="innerViews" upperBound="-1"
+          eType="#//coreMVC/View" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Controller" eSuperTypes="#//coreMVC/MVCClass">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1"
+          eType="#//coreMVC/Method" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Method">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inParameters" upperBound="-1"
+          eType="#//coreMVC/Attribute" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outParameters" upperBound="-1"
+          eType="#//coreMVC/Attribute" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ViewComponent" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
+          eType="#//coreMVC/Event" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Event">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//coreMVC/EventType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="handler" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="EventType">
+      <eLiterals name="workaround" literal="workaround"/>
+      <eLiterals name="onSubmit" value="1"/>
+      <eLiterals name="onError" value="2" literal="onError"/>
+      <eLiterals name="onLoad" value="3"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="extPHP" nsURI="http://www.application.org/extPHP" nsPrefix="extPHP">
+    <eClassifiers xsi:type="ecore:EClass" name="HTMLElement" abstract="true" eSuperTypes="#//coreMVC/ViewComponent">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="tagName" eType="#//extPHP/HTMLTag"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPairedTag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEmpty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="htmlElements" upperBound="-1"
+          eType="#//extPHP/HTMLElement" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Form" eSuperTypes="#//extPHP/HTMLElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="method" eType="#//extPHP/MethodType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="target" eType="#//extPHP/TargetType"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Button" eSuperTypes="#//extPHP/HTMLElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="disabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//extPHP/ButtonType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Text" eSuperTypes="#//extPHP/HTMLElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Anchor" eSuperTypes="#//extPHP/HTMLElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="target" eType="#//extPHP/TargetType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="hypRef" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral=""/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Image" eSuperTypes="#//extPHP/HTMLElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Input" abstract="true" eSuperTypes="#//extPHP/HTMLElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//extPHP/InputType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TextField" eSuperTypes="#//extPHP/Input"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Checkbox" eSuperTypes="#//extPHP/Input"/>
+    <eClassifiers xsi:type="ecore:EClass" name="RadioButton" eSuperTypes="#//extPHP/Input"/>
+    <eClassifiers xsi:type="ecore:EEnum" name="ButtonType">
+      <eLiterals name="workaround"/>
+      <eLiterals name="button" value="1"/>
+      <eLiterals name="submit" value="2" literal="submit"/>
+      <eLiterals name="reset" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="TargetType">
+      <eLiterals name="workaround"/>
+      <eLiterals name="self" value="1"/>
+      <eLiterals name="blank" value="2"/>
+      <eLiterals name="parent" value="3"/>
+      <eLiterals name="top" value="4"/>
+      <eLiterals name="framename" value="5"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="InputType">
+      <eLiterals name="workaround"/>
+      <eLiterals name="text" value="1"/>
+      <eLiterals name="radio" value="2"/>
+      <eLiterals name="checkbox" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="HTMLTag">
+      <eLiterals name="workaround"/>
+      <eLiterals name="button" value="1"/>
+      <eLiterals name="input" value="2"/>
+      <eLiterals name="a" value="3"/>
+      <eLiterals name="form" value="4"/>
+      <eLiterals name="img" value="5"/>
+      <eLiterals name="p" value="6" literal="p"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="MethodType">
+      <eLiterals name="workaround"/>
+      <eLiterals name="get" value="1"/>
+      <eLiterals name="post" value="2"/>
+      <eLiterals name="put"/>
+      <eLiterals name="patch"/>
+      <eLiterals name="head" literal="head"/>
+      <eLiterals name="delete"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>
