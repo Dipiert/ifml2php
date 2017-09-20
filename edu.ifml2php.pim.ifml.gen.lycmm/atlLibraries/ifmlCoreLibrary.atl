@@ -31,3 +31,14 @@ helper context IFMLMM!ViewContainer def : getViewComponents() : Sequence(ourMM!V
                       ->collect(f|thisModule.ViewElement2Image(f)),
     self.viewElements->select(e | e.oclIsTypeOf(extMM!Form))
 };
+
+helper context IFMLMM!ViewElement def : getSelectionFields() : Sequence(ourMM!Input) =
+  Sequence{
+    extMM!IFMLSlot.allInstances()
+                    ->select(e|(e.areRelatives(e.refImmediateComposite(), self.parameters)))
+                    ->select(e|(not(e.refImmediateComposite().isCheckbox())))
+                    ->collect(e|thisModule.IFMLSlot2RadioButton(e, e.refImmediateComposite().name)),
+    extMM!IFMLSlot.allInstances()
+                    ->select(e|(e.areRelatives(e.refImmediateComposite(), self.parameters)))
+                    ->select(e|((e.refImmediateComposite().isCheckbox())))              
+                    ->collect(e|thisModule.IFMLSlot2Checkbox(e, e.refImmediateComposite().name))};
