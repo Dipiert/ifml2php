@@ -85,7 +85,7 @@ rule UMLClass2Model{
 		)
 }
 
-rule UMLproperty2ModelAttribute{
+rule UMLProperty2ModelAttribute{
 	from
 		prop : UMLMM!Property
 	to
@@ -210,7 +210,7 @@ lazy rule OnSubmitEvent2Event{
 lazy rule Landmarks2MenuItems{
 	from
 		vc	: IFMLMM!ViewContainer(
-			(not vc.isLandmark)
+			(vc.isLandmark)
 		)
 	to
 		an	: ourMM!Anchor(
