@@ -1,8 +1,5 @@
 library systemLibrary;
 
-helper def : areRelatives(child : OclAny, seq : Sequence(OclAny)) : Boolean =
-  seq->includes(child);
-
 helper context String def : decapitalize() : String =
   if self.size () > 1 then
     self.substring(1,1).toLower().concat(self.substring(2,self.size()))
