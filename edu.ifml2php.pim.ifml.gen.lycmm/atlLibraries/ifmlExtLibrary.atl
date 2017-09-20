@@ -3,17 +3,6 @@ library ifmlExtLibrary;
 helper context extMM!Field def : isCheckbox() : Boolean =
   self.isMultiSelection;
 
-helper context IFMLMM!ViewElement def : getSelectionFields() : Sequence(ourMM!Input) =
-  Sequence{
-    extMM!IFMLSlot.allInstances()
-                    ->select(e|(e.areRelatives(e.refImmediateComposite(), self.parameters)))
-                    ->select(e|(not(e.refImmediateComposite().isCheckbox())))
-                    ->collect(e|thisModule.IFMLSlot2RadioButton(e, e.refImmediateComposite().name)),
-    extMM!IFMLSlot.allInstances()
-                    ->select(e|(e.areRelatives(e.refImmediateComposite(), self.parameters)))
-                    ->select(e|((e.refImmediateComposite().isCheckbox())))              
-                    ->collect(e|thisModule.IFMLSlot2Checkbox(e, e.refImmediateComposite().name))};
-
   helper context extMM!IFMLWindow def : getSimpleFields() : Sequence(ourMM!TextField) =
     self.viewElements->select(e | e.oclIsTypeOf(extMM!SimpleField));
 
