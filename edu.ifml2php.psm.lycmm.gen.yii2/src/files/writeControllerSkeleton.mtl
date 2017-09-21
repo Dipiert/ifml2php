@@ -22,6 +22,7 @@
 namespace app\controllers\[pmName/]Controllers;
 use Yii;
 use yii\web\Controller;
+use yii\db\Connection: [comment TODO: este import no debe ser un supuesto/]
 
 class [controller.name/]Controller extends Controller
 {
@@ -37,4 +38,29 @@ class [controller.name/]Controller extends Controller
    }
 [/for]	
 [/file]
+[/template]
+
+[template public registerController(pc : PackageController)]
+
+[file (self.getConfigAppPath(), true, 'UTF-8')]
+if (is_null($config[ '[' /]'controllerMap'[']'/])){
+        $config['['/]'controllerMap'[']'/] = ['['/][']'/];
+    }
+[for (controller : Controller | pc.controllers)]
+	[for (line : String | getAppConfig().tokenize('\n'))]
+		[if (line.contains('return $config;'))] 
+			[let ifmlControllerMap : String = '\\$ifmlControllerMap = [\'' + controller.name.toLowerCase() + '\' => \'\\\\app\\\\controllers\\\\' + pc.name + 'Controllers\\\\' + controller.name +'Controller\'];']
+			[let config : String = '\\$config[\'controllerMap\'] = array_merge(\\$ifmlControllerMap, \\$config[\'controllerMap\']);']
+[line.replace('return \\$config;', ifmlControllerMap + '\n' + config)/]
+			[/let]
+			[/let]
+		[/if]
+	[/for]
+[/for]
+[/file]
+	
+
+
+[comment]$ifmlControllerMap = ['['/]'[nameController.toLowerCase()/]' => '\app\controllers\[namePackage/]Controllers\[nameController/]Controller'[']'/];
+$config['['/]'controllerMap'[']'/] = array_merge($ifmlControllerMap, $config['['/]'controllerMap'[']'/]);[/comment]
 [/template]

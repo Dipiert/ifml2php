@@ -4,6 +4,7 @@
 [import services::helperFileReader /]
 [import services::helperApplication /]
 [import files::writeControllerSkeleton /]
+[import files::writeView /]
 [import services::helperStringUtil /]
 
 [template public makeControllers(anApp : Application)]
@@ -21,17 +22,4 @@
 	    [/for]
     [/let]
 [/let]
-[/template]
-
-[template private getViewConstructors(path : String, controllerName : String, pv : PackageView)]
-[file (path + controllerName + 'Controller.php', true, 'UTF-8')]
-[for (view : View | pv.views) after ('\n}')]
-   [if (getSuffix(view.name).toString().matches(controllerName))]
-   function actionView[ view.name /]()
-   {
-        return $this->render('/[pv.name/]Views/[ view.name /]');
-   }
-   [/if]
-[/for]
-[/file]
 [/template]

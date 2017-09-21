@@ -6,6 +6,8 @@
 
 [import services::helperStringUtil /]
 [import services::helperYii2InputPaths /]
+[import common::stringUtils /]
+[import common::writeIncludes /]
 [**
  * The documentation of the template generateElement.
  * @param aModel
@@ -87,20 +89,16 @@
 [/file]
 [/template]
 
-[template public writeIncludes(view : View)]
-<?php
-[writeHelpers()/]?>
-[/template]
 
-[template public writeHelpers(view : View)]
-[if (view.viewComponents->exists(oclIsTypeOf(Anchor)))]
-use yii\helpers\Url;
-use yii\helpers\Html; 
-[elseif (view.viewComponents->exists(oclIsTypeOf(Form)))]
-use yii\helpers\Html;
-[/if]
-[/template]
-
-[template public camelCase2CaterpillarCase(camelcased : String)]
-[camelcased.replaceAll('([a-z])([A-Z])', '$1 $2').replaceAll('\\s+|_+', '-').toLowerCase()/]
+[template public getViewConstructors(path : String, controllerName : String, pv : PackageView)]
+[file (path + controllerName + 'Controller.php', true, 'UTF-8')]
+[for (view : View | pv.views) after ('\n}')]
+   [if (getSuffix(view.name).toString().matches(controllerName))]
+   function actionView[ view.name /]()
+   {
+        return $this->render('/[pv.name/]Views/[ view.name /]');
+   }
+   [/if]
+[/for]
+[/file]
 [/template]
