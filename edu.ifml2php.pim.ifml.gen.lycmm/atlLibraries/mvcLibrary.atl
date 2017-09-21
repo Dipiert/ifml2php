@@ -2,12 +2,12 @@ library mvcLibrary;
 
 helper context ourMM!Event def : getDefaultEventType() : ourMM!EventType  = #onSubmit; -- in the actual implementation
 
-helper context ourMM!HTMLElement def : getDefaultTarget() : ourMM!TargetType = #self;
+helper context ourMM!Form def : getDefaultTarget() : ourMM!TargetType = #self;
 
+helper context ourMM!Anchor def : getDefaultTarget() : ourMM!TargetType = #self;
 
 helper context ourMM!Event def : getHandler (n : String) : String =
-	extMM!OnSubmitEvent.allInstances()	->select(d | d.viewElement.name.toLower() = n.toLower())	
-										->collect(a | a.outInteractionFlows
-										->collect(f | f.targetInteractionFlowElement)
-										->collect(g | g.name.decapitalize())); --assuming one Submit per Form
-
+  extMM!OnSubmitEvent.allInstances() ->select(d | d.viewElement.name.toLower() = n.toLower())  
+                                      ->collect(a | a.outInteractionFlows
+                                      ->collect(f | f.targetInteractionFlowElement)
+                                      ->collect(g | g.name.decapitalize())); --assuming one Submit per Form

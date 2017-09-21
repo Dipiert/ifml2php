@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="ASCII"?>
 <core:IFMLModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://www.omg.org/spec/20130218/core" xmlns:ext="http://www.omg.org/spec/20130218/ext" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" id="_FFmDkJ2YEeeisaFzOXmQ5Q" name="Movies">
   <interactionFlowModel id="_rFe7Mp2YEeeisaFzOXmQ5Q" name="InteractionFlowModel">
-    <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_15IEGZ2YEeeisaFzOXmQ5Q" name="MainMenuMovie">
+    <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_15IEGZ2YEeeisaFzOXmQ5Q" name="MainMenuMovie" isLandmark="true">
       <viewElements xsi:type="core:ViewComponent" id="_oSh1_Z2ZEeeisaFzOXmQ5Q" name="messages">
         <viewComponentParts xsi:type="core:ConditionalExpression" id="_qHOGvp2ZEeeisaFzOXmQ5Q" language="es" body="Movies DataBase" name="Title"/>
         <viewComponentParts xsi:type="core:ConditionalExpression" id="_qHOGvp2ZEeeisaFzOXmQ5Q" language="es" body="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." name="Intro"/>
       </viewElements>
       <viewElements id="https://upload.wikimedia.org/wikipedia/en/4/4e/IFML-Interaction-Flow-Modeling-Language-OMG-logo-copyrighted.png" name="logo"/>
     </interactionFlowModelElements>
-    <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_-AyHzZ2YEeeisaFzOXmQ5Q" name="AddFormMovie">
+    <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_-AyHzZ2YEeeisaFzOXmQ5Q" name="AddFormMovie" isLandmark="true">
       <viewElements xsi:type="ext:Form" id="_mB8d_52aEeeisaFzOXmQ5Q" name="AddMovieForm" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.1/@viewElements.0/@viewElementEvents.0/@outInteractionFlows.0">
         <parameters xsi:type="ext:SelectionField" id="_ys9YEZ2aEeeisaFzOXmQ5Q" name="audience">
           <parameters xsi:type="ext:IFMLSlot" id="_Ose9852bEeeisaFzOXmQ5Q" name="G"/>
@@ -38,7 +38,7 @@
         </viewComponentParts>
       </viewElements>
     </interactionFlowModelElements>
-    <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_CIHwnZ2ZEeeisaFzOXmQ5Q" name="UpdateFormMovie">
+    <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_CIHwnZ2ZEeeisaFzOXmQ5Q" name="UpdateFormMovie" isLandmark="true">
       <viewElements xsi:type="ext:Form" id="_C-vAX54-EeewNOKrpZAZPg" name="UpdateFormMovie" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0/@viewElementEvents.0/@outInteractionFlows.0">
         <parameters xsi:type="ext:SelectionField" id="__hT6ZJ5BEeewNOKrpZAZPg" name="saga" isMultiSelection="true">
           <parameters xsi:type="ext:IFMLSlot" id="_CeZ9o55CEeewNOKrpZAZPg" name="isSaga"/>
@@ -68,7 +68,7 @@
         <viewComponentParts xsi:type="core:DataBinding" id="_SORQJZ4_EeewNOKrpZAZPg" name="Movie" uniformResourceIdentifier=""/>
       </viewElements>
     </interactionFlowModelElements>
-    <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_MMbHHZ2ZEeeisaFzOXmQ5Q" name="DeleteFormMovie">
+    <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_MMbHHZ2ZEeeisaFzOXmQ5Q" name="DeleteFormMovie" isLandmark="true">
       <viewElements xsi:type="ext:Form" id="_1wwCf55FEeewNOKrpZAZPg" name="DeleteMovieForm" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.3/@viewElements.0/@viewElementEvents.0/@outInteractionFlows.0">
         <viewElementEvents xsi:type="ext:OnSubmitEvent" id="_8kTZ6Z5FEeewNOKrpZAZPg" name="Delete Movie" viewElement="//@interactionFlowModel/@interactionFlowModelElements.3/@viewElements.0">
           <outInteractionFlows xsi:type="core:NavigationFlow" id="_jYrph55GEeewNOKrpZAZPg" targetInteractionFlowElement="//@interactionFlowModel/@interactionFlowModelElements.3/@viewElements.0">

@@ -9,225 +9,221 @@ create ourm : ourMM from uml : UMLMM, ifml : IFMLMM, extm : extMM;
 uses ifmlCoreLibrary; uses ifmlExtLibrary; uses mvcLibrary; uses systemLibrary;
 
 rule IFMLModel2ApplicationClass{
-        from
- 	       ifmlModel : IFMLMM!IFMLModel
-        to
-           app : ourMM!Application(
-                    name <- ifmlModel.name,
-                    aPackageModel <- ifmlModel.domainModel,
-                    aPackageView <- ifmlModel.interactionFlowModel,         
-                    aPackageController <- thisModule.DomainModel2PackageController(ifmlModel.domainModel)
-                )		   			
+  from
+    ifmlModel : IFMLMM!IFMLModel
+  to
+    app : ourMM!Application(
+      name <- ifmlModel.name,
+      aPackageModel <- ifmlModel.domainModel,
+      aPackageView <- ifmlModel.interactionFlowModel,         
+      aPackageController <- thisModule.DomainModel2PackageController(ifmlModel.domainModel)
+    )           
 }
 
 lazy rule DomainModel2PackageController{
-        from
-            domainModel : IFMLMM!DomainModel
-        to
-            pc  : ourMM!PackageController(
-					name <- domainModel.name,
-					controllers <- UMLMM!Class.allInstances()
-								->collect(r|thisModule.UMLClass2Controller(r))
-				)	
+  from
+    domainModel : IFMLMM!DomainModel
+  to
+    pc  : ourMM!PackageController(
+      name <- domainModel.name,
+      controllers <- UMLMM!Class.allInstances()
+                      ->collect(r|thisModule.UMLClass2Controller(r))
+    ) 
 }
 
 lazy rule UMLClass2Controller{
-	from
-		class : UMLMM!Class
-	to
-		cont : ourMM!Controller(
-			name <- class.name,
-			methods <- IFMLMM!IFMLAction.allInstances()
-						->select(b|b.name.toLower().endsWith(class.name.toLower())
-			))				
+  from
+    class : UMLMM!Class
+  to
+    cont : ourMM!Controller(
+      name <- class.name,
+      methods <- IFMLMM!IFMLAction.allInstances()
+                  ->select(b|b.name.toLower().endsWith(class.name.toLower())
+      ))        
 }
 
 rule IFMLAction2Method{
-	from
-		ifmla : IFMLMM!IFMLAction
-	to
-		a : ourMM!Method(
-			name <- ifmla.name.decapitalize(),
-			inParameters <- ifmla.getInParameters(),
-			outParameters <- ifmla.getOutParameters()
-		)		
+  from
+    ifmla : IFMLMM!IFMLAction
+  to
+    a : ourMM!Method(
+      name <- ifmla.name.decapitalize(),
+      inParameters <- ifmla.getInParameters(),
+      outParameters <- ifmla.getOutParameters()
+    )   
 }
 
 lazy rule Parameter2Attribute{
-	from
-		st : String
-	to
-		at : ourMM!Attribute(
-			name <- st.toLower()	
-		)
+  from
+    st : String
+  to
+    at : ourMM!Attribute(
+      name <- st.toLower()  
+    )
 }
 
 rule DomainModel2PackageModel{
-        from
-            dm : IFMLMM!DomainModel
-        to
-            pm : ourMM!PackageModel(
-                    name <- dm.name,
-                    models <- UMLMM!Class.allInstances() 
-						   ->collect(e| e)	
-                 )
+  from
+    dm : IFMLMM!DomainModel
+  to
+    pm : ourMM!PackageModel(
+      name <- dm.name,
+      models <- UMLMM!Class.allInstances()  
+    )
 }
 
 rule UMLClass2Model{
-	from
-		class : UMLMM!Class
-	to
-		model : ourMM!Model(
-			name<-class.name,
-			attributes <- UMLMM!Property.allInstances()
-							->select(e | e.namespace.name = class.name)
-							->collect(e| e)			
-		)
+  from
+    class : UMLMM!Class
+  to
+    model : ourMM!Model(
+      name<-class.name,
+      attributes <- UMLMM!Property.allInstances()
+                      ->select(e | e.namespace.name = class.name)
+    )
 }
 
-rule UMLproperty2ModelAttribute{
-	from
-		prop : UMLMM!Property
-	to
-		modAt : ourMM!Attribute(
-				name<-prop.name
-			)
+rule UMLProperty2ModelAttribute{
+  from
+    prop : UMLMM!Property
+  to
+    modAt : ourMM!Attribute(
+      name<-prop.name
+    )
 }
 
 rule InteractionFlowModel2PackageView{
-        from
-            ifm : IFMLMM!InteractionFlowModel
-        to
-             pv : ourMM!PackageView(
-                     name <- ifm.name,
-					 views <- ifm.interactionFlowModelElements->select(f|f.oclIsKindOf(IFMLMM!ViewContainer))
-                )
+  from
+    ifm : IFMLMM!InteractionFlowModel
+  to
+    pv : ourMM!PackageView(
+      name <- ifm.name,
+      views <- ifm.interactionFlowModelElements
+                ->select(f|f.oclIsKindOf(IFMLMM!ViewContainer))
+    )
 }
 
 rule ViewContainer2View{
-	from
-		vc : IFMLMM!ViewContainer
-		(not (vc.refImmediateComposite().oclIsKindOf(IFMLMM!ViewContainer)))				
-	to
-		v  : ourMM!View(
-				name <- vc.name,
-				viewComponents <- vc.getViewComponents(),	--TODO: asegurar que se mantenga el orden de los elementos generados				
-				innerViews <- vc.viewElements->select(e| e.oclIsKindOf(IFMLMM!ViewContainer))
-													->collect(e|thisModule.ViewContainer2InnerView(e))
-			)
+  from
+    vc : IFMLMM!ViewContainer
+    (not (vc.refImmediateComposite().oclIsKindOf(IFMLMM!ViewContainer)))        
+  to
+    v  : ourMM!View(
+      name <- vc.name,
+      viewComponents <- vc.getViewComponents(), --TODO: asegurar que se mantenga el orden de los elementos generados        
+      innerViews <- vc.viewElements->select(e| e.oclIsKindOf(IFMLMM!ViewContainer))
+                                    ->collect(e|thisModule.ViewContainer2InnerView(e))
+    )
 }
 
 lazy rule ViewContainer2InnerView{
-	from
-		vc : IFMLMM!ViewContainer
-		(vc.refImmediateComposite().oclIsKindOf(IFMLMM!ViewContainer))		
-	to
-		v  : ourMM!View(
-				name <- vc.name,
-				viewComponents <- vc.getViewComponents(),
-			 	innerViews <- vc.viewElements->select(e| e.oclIsKindOf(IFMLMM!ViewContainer))
-													->collect(e|thisModule.ViewContainer2InnerView(e))
-			)
+  from
+    vc : IFMLMM!ViewContainer
+    (vc.refImmediateComposite().oclIsKindOf(IFMLMM!ViewContainer))    
+  to
+    v  : ourMM!View(
+      name <- vc.name,
+      viewComponents <- vc.getViewComponents(),
+      innerViews <- vc.viewElements->select(e| e.oclIsKindOf(IFMLMM!ViewContainer))
+                                    ->collect(e|thisModule.ViewContainer2InnerView(e))
+    )
 }
 
 rule ConditionalExpression2Text{ 
-	from
-		ce : IFMLMM!ConditionalExpression
-	to
-		t : ourMM!Text(
-			tagName <- #p,
-			name <- ce.name,
-			language <- ce.language,			
-			content <- ce.body
-		)
+  from
+    ce : IFMLMM!ConditionalExpression
+  to
+    t : ourMM!Text(
+      tagName <- #p,
+      name <- ce.name,
+      language <- ce.language,      
+      content <- ce.body
+    )
 }
 
 rule IFMLForm2Form{
-	from
-		frm : extMM!Form
-	to
-		f : ourMM!Form(
-			name <- frm.name,
-			tagName <- #form,
-			method <- #post,
-			target <- f.getDefaultTarget(),
-			htmlElements <- frm.getHTMLElements(),
-			events <- thisModule.OnSubmitEvent2Event(f.name)
-			
-		)
-}	
+  from
+    frm : extMM!Form
+  to
+    f : ourMM!Form(
+      name <- frm.name,
+      tagName <- #form,
+      method <- #post,
+      target <- f.getDefaultTarget(),
+      htmlElements <- frm.getHTMLElements(),
+      events <- thisModule.OnSubmitEvent2Event(f.name)
+    )
+} 
 
 lazy rule IFMLSlot2RadioButton{
-	from
-		sl : extMM!IFMLSlot,
-		st : String
-	to
-		rb : ourMM!RadioButton(
-			name <- st,
-			value <- sl.name,
-			tagName <- #input,
-			type <- #radio,
-			isPairedTag <- false
-		)
+  from
+    sl : extMM!IFMLSlot,
+    st : String
+  to
+    rb : ourMM!RadioButton(
+      name <- st,
+      value <- sl.name,
+      tagName <- #input,
+      type <- #radio,
+      isPairedTag <- false
+    )
 }
 
 lazy rule IFMLSlot2Checkbox{
-	from
-		sl : extMM!IFMLSlot,
-		st : String
-	to
-		cb : ourMM!Checkbox(
-			name <- st,
-			value <- sl.name,
-			tagName <- #input,
-			type <- #checkbox,
-			isPairedTag <- false
-		)
+  from
+    sl : extMM!IFMLSlot,
+    st : String
+  to
+    cb : ourMM!Checkbox(
+      name <- st,
+      value <- sl.name,
+      tagName <- #input,
+      type <- #checkbox,
+      isPairedTag <- false
+    )
 }
 
 rule SimpleField2TextField{
-	from
-		sf : extMM!SimpleField
-	to
-		f : ourMM!TextField(
-			name <- sf.name.decapitalize(),
-			tagName <- #input,
-			type <- #text,
-			isPairedTag <- false
-		)
+  from
+    sf : extMM!SimpleField
+  to
+    f : ourMM!TextField(
+      name <- sf.name.decapitalize(),
+      tagName <- #input,
+      type <- #text,
+      isPairedTag <- false
+    )
 }
 
 lazy rule OnSubmitEvent2Event{
-	from
-		n	: String
-	to	
-		e : ourMM!Event(
-			handler <- e.getHandler(n),
-			type <- e.getDefaultEventType()
-		)	
+  from
+    n : String
+  to  
+    e : ourMM!Event(
+      handler <- e.getHandler(n),
+      type <- e.getDefaultEventType()
+    ) 
 }
 
 lazy rule Landmarks2MenuItems{
-	from
-		vc	: IFMLMM!ViewContainer(
-			(not vc.isLandmark)
-		)
-	to
-		an	: ourMM!Anchor(
-			name <- vc.name.decapitalize(),
-			hypRef <- vc.name,
-			target <- an.getDefaultTarget(),
-			tagName <- #a
-		)	
+  from
+    vc  : IFMLMM!ViewContainer((vc.isLandmark))
+  to
+    an  : ourMM!Anchor(
+      name <- vc.name.decapitalize(),
+      hypRef <- vc.name,
+      target <- an.getDefaultTarget(),
+      tagName <- #a
+    ) 
 }
 
 lazy rule ViewElement2Image{
-	from
-		ve : IFMLMM!ViewElement
-	to
-		i : ourMM!Image(
-				source <- ve.id,
-				name <- ve.name,
-				tagName <- #img
-			)	
+  from
+    ve : IFMLMM!ViewElement
+  to
+    i : ourMM!Image(
+      source <- ve.id,
+      name <- ve.name,
+      tagName <- #img
+    ) 
 }
