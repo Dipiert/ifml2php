@@ -5,7 +5,7 @@
 [module view('http://www.application.org')]
 
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperFileReader /]
-[import edu::ifml2php::psm::lycmm::gen::lyphp::files::writeView /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::files::writeViews /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::files::generateWelcomeView /]
 
 [**

@@ -5,7 +5,7 @@
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperApplication /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperLaravelInputPaths /]
 
-[template public setAppConf(anApp : Application)]
+[template public setApplicationConf(anApp : Application)]
 
 [ setAppName('/var/www/html/laravel5.4.15', anApp.name) /]
 

@@ -4,7 +4,6 @@
  */]
 [module generateWelcomeView('http://www.application.org')]
 
-
 [**
  * The documentation of the template generateElement.
  * @param aModel

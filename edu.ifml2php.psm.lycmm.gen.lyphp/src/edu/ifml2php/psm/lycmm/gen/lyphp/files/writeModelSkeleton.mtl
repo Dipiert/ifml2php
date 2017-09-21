@@ -26,8 +26,7 @@ class [model.name /] extends Model
 '[at.name/]'[/for]
 [ ']' /];
 	[comment]TODO:
-	* protected $fillable = ['['/][']'/]; TODO: este vector podría obtenerse desde IFMLModel	
-	* se podrían generar las relaciones entre modelos para la persistencia:
+		* se podrían generar las relaciones entre modelos para la persistencia:
 		public function othermodel(){
 			return $this->typeRelation(othermodelUri)...
 		}[/comment]

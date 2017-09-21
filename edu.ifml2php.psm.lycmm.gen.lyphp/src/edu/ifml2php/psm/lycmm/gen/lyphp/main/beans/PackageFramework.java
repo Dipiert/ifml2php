@@ -2,7 +2,7 @@ package edu.ifml2php.psm.lycmm.gen.lyphp.main.beans;
 
 public class PackageFramework {
 	String name = "Laravel";
-	String version = "5.4";
+	String version = "5.4.15";
 	//Es necesaria la relación c/ Application?
 	public String getName() {
 		return name;

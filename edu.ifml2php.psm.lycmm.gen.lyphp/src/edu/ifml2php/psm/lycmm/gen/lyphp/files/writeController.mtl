@@ -2,11 +2,8 @@
 [**
  * The documentation of the module writeControllerSkeleton.
  */]
-[module writeControllerSkeleton('http://www.application.org')]
+[module writeController('http://www.application.org')]
 
-[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperApplication /]
-[import edu::ifml2php::psm::lycmm::gen::lyphp::main::view /]
-[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperController /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperLaravelInputPaths /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperStringUtil /]
 
@@ -130,10 +127,6 @@ Incluso, se podría poner a los métodos en un orden tal que sea significativo p
 
 [file (self.getRoutesPath(), true, 'UTF-8')]
 <?php 
-
-Route::get('/', function(){
-        return view('welcome');
-});
 [for (view : View | pv.views)]
 	[if (getSuffix(view.name).toString().matches(nameController))]
 Route::get('[nameController.toLowerCase()/]/[view.name/]', '[namePackage/]Controllers\[nameController/]Controller@createView[view.name/]')->name('[nameController.toLowerCase()/].[view.name/]');

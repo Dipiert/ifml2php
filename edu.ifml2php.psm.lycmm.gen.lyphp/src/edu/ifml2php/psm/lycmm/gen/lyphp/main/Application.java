@@ -49,7 +49,7 @@ public class Application extends AbstractAcceleoGenerator {
      *
      * @generated NOT
      */
-    public static final String[] TEMPLATE_NAMES = {"setAppConf"};
+    public static final String[] TEMPLATE_NAMES = {"application"};
  
     
     /**
@@ -140,6 +140,8 @@ public class Application extends AbstractAcceleoGenerator {
     }
     
     private void getPSM(){
+    	
+    	
     	Scanner sc = new Scanner(System.in);
     	System.out.println("PHP Version >= 5.6.4 required");
     	System.out.println("Target Framework(Laravel|Yii2)[Laravel]");
