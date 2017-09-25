@@ -10,7 +10,5 @@ public class Yii2Paths {
    public void setBaseDir(String baseDir) {
       this.baseDir = baseDir;
    }
-
-   
    
 }

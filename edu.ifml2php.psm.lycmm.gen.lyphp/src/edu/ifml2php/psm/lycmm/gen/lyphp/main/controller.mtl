@@ -7,6 +7,8 @@
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperFileReader /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::files::writeController /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperApplication /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperLaravelPaths /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperLaravelOutputPaths /]
 
 [**
  * The documentation of the template generateElement.
@@ -17,8 +19,8 @@
 
 [template public makeControllers(anApp : Application)]
 [comment @main/]  
-[let base_dir : String = 'FHS/var/www/html/' ]
-   [let path : String = 'laravel5.4.15/app/Http/Controllers/' + anApp.aPackageController.name + 'Controllers/']
+[let base_dir : String = getBaseDir() ]
+   [let path : String = getControllersHome() + anApp.aPackageController.name + 'Controllers/']
        [self.makeFolder(base_dir + path) /]
        [for (controller : Controller | anApp.aPackageController.controllers)]
         [if (anApp.name.oclIsUndefined() or anApp.name = '')]

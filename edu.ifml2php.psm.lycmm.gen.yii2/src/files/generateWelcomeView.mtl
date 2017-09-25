@@ -3,7 +3,7 @@
  * The documentation of the module generate.
  */]
 [module generateWelcomeView('http://www.application.org')]
-
+[import services::helperYii2OutputPaths /]
 
 [**
  * The documentation of the template generateElement.
@@ -11,7 +11,7 @@
  */]
 [template public generateWelcomeView()]
 
-[file ('/yii2.0.12/views/layouts/main.php', false, 'UTF-8')]
+[file ( getWelcomeView(), false, 'UTF-8')]
 <?php
 
 /* @var $this \yii\web\View */

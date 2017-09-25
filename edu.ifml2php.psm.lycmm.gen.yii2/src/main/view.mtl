@@ -7,6 +7,8 @@
 [import services::helperFileReader /]
 [import files::writeView /]
 [import files::generateWelcomeView /]
+[import services::helperYii2OutputPaths /]
+[import services::helperYii2Paths /]
 
 [**
  * The documentation of the template generateElement.
@@ -15,8 +17,8 @@
 
 [template public makeViews(anApp : Application)]
 [comment @main /]
-	[let base_dir : String = 'FHS/var/www/html/' ] 
-	   [let path : String = 'yii2.0.12/views/' + anApp.aPackageView.name + 'Views/']
+	[let base_dir : String = getBaseDir() ] 
+	   [let path : String = getViewsHome() + anApp.aPackageView.name + 'Views/']
           [ self.makeFolder(base_dir + path) /]
              [for (view : View | anApp.aPackageView.views )]	
 		        [for (inner : View | view.innerViews)]

@@ -3,14 +3,15 @@
  * The documentation of the module generate.
  */]
 [module generateWelcomeView('http://www.application.org')]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperLaravelOutputPaths /]
 
 [**
- * The documentation of the template generateElement.
- * @param aModel
+ * The documentation of the template generateElement.'/laravel5.4.15/resources/views/welcome.blade.php'
+ * @param aModel 
  */]
 [template public generateWelcomeView()]
 
-[file ('/laravel5.4.15/resources/views/welcome.blade.php', false, 'UTF-8')]
+[file ( getWelcomeView() , false, 'UTF-8')]
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
     <head>

@@ -2,10 +2,10 @@
 [module helperLaravelPaths('http://www.application.org')/]
 
 [query public getBaseDir(anOclAny: OclAny) : String
-	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.common.LaravelPaths', 'getBaseDir()', Sequence{})
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelPaths', 'getBaseDir()', Sequence{})
 /]
 
 [query public setBaseDir(arg0 : String) : OclVoid
-	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.common.LaravelPaths', 'setBaseDir(java.lang.String)', Sequence{arg0})
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelPaths', 'setBaseDir(java.lang.String)', Sequence{arg0})
 /]
 

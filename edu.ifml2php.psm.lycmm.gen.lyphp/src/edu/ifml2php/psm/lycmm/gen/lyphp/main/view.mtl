@@ -6,6 +6,7 @@
 
 [import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperFileReader /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::files::writeViews /]
+[import edu::ifml2php::psm::lycmm::gen::lyphp::services::helperLaravelPaths /]
 [import edu::ifml2php::psm::lycmm::gen::lyphp::files::generateWelcomeView /]
 
 [**
@@ -15,7 +16,7 @@
 
 [template public makeViews(anApp : Application)]
 [comment @main /]
-    [let base_dir : String = 'FHS/var/www/html/' ] [comment]FHS + getBaseDir()[/comment] 
+    [let base_dir : String = getBaseDir() ] 
 	   [let path : String = 'laravel5.4.15/resources/views/' + anApp.aPackageView.name + 'Views/']
           [ self.makeFolder(base_dir + path) /]
              [for (view : View | anApp.aPackageView.views )]	

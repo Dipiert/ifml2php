@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project default="generate" name="acceleo.generacionClaseApplication">
+<project default="generate" name="edu.ifml2php.psm.lycmm.gen.lyphp">
     <property name="ECLIPSE_HOME" value="../../../../Descargas/eclipse/luna"/>
     <property name="ECLIPSE_WORKSPACE" value="../.."/>
 
     <!-- The classpath with only the dependencies used by the project -->
-    <path id="acceleo.generacionClaseApplication.libraryclasspath">
-        <pathelement location="${ECLIPSE_WORKSPACE}/acceleo.generacionClaseApplication/bin"/>
+    <path id="edu.ifml2php.psm.lycmm.gen.lyphp.libraryclasspath">
+        <pathelement location="${ECLIPSE_WORKSPACE}/edu.ifml2php.psm.lycmm.gen.lyphp/bin"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.core.runtime_3.10.0.v20140318-2214.jar"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/javax.annotation_1.2.0.v201401042248.jar"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/javax.inject_1.0.0.v20091030.jar"/>
@@ -20,12 +20,7 @@
         <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.equinox.app_1.3.200.v20130910-1609.jar"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.ecore_2.10.2.v20150123-0348.jar"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.common_2.10.1.v20150123-0348.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/IFMLEditor_1.0.0.201412021412.jar"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.ecore.xmi_2.10.2.v20150123-0348.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.uml2.types_2.0.0.v20150202-0947.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.uml2.common_2.0.1.v20150202-0947.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.uml2.uml_5.0.2.v20150202-0947.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.emf.mapping.ecore2xml_2.8.0.v20150123-0452.jar"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.ocl_3.4.2.v20140725-2242.jar"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/lpg.runtime.java_2.0.17.v201004271640.jar"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.ocl.common_1.2.0.v20140610-0641.jar"/>
@@ -39,23 +34,23 @@
         <pathelement location="${ECLIPSE_HOME}/plugins/com.google.guava_15.0.0.v201403281430.jar"/>
     </path>
 
-    <path id="acceleo.generacionClaseApplication.classpath">
-        <path refid="acceleo.generacionClaseApplication.libraryclasspath"/>
+    <path id="edu.ifml2php.psm.lycmm.gen.lyphp.classpath">
+        <path refid="edu.ifml2php.psm.lycmm.gen.lyphp.libraryclasspath"/>
     </path>
 
     <!-- The classpath with only the jars available in the plugin folder of Eclipse -->
-    <path id="acceleo.generacionClaseApplication.libraryclasspath.alljars">
-        <pathelement location="../acceleo.generacionClaseApplication/bin"/>
+    <path id="edu.ifml2php.psm.lycmm.gen.lyphp.libraryclasspath.alljars">
+        <pathelement location="../edu.ifml2php.psm.lycmm.gen.lyphp/bin"/>
         <fileset dir="${ECLIPSE_HOME}/plugins/" includes="*.jar"/>
     </path>
 
-    <path id="acceleo.generacionClaseApplication.classpath.alljars">
-        <path refid="acceleo.generacionClaseApplication.libraryclasspath.alljars"/>
+    <path id="edu.ifml2php.psm.lycmm.gen.lyphp.classpath.alljars">
+        <path refid="edu.ifml2php.psm.lycmm.gen.lyphp.libraryclasspath.alljars"/>
     </path>
 
     <!-- The default task with the jars used by this project -->
     <target name="generate">
-        <java classname="acceleo.generacionClaseApplication.main.Generate" classpathref="acceleo.generacionClaseApplication.classpath">
+        <java classname="edu.ifml2php.psm.lycmm.gen.lyphp.files.Generate" classpathref="edu.ifml2php.psm.lycmm.gen.lyphp.classpath">
             <arg value="${model}"/>
             <arg value="${target}"/>
         </java>
@@ -66,7 +61,7 @@
         Keep in mind that having two versions of the same jar can create problems
     -->
     <target name="generate.alljars">
-        <java classname="acceleo.generacionClaseApplication.main.Generate" classpathref="acceleo.generacionClaseApplication.classpath">
+        <java classname="edu.ifml2php.psm.lycmm.gen.lyphp.files.Generate" classpathref="edu.ifml2php.psm.lycmm.gen.lyphp.classpath">
             <arg value="${model}"/>
             <arg value="${target}"/>
         </java>

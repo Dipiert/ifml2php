@@ -7,7 +7,8 @@
 [import services::helperFileReader /]
 [import services::helperApplication /]
 [import files::writeModelSkeleton  /]
-
+[import services::helperYii2Paths  /]
+[import services::helperYii2OutputPaths  /]
 [comment]
 
 [import edu::ifml2php::psm::lycmm::gen::lyphp::files::writeModelRequest   /][/comment]
@@ -20,8 +21,8 @@
 [template public makeModels(anApp : Application)]
 [comment @main/]
 	[let pm : PackageModel = anApp.aPackageModel]
-    [let base_dir : String = 'FHS/var/www/html/' ]
-	[let pathModels : String = 'yii2.0.12/models/' + pm.name + 'Models/']
+    [let base_dir : String = getBaseDir() ]
+	[let pathModels : String = getModelsHome() + pm.name + 'Models/']
 	
       [ self.makeFolder(base_dir + pathModels) /]
 	  
