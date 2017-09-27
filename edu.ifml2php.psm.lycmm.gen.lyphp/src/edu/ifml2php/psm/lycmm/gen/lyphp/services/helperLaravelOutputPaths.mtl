@@ -1,0 +1,89 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module.
+ */]
+[module helperLaravelOutputPaths('http://www.application.org')/]
+
+[**
+ * The documentation of the query
+ */]
+[query public getLaravelVersion(anOclAny: OclAny) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelOutputPaths', 'getLaravelVersion()', Sequence{})
+/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public setLaravelVersion(arg0 : String) : OclVoid
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelOutputPaths', 'setLaravelVersion(java.lang.String)', Sequence{arg0})
+/]
+
+[**
+ * The documentation of the query
+ */]
+[query public getModelsHome(anOclAny: OclAny) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelOutputPaths', 'getModelsHome()', Sequence{})
+/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public setModelsHome(arg0 : String) : OclVoid
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelOutputPaths', 'setModelsHome(java.lang.String)', Sequence{arg0})
+/]
+
+[**
+ * The documentation of the query
+ */]
+[query public getViewsHome(anOclAny: OclAny) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelOutputPaths', 'getViewsHome()', Sequence{})
+/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public setViewsHome(arg0 : String) : OclVoid
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelOutputPaths', 'setViewsHome(java.lang.String)', Sequence{arg0})
+/]
+
+[**
+ * The documentation of the query
+ */]
+[query public getControllersHome(anOclAny: OclAny) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelOutputPaths', 'getControllersHome()', Sequence{})
+/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public setControllersHome(arg0 : String) : OclVoid
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelOutputPaths', 'setControllersHome(java.lang.String)', Sequence{arg0})
+/]
+
+[query public getWelcomeView(anOclAny: OclAny) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelOutputPaths', 'getWelcomeView()', Sequence{})
+/]
+
+[query public setWelcomeView(arg0 : String) : OclVoid
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelOutputPaths', 'setWelcomeView(java.lang.String)', Sequence{arg0})
+/]
+
+[query public getModelRequestsHome(anOclAny: OclAny) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelOutputPaths', 'getModelRequestsHome()', Sequence{})
+/]
+
+[query public setModelRequestsHome(arg0 : String) : OclVoid
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelOutputPaths', 'setModelRequestsHome(java.lang.String)', Sequence{arg0})
+/]
+
+[query public getStylesheetsHome(anOclAny: OclAny) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelOutputPaths', 'getStylesheetsHome()', Sequence{})
+/]
+
+[query public setStylesheetsHome(arg0 : String) : OclVoid
+	= invoke('edu.ifml2php.psm.lycmm.gen.lyphp.services.LaravelOutputPaths', 'setStyleSheetHome(java.lang.String)', Sequence{arg0})
+/]

@@ -33,7 +33,10 @@ public class Application {
     }
 	
 	public String getAppConfig() {
-		return fr.getFile(lip.getBaseDir() + lip.getConfigAppPath());
+		String baseDir = lip.getBaseDir();
+		String configAppPath = lip.getConfigAppPath();
+		String file = fr.getFile(baseDir + configAppPath);
+		return file;
 	}
 	
 	public String getRoutes(){

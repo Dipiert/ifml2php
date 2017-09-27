@@ -114,7 +114,7 @@
       <structuralFeature xsi:type="uml:Property" href="model.uml#_VB_OcIw3EeeRs66kVYR6_g"/>
     </domainElements>
     <domainElements xsi:type="core:UMLStructuralFeature" id="_FFpt9J2YEeeisaFzOXmQ5Q" name="title">
-      <structuralFeature xsi:type="uml:Property" href="model.uml#_AesM4J13EeeisaFzOXmQ5Q"/>
+      <structuralFeature xsi:type="uml:Property" href="model.uml#_jEpi8J6QEeGdnpRmAZh-dQ"/>
     </domainElements>
   </domainModel>
 </core:IFMLModel>

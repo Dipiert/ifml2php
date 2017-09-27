@@ -39,7 +39,7 @@
 		[/if]
 		[if (viewComponent.oclIsTypeOf(RadioButton))]
 			[let rb : RadioButton = viewComponent]
-<?= Html::radio('['['/]r.name/]', false, ['['/]'value' => '[ rb.value /]']) ?> [comment NO TESTED YET/]
+<?= Html::radio('['['/]r.name/]', false, ['['/]'value' => '[ rb.value /]', 'label' => '[ rb.value /]']) ?> [comment NO TESTED YET/]
 			[/let]			
 		[/if]	
 		[if (viewComponent.oclIsTypeOf(Image))]	

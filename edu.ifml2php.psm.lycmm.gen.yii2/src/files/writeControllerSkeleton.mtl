@@ -22,7 +22,7 @@
 namespace app\controllers\[pmName/]Controllers;
 use Yii;
 use yii\web\Controller;
-use yii\db\Connection: [comment TODO: este import no debe ser un supuesto/]
+use yii\db\Connection; [comment TODO: este import no debe ser un supuesto/]
 
 class [controller.name/]Controller extends Controller
 {

@@ -7,7 +7,8 @@ public class LaravelOutputPaths extends LaravelPaths{
    String controllersHome = laravelVersion + "/app/Http/Controllers/";
    String modelRequestsHome = laravelVersion + "app/Http/Requests/";
    String welcomeView = laravelVersion + "resources/views/welcome.blade.php";
-
+   String stylesheetsPath = laravelVersion + "public/css/";
+   
    public String getLaravelVersion() {
       return laravelVersion;
    }
@@ -43,6 +44,12 @@ public class LaravelOutputPaths extends LaravelPaths{
    }
    public void setModelRequestsHome(String modelRequestsHome) {
       this.modelRequestsHome = modelRequestsHome;
-   }   
+   }
+   public String getStylesheetsHome() {
+	      return this.stylesheetsPath;
+   }
+   public void setStyleSheetsHome(String stylesheetPath) {
+	      this.stylesheetsPath = stylesheetPath;
+   }
    
 }

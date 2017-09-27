@@ -1,0 +1,81 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module.
+ */]
+[module helperYii2OutputPaths('http://www.application.org')/]
+
+[**
+ * The documentation of the query
+ */]
+[query public getYii2Version(anOclAny: OclAny) : String
+	= invoke('services.Yii2OutputPaths', 'getYii2Version()', Sequence{})
+/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public setYii2Version(arg0 : String) : OclVoid
+	= invoke('services.Yii2OutputPaths', 'setYii2Version(java.lang.String)', Sequence{arg0})
+/]
+
+[**
+ * The documentation of the query
+ */]
+[query public getModelsHome(anOclAny: OclAny) : String
+	= invoke('services.Yii2OutputPaths', 'getModelsHome()', Sequence{})
+/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public setModelsHome(arg0 : String) : OclVoid
+	= invoke('services.Yii2OutputPaths', 'setModelsHome(java.lang.String)', Sequence{arg0})
+/]
+
+[**
+ * The documentation of the query
+ */]
+[query public getViewsHome(anOclAny: OclAny) : String
+	= invoke('services.Yii2OutputPaths', 'getViewsHome()', Sequence{})
+/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public setViewsHome(arg0 : String) : OclVoid
+	= invoke('services.Yii2OutputPaths', 'setViewsHome(java.lang.String)', Sequence{arg0})
+/]
+
+[**
+ * The documentation of the query
+ */]
+[query public getControllersHome(anOclAny: OclAny) : String
+	= invoke('services.Yii2OutputPaths', 'getControllersHome()', Sequence{})
+/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public setControllersHome(arg0 : String) : OclVoid
+	= invoke('services.Yii2OutputPaths', 'setControllersHome(java.lang.String)', Sequence{arg0})
+/]
+
+[**
+ * The documentation of the query
+ */]
+[query public getWelcomeView(anOclAny: OclAny) : String
+	= invoke('services.Yii2OutputPaths', 'getWelcomeView()', Sequence{})
+/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public setWelcomeView(arg0 : String) : OclVoid
+	= invoke('services.Yii2OutputPaths', 'setWelcomeView(java.lang.String)', Sequence{arg0})
+/]
+
