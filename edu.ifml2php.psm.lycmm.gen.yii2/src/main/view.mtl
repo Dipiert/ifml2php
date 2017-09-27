@@ -8,6 +8,7 @@
 [import files::writeView /]
 [import files::generateWelcomeView /]
 [import services::helperYii2OutputPaths /]
+[import files::writeDefaultStylesheet /]
 [import services::helperYii2Paths /]
 
 [**
@@ -27,6 +28,7 @@
 	            [ writeView(path, view, anApp.aPackageController.name, anApp.aPackageView.name) /]
              [/for]
 	   [ self.generateWelcomeView() /]
+	   [ self.writeDefaultStylesheet() /]
    	   [/let]
     [/let]
 [/template]

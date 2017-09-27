@@ -30,7 +30,7 @@
 	[if (viewComponent.oclIsTypeOf(Anchor))]
 		[let a : Anchor = viewComponent][comment]En lugar de usar los pairedTag y emptyTag casteamos el viewComponent a Anchor. Esto simplifica el código y mejora la legibilidad a la vez que permite flexibilidad en la implementación (podría no hacerse el cast y utilizar estos atributos)[/comment]
 			[if (view.name.strcmp(a.hypRef) <> 0)]
-<[ a.tagName /] href="{{ route('[ self.getSuffix(a.name).toLowerFirst() /].[a.name.toUpperFirst()/]') }}" target="[ a.target /]" class="navbar">[ a.hypRef.replaceAll('([A-Z])', ' $1' ) /] </[ a.tagName /]> 
+<[ a.tagName /] href="{{ route('[ self.getSuffix(a.name).toLowerFirst() /].[a.name.toUpperFirst()/]') }}" target="[ a.target /]" class="ifml2php_navbar">[ a.hypRef.replaceAll('([A-Z])', ' $1' ) /] </[ a.tagName /]> 
 			[/if]
 		[/let]
 	[/if]
@@ -60,7 +60,7 @@
 					[let actionName : String = event.handler]
 						[let formHandler : String = pcName + 'Controllers\\' + getSuffix(view.name.toUpperFirst()) + 'Controller' + '@']
 							[registerPostForm(actionName, formHandler, getSuffix(view.name.toUpperFirst()))/]		
-<div class="form">
+<div class="ifml2php_form">
 {!! Form::open([ '[' /]'action' => '[formHandler + actionName /]', 'method' => '[ f.method /]', 'name' => '[ f.name /]' [ ']' /]) !!}
 						[/let]
 					[/let]

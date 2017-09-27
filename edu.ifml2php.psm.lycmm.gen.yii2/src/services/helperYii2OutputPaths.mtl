@@ -79,3 +79,10 @@
 	= invoke('services.Yii2OutputPaths', 'setWelcomeView(java.lang.String)', Sequence{arg0})
 /]
 
+[query public getStylesheetsHome(anOclAny: OclAny) : String
+	= invoke('services.Yii2OutputPaths', 'getStylesheetsHome()', Sequence{})
+/]
+
+[query public setStylesheetsHome(arg0 : String) : OclVoid
+	= invoke('services.Yii2OutputPaths', 'setStyleSheetHome(java.lang.String)', Sequence{arg0})
+/]
