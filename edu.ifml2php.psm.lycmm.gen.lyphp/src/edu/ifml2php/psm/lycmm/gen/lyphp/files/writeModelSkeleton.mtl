@@ -21,8 +21,20 @@ use Illuminate\Database\Eloquent\Model;
 		
 class [model.name /] extends Model
 {
+	[if (not model.primaryKeys->select(e|e.oclIsTypeOf(Identifier))->isEmpty())]
+		public $primaryKey = '[model.primaryKeys->first().name/]';
+		[if (model.primaryKeys->select(e|e.oclIsTypeOf(Identifier))->size() > 1)]				
+		/*
+			En el modelo fue definida una clave primaria compuesta. Al momento Eloquent no lo soporta. Los atributos modelados como primaryKey son:
+			[for (id : Identifier | model.primaryKeys->select(e|e.oclIsTypeOf(Identifier))) separator(', ')]'[id.name/]'[/for]
+			https://github.com/laravel/framework/issues/5355
+		*/				
+		[/if]
+	[/if]
+	
+	
 	protected $table = '[model.name.toLowerCase() /]' ; 
-	protected $fillable = [ '[' /] [for (at : Attribute | model.attributes) separator(', ')]
+	protected $fillable = [ '[' /] [for (at : Attribute | model.eAllContents(Attribute)) separator(', ')]
 '[at.name/]'[/for]
 [ ']' /];
 	[comment]TODO:

@@ -31,7 +31,7 @@ class [ model.name /]Request extends FormRequest
     public function rules()
     {
         return  [ '[' /]
-			[for (at : Attribute | model.attributes ) separator(',\n')]
+			[for (at : Attribute | model.eAllContents(Attribute) ) separator(',\n')]
 			'[ at.name /]' => ''[/for]	
 
 		[ ']' /];

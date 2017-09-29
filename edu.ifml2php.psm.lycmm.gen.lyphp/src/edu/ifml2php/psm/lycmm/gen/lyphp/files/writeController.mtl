@@ -133,9 +133,9 @@ Route::get('[nameController.toLowerCase()/]/[view.name/]', '[namePackage/]Contro
 	[/if]
 [/for]
 Route::resource('[nameController.toLowerCase()/]','[namePackage/]Controllers\[nameController/]Controller');
-Route::any( '{catchall}', function () {
+/*Route::any( '{catchall}', function () {
     return view('welcome');
-})->where('catchall', '(.*)');
+})->where('catchall', '(.*)');*/
 [/file]
 [/template]
 

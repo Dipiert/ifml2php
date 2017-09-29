@@ -37,7 +37,10 @@
     <eClassifiers xsi:type="ecore:EClass" name="Attribute">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//coreMVC/MVCClass"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//coreMVC/MVCClass">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="primaryKeys" lowerBound="1"
+          upperBound="-1" eType="#//coreMVC/Identifier" containment="true"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="View" eSuperTypes="#//coreMVC/MVCClass">
       <eStructuralFeatures xsi:type="ecore:EReference" name="viewComponents" upperBound="-1"
           eType="#//coreMVC/ViewComponent" containment="true"/>
@@ -69,6 +72,9 @@
       <eLiterals name="onSubmit" value="1"/>
       <eLiterals name="onError" value="2" literal="onError"/>
       <eLiterals name="onLoad" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Identifier" eSuperTypes="#//coreMVC/Attribute">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAutoincremental" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="extPHP" nsURI="http://www.application.org/extPHP" nsPrefix="extPHP">
