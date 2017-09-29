@@ -9,7 +9,7 @@
       <viewElements id="https://upload.wikimedia.org/wikipedia/en/4/4e/IFML-Interaction-Flow-Modeling-Language-OMG-logo-copyrighted.png" name="logo"/>
     </interactionFlowModelElements>
     <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_-AyHzZ2YEeeisaFzOXmQ5Q" name="AddFormMovie" isLandmark="true">
-      <viewElements xsi:type="ext:Form" id="_mB8d_52aEeeisaFzOXmQ5Q" name="AddMovieForm" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.1/@viewElements.0/@viewElementEvents.0/@outInteractionFlows.0">
+      <viewElements xsi:type="ext:Form" id="_mB8d_52aEeeisaFzOXmQ5Q" name="AddMovieForm">
         <parameters xsi:type="ext:SelectionField" id="_ys9YEZ2aEeeisaFzOXmQ5Q" name="audience">
           <parameters xsi:type="ext:IFMLSlot" id="_Ose9852bEeeisaFzOXmQ5Q" name="G"/>
           <parameters xsi:type="ext:IFMLSlot" id="_Ose9852bEeeisaFzOXmQ5Q" name="PG"/>
@@ -20,7 +20,7 @@
           <parameters xsi:type="ext:IFMLSlot" id="_Ose9852bEeeisaFzOXmQ6Q" name="isSaga"/>
         </parameters>
         <viewElementEvents xsi:type="ext:OnSubmitEvent" id="_tzZyqZ2bEeeisaFzOXmQ5Q" name="Add Movie" viewElement="//@interactionFlowModel/@interactionFlowModelElements.1/@viewElements.0">
-          <outInteractionFlows xsi:type="core:NavigationFlow" id="_3AGyx52bEeeisaFzOXmQ5Q" targetInteractionFlowElement="//@interactionFlowModel/@interactionFlowModelElements.1/@viewElements.0">
+          <outInteractionFlows xsi:type="core:NavigationFlow" id="_3AGyx52bEeeisaFzOXmQ5Q" targetInteractionFlowElement="//@interactionFlowModel/@interactionFlowModelElements.4">
             <parameterBindingGroup id="_5v7PAp2bEeeisaFzOXmQ5Q">
               <parameterBindings id="_BQD_op2cEeeisaFzOXmQ5Q" sourceParameter="//@interactionFlowModel/@interactionFlowModelElements.1/@viewElements.0/@viewComponentParts.2" targetParameter="//@interactionFlowModel/@interactionFlowModelElements.4/@parameters.0"/>
               <parameterBindings id="_BQD_op2cEeeisaFzOXmQ5Q" sourceParameter="//@interactionFlowModel/@interactionFlowModelElements.1/@viewElements.0/@viewComponentParts.0" targetParameter="//@interactionFlowModel/@interactionFlowModelElements.4/@parameters.1"/>
@@ -39,7 +39,7 @@
       </viewElements>
     </interactionFlowModelElements>
     <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_CIHwnZ2ZEeeisaFzOXmQ5Q" name="UpdateFormMovie" isLandmark="true">
-      <viewElements xsi:type="ext:Form" id="_C-vAX54-EeewNOKrpZAZPg" name="UpdateFormMovie" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0/@viewElementEvents.0/@outInteractionFlows.0">
+      <viewElements xsi:type="ext:Form" id="_C-vAX54-EeewNOKrpZAZPg" name="UpdateFormMovie">
         <parameters xsi:type="ext:SelectionField" id="__hT6ZJ5BEeewNOKrpZAZPg" name="saga" isMultiSelection="true">
           <parameters xsi:type="ext:IFMLSlot" id="_CeZ9o55CEeewNOKrpZAZPg" name="isSaga"/>
         </parameters>
@@ -50,7 +50,7 @@
           <parameters xsi:type="ext:IFMLSlot" id="_Ij58Q55CEeewNOKrpZAZPg" name="R"/>
         </parameters>
         <viewElementEvents xsi:type="ext:OnSubmitEvent" id="_YtfWWZ4_EeewNOKrpZAZPg" name="Update Movie" viewElement="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0">
-          <outInteractionFlows xsi:type="core:NavigationFlow" id="_amhUh54_EeewNOKrpZAZPg" targetInteractionFlowElement="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0">
+          <outInteractionFlows xsi:type="core:NavigationFlow" id="_amhUh54_EeewNOKrpZAZPg" targetInteractionFlowElement="//@interactionFlowModel/@interactionFlowModelElements.5">
             <parameterBindingGroup id="_beWUYp4_EeewNOKrpZAZPg">
               <parameterBindings id="_cCQ5wp4_EeewNOKrpZAZPg" sourceParameter="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0/@viewComponentParts.0" targetParameter="//@interactionFlowModel/@interactionFlowModelElements.5/@parameters.0"/>
               <parameterBindings id="_O_hKQp5BEeewNOKrpZAZPg" sourceParameter="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0/@viewComponentParts.1" targetParameter="//@interactionFlowModel/@interactionFlowModelElements.5/@parameters.1"/>
@@ -69,9 +69,9 @@
       </viewElements>
     </interactionFlowModelElements>
     <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_MMbHHZ2ZEeeisaFzOXmQ5Q" name="DeleteFormMovie" isLandmark="true">
-      <viewElements xsi:type="ext:Form" id="_1wwCf55FEeewNOKrpZAZPg" name="DeleteMovieForm" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.3/@viewElements.0/@viewElementEvents.0/@outInteractionFlows.0">
+      <viewElements xsi:type="ext:Form" id="_1wwCf55FEeewNOKrpZAZPg" name="DeleteMovieForm">
         <viewElementEvents xsi:type="ext:OnSubmitEvent" id="_8kTZ6Z5FEeewNOKrpZAZPg" name="Delete Movie" viewElement="//@interactionFlowModel/@interactionFlowModelElements.3/@viewElements.0">
-          <outInteractionFlows xsi:type="core:NavigationFlow" id="_jYrph55GEeewNOKrpZAZPg" targetInteractionFlowElement="//@interactionFlowModel/@interactionFlowModelElements.3/@viewElements.0">
+          <outInteractionFlows xsi:type="core:NavigationFlow" id="_jYrph55GEeewNOKrpZAZPg" targetInteractionFlowElement="//@interactionFlowModel/@interactionFlowModelElements.6">
             <parameterBindingGroup id="_qnFw8p5GEeewNOKrpZAZPg">
               <parameterBindings id="_rMOeUp5GEeewNOKrpZAZPg" sourceParameter="//@interactionFlowModel/@interactionFlowModelElements.3/@viewElements.0/@viewComponentParts.0" targetParameter="//@interactionFlowModel/@interactionFlowModelElements.6/@parameters.0"/>
             </parameterBindingGroup>
@@ -81,19 +81,19 @@
         <viewComponentParts xsi:type="core:DataBinding" id="_631RDZ5FEeewNOKrpZAZPg" name="Movie"/>
       </viewElements>
     </interactionFlowModelElements>
-    <interactionFlowModelElements xsi:type="core:IFMLAction" id="_QumRtp2ZEeeisaFzOXmQ5Q" name="AddMovie">
+    <interactionFlowModelElements xsi:type="core:IFMLAction" id="_QumRtp2ZEeeisaFzOXmQ5Q" name="AddMovie" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.1/@viewElements.0/@viewElementEvents.0/@outInteractionFlows.0">
       <parameters id="_IqkCUp2cEeeisaFzOXmQ5Q" name="Title"/>
       <parameters id="_IqkCUp2cEeeisaFzOXmQ5Q" name="Year"/>
       <parameters id="_IqkCUp2cEeeisaFzOXmQ5Q" name="Audience"/>
       <parameters id="_IqkCUp2cEeeisaFzOXmQ5Q" name="Saga"/>
     </interactionFlowModelElements>
-    <interactionFlowModelElements xsi:type="core:IFMLAction" id="_QumRtp2ZEeeisaFzOXmQ5Q" name="UpdateMovie">
+    <interactionFlowModelElements xsi:type="core:IFMLAction" id="_QumRtp2ZEeeisaFzOXmQ5Q" name="UpdateMovie" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0/@viewElementEvents.0/@outInteractionFlows.0">
       <parameters id="_bNBeYp5AEeewNOKrpZAZPg" name="Title_Update"/>
       <parameters id="_cThzcp5AEeewNOKrpZAZPg" name="Year_Update"/>
       <parameters id="_dAwF0p5AEeewNOKrpZAZPg" name="Audience_Update"/>
       <parameters id="_dausEp5AEeewNOKrpZAZPg" name="Saga_Update"/>
     </interactionFlowModelElements>
-    <interactionFlowModelElements xsi:type="core:IFMLAction" id="_QumRtp2ZEeeisaFzOXmQ5Q" name="DeleteMovie">
+    <interactionFlowModelElements xsi:type="core:IFMLAction" id="_QumRtp2ZEeeisaFzOXmQ5Q" name="DeleteMovie" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.3/@viewElements.0/@viewElementEvents.0/@outInteractionFlows.0">
       <parameters id="_yL0jIp5FEeewNOKrpZAZPg" name="Title_Delete"/>
     </interactionFlowModelElements>
   </interactionFlowModel>
