@@ -1,0 +1,112 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module writeView.
+ */]
+[module writeViews('http://www.application.org')]
+
+[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperStringUtil /]
+[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperLaravelOutputPaths /]
+[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperLaravelInputPaths /]
+
+[**
+ * The documentation of the template generateElement.
+ * @param aModel
+ */]
+
+[template public writeView(path : String, view : View, pcName : String, pvName : String)]
+[file (path + view.name + '.blade.php', false, 'UTF-8')]
+<!DOCTYPE html>
+<head>
+	<meta name="description" content="ifml2php">
+	<meta name="author" content="Damián Rotta">
+	<meta name="author" content="Gonzalo Pallotta">
+	<meta name="keywords" content="IFML, PHP, MDA, MDWE">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{{ Html::style('css/ifml2php.css') }}
+	<title>[ view.name /]</title>
+</head>
+<body>
+[for (viewComponent : ViewComponent | view.viewComponents)]
+	[if (viewComponent.oclIsTypeOf(Anchor))]
+		[let a : Anchor = viewComponent][comment]En lugar de usar los pairedTag y emptyTag casteamos el viewComponent a Anchor. Esto simplifica el código y mejora la legibilidad a la vez que permite flexibilidad en la implementación (podría no hacerse el cast y utilizar estos atributos)[/comment]
+			[if (view.name.strcmp(a.hypRef) <> 0)]
+<[ a.tagName /] href="{{ route('[ self.getSuffix(a.name).toLowerFirst() /].[a.name.toUpperFirst()/]') }}" target="[ a.target /]" class="ifml2php_navbar">[ a.hypRef.replaceAll('([A-Z])', ' $1' ) /] </[ a.tagName /]> 
+			[/if]
+		[/let]
+	[/if]
+		[if (viewComponent.oclIsTypeOf(Text))]
+			[let t : Text = viewComponent]
+<[ t.tagName /] data-language="[ t._language /]" id="[ t.name /]" > [ t.content /] </[ t.tagName /]>
+			[/let]
+		[/if]
+		[if (viewComponent.oclIsTypeOf(Checkbox))]	
+			[let cb : Checkbox = viewComponent]
+<[ cb.tagName /] name="[ cb.name /]"[ '[' /] [ ']' /] type="[ cb.type /]" value="[ cb.value /]"/>			
+			[/let] 		
+		[/if]
+		[if (viewComponent.oclIsTypeOf(RadioButton))]
+			[let rb : RadioButton = viewComponent]
+<[ rb.tagName /] type="[ rb.type /]" value="[ rb.value /]" />
+			[/let]			
+		[/if]	
+		[if (viewComponent.oclIsTypeOf(Image))]	
+			[let i : Image = viewComponent]
+{{ Html::image('[ i.source /]', '[ i.name /]') }}		
+			[/let]
+		[/if]
+		[if (viewComponent.oclIsTypeOf(Form))]
+			[let f : Form = viewComponent]
+				[for (event : Event | f.events)]
+					[let actionName : String = event.handler]
+						[let formHandler : String = pcName + 'Controllers\\' + getSuffix(view.name.toUpperFirst()) + 'Controller' + '@']
+							[registerPostForm(actionName, formHandler, getSuffix(view.name.toUpperFirst()))/]		
+<div class="ifml2php_form">
+{!! Form::open([ '[' /]'action' => '[formHandler + actionName /]', 'method' => '[ f.method /]', 'name' => '[ f.name /]' [ ']' /]) !!}
+						[/let]
+					[/let]
+				[/for]				
+				[for (htmle : HTMLElement | f.htmlElements)]
+						[if (htmle.oclIsTypeOf(TextField))]	
+							[let tf : TextField = htmle]
+{{ Form::label('[ tf.name /]', '[ tf.name.toUpperFirst() /]') }}
+{{ Form::text('[ tf.name /]') }}
+<br>	
+							[/let]
+						[/if]
+						[if (htmle.oclIsTypeOf(Checkbox))]			
+							[let cb : Checkbox = htmle]
+{{ Form::label('[ cb.value /]', '[ cb.value.toUpperFirst() /]') }}
+{{ Form::[ cb.type /] ('[cb.name/][ '[' /] [ ']' /]', '[cb.value/]') }}
+							[/let]				
+<br><br>
+						[/if]
+						[if (htmle.oclIsTypeOf(RadioButton))]
+							[let r :RadioButton = htmle]
+{{ Form::label('[ r.value /]', '[ r.value.toUpperFirst() /]') }}
+{{ Form::radio('[r.name/]', '[r.value/]') }}
+							[/let]
+						[/if]					 
+				[/for][comment]no contemplamos forms que contengan forms, anchors, textos ni imágenes[/comment]					
+				[for (event : Event | f.events)]
+					[if (event.type.toString().matches('onSubmit') )]
+
+{{ Form::submit('Enviar') }}
+					[/if] 
+				[/for]		
+{!! Form::close() !!}
+</div>
+			[/let]			
+		[/if]
+	[/for]
+	[for (iv : View | view.innerViews)]
+@include('[pvName + 'Views/' + iv.name /]')
+	[/for]
+
+[/file]
+[/template]
+
+[template public registerPostForm(actionName : String, formHandler : String, controllerName : String)]
+[file (self.getRoutesPath(), true, 'UTF-8')]
+Route::post('[controllerName.toLowerCase()/]/[ actionName /]', '[ formHandler + actionName /]');
+[/file]
+[/template]

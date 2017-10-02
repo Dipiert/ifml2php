@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.acceleo.ide.ui.launching.launchConfigurationType">
+<stringAttribute key="org.eclipse.acceleo.ide.ui.ARGUMENTS" value=""/>
+<booleanAttribute key="org.eclipse.acceleo.ide.ui.COMPUTE_PROFILING" value="false"/>
+<booleanAttribute key="org.eclipse.acceleo.ide.ui.COMPUTE_TRACEABILITY" value="false"/>
+<stringAttribute key="org.eclipse.acceleo.ide.ui.LAUNCHING_STRATEGY_DESCRIPTION" value="Java Application"/>
+<stringAttribute key="org.eclipse.acceleo.ide.ui.MODEL_PATH" value="/edu.ifml2php.pim.ifml.gen.lycmm/preProd-gen.xmi"/>
+<stringAttribute key="org.eclipse.acceleo.ide.ui.TARGET_PATH" value="/edu.ifml2php.psm.lycmm.gen.lyphp/FHS/var/www/html"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/edu.ifml2php.psm.lycmm.gen.lyphp/src/edu/ifml2php/psm/lycmm/gen/lyphp/main/Application.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="edu.ifml2php.psm.lycmm.gen.lyphp.main.Application"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="&quot;/home/dam/Escritorio/ws/edu.ifml2php.pim.ifml.gen.lycmm/preProd-gen.xmi&quot; &quot;/home/dam/Escritorio/ws/edu.ifml2php.psm.lycmm.gen.lyphp/FHS/var/www/html&quot;"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="edu.ifml2php.psm.lycmm.gen.lyphp"/>
+</launchConfiguration>

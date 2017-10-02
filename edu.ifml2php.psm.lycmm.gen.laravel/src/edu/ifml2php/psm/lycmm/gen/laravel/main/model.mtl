@@ -1,0 +1,42 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module model.
+ */]
+[module model('http://www.application.org')]
+
+[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperFileReader /]
+[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperApplication /]
+[import edu::ifml2php::psm::lycmm::gen::laravel::files::writeModelSkeleton  /]
+[import edu::ifml2php::psm::lycmm::gen::laravel::files::writeModelRequest   /]
+[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperLaravelOutputPaths   /]
+[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperLaravelPaths   /]
+
+[**
+ * The documentation of the template generateElement. 'laravel5.4.15/app/Http/Requests/'
+ * @param aModel
+ */]
+
+[template public makeModels(anApp : Application)]
+[comment @main/]
+	[let pm : PackageModel = anApp.aPackageModel]
+    [let base_dir : String = getBaseDir() ]
+	[let pathModels : String = getModelsHome() + pm.name + 'Models/']
+	[let pathReq : String =  getModelRequestsHome() + pm.name + 'Requests/']
+      [ self.makeFolder(base_dir + pathModels) /]
+	  [ self.makeFolder(base_dir + pathReq) /]
+      [for (model : Model | pm.models)]
+	  [if (anApp.name = '' or anApp.name.oclIsUndefined())]
+	  	[ writeModelSkeleton(getDefaultAppName('Laravel'), pathModels, model)/]
+		[ writeModelRequest(getDefaultAppName('Laravel'), pathReq, pm.name,model) /]
+	  [else]
+	  	 [ writeModelSkeleton(anApp.name, pathModels, model)/]
+		 [ writeModelRequest(anApp.name, pathReq, pm.name,model) /]	
+	  [/if]
+	    
+      [/for]
+   [/let]
+   [/let]
+   [/let]
+   [/let]
+[/template]
+
