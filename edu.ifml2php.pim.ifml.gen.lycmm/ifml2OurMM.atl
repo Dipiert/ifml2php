@@ -79,6 +79,8 @@ rule UMLClass2Model{
     model : ourMM!Model(
       name<-class.name,
       attributes <- UMLMM!Property.allInstances()
+                      ->select(e | e.namespace.name = class.name),
+      primaryKeys <- UMLMM!Property.allInstances()
                       ->select(e | e.namespace.name = class.name)
     )
 }
@@ -86,9 +88,20 @@ rule UMLClass2Model{
 rule UMLProperty2ModelAttribute{
   from
     prop : UMLMM!Property
+	(not prop.isID)
   to
     modAt : ourMM!Attribute(
-      name<-prop.name
+      name<-prop.name	  
+    )
+}
+
+rule UMLProperty2Identifier{
+  from
+    prop : UMLMM!Property
+	(prop.isID)
+  to
+    modAt : ourMM!Identifier(
+      name<-prop.name	  
     )
 }
 
