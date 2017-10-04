@@ -11,13 +11,23 @@
     <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_-AyHzZ2YEeeisaFzOXmQ5Q" name="AddFormMovie" isLandmark="true">
       <viewElements xsi:type="ext:Form" id="_mB8d_52aEeeisaFzOXmQ5Q" name="AddMovieForm">
         <parameters xsi:type="ext:SelectionField" id="_ys9YEZ2aEeeisaFzOXmQ5Q" name="audience">
-          <parameters xsi:type="ext:IFMLSlot" id="_Ose9852bEeeisaFzOXmQ5Q" name="G"/>
-          <parameters xsi:type="ext:IFMLSlot" id="_Ose9852bEeeisaFzOXmQ5Q" name="PG"/>
-          <parameters xsi:type="ext:IFMLSlot" id="_Ose9852bEeeisaFzOXmQ5Q" name="PG-13"/>
-          <parameters xsi:type="ext:IFMLSlot" id="_Ose9852bEeeisaFzOXmQ5Q" name="R"/>
+          <parameters xsi:type="ext:IFMLSlot" id="_Ose9852bEeeisaFzOXmQ5Q" name="G">
+            <type xsi:type="uml:PrimitiveType" href="model.uml#_VK2hkJ6QEeGdnpRmAZh-dQ"/>
+          </parameters>
+          <parameters xsi:type="ext:IFMLSlot" id="_Ose9852bEeeisaFzOXmQ5Q" name="PG">
+            <type xsi:type="uml:PrimitiveType" href="model.uml#_VK2hkJ6QEeGdnpRmAZh-dQ"/>
+          </parameters>
+          <parameters xsi:type="ext:IFMLSlot" id="_Ose9852bEeeisaFzOXmQ5Q" name="PG-13">
+            <type xsi:type="uml:PrimitiveType" href="model.uml#_VK2hkJ6QEeGdnpRmAZh-dQ"/>
+          </parameters>
+          <parameters xsi:type="ext:IFMLSlot" id="_Ose9852bEeeisaFzOXmQ5Q" name="R">
+            <type xsi:type="uml:PrimitiveType" href="model.uml#_VK2hkJ6QEeGdnpRmAZh-dQ"/>
+          </parameters>
+          <type xsi:type="uml:PrimitiveType" href="model.uml#_VK2hkJ6QEeGdnpRmAZh-dQ"/>
         </parameters>
         <parameters xsi:type="ext:SelectionField" id="_ys9YEZ2aEeeisaFzOXmQ6Q" name="saga" isMultiSelection="true">
           <parameters xsi:type="ext:IFMLSlot" id="_Ose9852bEeeisaFzOXmQ6Q" name="isSaga"/>
+          <type xsi:type="uml:PrimitiveType" href="model.uml#_VK2hkJ6QEeGdnpRmAZh-dQ"/>
         </parameters>
         <viewElementEvents xsi:type="ext:OnSubmitEvent" id="_tzZyqZ2bEeeisaFzOXmQ5Q" name="Add Movie" viewElement="//@interactionFlowModel/@interactionFlowModelElements.1/@viewElements.0">
           <outInteractionFlows xsi:type="core:NavigationFlow" id="_3AGyx52bEeeisaFzOXmQ5Q" targetInteractionFlowElement="//@interactionFlowModel/@interactionFlowModelElements.4">
@@ -40,14 +50,16 @@
     </interactionFlowModelElements>
     <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_CIHwnZ2ZEeeisaFzOXmQ5Q" name="UpdateFormMovie" isLandmark="true">
       <viewElements xsi:type="ext:Form" id="_C-vAX54-EeewNOKrpZAZPg" name="UpdateFormMovie">
-        <parameters xsi:type="ext:SelectionField" id="__hT6ZJ5BEeewNOKrpZAZPg" name="saga" isMultiSelection="true">
+        <parameters xsi:type="ext:SelectionField" id="__hT6ZJ5BEeewNOKrpZAZPg" name="Saga" isMultiSelection="true">
           <parameters xsi:type="ext:IFMLSlot" id="_CeZ9o55CEeewNOKrpZAZPg" name="isSaga"/>
+          <type xsi:type="uml:PrimitiveType" href="model.uml#_VK2hkJ6QEeGdnpRmAZh-dQ"/>
         </parameters>
-        <parameters xsi:type="ext:SelectionField" id="_Bg_6NJ5CEeewNOKrpZAZPg" name="audience">
+        <parameters xsi:type="ext:SelectionField" id="_Bg_6NJ5CEeewNOKrpZAZPg" name="Audience">
           <parameters xsi:type="ext:IFMLSlot" id="_HI7MA55CEeewNOKrpZAZPg" name="G"/>
           <parameters xsi:type="ext:IFMLSlot" id="_HnAPI55CEeewNOKrpZAZPg" name="PG"/>
           <parameters xsi:type="ext:IFMLSlot" id="_ICLvQ55CEeewNOKrpZAZPg" name="PG-13"/>
           <parameters xsi:type="ext:IFMLSlot" id="_Ij58Q55CEeewNOKrpZAZPg" name="R"/>
+          <type xsi:type="uml:PrimitiveType" href="model.uml#_VK2hkJ6QEeGdnpRmAZh-dQ"/>
         </parameters>
         <viewElementEvents xsi:type="ext:OnSubmitEvent" id="_YtfWWZ4_EeewNOKrpZAZPg" name="Update Movie" viewElement="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0">
           <outInteractionFlows xsi:type="core:NavigationFlow" id="_amhUh54_EeewNOKrpZAZPg" targetInteractionFlowElement="//@interactionFlowModel/@interactionFlowModelElements.5">
@@ -77,7 +89,9 @@
             </parameterBindingGroup>
           </outInteractionFlows>
         </viewElementEvents>
-        <viewComponentParts xsi:type="ext:SimpleField" id="_4mFQ4p5FEeewNOKrpZAZPg" name="Title"/>
+        <viewComponentParts xsi:type="ext:SimpleField" id="_4mFQ4p5FEeewNOKrpZAZPg" name="Title">
+          <type xsi:type="uml:PrimitiveType" href="model.uml#_VK2hkJ6QEeGdnpRmAZh-dQ"/>
+        </viewComponentParts>
         <viewComponentParts xsi:type="core:DataBinding" id="_631RDZ5FEeewNOKrpZAZPg" name="Movie"/>
       </viewElements>
     </interactionFlowModelElements>
@@ -88,13 +102,15 @@
       <parameters id="_IqkCUp2cEeeisaFzOXmQ5Q" name="Saga"/>
     </interactionFlowModelElements>
     <interactionFlowModelElements xsi:type="core:IFMLAction" id="_QumRtp2ZEeeisaFzOXmQ5Q" name="UpdateMovie" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0/@viewElementEvents.0/@outInteractionFlows.0">
-      <parameters id="_bNBeYp5AEeewNOKrpZAZPg" name="Title_Update"/>
-      <parameters id="_cThzcp5AEeewNOKrpZAZPg" name="Year_Update"/>
-      <parameters id="_dAwF0p5AEeewNOKrpZAZPg" name="Audience_Update"/>
-      <parameters id="_dausEp5AEeewNOKrpZAZPg" name="Saga_Update"/>
+      <parameters id="_bNBeYp5AEeewNOKrpZAZPg" name="Title">
+        <type xsi:type="uml:PrimitiveType" href="model.uml#_VK2hkJ6QEeGdnpRmAZh-dQ"/>
+      </parameters>
+      <parameters id="_cThzcp5AEeewNOKrpZAZPg" name="Year"/>
+      <parameters id="_dAwF0p5AEeewNOKrpZAZPg" name="Audience"/>
+      <parameters id="_dausEp5AEeewNOKrpZAZPg" name="Saga"/>
     </interactionFlowModelElements>
     <interactionFlowModelElements xsi:type="core:IFMLAction" id="_QumRtp2ZEeeisaFzOXmQ5Q" name="DeleteMovie" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.3/@viewElements.0/@viewElementEvents.0/@outInteractionFlows.0">
-      <parameters id="_yL0jIp5FEeewNOKrpZAZPg" name="Title_Delete"/>
+      <parameters id="_yL0jIp5FEeewNOKrpZAZPg" name="Title"/>
     </interactionFlowModelElements>
   </interactionFlowModel>
   <domainModel id="_FFmDkZ2YEeeisaFzOXmQ5Q" name="domainModel">

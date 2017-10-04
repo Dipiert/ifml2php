@@ -1,6 +1,6 @@
 <?php
 
-namespace Movies\Http\Controllers\domainModelControllers;	
+namespace Movies\Http\Controllers\domainModelControllers;   
 
 use Movies\Http\Controllers\Controller;
 use Movies\Http\Requests\domainModelRequests\MovieRequest;
@@ -10,10 +10,12 @@ class MovieController extends Controller
 {
 
    protected function addMovie(MovieRequest $request)
-   {   
+   {
     $request->merge(['isSaga' => ($request->__isset('saga'))? 1 : 0]);
     $movie = new Movie($request->all());
     $movie->save(); 
+    $request->session()->flash('flash_message', 'Se agregó una nueva película exitosamente');
+    return redirect()->route("movie.MainMenuMovie");
    }
         
 
@@ -26,15 +28,19 @@ class MovieController extends Controller
                      'year' => $request->get('year'),    
                      'audience' => $request->get('audience'),    
                      'isSaga' => $request->get('isSaga')
-                    ]); 
+                    ]);
+    $request->session()->flash('flash_message', 'Se actualizó una película exitosamente');
+    return redirect()->route("movie.MainMenuMovie"); 
     }
-		
+        
 
    protected function deleteMovie(MovieRequest $request)
    {   
     Movie::where('title', $request->get('title'))->delete();
+    $request->session()->flash('flash_message', 'Se eliminó una película exitosamente');
+    return redirect()->route("movie.MainMenuMovie");
    }
-		
+        
 
 /**
      * Display a listing of the resource.
@@ -75,7 +81,7 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-		dd("show :)");
+        dd("show :)");
     }
 
 
@@ -99,7 +105,7 @@ class MovieController extends Controller
      */
     public function update(MovieRequest $request, $id)
     {
-		dd("update :)");
+        dd("update :)");
     }
 
     /**
