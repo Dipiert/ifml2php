@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.m2m.atl.adt.launching.atlTransformation">
+<stringAttribute key="ATL File Name" value="/edu.ifml2php.pim.ifml.gen.lycmm/ifml2OurMM.atl"/>
+<stringAttribute key="ATL VM" value="EMF-specific VM"/>
+<stringAttribute key="ATL_COMPILER" value="atl2006"/>
+<booleanAttribute key="IS_REFINING" value="false"/>
+<mapAttribute key="Input">
+<mapEntry key="extm" value="extMM"/>
+<mapEntry key="ifml" value="IFMLMM"/>
+<mapEntry key="uml" value="UMLMM"/>
+</mapAttribute>
+<mapAttribute key="Libs">
+<mapEntry key="ifmlCoreLibrary" value="/edu.ifml2php.pim.ifml.gen.lycmm/atlLibraries/ifmlCoreLibrary.asm"/>
+<mapEntry key="ifmlExtLibrary" value="/edu.ifml2php.pim.ifml.gen.lycmm/atlLibraries/ifmlExtLibrary.asm"/>
+<mapEntry key="mvcLibrary" value="/edu.ifml2php.pim.ifml.gen.lycmm/atlLibraries/mvcLibrary.asm"/>
+<mapEntry key="systemLibrary" value="/edu.ifml2php.pim.ifml.gen.lycmm/atlLibraries/systemLibrary.asm"/>
+</mapAttribute>
+<mapAttribute key="Model Handler">
+<mapEntry key="IFMLMM" value="EMF"/>
+<mapEntry key="UMLMM" value="EMF"/>
+<mapEntry key="extMM" value="EMF"/>
+<mapEntry key="ourMM" value="EMF"/>
+</mapAttribute>
+<mapAttribute key="ModelType">
+<mapEntry key="IFMLMM" value="METAMODELINPUT"/>
+<mapEntry key="UMLMM" value="METAMODELINPUT"/>
+<mapEntry key="extMM" value="METAMODELINPUT"/>
+<mapEntry key="extm" value="MODELINPUT"/>
+<mapEntry key="ifml" value="MODELINPUT"/>
+<mapEntry key="ourMM" value="METAMODELOUTPUT"/>
+<mapEntry key="ourm" value="MODELOUTPUT"/>
+<mapEntry key="uml" value="MODELINPUT"/>
+</mapAttribute>
+<mapAttribute key="Options">
+<mapEntry key="OPTION_CLEAR" value="true"/>
+<mapEntry key="OPTION_CONTENT_TYPE" value="false"/>
+<mapEntry key="OPTION_DERIVED" value="true"/>
+<mapEntry key="allowInterModelReferences" value="false"/>
+<mapEntry key="printExecutionTime" value="false"/>
+<mapEntry key="step" value="false"/>
+<mapEntry key="supportUML2Stereotypes" value="false"/>
+</mapAttribute>
+<listAttribute key="OrderedInput">
+<listEntry value="uml"/>
+<listEntry value="ifml"/>
+<listEntry value="extm"/>
+</listAttribute>
+<listAttribute key="OrderedOutput">
+<listEntry value="ourm"/>
+</listAttribute>
+<mapAttribute key="Output">
+<mapEntry key="ourm" value="ourMM"/>
+</mapAttribute>
+<mapAttribute key="Path">
+<mapEntry key="IFMLMM" value="uri:http://www.omg.org/spec/20130218/core"/>
+<mapEntry key="UMLMM" value="uri:http://www.eclipse.org/uml2/5.0.0/UML"/>
+<mapEntry key="extMM" value="uri:http://www.omg.org/spec/20130218/ext"/>
+<mapEntry key="extm" value="/ifml2php/models/models/movies.core"/>
+<mapEntry key="ifml" value="/ifml2php/models/models/movies.core"/>
+<mapEntry key="ourMM" value="/edu.ifml2php.psm.lycmm.gen.lyphp/src/Metamodel.ecore"/>
+<mapEntry key="ourm" value="/edu.ifml2php.pim.ifml.gen.lycmm/preProd-gen.xmi"/>
+<mapEntry key="uml" value="/ifml2php/models/models/model.uml"/>
+</mapAttribute>
+<listAttribute key="Superimpose"/>
+<stringAttribute key="bad_container_name" value="/edu.ifml2php.pim.ifml.gen.lycmm/a"/>
+</launchConfiguration>
