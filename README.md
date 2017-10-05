@@ -11,48 +11,93 @@ This project intended to facilitate the adoption of the MDD approach by Web Deve
 * [Sirius](https://eclipse.org/sirius/)
 * [Un caso de estudio sobre la aplicación de UWE para la generación de sistemas web](https://goo.gl/dozG7N)
 
------------------------------------------------------------------------------------------------------------------------------------
-Fork this repo.
+---------------------------------------------------------------------------------------------------------------------------------### Setting up your development environment
 
-Prepara el entorno de desarrollo:
+#### Requirements
+[Eclipse Luna Modeling Tools](https://www.eclipse.org/downloads/packages/eclipse-modeling-tools/lunasr2)
 
-Requerimientos
+After download Eclipse, open it up and go to: 
+Help -> Installing Modelling Components
 
-Eclipse Luna Modeling Tools
-https://www.eclipse.org/downloads/packages/eclipse-modeling-tools/lunasr2
+Choose Acceleo y ATL. After install you will be prompted to restart Eclipse, do it.
 
-Help -> Installing Modelling Components:
-Seleccionar Acceleo y ATL. Se te pedirá que reinicies Eclipse para que los cambios tengan lugar. Hazlo
+#### ATL project
 
-Importar tu fork como proyecto de GitHub.
+Create a new ATL project in Eclipse:
 
-Crea un nuevo proyecto ATL.
+New -> Other...-> ATL Project
 
-En nuestro repo, el proyecto ATL se llama edu.ifml2php.pim.ifml.gen.lycmm. Respeta la convención para plugins de Eclipse
-"lycmm" pretende significar "Laravel, Yii2 & CodeIgniter Meta-Model"
+In this repo, the ATL project is called
+```
+edu.ifml2php.pim.ifml.gen.lycmm 
+```
+This name follow the following convention:
+```
+<domain>.<project-name>.<input-metamodel-name>.gen.<output-language-name>
+```
+"lycmm" means "Laravel, Yii2 & CodeIgniter Meta-Model".
 
-<domain><project name (optional)><kind of input (optional)><input metamodel name>gen<output language name>
+The ATL project consists in:
 
-El proyecto ATL está compuesto por:
--Un archivo ifml2OurMM.atl, en donde están todas las reglas de transformacion M2M.
--Una carpeta atlLibraries, donde se guardan los helpers utilizados por el archivo ifml2OurMM.atl
+- A file called **ifml2OurMM.atl** , where the Model-To-Model (M2M) transformation rules lives.
+- A folder called **atlLibraries**, where the helpers lives.
 
-Para correr las transformaciones debes asegurarte de tener el archivo ifml2OurMM.launch en la raiz del proyecto ATL. Haz click derecho sobre el archivo ifml2OurMM.atl. Luego en "Run As" -> "ATL Transformation".
-En caso de que no tengas dicho archivo .launch o que tengas problemas al correr la transformación deberás setear los sgtes. parámetros haciendo click derecho sobre el archivo ifml2OurMM.atl. Luego en "Run As" -> "ATL Transformation".
+In order to run the M2M transformations you need to have the **ifml2OurMM.launch** file on the ATL project's root.
+This file contain run configuration parameters, in case you want to know the details about this file go to "Making a .launch file" section on this README.
 
-Metamodelos de entrada: se recomienda siempre usar namespaces más que paths relativos o absolutos. En nuestro caso los metamodelos son:
-IFMLMM
-extMM
-ourMM
+Finally, right click in **ifml2OurMM.atl** file, then "Run As" -> "ATL Transformation" should do the magic.
 
-Modelos de entrada: son de dominio y de flujos de interacción (core y ext). En el caso de los 2 últimos, uno debería indicar el mismo .core (para aprender a generar un archivo .core, ver Sección "IFMLEditor").
+If the transformation was succesful you should see a file called **preProd-gen.xmi** (or the name you've set) on the ATL project's root.
 
-Modelos Destino: básicamente la ruta en donde se guardará el .xmi generado.
+##### Making a .launch file
+Right click in  **ifml2OurMM.atl** file, then "Run As" -> "Run Configuration". This open a window where you can set the following parameters:
 
-Librerías: no hace falta más que incluir el path de cada librería según su nombre.
+(We encourage the use of URIs instead absolute paths or relative paths whenever it is possible)
 
-Si la transformación se ejecutó correctamente deberías tener un archivo .xmi en la ruta que especificaste en el Launch Wizard.
+Source Metamodels: In this case,
 
-Crea un nuevo proyecto Acceleo:
+Name | Path | URI
+-- | -- | --
+IFMLMM |/models/metamodels/IFML-Metamodel.ecore | http://www.omg.org/spec/20130218/core
+extMM | /models/metamodels/IFML-Metamodel.ecore |http://www.omg.org/spec/20130218/ext
+PHPMVC | /models/metamodels/Metamodel.ecore  | http://www.application.org
 
-Necesitas indicar la URI de los metamodelos con los que trabajarás en este proyecto. En este caso será solo uno y será el que estuviera seteado en el archivo Metamodel.ecore en el momento de su registro EMF. ¿Qué? Los metamodelos deben registrar la URI que utilizarán, para ello, lo más sencillo es cambiar la perspectiva de Eclipse a ATL, luego hacer click derecho sobre el metamodelo a registrar y darle a "Register Metamodel". No esperes confirmación o cambio alguno, pero el metamodelo estará registrado. A la hora de incluirlo en el proyecto Acceleo, te aparece como "Runtime Version" y no como "Development Version" no hay problemas con eso.
+Source Models: in this case,
+
+Name | Conforms to | Path | Type
+-- | -- | -- | --
+uml |UMLMMM | /models/models/model.uml | Domain
+ifml | IFMLMM | /models/models/movies.core | Interaction Flow
+extm | extMM | /models/models/movies.core | Interaction Flow
+
+Target models: the path where the generated .xmi file will be stored. In this case, the ATL project's root.
+
+Libraries: In this case,
+
+- ifmlCoreLibrary.asm
+- ifmlExtLibrary.asm
+- mvcLibrary.asm
+- systemLibrary.asm
+
+#### Acceleo project
+
+You need to include **Metamodel.ecore** to EMF registry. The easiest way to do that is:
+
+1. Open ATL Perspective
+Window->Open Perspective->Other->ATL
+
+2. Register metamodel
+Right click on **Metamodel.ecore** -> Register Metamodel.
+You will not see any visual change but trust me, the metamodel is registered now.
+
+Now, let's to create a new Acceleo project in Eclipse:
+
+New -> Other...-> Acceleo Project
+
+In this repo, there is an Acceleo project for each Target framework:
+```
+edu.ifml2php.psm.lycmm.gen.laravel
+edu.ifml2php.psm.lycmm.gen.yii2
+```
+
+During the Acceleo project creation you need to indicate the URI of the metamodel that you just registered. That will be in _Runtime Version_ list.
