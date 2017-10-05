@@ -11,7 +11,9 @@ This project intended to facilitate the adoption of the MDD approach by Web Deve
 * [Sirius](https://eclipse.org/sirius/)
 * [Un caso de estudio sobre la aplicación de UWE para la generación de sistemas web](https://goo.gl/dozG7N)
 
----------------------------------------------------------------------------------------------------------------------------------### Setting up your development environment
+---
+
+### Setting up your development environment
 
 #### Requirements
 [Eclipse Luna Modeling Tools](https://www.eclipse.org/downloads/packages/eclipse-modeling-tools/lunasr2)
