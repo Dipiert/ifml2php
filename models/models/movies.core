@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <core:IFMLModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://www.omg.org/spec/20130218/core" xmlns:ext="http://www.omg.org/spec/20130218/ext" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" id="_FFmDkJ2YEeeisaFzOXmQ5Q" name="Movies">
   <interactionFlowModel id="_rFe7Mp2YEeeisaFzOXmQ5Q" name="InteractionFlowModel">
-    <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_15IEGZ2YEeeisaFzOXmQ5Q" name="MainMenuMovie" isLandmark="true">
+    <interactionFlowModelElements xsi:type="ext:IFMLWindow" id="_15IEGZ2YEeeisaFzOXmQ5Q" name="MainMenuMovie" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.4/@outInteractionFlows.0 //@interactionFlowModel/@interactionFlowModelElements.5/@outInteractionFlows.0 //@interactionFlowModel/@interactionFlowModelElements.6/@outInteractionFlows.0" isLandmark="true">
       <viewElements xsi:type="core:ViewComponent" id="_oSh1_Z2ZEeeisaFzOXmQ5Q" name="messages">
         <viewComponentParts xsi:type="core:ConditionalExpression" id="_qHOGvp2ZEeeisaFzOXmQ5Q" language="es" body="Movies DataBase" name="Title"/>
         <viewComponentParts xsi:type="core:ConditionalExpression" id="_qHOGvp2ZEeeisaFzOXmQ5Q" language="es" body="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." name="Intro"/>
@@ -100,6 +100,7 @@
       <parameters id="_IqkCUp2cEeeisaFzOXmQ5Q" name="Year"/>
       <parameters id="_IqkCUp2cEeeisaFzOXmQ5Q" name="Audience"/>
       <parameters id="_IqkCUp2cEeeisaFzOXmQ5Q" name="Saga"/>
+      <outInteractionFlows xsi:type="core:NavigationFlow" id="_ey_lV6oOEeeeep67fmPKYQ" targetInteractionFlowElement="//@interactionFlowModel/@interactionFlowModelElements.0"/>
     </interactionFlowModelElements>
     <interactionFlowModelElements xsi:type="core:IFMLAction" id="_QumRtp2ZEeeisaFzOXmQ5Q" name="UpdateMovie" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.2/@viewElements.0/@viewElementEvents.0/@outInteractionFlows.0">
       <parameters id="_bNBeYp5AEeewNOKrpZAZPg" name="Title">
@@ -108,9 +109,11 @@
       <parameters id="_cThzcp5AEeewNOKrpZAZPg" name="Year"/>
       <parameters id="_dAwF0p5AEeewNOKrpZAZPg" name="Audience"/>
       <parameters id="_dausEp5AEeewNOKrpZAZPg" name="Saga"/>
+      <outInteractionFlows xsi:type="core:NavigationFlow" id="_lRAKl6oOEeeeep67fmPKYQ" targetInteractionFlowElement="//@interactionFlowModel/@interactionFlowModelElements.0"/>
     </interactionFlowModelElements>
     <interactionFlowModelElements xsi:type="core:IFMLAction" id="_QumRtp2ZEeeisaFzOXmQ5Q" name="DeleteMovie" inInteractionFlows="//@interactionFlowModel/@interactionFlowModelElements.3/@viewElements.0/@viewElementEvents.0/@outInteractionFlows.0">
       <parameters id="_yL0jIp5FEeewNOKrpZAZPg" name="Title"/>
+      <outInteractionFlows xsi:type="core:NavigationFlow" id="_oTj8p6oOEeeeep67fmPKYQ" targetInteractionFlowElement="//@interactionFlowModel/@interactionFlowModelElements.0"/>
     </interactionFlowModelElements>
   </interactionFlowModel>
   <domainModel id="_FFmDkZ2YEeeisaFzOXmQ5Q" name="domainModel">
