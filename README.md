@@ -103,3 +103,7 @@ edu.ifml2php.psm.lycmm.gen.yii2
 ```
 
 During the Acceleo project creation you need to indicate the URI of the metamodel that you just registered. That will be in _Runtime Version_ list.
+
+---
+#### Laravel, Yii2 & CodeIgniter Metamodel
+![Our PHPMVC Metamodel](https://goo.gl/QU1qxp  "OurMM")
