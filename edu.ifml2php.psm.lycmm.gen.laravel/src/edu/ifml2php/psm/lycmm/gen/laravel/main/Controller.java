@@ -8,7 +8,7 @@
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
-package services;
+package edu.ifml2php.psm.lycmm.gen.laravel.main;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,27 +22,29 @@ import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
 /**
- * Entry point of the 'HelperFileReader' generation module.
+ * Entry point of the 'Controller' generation module.
  *
  * @generated
  */
-public class HelperFileReader extends AbstractAcceleoGenerator {
+public class Controller extends AbstractAcceleoGenerator {
     /**
      * The name of the module.
      *
      * @generated
      */
-    public static final String MODULE_FILE_NAME = "/services/helperFileReader";
+    public static final String MODULE_FILE_NAME = "/edu/ifml2php/psm/lycmm/gen/laravel/main/controller";
     
     /**
      * The name of the templates that are to be generated.
      *
      * @generated
      */
-    public static final String[] TEMPLATE_NAMES = { "generateElement" };
+    public static final String[] TEMPLATE_NAMES = { "makeControllers" };
     
     /**
      * The list of properties files from the launch parameters (Launch configuration).
@@ -65,7 +67,7 @@ public class HelperFileReader extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public HelperFileReader() {
+    public Controller() {
         // Empty implementation
     }
 
@@ -85,7 +87,7 @@ public class HelperFileReader extends AbstractAcceleoGenerator {
      *             the model cannot be loaded.
      * @generated
      */
-    public HelperFileReader(URI modelURI, File targetFolder,
+    public Controller(URI modelURI, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(modelURI, targetFolder, arguments);
     }
@@ -106,7 +108,7 @@ public class HelperFileReader extends AbstractAcceleoGenerator {
      *             This can be thrown in two scenarios : the module cannot be found, or it cannot be loaded.
      * @generated
      */
-    public HelperFileReader(EObject model, File targetFolder,
+    public Controller(EObject model, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(model, targetFolder, arguments);
     }
@@ -141,7 +143,7 @@ public class HelperFileReader extends AbstractAcceleoGenerator {
                  * add in "arguments" this "String" attribute.
                  */
                 
-                HelperFileReader generator = new HelperFileReader(modelURI, folder, arguments);
+                Controller generator = new Controller(modelURI, folder, arguments);
                 
                 /*
                  * Add the properties from the launch arguments.
@@ -335,11 +337,20 @@ public class HelperFileReader extends AbstractAcceleoGenerator {
      * 
      * @param resourceSet
      *            The resource set which registry has to be updated.
-     * @generated
+     * @generated NOT
      */
     @Override
     public void registerPackages(ResourceSet resourceSet) {
         super.registerPackages(resourceSet);
+        
+        URI uri = URI.createFileURI("/home/dam/Escritorio/ws/edu.ifml2php.psm.lycmm.gen.laravel/src/Metamodel.ecore");
+        
+        Resource resource = resourceSet.getResource(uri, true);         
+        EPackage PHPMVC = (EPackage) resource.getContents().get(0);
+        List<EPackage> subPackages = PHPMVC.getESubpackages();
+        for(EPackage subPack : subPackages){
+           EPackage.Registry.INSTANCE.put(subPack.getNsURI(), subPack);
+        }
         
         /*
          * If you want to change the content of this method, do NOT forget to change the "@generated"

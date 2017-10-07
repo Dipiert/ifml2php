@@ -1,12 +1,11 @@
 package services;
 
 public class Yii2OutputPaths extends Yii2Paths{
-   String yii2Version = "yii2.0.12/";
-   String modelsHome = yii2Version  + "models/";
-   String viewsHome =  yii2Version  + "views/";
-   String controllersHome = yii2Version  + "controllers/";
-   String welcomeView = yii2Version  + "views/layouts/main.php";
-   String stylesheetsPath = yii2Version + "web/css/";
+   String modelsHome = super.getYii2Version()  + "models/";
+   String viewsHome =  super.getYii2Version() + "views/";
+   String controllersHome = super.getYii2Version()  + "controllers/";
+   String welcomeView = super.getYii2Version()  + "views/layouts/main.php";
+   String stylesheetsPath = super.getYii2Version() + "web/css/";
    
    public String getYii2Version() {
       return yii2Version ;

@@ -9,7 +9,7 @@
 [import services::helperYii2OutputPaths /]
 
 [template public makeControllers(anApp : Application)]
-[comment 'yii2.0.12/controllers/' @main/]  
+[comment @main/]  
 [let base_dir : String = getBaseDir() ]
    [let path : String = getControllersHome() + anApp.aPackageController.name + 'Controllers/']
        [self.makeFolder(base_dir + path) /]

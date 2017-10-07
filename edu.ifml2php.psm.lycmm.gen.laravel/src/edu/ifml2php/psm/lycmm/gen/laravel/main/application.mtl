@@ -1,0 +1,10 @@
+[comment encoding = UTF-8 /]
+[module application('http://www.application.org/coreMVC', 'http://www.application.org/extPHP','http://www.eclipse.org/uml2/5.0.0/UML')/]
+
+[import edu::ifml2php::psm::lycmm::gen::laravel::files::setApplicationConf /]
+
+[template public application(anApp : Application)]
+[comment @main /]
+[ setApplicationConf(anApp) /]
+[comment]Puedo usar la función reflexiva de Java Class.getDeclaredFields() para solicitar, mediante un servicio, los atributos de la clase. Una vez que los tengo puedo iterar a través de ellos para hacer la sustitución del lado derecho de los Strings en el archivo de configuración. Si por alguna razón no quiero traer todos los atributos, podría crear un array de atributos exportados. Contra: el nombre del atributo en la clase Java deberá ser igual al parámetro de configuración que se quiere cambiar. Solución: Agregar un Adapter que haga el mapeo. Sin embargo: cuántos menos cosas puedan ir mal, menos cosas lo harán. Buscamos minimizar las dependencias, de alguna manera ya existen bastantes. [/comment]
+[/template]

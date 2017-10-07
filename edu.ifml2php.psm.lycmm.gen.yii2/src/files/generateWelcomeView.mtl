@@ -54,19 +54,7 @@ AppAsset::register($this);
         'items' => ['['/]
             ['['/]'label' => 'Home', 'url' => ['['/]'/site/index']],
             ['['/]'label' => 'Documentation', 'url' => ['['/]'/site/about']],
-            ['['/]'label' => 'Github', 'url' => ['['/]'/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['['/]'label' => 'Login', 'url' => ['['/]'/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['['/]'/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['['/]'class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
+            ['['/]'label' => 'Github', 'url' => ['['/]'/site/contact']]
         ],
     ]);
     NavBar::end();

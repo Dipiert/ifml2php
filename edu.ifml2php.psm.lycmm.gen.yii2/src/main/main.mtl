@@ -1,0 +1,21 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module main.
+ */]
+[module main('http://www.application.org')]
+[ import main::controller /]
+[ import main::model /]
+[ import main::view /]
+[ import main::application /]
+
+[**
+ * The documentation of the template generateElement.
+ * @param aModel
+ */]
+[template public generateElement(anApp : Application)]
+[comment @main/]
+[ setAppConf(anApp) /]
+[ makeControllers(anApp)/]
+[ makeModels(anApp) /]
+[ makeViews(anApp) /]
+[/template]

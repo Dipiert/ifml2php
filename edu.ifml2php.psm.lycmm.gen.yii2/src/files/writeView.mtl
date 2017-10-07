@@ -77,7 +77,7 @@
 				[/for][comment]no contemplamos forms que contengan forms, anchors, textos ni imágenes[/comment]					
 				[for (event : Event | f.events)]
 					[if (event.type.toString().matches('onSubmit') )]
-<?= Html::submitButton('Enviar', ['['/]]) ?>
+<?= Html::submitButton('[ self.separatePrefixSuffix(event.handler).toUpperFirst() /]', ['['/]]) ?>
 					[/if] 
 				[/for]		
 <?= Html::endForm() ?>

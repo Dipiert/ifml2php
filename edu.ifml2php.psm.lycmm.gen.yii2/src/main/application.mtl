@@ -8,7 +8,6 @@
 
 [template public setAppConf(anApp : Application)]
 [comment @main /]
-[comment][ removeReturnStmt('config', '/var/www/html/' + anApp.getConfigAppPath()) /][/comment]
 [ setNameApp(anApp) /]
 [ setLocaleApp(anApp) /]
 [ registerController(anApp.aPackageController)/]

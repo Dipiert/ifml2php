@@ -1,0 +1,11 @@
+[comment encoding = UTF-8 /]
+[module helperLaravelPaths('http://www.application.org')/]
+
+[query public getBaseDir(anOclAny: OclAny) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.laravel.services.LaravelPaths', 'getBaseDir()', Sequence{})
+/]
+
+[query public setBaseDir(arg0 : String) : OclVoid
+	= invoke('edu.ifml2php.psm.lycmm.gen.laravel.services.LaravelPaths', 'setBaseDir(java.lang.String)', Sequence{arg0})
+/]
+
