@@ -8,6 +8,11 @@ create ourm : ourMM from uml : UMLMM, ifml : IFMLMM, extm : extMM;
 
 uses ifmlCoreLibrary; uses ifmlExtLibrary; uses mvcLibrary; uses systemLibrary;
 
+--- IFMLModel2ApplicationClass
+--- puede entenderse la transformación entre estas 2 metaclases desde el punto 
+--- de vista de que un IFMLModel es el contenedor del resto de los elementos de
+--- modelo, y por ello, el de más alto nivel, al igual que una Application en el
+--- metamodelo al que conforman los modelos destino.
 rule IFMLModel2ApplicationClass{
   from
     ifmlModel : IFMLMM!IFMLModel
@@ -20,6 +25,13 @@ rule IFMLModel2ApplicationClass{
     )           
 }
 
+--- DomainModel2PackageController
+--- desde que los IFML Actions representan porciones de la lógica de negocios
+--- pero no las agrupa en conceptos de algún nivel superior, es dificil poder
+--- establecer una relación directa entre el metamodelo de IFML y un paquete 
+--- de controladores PHPFW. Esta regla aprovecha la cardinalidad uno a uno
+--- entre modelo de dominio IFML y paquete de controladores PHPFW y asume un
+--- controlador por cada clase de dominio UML.
 lazy rule DomainModel2PackageController{
   from
     domainModel : IFMLMM!DomainModel
@@ -42,6 +54,10 @@ lazy rule UMLClass2Controller{
       ))        
 }
 
+--- IFMLAction2Method
+--- los IFML Action representan porciones de la lógica de negocios de la 
+--- aplicación. Esa lógica de negocios es implementada, en frameworks de 
+--- desarrollo para lenguajes Orientados a Objetos, utilizando métodos.
 rule IFMLAction2Method{
   from
     ifmla : IFMLMM!IFMLAction
@@ -53,6 +69,8 @@ rule IFMLAction2Method{
     )   
 }
 
+--- Parameter2Attribute: una instancia de un IFML Parameter es un nombre tipado
+--- capaz de mantener valores, y por ello, puede entendérsela como atributo. 
 lazy rule Parameter2Attribute{
   from
     st : String
@@ -62,6 +80,10 @@ lazy rule Parameter2Attribute{
     )
 }
 
+--- DomainModel2PackageModel
+--- desde que el DomainModel se define como contenedor de todos los elementos
+--- de contenido utilizados por ViewComponents. Puede verse una clara relación
+--- con el concepto de PackageModel.
 rule DomainModel2PackageModel{
   from
     dm : IFMLMM!DomainModel
@@ -105,6 +127,10 @@ rule UMLProperty2Identifier{
     )
 }
 
+--- InteractionFlowModel2PackageView
+--- Esta regla se basa en la idea de que un InteractionFlowModel agrega todos
+--- los elementos que modelan la interacción con el usuario y siguiendo un
+--- patrón arquitectónico MVC el usuario interactúa con la vista.
 rule InteractionFlowModel2PackageView{
   from
     ifm : IFMLMM!InteractionFlowModel
@@ -142,6 +168,12 @@ lazy rule ViewContainer2InnerView{
     )
 }
 
+--- ConditionalExpression2Text
+--- Desde que es razonable asumir que el texto presentado en la aplicación esté 
+--- guardado en fuentes de datos externas, las expresiones condicionales -que son
+--- expresiones predefinidas de consulta asociadas con DataBindings- son un buen
+--- candidato para representar la consulta de dicho texto. Se utiliza <p> como nombre
+--- de tag HTML por defecto en la metaclase Text.
 rule ConditionalExpression2Text{ 
   from
     ce : IFMLMM!ConditionalExpression
@@ -154,6 +186,10 @@ rule ConditionalExpression2Text{
     )
 }
 
+--- IFMLForm2Form
+--- este concepto es el mismo en ambos metamodelos. A saber, la representación
+--- de un formulario de entrada donde el usuario puede enviar información entre
+--- páginas. Por defecto, se asume POST por método de envío y self como target.
 rule IFMLForm2Form{
   from
     frm : extMM!Form
@@ -168,6 +204,10 @@ rule IFMLForm2Form{
     )
 } 
 
+--- IFMLSlot2RadioButton
+--- un IFML Slot representa los valores que puede asumir un determinado campo 
+--- del formulario. Esta regla es invocada en los casos en el que dicho campo
+--- es univaluado.
 lazy rule IFMLSlot2RadioButton{
   from
     sl : extMM!IFMLSlot,
@@ -182,6 +222,10 @@ lazy rule IFMLSlot2RadioButton{
     )
 }
 
+--- IFMLSlot2Checkbox
+--- un IFML Slot representa los valores que puede asumir un determinado campo del
+--- formulario. Esta regla es invocada en los casos en el que dicho campo pueda
+--- ser multivaluado.
 lazy rule IFMLSlot2Checkbox{
   from
     sl : extMM!IFMLSlot,
@@ -208,6 +252,12 @@ rule SimpleField2TextField{
     )
 }
 
+--- OnSubmitEvent2Event
+--- El concepto de evento es el mismo en el metamodelo origen y el destino, 
+--- por lo cual la transformación resulta natural. El nombre corresponde a que
+--- en esta implementación, en vistas a cubrir los casos de estudio y sus
+--- criterios de éxito, solo se transforma los eventos OnSubmit, pero nada
+--- restringe que no puedan tratarse otros eventos.
 lazy rule OnSubmitEvent2Event{
   from
     n : String
@@ -218,6 +268,10 @@ lazy rule OnSubmitEvent2Event{
     ) 
 }
 
+--- Landmarks2MenuItems
+--- esta regla transforma todos los ViewContainers que son landmark a items de
+--- un menú. Similar al funcionamiento de la herramienta WebRatio, que incluye
+--- la implementación paga pero más extendida de IFML.
 lazy rule Landmarks2MenuItems{
   from
     vc  : IFMLMM!ViewContainer((vc.isLandmark))
