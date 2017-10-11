@@ -1,4 +1,4 @@
--- @nsURI ourMM=http://www.application.org
+-- @nsURI ourMM=http://www.application.org 
 -- @nsURI UMLMM=http://www.eclipse.org/uml2/5.0.0/UML
 -- @nsURI IFMLMM=http://www.omg.org/spec/20130218/core
 -- @nsURI extMM=http://www.omg.org/spec/20130218/ext
@@ -42,7 +42,8 @@ lazy rule DomainModel2PackageController{
                       ->collect(r|thisModule.UMLClass2Controller(r))
     ) 
 }
-
+--- UMLClass2Controller
+--- Ver Justificación de la regla “DomainModel2PackageController”.
 lazy rule UMLClass2Controller{
   from
     class : UMLMM!Class
@@ -94,6 +95,9 @@ rule DomainModel2PackageModel{
     )
 }
 
+--- UMLClass2Model: desde que una clase puede utilizarse para especificar la
+--- estructura que caracteriza un determinado objeto, una clase se puede 
+--- transformar en una metaclase Model que cumpla ese mismo rol en el metamodelo PHPFW.
 rule UMLClass2Model{
   from
     class : UMLMM!Class
@@ -107,7 +111,9 @@ rule UMLClass2Model{
     )
 }
 
-rule UMLProperty2ModelAttribute{
+--- UMLProperty2Attribute: a excepción de la regla UMLProperty2Identifier, esta regla se
+--- disparar para todas las UML Properties que no son IDs.
+rule UMLProperty2Attribute{
   from
     prop : UMLMM!Property
 	(not prop.isID)
@@ -117,6 +123,9 @@ rule UMLProperty2ModelAttribute{
     )
 }
 
+--- UMLProperty2Identifier: algunas de las propiedades de los modelos pueden 
+--- utilizarse para identificar unívocamente un objeto, esas propiedades de 
+--- UML pueden transformarse en Identifiers.
 rule UMLProperty2Identifier{
   from
     prop : UMLMM!Property
@@ -141,7 +150,8 @@ rule InteractionFlowModel2PackageView{
                 ->select(f|f.oclIsKindOf(IFMLMM!ViewContainer))
     )
 }
-
+--- ViewContainer2View: ViewContainer (View) refieren al mismo concepto en 
+--- metamodelo origen (destino).
 rule ViewContainer2View{
   from
     vc : IFMLMM!ViewContainer
@@ -155,6 +165,9 @@ rule ViewContainer2View{
     )
 }
 
+--- ViewContainer2InnerView: ViewContainer (View) refieren al mismo concepto en
+--- metamodelo origen (destino). Definimos como Inner View a una vista que está
+--- contenida dentro de otra.
 lazy rule ViewContainer2InnerView{
   from
     vc : IFMLMM!ViewContainer
@@ -240,6 +253,8 @@ lazy rule IFMLSlot2Checkbox{
     )
 }
 
+--- un SimpleField de IFML es un un campo que puede capturar entradas textuales del 
+--- usuario, al igual que un textfield (input type text) de HTML.
 rule SimpleField2TextField{
   from
     sf : extMM!SimpleField
@@ -284,6 +299,8 @@ lazy rule Landmarks2MenuItems{
     ) 
 }
 
+--- ViewElement2Image: desde que un ViewElement son elementos de la interfaz de usuario
+--- que muestran contenido, contiene la estructura necesaria como para ser transformada en un Image. 
 lazy rule ViewElement2Image{
   from
     ve : IFMLMM!ViewElement
