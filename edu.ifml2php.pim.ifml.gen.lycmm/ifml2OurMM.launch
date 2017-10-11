@@ -55,11 +55,11 @@
 <mapEntry key="IFMLMM" value="uri:http://www.omg.org/spec/20130218/core"/>
 <mapEntry key="UMLMM" value="uri:http://www.eclipse.org/uml2/5.0.0/UML"/>
 <mapEntry key="extMM" value="uri:http://www.omg.org/spec/20130218/ext"/>
-<mapEntry key="extm" value="/ifml2php/models/models/movies.core"/>
-<mapEntry key="ifml" value="/ifml2php/models/models/movies.core"/>
-<mapEntry key="ourMM" value="/edu.ifml2php.psm.lycmm.gen.lyphp/src/Metamodel.ecore"/>
+<mapEntry key="extm" value="/edu.ifml2php.pim.ifml.gen.lycmm/models/models/movies.core"/>
+<mapEntry key="ifml" value="/edu.ifml2php.pim.ifml.gen.lycmm/models/models/movies.core"/>
+<mapEntry key="ourMM" value="/edu.ifml2php.pim.ifml.gen.lycmm/models/metamodels/Metamodel.ecore"/>
 <mapEntry key="ourm" value="/edu.ifml2php.pim.ifml.gen.lycmm/preProd-gen.xmi"/>
-<mapEntry key="uml" value="/ifml2php/models/models/model.uml"/>
+<mapEntry key="uml" value="/edu.ifml2php.pim.ifml.gen.lycmm/models/models/model.uml"/>
 </mapAttribute>
 <listAttribute key="Superimpose"/>
 <stringAttribute key="bad_container_name" value="/edu.ifml2php.pim.ifml.gen.lycmm/a"/>
