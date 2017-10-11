@@ -11,75 +11,100 @@ This project intended to facilitate the adoption of the MDD approach by Web Deve
 * [Sirius](https://eclipse.org/sirius/)
 * [Un caso de estudio sobre la aplicación de UWE para la generación de sistemas web](https://goo.gl/dozG7N)
 
----
+## Setting up your development environment
 
-### Setting up your development environment
+### Requirements
 
-#### Requirements
-[Eclipse Luna Modeling Tools](https://www.eclipse.org/downloads/packages/eclipse-modeling-tools/lunasr2)
+ * [Eclipse Luna Modeling Tools](https://www.eclipse.org/downloads/packages/eclipse-modeling-tools/lunasr2)
+ * [Composer](https://getcomposer.org/download/)
+ * [Apache Commons Lang](https://commons.apache.org/proper/commons-lang/)
+ * [Laravel Framework](https://laravel.com/)
+ * [Laravel Colletive](https://laravelcollective.com/docs/5.0/html)
 
-After download Eclipse, open it up and go to: 
-Help -> Installing Modelling Components
+#### [Eclipse](https://www.eclipse.org/downloads/packages/eclipse-modeling-tools/lunasr2)
 
-Choose Acceleo y ATL. After install you will be prompted to restart Eclipse, do it.
+The [Acceleo](https://www.eclipse.org/acceleo/) and [ATL](https://eclipse.org/atl/) frameworks designed for Model-to-Text and Model-Transformation aiding. And we will use them along the project.
 
-#### ATL project
+Once Eclipse is ready we need to install the Acceleo and ATL Frameworks.
+We can do this by opening Eclipse and going to:
 
-Create a new ATL project in Eclipse:
+ 1) Help -> Installing Modelling Components
+ 2) Choose Acceleo y ATL.
+ 3) After install you will be prompted to restart Eclipse, do it.
 
-New -> Other...-> ATL Project
+Once Eclipse starts again we need to install the [IFML Editor](https://github.com/ifml/ifml-editor), in order to do that we can follow the instructions [here](http://ifml.github.io/).
 
-In this repo, the ATL project is called
-```
-edu.ifml2php.pim.ifml.gen.lycmm 
-```
+This should leave us with a starting working environment.
+
+## Proyects
+### ATL Project
+
+First things first, you should import the ATL project in Eclipse:
+
+ 1) File -> Import (Alt + F + I)
+ 2) General
+ 3) Existing project into workspace
+
+In this repo, the ATL project is called **`edu.ifml2php.pim.ifml.gen.lycmm`**.
+
 This name follow the following convention:
-```
-<domain>.<project-name>.<input-metamodel-name>.gen.<output-language-name>
-```
-"lycmm" means "Laravel, Yii2 & CodeIgniter Meta-Model".
+
+`<domain>.<project-name>.<input-metamodel-name>.gen.<output-language-name>`
+
+**`lycmm`** means "Laravel, Yii2 & CodeIgniter Meta-Model".
 
 The ATL project consists in:
 
-- A file called **ifml2OurMM.atl** , where the Model-To-Model (M2M) transformation rules lives.
-- A folder called **atlLibraries**, where the helpers lives.
+- A file called **ifml2OurMM.atl**, where the Model-To-Model (M2M) transformation rules lives.
+- A folder called **atlLibraries**, where the IFML helpers live.
 
-In order to run the M2M transformations you need to have the **ifml2OurMM.launch** file on the ATL project's root.
-This file contain run configuration parameters, in case you want to know the details about this file go to "Making a .launch file" section on this README.
+The **ifml2OurMM.launch** file on the ATL project's root contains run configuration parameters. You shouldn't need to change that file but in case you want to know the details about this file go to [Making a .launch file](#launch) section on this README.
 
-Finally, right click in **ifml2OurMM.atl** file, then "Run As" -> "ATL Transformation" should do the magic.
+Finally, right click in **ifml2OurMM.atl** file, then "Run As" -> "ATL Transformation" should do the trick.
 
-If the transformation was succesful you should see a file called **preProd-gen.xmi** (or the name you've set) on the ATL project's root.
+If the transformation was successful you should see a file called **preProd-gen.xmi** (or the name you've set it to in the .launch file) on the ATL project's root.
 
-##### Making a .launch file
-Right click in  **ifml2OurMM.atl** file, then "Run As" -> "Run Configuration". This open a window where you can set the following parameters:
+#### <a name="launch"></a> Making a .launch file.
 
-(We encourage the use of URIs instead absolute paths or relative paths whenever it is possible)
+Right click in  **ifml2OurMM.atl** file, then "Run As" -> "Run Configuration". This opens a window where you can set the following parameters:
 
-Source Metamodels: In this case,
+(We encourage the use of URIs instead absolute paths or relative paths whenever possible)
 
-Name | Path | URI
--- | -- | --
-IFMLMM |/models/metamodels/IFML-Metamodel.ecore | http://www.omg.org/spec/20130218/core
-extMM | /models/metamodels/IFML-Metamodel.ecore |http://www.omg.org/spec/20130218/ext
-PHPMVC | /models/metamodels/Metamodel.ecore  | http://www.application.org
+ATL Module: This should point to the path of the ifml2OutMM.atl file you've just right-clicked on.
 
-Source Models: in this case,
+##### Metamodels:
+
+Name| Path |URI
+---| --- |---
+UMLMM | | uri:http://www.eclipse.org/uml2/5.0.0/UML
+IFMLMM | /models/metamodels/IFML-Metamodel.ecore | uri:http://www.omg.org/spec/20130218/core
+extMM | /models/metamodels/IFML-Metamodel.ecore | uri:http://www.omg.org/spec/20130218/ext
+ourMM | /edu.ifml2php.pim.ifml.gen.lycmm/models/metamodels/Metamodel.ecore  | uri:http://www.application.org
+
+***Do not check the `Is Metametamodel` check box***
+
+##### Source Models:
 
 Name | Conforms to | Path | Type
--- | -- | -- | --
-uml |UMLMMM | /models/models/model.uml | Domain
-ifml | IFMLMM | /models/models/movies.core | Interaction Flow
-extm | extMM | /models/models/movies.core | Interaction Flow
+--- | --- | --- | ---
+uml |UMLMMM | /edu.ifml2php.pim.ifml.gen.lycmm/models/models/model.uml | Domain
+ifml | IFMLMM | /edu.ifml2php.pim.ifml.gen.lycmm/models/models/movies.core | Interaction Flow
+extm | extMM | /edu.ifml2php.pim.ifml.gen.lycmm/models/models/movies.core | Interaction Flow
 
-Target models: the path where the generated .xmi file will be stored. In this case, the ATL project's root.
+##### Target models:
 
-Libraries: In this case,
+ourm: This is the path where the generated .xmi file will be stored. In this case, the ATL project's root.
 
-- ifmlCoreLibrary.asm
-- ifmlExtLibrary.asm
-- mvcLibrary.asm
-- systemLibrary.asm
+##### Libraries:
+
+
+| Name | Path |
+| --- | --- |
+| ifmlCoreLibrary | /edu.ifml2php.pim.ifml.gen.lycmm/atlLibraries/ifmlCoreLibrary.asm |
+| ifmlExtLibrary | /edu.ifml2php.pim.ifml.gen.lycmm/atlLibraries/ifmlExtLibrary.asm |
+| mvcLibrary | /edu.ifml2php.pim.ifml.gen.lycmm/atlLibraries/mvcLibrary.asm |
+| systemLibrary | /edu.ifml2php.pim.ifml.gen.lycmm/atlLibraries/systemLibrary.asm |
+
 
 #### Acceleo project
 
