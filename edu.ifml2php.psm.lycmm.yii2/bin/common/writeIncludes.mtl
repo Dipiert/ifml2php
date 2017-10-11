@@ -1,0 +1,26 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module writeIncludes.
+ */]
+[module writeIncludes('http://www.application.org/coreMVC', 'http://www.application.org/extPHP')]
+
+
+[**
+ * The documentation of the template generateElement.
+ * @param aModel
+ */]
+[template public writeIncludes(view : View)]
+<?php
+[writeHelpers()/]?>
+[/template]
+
+[template public writeHelpers(view : View)]
+[if (view.viewComponents->exists(oclIsTypeOf(Anchor)))]
+use yii\helpers\Url;
+use yii\helpers\Html; 
+[elseif (view.viewComponents->exists(oclIsTypeOf(Form)))]
+use yii\helpers\Html;
+[/if]
+[/template]
+
+

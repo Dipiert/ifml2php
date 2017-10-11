@@ -1,0 +1,21 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module.
+ */]
+[module helperYii2Paths('http://www.application.org/coreMVC')/]
+
+[**
+ * The documentation of the query
+ */]
+[query public getBaseDir(anOclAny: OclAny) : String
+	= invoke('services.Yii2Paths', 'getBaseDir()', Sequence{})
+/]
+
+[**
+ * The documentation of the query
+ * @param arg0
+ */]
+[query public setBaseDir(arg0 : String) : OclVoid
+	= invoke('services.Yii2Paths', 'setBaseDir(java.lang.String)', Sequence{arg0})
+/]
+

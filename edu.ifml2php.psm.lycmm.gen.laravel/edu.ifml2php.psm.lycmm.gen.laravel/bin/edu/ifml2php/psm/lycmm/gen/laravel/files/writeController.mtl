@@ -1,0 +1,154 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module writeControllerSkeleton.
+ */]
+[module writeController('http://www.application.org/coreMVC')]
+
+[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperLaravelInputPaths /]
+[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperStringUtil /]
+
+[comment]quiza pueda traer el path desde el helper y no pasarselo como param[/comment]
+
+[**
+ * @param path
+ * @param controller
+ * @param appName
+ * @param pmName
+ */]
+[template public writeControllerSkeleton(path : String, controller : Controller, appName : String, pmName : String)]
+
+[file (path + controller.name + 'Controller.php', false, 'UTF-8')]
+<?php
+
+namespace [ appName/]\Http\Controllers\[pmName+ 'Controllers'/];	
+
+use [appName/]\Http\Controllers\Controller;
+use [appName/]\Http\Requests\[ pmName /]Requests\[controller.name/]Request;
+use [appName/]\[pmName/]Models\[controller.name/];
+
+class [controller.name/]Controller extends Controller
+{
+[for (method : Method | controller.methods)]
+
+   protected function [ method.name /]([controller.name/]Request $request)
+   {   
+    [if ( method.outParameters->size() > 0)]
+    	//Los parámetros ([for (parameter : Attribute | method.outParameters) separator(', ' )]$[parameter.name/][/for]) fueron modelados como de salida. Verifique si son retornados al módulo llamador o pasado a otro 
+    [else]
+	
+	[/if] 
+   }
+		
+[/for]	
+
+/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        dd("index :)");
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        dd("create :)");
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store([controller.name/]Request $request)
+    {
+        dd("request :)");
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+		dd("show :)");
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        dd("edit :)");
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update([controller.name/]Request $request, $id)
+    {
+		dd("update :)");
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        dd("destroy :)");
+    }
+[comment]TODO: *Podrían usarse 2 templates, uno que coloque los métodos personalizados al comienzo y otro que los coloque al final.
+Incluso, se podría poner a los métodos en un orden tal que sea significativo para facilitar la lectura.[/comment]  
+[/file]
+
+[/template]
+
+[template public registerController(nameController : String, namePackage : String, pv : PackageView)]
+
+[file (self.getRoutesPath(), true, 'UTF-8')]
+<?php 
+[for (view : View | pv.views)]
+	[if (getSuffix(view.name).toString().matches(nameController))]
+Route::get('[nameController.toLowerCase()/]/[view.name/]', '[namePackage/]Controllers\[nameController/]Controller@createView[view.name/]')->name('[nameController.toLowerCase()/].[view.name/]');
+	[/if]
+[/for]
+Route::resource('[nameController.toLowerCase()/]','[namePackage/]Controllers\[nameController/]Controller');
+/*Route::any( '{catchall}', function () {
+    return view('welcome');
+})->where('catchall', '(.*)');*/
+[/file]
+[/template]
+
+[template public writeViewConstructors(path : String, controllerName : String, pv : PackageView)]
+[file (path + controllerName + 'Controller.php', true, 'UTF-8')]
+[for (view : View | pv.views) after ('}')]
+	[if (getSuffix(view.name).toString().matches(controllerName))]
+    function createView[ view.name /]()
+    {
+         return view('[pv.name/]Views.[ view.name /]');
+    }
+
+	[/if]
+[/for]
+[/file]
+[/template]

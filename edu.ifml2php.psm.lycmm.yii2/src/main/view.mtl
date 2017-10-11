@@ -1,0 +1,41 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module generate.
+ */]
+[module view('http://www.application.org/coreMVC')]
+
+[import services::helperFileReader /]
+[import files::writeView /]
+[import files::generateWelcomeView /]
+[import services::helperYii2OutputPaths /]
+[import files::writeDefaultStylesheet /]
+[import services::helperYii2Paths /]
+
+[**
+ * The documentation of the template generateElement.
+ * @param aModel
+ */]
+
+[template public makeViews(anApp : Application)]
+[comment @main /]
+	[let base_dir : String = getBaseDir() ] 
+	   [let path : String = getViewsHome() + anApp.aPackageView.name + 'Views/']
+          [ self.makeFolder(base_dir + path) /]
+             [for (view : View | anApp.aPackageView.views )]	
+		        [for (inner : View | view.innerViews)]
+			       [ makeInnerViews(path, inner, anApp.aPackageController.name, anApp.aPackageView.name) /]
+         		[/for]			
+	            [ writeView(path, view, anApp.aPackageController.name, anApp.aPackageView.name) /]
+             [/for]
+	   [ self.generateWelcomeView() /]
+	   [ self.writeDefaultStylesheet() /]
+   	   [/let]
+    [/let]
+[/template]
+
+[template public makeInnerViews(path : String, view : View, controllerName : String, pvName : String )]
+        [ writeView(path, view, controllerName, pvName) /]
+   		[for (inner : View | view.innerViews)]
+   			[ makeInnerViews(path, inner, controllerName, pvName) /]
+   		[/for]
+[/template]

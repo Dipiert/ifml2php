@@ -1,0 +1,40 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module writeDefaultStylesheet.
+ */]
+[module writeDefaultStylesheet('http://www.application.org/coreMVC')]
+[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperLaravelOutputPaths /]
+
+[**
+ * The documentation of the template generateElement.
+ * @param aModel
+ */]
+[template public writeDefaultStylesheet()]
+
+[file(getStylesheetsHome() + 'ifml2php.css', false, 'UTF-8')]
+.ifml2php_navbar {
+	text-decoration: none;
+	border: 1px black solid;
+	padding: 7px;
+	border-radius: 4px;
+	background-color: rgb(251,196,58);
+}
+
+#Title {
+	font-size: 2.7em;
+	text-align: center;
+}
+
+.ifml2php_form{
+	border: 1px solid black;
+	text-align: center;
+	margin: 0 auto;
+    margin-top: 0px;
+	width: 50%;
+	margin-top: 3%;
+	padding: 2% 0px;
+	border-radius: 2%;
+}
+[/file]
+
+[/template]

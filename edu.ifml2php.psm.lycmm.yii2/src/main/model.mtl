@@ -1,0 +1,38 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module model.
+ */]
+[module model('http://www.application.org/coreMVC')]
+
+[import services::helperFileReader /]
+[import services::helperApplication /]
+[import files::writeModelSkeleton  /]
+[import services::helperYii2Paths  /]
+[import services::helperYii2OutputPaths  /]
+[**
+ * The documentation of the template generateElement.
+ * @param aModel
+ */]
+
+[template public makeModels(anApp : Application)]
+[comment @main/]
+	[let pm : PackageModel = anApp.aPackageModel]
+    [let base_dir : String = getBaseDir() ]
+	[let pathModels : String = getModelsHome() + pm.name + 'Models/']
+	
+      [ self.makeFolder(base_dir + pathModels) /]
+	  
+      [for (model : Model | pm.models)]
+	  [if (anApp.name = '' or anApp.name.oclIsUndefined())]
+	  	[ writeModelSkeleton(getDefaultAppName('Yii2'), pathModels, model)/]
+	  [else]
+	  	 [ writeModelSkeleton(anApp.name, pathModels, model)/]
+		 
+	  [/if]
+	    
+      [/for]
+      [/let]
+   [/let]
+   [/let]
+[/template]
+
