@@ -20,12 +20,13 @@ This project intended to facilitate the adoption of the MDD approach by Web Deve
  * [Apache Commons Lang](https://commons.apache.org/proper/commons-lang/)
  * [Laravel Framework](https://laravel.com/)
  * [Laravel Colletive](https://laravelcollective.com/docs/5.0/html)
+ * [Yii2 Framework](http://www.yiiframework.com/)
 
-#### [Eclipse](https://www.eclipse.org/downloads/packages/eclipse-modeling-tools/lunasr2)
+### [Eclipse](https://www.eclipse.org/downloads/packages/eclipse-modeling-tools/lunasr2)
 
-The [Acceleo](https://www.eclipse.org/acceleo/) and [ATL](https://eclipse.org/atl/) frameworks designed for Model-to-Text and Model-Transformation aiding. And we will use them along the project.
+The [Acceleo](https://www.eclipse.org/acceleo/) and [ATL](https://eclipse.org/atl/) frameworks are designed for Model-to-Text and Model-Transformation aiding. And we will use them along the project.
 
-Once Eclipse is ready we need to install the Acceleo and ATL Frameworks.
+The first step will be to download and install Eclipse Modeling Tools from the link above. Once Eclipse is ready we need to install the Acceleo and ATL Frameworks.
 We can do this by opening Eclipse and going to:
 
  1) Help -> Installing Modelling Components
@@ -36,7 +37,42 @@ Once Eclipse starts again we need to install the [IFML Editor](https://github.co
 
 This should leave us with a starting working environment.
 
+### [Composer](https://getcomposer.org/download/)
+
+Composer is a **Dependency Manager for PHP** which is going to allow us to install and both Laravel and Yii2 frameworks.
+
+#### Installation
+
+For windows you the best way is to download and run [Composer Setup Executable](https://getcomposer.org/Composer-Setup.exe) and it will install the latest composer version whenever it is executed.
+
+For Ubuntu based Linux distros running the following should do the trick:
+
+ ```
+ sudo apt install composer
+ ```
+
+Any other case this should be enough to get things working:
+
+ ```
+ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+ php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+ php composer-setup.php
+ php -r "unlink('composer-setup.php');"
+ ```
+
 ## Proyects
+
+### Naming conventions
+
+The naming convention is for all projects is:
+
+`<domain>.<project-name>.<kind-of-input>.<input-metamodel-name>.gen.<output-language-name>`
+
+Where `kind-of-input` is one of:
+ * pim: Platform-Independent Model
+ * psm: Platform-Specific Models
+ * dsl: Domain-Specific Language
+
 ### ATL Project
 
 First things first, you should import the ATL project in Eclipse:
@@ -46,10 +82,6 @@ First things first, you should import the ATL project in Eclipse:
  3) Existing project into workspace
 
 In this repo, the ATL project is called **`edu.ifml2php.pim.ifml.gen.lycmm`**.
-
-This name follow the following convention:
-
-`<domain>.<project-name>.<input-metamodel-name>.gen.<output-language-name>`
 
 **`lycmm`** means "Laravel, Yii2 & CodeIgniter Meta-Model".
 
@@ -105,28 +137,37 @@ ourm: This is the path where the generated .xmi file will be stored. In this cas
 | mvcLibrary | /edu.ifml2php.pim.ifml.gen.lycmm/atlLibraries/mvcLibrary.asm |
 | systemLibrary | /edu.ifml2php.pim.ifml.gen.lycmm/atlLibraries/systemLibrary.asm |
 
+In order to use the models in an Acceleo project you need to include **Metamodel.ecore** to EMF registry.
 
-#### Acceleo project
+The easiest way to do that is:
+ 1. Change to ATL Perspective
+ 2. Window->Open Perspective->Other->ATL
+ 2. Right click on **Metamodel.ecore** -> Register Metamodel.
 
-You need to include **Metamodel.ecore** to EMF registry. The easiest way to do that is:
-
-1. Open ATL Perspective
-Window->Open Perspective->Other->ATL
-
-2. Register metamodel
-Right click on **Metamodel.ecore** -> Register Metamodel.
 You will not see any visual change but trust me, the metamodel is registered now.
+
+### Acceleo Project
+
+Now you should import the ATL project in Eclipse:
+
+ 1) File -> Import (Alt + F + I)
+ 2) General
+ 3) Existing project into workspace
+
+In this repo, there are two Acceleo projects called:
+ * **`edu.ifml2php.psm.lycmm.gen.laravel`**.
+ * **`edu.ifml2php.psm.lycmm.gen.yii2`**.
 
 ## Troubleshooting
 
-###ATL
-- You must specify a path for *
-- Arguments of a generation cannot be null
-- {.asm, .atl} does not exist
-Verify the M2M transformations parameters in the .launch file
+### ATL
 
+ * You must specify a path for *
+ * Arguments of a generation cannot be null
+ * {.asm, .atl} does not exist: Verify the M2M transformations parameters in the .launch file
 
-###Acceleo
+### Acceleo
+
 - Package with URI * not found
 Do a manual register of the metamodel.
 ```
@@ -138,6 +179,7 @@ for(EPackage subPack : subPackages){
    EPackage.Registry.INSTANCE.put(subPack.getNsURI(), subPack);
 }
 ```
+
 - ClassNotFoundException: org.eclipse.uml2.types.TypesPackage
 Add [org.eclipse.uml2.types](http://central.maven.org/maven2/org/eclipse/uml2/types/2.0.0-v20140602-0749/types-2.0.0-v20140602-0749.jar) to the classpath.
 
