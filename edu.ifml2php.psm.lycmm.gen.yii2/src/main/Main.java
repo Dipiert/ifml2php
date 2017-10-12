@@ -337,20 +337,20 @@ public class Main extends AbstractAcceleoGenerator {
      * 
      * @param resourceSet
      *            The resource set which registry has to be updated.
-     * @generated
+     * @generated NOT
      */
     @Override
     public void registerPackages(ResourceSet resourceSet) {
         super.registerPackages(resourceSet);
-                
-        URI uri = URI.createFileURI("/home/dam/Escritorio/ws/edu.ifml2php.psm.lycmm.gen.yii2/src/Metamodel.ecore");
-                                     
+        
+        URI uri = URI.createFileURI("../edu.ifml2php.pim.ifml.gen.lycmm/models/metamodels/Metamodel.ecore");
+        
         Resource resource = resourceSet.getResource(uri, true);         
         EPackage PHPMVC = (EPackage) resource.getContents().get(0);
         List<EPackage> subPackages = PHPMVC.getESubpackages();
         for(EPackage subPack : subPackages){
            EPackage.Registry.INSTANCE.put(subPack.getNsURI(), subPack);
-        }    
+        }
         
         /*
          * If you want to change the content of this method, do NOT forget to change the "@generated"

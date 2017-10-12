@@ -343,7 +343,7 @@ public class View extends AbstractAcceleoGenerator {
     public void registerPackages(ResourceSet resourceSet) {
         super.registerPackages(resourceSet);
         
-        URI uri = URI.createFileURI("/home/dam/Escritorio/ws/edu.ifml2php.psm.lycmm.gen.laravel/src/Metamodel.ecore");
+        URI uri = URI.createFileURI("../edu.ifml2php.pim.ifml.gen.lycmm/models/metamodels/Metamodel.ecore");
         
         Resource resource = resourceSet.getResource(uri, true);         
         EPackage PHPMVC = (EPackage) resource.getContents().get(0);

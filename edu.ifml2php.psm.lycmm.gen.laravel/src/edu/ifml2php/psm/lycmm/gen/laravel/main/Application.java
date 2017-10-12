@@ -388,6 +388,7 @@ public class Application extends AbstractAcceleoGenerator {
     @Override
     public void registerPackages(ResourceSet resourceSet) {
         super.registerPackages(resourceSet);        
+        
         /*if (!isInWorkspace(IFML.Core.CorePackage.class)) {
             resourceSet.getPackageRegistry().put(IFML.Core.CorePackage.eINSTANCE.getNsURI(), IFML.Core.CorePackage.eINSTANCE);
         }/*
@@ -404,8 +405,8 @@ public class Application extends AbstractAcceleoGenerator {
         no funciona. La alternativa es usar Java como launcher, como aplicación stand alone. Para estos casos EMF no descubrirá
         ni registrará los paquetes disponibles y por ello debe hacer esto manualmente*/
         
-        URI uri = URI.createFileURI("/home/dam/Escritorio/ws/edu.ifml2php.psm.lycmm.gen.laravel/src/Metamodel.ecore");
-                                     
+        //URI uri = URI.createFileURI("/home/dam/Escritorio/ws/edu.ifml2php.psm.lycmm.gen.laravel/src/Metamodel.ecore");
+        URI uri = URI.createFileURI("../edu.ifml2php.pim.ifml.gen.lycmm/models/metamodels/Metamodel.ecore");                           
         Resource resource = resourceSet.getResource(uri, true);         
         EPackage PHPMVC = (EPackage) resource.getContents().get(0);
         List<EPackage> subPackages = PHPMVC.getESubpackages();
