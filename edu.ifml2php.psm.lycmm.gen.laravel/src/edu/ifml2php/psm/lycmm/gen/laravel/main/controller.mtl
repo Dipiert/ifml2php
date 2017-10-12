@@ -2,7 +2,7 @@
 [**
  * The documentation of the module generate.
  */]
-[module controller('http://www.application.org')]
+[module controller('http://www.application.org/coreMVC')]
 
 [import edu::ifml2php::psm::lycmm::gen::laravel::services::helperFileReader /]
 [import edu::ifml2php::psm::lycmm::gen::laravel::files::writeController /]

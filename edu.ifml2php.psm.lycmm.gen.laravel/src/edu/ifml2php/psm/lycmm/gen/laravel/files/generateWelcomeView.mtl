@@ -2,7 +2,7 @@
 [**
  * The documentation of the module generate.
  */]
-[module generateWelcomeView('http://www.application.org')]
+[module generateWelcomeView('http://www.application.org/coreMVC')]
 [import edu::ifml2php::psm::lycmm::gen::laravel::services::helperLaravelOutputPaths /]
 
 [**

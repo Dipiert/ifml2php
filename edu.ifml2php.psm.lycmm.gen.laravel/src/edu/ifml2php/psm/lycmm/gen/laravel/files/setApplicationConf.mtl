@@ -1,5 +1,5 @@
 [comment encoding = UTF-8 /]
-[module setApplicationConf('http://www.application.org')]
+[module setApplicationConf('http://www.application.org/coreMVC')]
 
 
 [import edu::ifml2php::psm::lycmm::gen::laravel::services::helperApplication /]

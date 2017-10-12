@@ -2,7 +2,7 @@
 [**
  * The documentation of the module writeControllerSkeleton.
  */]
-[module writeController('http://www.application.org')]
+[module writeController('http://www.application.org/coreMVC')]
 
 [import edu::ifml2php::psm::lycmm::gen::laravel::services::helperLaravelInputPaths /]
 [import edu::ifml2php::psm::lycmm::gen::laravel::services::helperStringUtil /]

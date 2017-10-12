@@ -2,7 +2,7 @@
 [**
  * The documentation of the module writeModelSkeleton.
  */]
-[module writeModelSkeleton('http://www.application.org')]
+[module writeModelSkeleton('http://www.application.org/coreMVC')]
 
 
 [**

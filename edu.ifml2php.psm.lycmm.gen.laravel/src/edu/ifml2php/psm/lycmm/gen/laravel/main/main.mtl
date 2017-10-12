@@ -2,7 +2,7 @@
 [**
  * The documentation of the module main.
  */]
-[module main('http://www.application.org')]
+[module main('http://www.application.org/coreMVC')]
 [ import edu::ifml2php::psm::lycmm::gen::laravel::main::controller /]
 [ import edu::ifml2php::psm::lycmm::gen::laravel::main::model /]
 [ import edu::ifml2php::psm::lycmm::gen::laravel::main::view /]

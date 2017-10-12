@@ -1,5 +1,5 @@
 [comment encoding = UTF-8 /]
-[module application('http://www.application.org/coreMVC', 'http://www.application.org/extPHP','http://www.eclipse.org/uml2/5.0.0/UML')/]
+[module application('http://www.application.org/coreMVC')/]
 
 [import edu::ifml2php::psm::lycmm::gen::laravel::files::setApplicationConf /]
 
