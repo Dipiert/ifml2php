@@ -2,7 +2,7 @@
 [**
  * The documentation of the module writeDefaultStylesheet.
  */]
-[module writeDefaultStylesheet('http://www.application.org')]
+[module writeDefaultStylesheet('http://www.application.org/coreMVC')]
 [import services::helperYii2OutputPaths /]
 
 [**

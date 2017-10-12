@@ -2,7 +2,7 @@
 [**
  * The documentation of the module.
  */]
-[module helperApplication ('http://www.application.org')/]
+[module helperApplication ('http://www.application.org/coreMVC')/]
 
 [**
  * The documentation of the query
@@ -14,7 +14,6 @@
 
 [query public getLocale(anOclAny: OclAny) : String
 	= invoke('main.beans.Application', 'getLocale()', Sequence{})
-
 /]
 
 [**

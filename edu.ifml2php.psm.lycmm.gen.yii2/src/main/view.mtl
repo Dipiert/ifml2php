@@ -2,7 +2,7 @@
 [**
  * The documentation of the module generate.
  */]
-[module view('http://www.application.org')]
+[module view('http://www.application.org/coreMVC')]
 
 [import services::helperFileReader /]
 [import files::writeView /]

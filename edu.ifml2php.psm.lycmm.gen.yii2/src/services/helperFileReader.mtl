@@ -1,5 +1,5 @@
 [comment encoding = UTF-8 /]
-[module helperFileReader('http://www.application.org')/]
+[module helperFileReader('http://www.application.org/coreMVC')/]
 
 [import services::helperApplication /]
 [import services::helperYii2InputPaths /]

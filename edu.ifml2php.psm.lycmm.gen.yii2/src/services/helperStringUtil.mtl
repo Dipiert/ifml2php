@@ -1,5 +1,5 @@
 [comment encoding = UTF-8 /]
-[module helperStringUtil('http://www.application.org')/]
+[module helperStringUtil('http://www.application.org/coreMVC')/]
 
 [query public getSuffix(arg0 : String) : String
 	= invoke('services.StringUtil', 'getSuffix(java.lang.String)', Sequence{arg0})

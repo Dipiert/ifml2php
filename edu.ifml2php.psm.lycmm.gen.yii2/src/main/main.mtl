@@ -2,7 +2,7 @@
 [**
  * The documentation of the module main.
  */]
-[module main('http://www.application.org')]
+[module main('http://www.application.org/coreMVC')]
 [ import main::controller /]
 [ import main::model /]
 [ import main::view /]

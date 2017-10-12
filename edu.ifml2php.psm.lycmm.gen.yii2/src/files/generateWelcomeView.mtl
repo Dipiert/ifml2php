@@ -2,7 +2,7 @@
 [**
  * The documentation of the module generate.
  */]
-[module generateWelcomeView('http://www.application.org')]
+[module generateWelcomeView('http://www.application.org/coreMVC')]
 [import services::helperYii2OutputPaths /]
 
 [**

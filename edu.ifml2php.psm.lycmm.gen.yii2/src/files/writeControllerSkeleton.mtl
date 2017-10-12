@@ -2,7 +2,7 @@
 [**
  * The documentation of the module writeControllerSkeleton.
  */]
-[module writeControllerSkeleton('http://www.application.org')]
+[module writeControllerSkeleton('http://www.application.org/coreMVC')]
 
 [import services::helperYii2InputPaths /]
 [import services::helperFileReader /]
@@ -58,9 +58,4 @@ if (is_null($config[ '[' /]'controllerMap'[']'/])){
 	[/for]
 [/for]
 [/file]
-	
-
-
-[comment]$ifmlControllerMap = ['['/]'[nameController.toLowerCase()/]' => '\app\controllers\[namePackage/]Controllers\[nameController/]Controller'[']'/];
-$config['['/]'controllerMap'[']'/] = array_merge($ifmlControllerMap, $config['['/]'controllerMap'[']'/]);[/comment]
 [/template]

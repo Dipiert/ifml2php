@@ -1,5 +1,5 @@
 [comment encoding = UTF-8 /]
-[module controller('http://www.application.org')]
+[module controller('http://www.application.org/coreMVC')]
 
 [import services::helperFileReader /]
 [import services::helperApplication /]

@@ -2,17 +2,13 @@
 [**
  * The documentation of the module model.
  */]
-[module model('http://www.application.org')]
+[module model('http://www.application.org/coreMVC')]
 
 [import services::helperFileReader /]
 [import services::helperApplication /]
 [import files::writeModelSkeleton  /]
 [import services::helperYii2Paths  /]
 [import services::helperYii2OutputPaths  /]
-[comment]
-
-[import edu::ifml2php::psm::lycmm::gen::lyphp::files::writeModelRequest   /][/comment]
-
 [**
  * The documentation of the template generateElement.
  * @param aModel
