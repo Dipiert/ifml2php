@@ -117,18 +117,32 @@ Window->Open Perspective->Other->ATL
 Right click on **Metamodel.ecore** -> Register Metamodel.
 You will not see any visual change but trust me, the metamodel is registered now.
 
-Now, let's to create a new Acceleo project in Eclipse:
+## Troubleshooting
 
-New -> Other...-> Acceleo Project
+###ATL
+- You must specify a path for *
+- Arguments of a generation cannot be null
+- {.asm, .atl} does not exist
+Verify the M2M transformations parameters in the .launch file
 
-In this repo, there is an Acceleo project for each Target framework:
+
+###Acceleo
+- Package with URI * not found
+Do a manual register of the metamodel.
 ```
-edu.ifml2php.psm.lycmm.gen.laravel
-edu.ifml2php.psm.lycmm.gen.yii2
+URI uri = URI.createFileURI("../edu.ifml2php.pim.ifml.gen.lycmm/models/metamodels/Metamodel.ecore");
+Resource resource = resourceSet.getResource(uri, true);         
+EPackage PHPMVC = (EPackage) resource.getContents().get(0);
+List<EPackage> subPackages = PHPMVC.getESubpackages();
+for(EPackage subPack : subPackages){
+   EPackage.Registry.INSTANCE.put(subPack.getNsURI(), subPack);
+}
 ```
+- ClassNotFoundException: org.eclipse.uml2.types.TypesPackage
+Add [org.eclipse.uml2.types](http://central.maven.org/maven2/org/eclipse/uml2/types/2.0.0-v20140602-0749/types-2.0.0-v20140602-0749.jar) to the classpath.
 
-During the Acceleo project creation you need to indicate the URI of the metamodel that you just registered. That will be in _Runtime Version_ list.
+- Could not find public template * in module *
+Add the @main annotation to the corresponding template and make sure you have at least one public template.
 
----
-#### Laravel, Yii2 & CodeIgniter Metamodel
-![Our PHPMVC Metamodel](https://goo.gl/QU1qxp  "OurMM")
+- java.lang.NoClassDefFoundError: org/eclipse/core/resources/IresourceChangeListener
+Add [org.eclipse.core.resources3.9.1.v20140825-1431.jar](http://central.maven.org/maven2/org/eclipse/birt/runtime/org.eclipse.core.resources/3.9.1.v20140825-1431/org.eclipse.core.resources-3.9.1.v20140825-1431.jar) to the classpath.
