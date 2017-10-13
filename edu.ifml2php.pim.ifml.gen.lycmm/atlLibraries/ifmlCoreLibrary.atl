@@ -24,10 +24,25 @@ helper context IFMLMM!ViewContainer def : getViewComponents() : Sequence(ourMM!V
 			Sequence{}
 		endif,
 		self.getInputFields(),
-		self.viewElements->select(f | f.oclIsTypeOf(IFMLMM!ViewComponent))
-		      			->collect(h|h.viewComponentParts
-	       				->select(b|b.oclIsTypeOf(IFMLMM!ConditionalExpression))),
-		self.viewElements->select(e | e.oclIsTypeOf(IFMLMM!ViewElement))
-						->collect(f|thisModule.ViewElement2Image(f)),
+		self.getViewComponentsParts(),
+		self.getImages(),
+		self.getForms()
+	};
+	
+helper context IFMLMM!ViewContainer def : getViewComponentsParts() : Sequence(ourMM!ViewComponent) =
+	Sequence {
+	self.viewElements->select(f | f.oclIsTypeOf(IFMLMM!ViewComponent))
+		      		 ->collect(h|h.viewComponentParts
+	       			   ->select(b|b.oclIsTypeOf(IFMLMM!ConditionalExpression)))
+	};
+
+helper context IFMLMM!ViewContainer def : getImages() : Sequence(ourMM!Image) =
+	Sequence {
+	self.viewElements->select(e | e.oclIsTypeOf(IFMLMM!ViewElement))
+					 ->collect(f|thisModule.ViewElement2Image(f))
+	};
+	
+helper context IFMLMM!ViewContainer def : getForms() : Sequence(ourMM!Form) =
+	Sequence {
 		self.viewElements->select(e | e.oclIsTypeOf(extMM!Form))
 	};
