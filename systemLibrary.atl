@@ -1,0 +1,7 @@
+library systemLibrary;
+---Todo el contexto de los helpers contenidos en esta librería son clases OCL Primitive Type.
+
+---Pone en minúsculas la primera letra de un String.
+helper context String def : decapitalize() : String = 
+	self.substring(1,1).toLower() + self.substring(2,self.size());
+
