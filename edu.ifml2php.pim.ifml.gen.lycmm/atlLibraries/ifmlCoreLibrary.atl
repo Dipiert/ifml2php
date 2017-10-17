@@ -1,21 +1,35 @@
 library ifmlLibrary;
+---IFMLMM es el contexto de todas las clases. Todas las salidas de los helpers pertenecen a PHPFW.
 
+--- Devuelve una secuencia de Anchor donde cada uno apunta a una de las 
+--- ViewContainers que haya sido caracterizada como landmark y que no sea
+--- el ViewContainer en sí desde donde se está invocando el helper. 
+--- Se utiliza para poder armar una barra de navegación.
 helper context IFMLMM!ViewContainer def : getAnchors() : Sequence(ourMM!Anchor) =
 	IFMLMM!ViewContainer.allInstances()
 			->select(a | (a.refImmediateComposite() = IFMLMM!InteractionFlowModel.allInstances().first()) and (a <> self))
 			->collect(f|thisModule.Landmarks2MenuItems(f));
 
+--- Devuelve una secuencia de atributos cuya dirección del 
+--- IFML Parameter asociado, sea “in” o “inout”.
 helper context IFMLMM!IFMLAction def : getInParameters() : Sequence(ourMM!Attribute) =
 	self.parameters->select(b|b.direction = #"in" or b.direction = #inout)
 					->collect(b|thisModule.Parameter2Attribute(b.name));	
 
+--- Devuelve una secuencia de atributos cuya dirección del 
+--- IFML Parameter asociado sea “out” o “inout”.
 helper context IFMLMM!IFMLAction def : getOutParameters() : Sequence(ourMM!Attribute) =
 	self.parameters->select(b|b.direction = #out or b.direction = #inout)
 					->collect(b|thisModule.parameters2Attributes(b.name));
 
+--- devuelve una secuencia de Input realizables en Checkboxes y RadioButtons.
 helper context IFMLMM!ViewElement def : getInputFields() : Sequence(ourMM!Input) =
 	Sequence{self.getSimpleFields(),self.getSelectionFields()};
 
+--- este helper es el encargado de coordinar las actividades de conseguir InputsFields,
+--- Images, ViewElements y, ademàs, si es un ViewContainer que no tiene como clase padre
+--- otro ViewContainer -es una vista del más alto nivel- se traen también los Anchors
+--- utilizados para armar una barra de navegación.
 helper context IFMLMM!ViewContainer def : getViewComponents() : Sequence(ourMM!ViewComponent) =
 	Sequence{
 		if (not (self.refImmediateComposite().oclIsKindOf(IFMLMM!ViewContainer))) then
@@ -29,20 +43,35 @@ helper context IFMLMM!ViewContainer def : getViewComponents() : Sequence(ourMM!V
 		self.getForms()
 	};
 	
-helper context IFMLMM!ViewContainer def : getViewComponentsParts() : Sequence(ourMM!ViewComponent) =
+--- getConditionedViewComponentsParts(): devuelve una lista de ViewComponentsParts 
+--- que tienen una ConditionalExpression definida.
+helper context IFMLMM!ViewContainer def : getConditionedViewComponentsParts() : Sequence(ourMM!ViewComponent) =
 	Sequence {
 	self.viewElements->select(f | f.oclIsTypeOf(IFMLMM!ViewComponent))
 		      		 ->collect(h|h.viewComponentParts
 	       			   ->select(b|b.oclIsTypeOf(IFMLMM!ConditionalExpression)))
 	};
-
+--- getImages(): devuelve la lista de Images que existen dentro de un ViewContainer
+--- obtenidos a partir de los ViewElements.
 helper context IFMLMM!ViewContainer def : getImages() : Sequence(ourMM!Image) =
 	Sequence {
 	self.viewElements->select(e | e.oclIsTypeOf(IFMLMM!ViewElement))
 					 ->collect(f|thisModule.ViewElement2Image(f))
 	};
-	
+
+---Devuelve la lista de Forms que existen  dentro de un ViewContainer, 
+---obtenidos a partir de los ViewElements.
 helper context IFMLMM!ViewContainer def : getForms() : Sequence(ourMM!Form) =
 	Sequence {
 		self.viewElements->select(e | e.oclIsTypeOf(extMM!Form))
 	};
+---Devuelve una lista con todos los Input de selección, a saber, Checkboxes y RadioButtons.
+helper context IFMLMM!ViewElement def : getSelectionFields() : Sequence(ourMM!Input) =
+	Sequence{extMM!IFMLSlot.allInstances()
+					->select(e|(e.areRelatives(e.refImmediateComposite(), self.parameters)))
+					->select(e|(not(e.refImmediateComposite().isCheckbox())))
+					->collect(e|thisModule.IFMLSlot2RadioButton(e, e.refImmediateComposite().name)),
+			extMM!IFMLSlot.allInstances()
+					->select(e|(e.areRelatives(e.refImmediateComposite(), self.parameters)))
+					->select(e|((e.refImmediateComposite().isCheckbox())))							
+					->collect(e|thisModule.IFMLSlot2Checkbox(e, e.refImmediateComposite().name))};
