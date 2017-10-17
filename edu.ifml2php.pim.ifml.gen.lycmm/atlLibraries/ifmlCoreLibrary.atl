@@ -38,7 +38,7 @@ helper context IFMLMM!ViewContainer def : getViewComponents() : Sequence(ourMM!V
 			Sequence{}
 		endif,
 		self.getInputFields(),
-		self.getViewComponentsParts(),
+		self.getConditionedViewComponentsParts(),
 		self.getImages(),
 		self.getForms()
 	};
@@ -68,10 +68,10 @@ helper context IFMLMM!ViewContainer def : getForms() : Sequence(ourMM!Form) =
 ---Devuelve una lista con todos los Input de selección, a saber, Checkboxes y RadioButtons.
 helper context IFMLMM!ViewElement def : getSelectionFields() : Sequence(ourMM!Input) =
 	Sequence{extMM!IFMLSlot.allInstances()
-					->select(e|(e.areRelatives(e.refImmediateComposite(), self.parameters)))
+					->select(e|self.parameters->includes(e.refImmediateComposite()))
 					->select(e|(not(e.refImmediateComposite().isCheckbox())))
 					->collect(e|thisModule.IFMLSlot2RadioButton(e, e.refImmediateComposite().name)),
 			extMM!IFMLSlot.allInstances()
-					->select(e|(e.areRelatives(e.refImmediateComposite(), self.parameters)))
-					->select(e|((e.refImmediateComposite().isCheckbox())))							
+					->select(e|self.parameters->includes(e.refImmediateComposite()))
+					->select(e|(e.refImmediateComposite().isCheckbox()))							
 					->collect(e|thisModule.IFMLSlot2Checkbox(e, e.refImmediateComposite().name))};
