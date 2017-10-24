@@ -33,6 +33,9 @@ We can do this by opening Eclipse and going to:
  2) Choose Acceleo y ATL.
  3) After install you will be prompted to restart Eclipse, do it.
 
+
+![Installing ATL & Acceleo](https://github.com/Dipiert/ifml2php/blob/master/images/install_atl-acceleo.gif "Installing ATL & Acceleo")
+
 Once Eclipse starts again we need to install the [IFML Editor](https://github.com/ifml/ifml-editor), in order to do that we can follow the instructions [here](http://ifml.github.io/).
 
 This should leave us with a starting working environment.
@@ -143,6 +146,9 @@ The easiest way to do that is:
  1. Change to ATL Perspective
  2. Window->Open Perspective->Other->ATL
  2. Right click on **Metamodel.ecore** -> Register Metamodel.
+
+
+![Registering a Metamodel](https://github.com/Dipiert/ifml2php/blob/master/images/register_metamodel.gif "Registering a Metamodel")
 
 You will not see any visual change but trust me, the metamodel is registered now.
 
