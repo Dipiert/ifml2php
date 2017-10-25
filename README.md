@@ -46,7 +46,7 @@ Composer is a **Dependency Manager for PHP** which is going to allow us to insta
 
 #### Installation
 
-For windows you the best way is to download and run [Composer Setup Executable](https://getcomposer.org/Composer-Setup.exe) and it will install the latest composer version whenever it is executed.
+For Microsoft Windows you the best way is to download and run [Composer Setup Executable](https://getcomposer.org/Composer-Setup.exe) and it will install the latest composer version whenever it is executed.
 
 For Ubuntu based Linux distros running the following should do the trick:
 
@@ -120,11 +120,11 @@ ourMM | /edu.ifml2php.pim.ifml.gen.lycmm/models/metamodels/Metamodel.ecore  | ur
 
 ##### Source Models:
 
-Name | Conforms to | Path | Type
+Name | Conforms to | Path (/edu.ifml2php.pim.ifml.gen.lycmm/models/models/) | Type
 --- | --- | --- | ---
-uml |UMLMMM | /edu.ifml2php.pim.ifml.gen.lycmm/models/models/model.uml | Domain
-ifml | IFMLMM | /edu.ifml2php.pim.ifml.gen.lycmm/models/models/movies.core | Interaction Flow
-extm | extMM | /edu.ifml2php.pim.ifml.gen.lycmm/models/models/movies.core | Interaction Flow
+uml |UMLMMM | model.uml | Domain
+ifml | IFMLMM | movies.core | Interaction Flow
+extm | extMM | movies.core | Interaction Flow
 
 ##### Target models:
 
@@ -133,20 +133,18 @@ ourm: This is the path where the generated .xmi file will be stored. In this cas
 ##### Libraries:
 
 
-| Name | Path |
+| Name | Path (/edu.ifml2php.pim.ifml.gen.lycmm/atlLibraries/)|
 | --- | --- |
-| ifmlCoreLibrary | /edu.ifml2php.pim.ifml.gen.lycmm/atlLibraries/ifmlCoreLibrary.asm |
-| ifmlExtLibrary | /edu.ifml2php.pim.ifml.gen.lycmm/atlLibraries/ifmlExtLibrary.asm |
-| mvcLibrary | /edu.ifml2php.pim.ifml.gen.lycmm/atlLibraries/mvcLibrary.asm |
-| systemLibrary | /edu.ifml2php.pim.ifml.gen.lycmm/atlLibraries/systemLibrary.asm |
+| ifmlCoreLibrary | ifmlCoreLibrary.asm |
+| ifmlExtLibrary | ifmlExtLibrary.asm |
+| mvcLibrary | mvcLibrary.asm |
+| systemLibrary | systemLibrary.asm |
 
 In order to use the models in an Acceleo project you need to include **Metamodel.ecore** to EMF registry.
 
 The easiest way to do that is:
- 1. Change to ATL Perspective
- 2. Window->Open Perspective->Other->ATL
+ 1. Change to ATL Perspective: Window->Open Perspective->Other->ATL
  2. Right click on **Metamodel.ecore** -> Register Metamodel.
-
 
 ![Registering a Metamodel](https://github.com/Dipiert/ifml2php/blob/master/images/register_metamodel.gif "Registering a Metamodel")
 
@@ -168,14 +166,18 @@ In this repo, there are two Acceleo projects called:
 
 ### ATL
 
- * You must specify a path for *
+ * You must specify a path for ```<model-name>```
  * Arguments of a generation cannot be null
- * {.asm, .atl} does not exist: Verify the M2M transformations parameters in the .launch file
+ * {.asm, .atl} does not exist
+ 
+ Verify the M2M transformations parameters in the .launch file
 
 ### Acceleo
 
-- Package with URI * not found
-Do a manual register of the metamodel.
+- Package with URI ```<uri>``` not found
+
+Do a manual register of the metamodel, add the following code on the ```registerPackages()``` method in the corresponding Java launcher. 
+
 ```
 URI uri = URI.createFileURI("../edu.ifml2php.pim.ifml.gen.lycmm/models/metamodels/Metamodel.ecore");
 Resource resource = resourceSet.getResource(uri, true);         
@@ -187,10 +189,13 @@ for(EPackage subPack : subPackages){
 ```
 
 - ClassNotFoundException: org.eclipse.uml2.types.TypesPackage
+
 Add [org.eclipse.uml2.types](http://central.maven.org/maven2/org/eclipse/uml2/types/2.0.0-v20140602-0749/types-2.0.0-v20140602-0749.jar) to the classpath.
 
-- Could not find public template * in module *
-Add the @main annotation to the corresponding template and make sure you have at least one public template.
+- Could not find public template ```<template-name>``` in module ```<module-name>```
+
+Make sure you have the ```@main``` annotation to the corresponding public template.
 
 - java.lang.NoClassDefFoundError: org/eclipse/core/resources/IresourceChangeListener
-Add [org.eclipse.core.resources3.9.1.v20140825-1431.jar](http://central.maven.org/maven2/org/eclipse/birt/runtime/org.eclipse.core.resources/3.9.1.v20140825-1431/org.eclipse.core.resources-3.9.1.v20140825-1431.jar) to the classpath.
+
+Add [org.eclipse.core.resources](http://central.maven.org/maven2/org/eclipse/birt/runtime/org.eclipse.core.resources/3.9.1.v20140825-1431/org.eclipse.core.resources-3.9.1.v20140825-1431.jar) to the classpath.
