@@ -2,7 +2,7 @@ package services;
 
 public class Yii2Paths {
    String baseDir = "/var/www/html/";
-   String yii2Version = "yii2.0.12/";
+   String yii2Version = "/yii2.0.12/";
 
    public String getBaseDir() {
       return baseDir;
