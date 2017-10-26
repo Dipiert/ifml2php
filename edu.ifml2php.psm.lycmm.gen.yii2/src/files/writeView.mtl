@@ -2,7 +2,7 @@
 [**
  * The documentation of the module writeView.
  */]
-[module writeView('http://www.application.org')]
+[module writeView('http://www.application.org/coreMVC', 'http://www.application.org/extPHP')]
 
 [import services::helperStringUtil /]
 [import services::helperYii2InputPaths /]
@@ -61,7 +61,8 @@
 				[for (htmle : HTMLElement | f.htmlElements)]
 						[if (htmle.oclIsTypeOf(TextField))]	
 							[let tf : TextField = htmle]
-<?= Html::input('text', '[ tf.name /]', null, ['['/]]) ?> [comment NO TESTED YET/]
+<?= Html::label('[ tf.name /]') ?>
+<?= Html::input('text', '[ tf.name /]', null, ['['/]]) ?>
 							[/let]
 						[/if]
 						[if (htmle.oclIsTypeOf(Checkbox))]			
@@ -71,7 +72,8 @@
 						[/if]
 						[if (htmle.oclIsTypeOf(RadioButton))]
 							[let rb :RadioButton = htmle]
-<?= Html::radio('[rb.name/]', false, ['['/]'value' => '[ rb.value /]']) ?> [comment NO TESTED YET/]
+<?= Html::label('[ rb.name /]') ?>
+<?= Html::radio('[rb.name/]', false, ['['/]'value' => '[ rb.value /]']) ?>
 							[/let]
 						[/if]					 
 				[/for][comment]no contemplamos forms que contengan forms, anchors, textos ni imágenes[/comment]					
@@ -90,7 +92,6 @@
 
 [/file]
 [/template]
-
 
 [template public getViewConstructors(path : String, controllerName : String, pv : PackageView)]
 [file (path + controllerName + 'Controller.php', true, 'UTF-8')]

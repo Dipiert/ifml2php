@@ -12,7 +12,16 @@
 [template public writeDefaultStylesheet()]
 
 [file(getStylesheetsHome() + 'ifml2php.css', false, 'UTF-8')]
+
+.ifml2php_content-area {
+	text-align: center;
+	border: 1px black solid;
+	border-radius: 1%;
+	padding-top: 2%;
+}
+
 .ifml2php_navbar {
+	float: left !important;
 	text-decoration: none;
 	border: 1px black solid;
 	padding: 7px;
@@ -20,21 +29,6 @@
 	background-color: rgb(251,196,58);
 }
 
-#Title {
-	font-size: 2.7em;
-	text-align: center;
-}
-
-.ifml2php_form{
-	border: 1px solid black;
-	text-align: center;
-	margin: 0 auto;
-    margin-top: 0px;
-	width: 50%;
-	margin-top: 3%;
-	padding: 2% 0px;
-	border-radius: 2%;
-}
 [/file]
 
 [/template]
