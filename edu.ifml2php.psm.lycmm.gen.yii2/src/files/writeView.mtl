@@ -19,7 +19,7 @@
 [comment]TODO: No es necesario pasarle la vista porque está dentro del package[/comment]
 [ writeIncludes(view) /]
 <!DOCTYPE html>
-<link rel="stylesheet" type="text/css" href="[ getStylesheetsHome() + 'ifml2php.css' /] /yii2.0.12/web/css/ifml2php.css">
+<link rel="stylesheet" type="text/css" href="[ getStylesheetsHome() + 'ifml2php.css' /]">
 [for (viewComponent : ViewComponent | view.viewComponents)]
 	[if (viewComponent.oclIsTypeOf(Anchor))]
 		[let a : Anchor = viewComponent][comment]En lugar de usar los pairedTag y emptyTag casteamos el viewComponent a Anchor. Esto simplifica el código y mejora la legibilidad a la vez que permite flexibilidad en la implementación (podría no hacerse el cast y utilizar estos atributos)[/comment]
