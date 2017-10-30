@@ -4,10 +4,11 @@
 
 [import edu::ifml2php::psm::lycmm::gen::laravel::services::helperApplication /]
 [import edu::ifml2php::psm::lycmm::gen::laravel::services::helperLaravelInputPaths /]
+[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperLaravelPaths /]
 
 [template public setApplicationConf(anApp : Application)]
 
-[ setAppName('/var/www/html/laravel5.4.15', anApp.name) /]
+[ setAppName(getBaseDir() + getLaravelVersion(), anApp.name) /]
 
 [file (self.getConfigAppPath(), false, 'UTF-8')]
 [for (line : String | anApp.getAppConfig().tokenize('\n'))]

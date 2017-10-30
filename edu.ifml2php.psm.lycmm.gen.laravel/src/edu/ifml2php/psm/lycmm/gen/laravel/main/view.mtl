@@ -18,7 +18,7 @@
 [template public makeViews(anApp : Application)]
 [comment @main /]
     [let base_dir : String = getBaseDir() ] 
-	   [let path : String = 'laravel5.4.15/resources/views/' + anApp.aPackageView.name + 'Views/']
+	   [let path : String = getLaravelVersion() + anApp.aPackageView.name + 'Views/']
           [ self.makeFolder(base_dir + path) /]
              [for (view : View | anApp.aPackageView.views )]	
 		        [for (inner : View | view.innerViews)]

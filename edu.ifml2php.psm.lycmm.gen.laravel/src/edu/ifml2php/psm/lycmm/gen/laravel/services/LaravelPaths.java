@@ -1,8 +1,13 @@
 package edu.ifml2php.psm.lycmm.gen.laravel.services;
 
+import org.apache.commons.lang3.SystemUtils;
+
 public class LaravelPaths {
-   String baseDir = "/var/www/html/";
-   String laravelVersion = "laravel5.4.15/";
+   String baseDir = SystemUtils.IS_OS_LINUX ? 
+		   					"/var/www/html/" : 
+		   					"C:/xampp/htdocs/";
+   
+   String laravelVersion = "laravel/";
 
    public String getBaseDir() {
       return baseDir;
