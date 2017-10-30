@@ -1,7 +1,7 @@
 package edu.ifml2php.psm.lycmm.gen.laravel.services;
 
 public class StringUtil {
-	char[] chars;
+	private char[] chars;
 	
 	public String getSuffix(String str) {
 		chars = str.toCharArray();

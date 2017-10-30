@@ -2,7 +2,7 @@
 [**
  * The documentation of the module.
  */]
-[module helperLaravelOutputPaths('http://www.application.org')/]
+[module helperLaravelOutputPaths('http://www.application.org/coreMVC')/]
 
 [**
  * The documentation of the query
