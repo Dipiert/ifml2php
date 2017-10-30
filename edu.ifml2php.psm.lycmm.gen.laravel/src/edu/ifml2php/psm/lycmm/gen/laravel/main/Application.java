@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.acceleo.common.utils.ModelUtils;
 import org.apache.commons.lang3.SystemUtils;
 
 import edu.ifml2php.psm.lycmm.gen.laravel.services.LaravelPaths;
