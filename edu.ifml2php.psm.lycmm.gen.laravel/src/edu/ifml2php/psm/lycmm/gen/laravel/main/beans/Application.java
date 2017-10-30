@@ -27,6 +27,10 @@ public class Application {
 	    	  return "";
 	   }
    }
+
+   public String getFQN(){
+	   return this.getClass().getCanonicalName();
+   }
    
 	public String getAppConfigLines(String keyword) {
       return fr.getFile(lip.getConfigAppPath(), keyword);
