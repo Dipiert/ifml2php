@@ -51,11 +51,6 @@ public void makeFolder(String path){
    new File(path).mkdirs();
 }
 
-public void shift(String array, String item, String path) {
-	String file = this.getFile(path);
-	file = file.trim();
-}
-
 public void removeReturnStmt(String varReturn, String path) {
 	String lineToRemove= "return $" + varReturn + ";";
 	String currentLine;
