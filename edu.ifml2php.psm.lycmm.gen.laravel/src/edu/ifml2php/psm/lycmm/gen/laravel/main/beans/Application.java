@@ -27,8 +27,8 @@ public class Application {
 	    	  return "";
 	   }
    }
-   
-	public String getAppConfigLines(String keyword) {
+
+    public String getAppConfigLines(String keyword) {
       return fr.getFile(lip.getConfigAppPath(), keyword);
     }
 	
