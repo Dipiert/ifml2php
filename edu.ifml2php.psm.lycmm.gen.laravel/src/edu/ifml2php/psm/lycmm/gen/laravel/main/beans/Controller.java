@@ -18,5 +18,8 @@ public class Controller {
 	public void setHookeable(boolean isHookeable) {
 		this.isHookeable = isHookeable;
 	}
-		
+	
+	public String getFQN() {
+		return this.getClass().getCanonicalName();
+	}
 }

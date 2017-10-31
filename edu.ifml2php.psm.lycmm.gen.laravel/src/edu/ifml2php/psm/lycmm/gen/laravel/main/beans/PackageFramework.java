@@ -17,7 +17,8 @@ public class PackageFramework {
 		this.version = version;
 	}
 	
-	
-	
+	public String getFQN() {
+		return this.getClass().getCanonicalName();
+	}
 }
 

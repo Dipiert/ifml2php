@@ -1,14 +1,19 @@
 [comment encoding = UTF-8 /]
+<<<<<<< HEAD
+[module helperLaravelInputPaths('http://www.application.org')/]
+[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperFQN  /]
+=======
 [module helperLaravelInputPaths('http://www.application.org/coreMVC')/]
+>>>>>>> 96deefc4e8541b7e24b4ad9f874897c722950733
 
 [query public getRoutesPath(anOclAny: OclAny) : String
-	= invoke('edu.ifml2php.psm.lycmm.gen.laravel.services.LaravelInputPaths', 'getRoutesPath()', Sequence{})
+	= invoke(getLaravelInputPathsFQN(), 'getRoutesPath()', Sequence{})
 /]
 
 [query public setRoutesPath(arg0 : String) : OclVoid
-	= invoke('edu.ifml2php.psm.lycmm.gen.laravel.services.LaravelInputPaths', 'setRoutesPath(java.lang.String)', Sequence{arg0})
+	= invoke(getLaravelInputPathsFQN(), 'setRoutesPath(java.lang.String)', Sequence{arg0})
 /]
 
 [query public getConfigAppPath(anOclAny: OclAny) : String
-	= invoke('edu.ifml2php.psm.lycmm.gen.laravel.services.LaravelInputPaths', 'getConfigAppPath()', Sequence{})
+	= invoke(getLaravelInputPathsFQN(), 'getConfigAppPath()', Sequence{})
 /]

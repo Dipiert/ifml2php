@@ -28,11 +28,7 @@ public class Application {
 	   }
    }
 
-   public String getFQN(){
-	   return this.getClass().getCanonicalName();
-   }
-   
-	public String getAppConfigLines(String keyword) {
+    public String getAppConfigLines(String keyword) {
       return fr.getFile(lip.getConfigAppPath(), keyword);
     }
 	
@@ -75,4 +71,7 @@ public class Application {
 		}
 	}
 	
+	public String getFQN() {
+		return this.getClass().getCanonicalName();
+	}
 }

@@ -1,16 +1,17 @@
 [comment encoding = UTF-8 /]
 [module helperFileReader('http://www.application.org')/]
+[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperFQN  /]
 
 [query public getFile(arg0 : String) : String
-	= invoke('edu.ifml2php.psm.lycmm.gen.laravel.services.FileReader', 'getFile(java.lang.String)', Sequence{arg0})
+	= invoke(getFileReaderFQN(), 'getFile(java.lang.String)', Sequence{arg0})
               
 /] 
 
 [query public getFile(arg0 : String, arg1 : String) : String
-	= invoke('edu.ifml2php.psm.lycmm.gen.laravel.services.FileReader', 'getFile(java.lang.String, java.lang.String)', Sequence{arg0, arg1})
+	= invoke(getFileReaderFQN(), 'getFile(java.lang.String, java.lang.String)', Sequence{arg0, arg1})
 /]
 
 [query public makeFolder(arg0 : String) : OclVoid
-	= invoke('edu.ifml2php.psm.lycmm.gen.laravel.services.FileReader', 'makeFolder(java.lang.String)', Sequence{arg0})
+	= invoke(getFileReaderFQN(), 'makeFolder(java.lang.String)', Sequence{arg0})
 /]
 
