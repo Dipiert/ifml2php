@@ -71,4 +71,7 @@ public class Application {
 		}
 	}
 	
+	public String getFQN() {
+		return this.getClass().getCanonicalName();
+	}
 }

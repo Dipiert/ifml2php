@@ -7,7 +7,6 @@ Bundle-Activator: edu.ifml2php.psm.lycmm.gen.laravel.Activator
 Bundle-Vendor: Eclipse Modeling Project
 Require-Bundle: org.eclipse.core.runtime, 
  org.eclipse.emf.ecore, 
- org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.ocl,
  org.eclipse.ocl.ecore,
@@ -21,6 +20,7 @@ Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
 Export-Package: edu.ifml2php.psm.lycmm.gen.laravel,
  edu.ifml2php.psm.lycmm.gen.laravel.main,
+ edu.ifml2php.psm.lycmm.gen.laravel.files,
  edu.ifml2php.psm.lycmm.gen.laravel.main.beans,
  edu.ifml2php.psm.lycmm.gen.laravel.services
 

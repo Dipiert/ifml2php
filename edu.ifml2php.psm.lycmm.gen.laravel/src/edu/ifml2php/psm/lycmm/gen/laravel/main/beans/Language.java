@@ -17,6 +17,7 @@ public class Language {
 		this.version = version;
 	}
 	
-	
-	
+	public String getFQN() {
+		return this.getClass().getCanonicalName();
+	}	
 }

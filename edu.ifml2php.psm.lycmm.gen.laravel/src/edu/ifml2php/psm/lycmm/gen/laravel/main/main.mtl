@@ -12,7 +12,7 @@
  * The documentation of the template generateElement.
  * @param aModel
  */]
-[template public generateElement(anApp : Application)]
+[template public main(anApp : Application)]
 [comment @main/]
 [ application(anApp) /]
 [ makeControllers(anApp) /]

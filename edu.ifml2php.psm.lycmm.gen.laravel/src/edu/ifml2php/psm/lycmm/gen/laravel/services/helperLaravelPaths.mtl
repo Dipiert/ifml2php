@@ -1,20 +1,21 @@
 [comment encoding = UTF-8 /]
 [module helperLaravelPaths('http://www.application.org')/]
+[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperFQN  /]
 
 [query public getBaseDir(anOclAny: OclAny) : String
-	= invoke('edu.ifml2php.psm.lycmm.gen.laravel.services.LaravelPaths', 'getBaseDir()', Sequence{})
+	= invoke(getLaravelPathsFQN(), 'getBaseDir()', Sequence{})
 /]
 
 [query public setBaseDir(arg0 : String) : OclVoid
-	= invoke('edu.ifml2php.psm.lycmm.gen.laravel.services.LaravelPaths', 'setBaseDir(java.lang.String)', Sequence{arg0})
+	= invoke(getLaravelPathsFQN(), 'setBaseDir(java.lang.String)', Sequence{arg0})
 /]
 
 [query public getLaravelVersion(anOclAny: OclAny) : String
-	= invoke('edu.ifml2php.psm.lycmm.gen.laravel.services.LaravelPaths', 'getLaravelVersion()', Sequence{})
+	= invoke(getLaravelPathsFQN(), 'getLaravelVersion()', Sequence{})
 /]
 
 [query public setLaravelVersion(arg0 : String) : OclVoid
-	= invoke('edu.ifml2php.psm.lycmm.gen.laravel.services.LaravelPaths', 'setLaravelVersion(java.lang.String)', Sequence{arg0})
+	= invoke(getLaravelPathsFQN(), 'setLaravelVersion(java.lang.String)', Sequence{arg0})
 /]
 
 

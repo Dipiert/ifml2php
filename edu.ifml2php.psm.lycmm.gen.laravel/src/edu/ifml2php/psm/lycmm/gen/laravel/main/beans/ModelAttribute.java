@@ -15,7 +15,7 @@ public class ModelAttribute {
 		this.isPersistible = isPersistible;
 	}
 
-	
-	
-	
+	public String getFQN() {
+		return this.getClass().getCanonicalName();
+	}
 }
