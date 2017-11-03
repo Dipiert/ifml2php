@@ -106,10 +106,8 @@ rule UMLClass2Model{
   to
     model : ourMM!Model(
       name<-class.name,
-      attributes <- UMLMM!Property.allInstances()
-                      ->select(e | e.namespace.name = class.name),
-      primaryKeys <- UMLMM!Property.allInstances()
-                      ->select(e | e.namespace.name = class.name)
+	  attributes <- class.ownedAttribute -> select(e | e.association = OclUndefined),
+	  primaryKeys <- class.ownedAttribute -> select(e | e.association = OclUndefined)	  
     )
 }
 
