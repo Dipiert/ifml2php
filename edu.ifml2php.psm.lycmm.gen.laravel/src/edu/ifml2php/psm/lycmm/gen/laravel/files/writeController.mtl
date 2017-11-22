@@ -7,14 +7,6 @@
 [import edu::ifml2php::psm::lycmm::gen::laravel::services::helperLaravelInputPaths /]
 [import edu::ifml2php::psm::lycmm::gen::laravel::services::helperStringUtil /]
 
-[comment]quiza pueda traer el path desde el helper y no pasarselo como param[/comment]
-
-[**
- * @param path
- * @param controller
- * @param appName
- * @param pmName
- */]
 [template public writeControllerSkeleton(path : String, controller : Controller, appName : String, pmName : String)]
 
 [file (path + controller.name + 'Controller.php', false, 'UTF-8')]
@@ -120,13 +112,11 @@ class [controller.name/]Controller extends Controller
 [comment]TODO: *Podrían usarse 2 templates, uno que coloque los métodos personalizados al comienzo y otro que los coloque al final.
 Incluso, se podría poner a los métodos en un orden tal que sea significativo para facilitar la lectura.[/comment]  
 [/file]
-
 [/template]
 
 [template public registerController(nameController : String, namePackage : String, pv : PackageView)]
 
 [file (self.getRoutesPath(), true, 'UTF-8')]
-<?php 
 [for (view : View | pv.views)]
 	[if (getSuffix(view.name).toString().matches(nameController))]
 Route::get('[nameController.toLowerCase()/]/[view.name/]', '[namePackage/]Controllers\[nameController/]Controller@createView[view.name/]')->name('[nameController.toLowerCase()/].[view.name/]');
@@ -151,4 +141,10 @@ Route::resource('[nameController.toLowerCase()/]','[namePackage/]Controllers\[na
 	[/if]
 [/for]
 [/file]
+[/template]
+
+[template public writePHPTag(path : String)]
+	[file (path, true, 'UTF-8')]
+<?php
+	[/file]
 [/template]

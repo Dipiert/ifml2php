@@ -8,6 +8,7 @@
 [import edu::ifml2php::psm::lycmm::gen::laravel::files::writeController /]
 [import edu::ifml2php::psm::lycmm::gen::laravel::services::helperApplication /]
 [import edu::ifml2php::psm::lycmm::gen::laravel::services::helperLaravelPaths /]
+[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperLaravelInputPaths /]
 [import edu::ifml2php::psm::lycmm::gen::laravel::services::helperLaravelOutputPaths /]
 
 [**
@@ -22,6 +23,7 @@
 [let base_dir : String = getBaseDir() ]
    [let path : String = getControllersHome() + anApp.aPackageController.name + 'Controllers/']
        [self.makeFolder(base_dir + path) /]
+	   [writePHPTag(getRoutesPath()) /]
        [for (controller : Controller | anApp.aPackageController.controllers)]
         [if (anApp.name.oclIsUndefined() or anApp.name = '')]
 			[ writeControllerSkeleton(path, controller, getDefaultAppName('Laravel'), anApp.aPackageModel.name) /]
