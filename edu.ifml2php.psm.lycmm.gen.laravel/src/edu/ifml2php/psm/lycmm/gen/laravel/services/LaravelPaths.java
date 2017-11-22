@@ -7,7 +7,7 @@ public class LaravelPaths {
 			"/var/www/html/" : 
 				"C:/xampp/htdocs/";
 
-	String laravelVersion = "laravel/";
+	String laravelVersion = "laravel5.4.15/";
 
 	public String getBaseDir() {
 		return baseDir;

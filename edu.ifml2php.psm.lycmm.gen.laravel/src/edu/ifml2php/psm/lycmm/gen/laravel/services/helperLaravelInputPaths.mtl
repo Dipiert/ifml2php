@@ -1,10 +1,7 @@
 [comment encoding = UTF-8 /]
-<<<<<<< HEAD
-[module helperLaravelInputPaths('http://www.application.org')/]
-[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperFQN  /]
-=======
 [module helperLaravelInputPaths('http://www.application.org/coreMVC')/]
->>>>>>> 96deefc4e8541b7e24b4ad9f874897c722950733
+
+[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperFQN  /]
 
 [query public getRoutesPath(anOclAny: OclAny) : String
 	= invoke(getLaravelInputPathsFQN(), 'getRoutesPath()', Sequence{})

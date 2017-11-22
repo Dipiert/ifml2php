@@ -2,12 +2,8 @@
 [**
  * The documentation of the module.
  */]
-<<<<<<< HEAD
-[module helperApplication ('http://www.application.org')/]
-[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperFQN  /]
-=======
 [module helperApplication ('http://www.application.org/coreMVC')/]
->>>>>>> 96deefc4e8541b7e24b4ad9f874897c722950733
+[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperFQN  /]
 
 [**
  * The documentation of the query
@@ -22,11 +18,7 @@
 /]
 
 [query public getLocale(anOclAny: OclAny) : String
-<<<<<<< HEAD
 	= invoke(getBeansApplicationFQN(), 'getLocale()', Sequence{})
-=======
-	= invoke(getFQN(), 'getLocale()', Sequence{})
->>>>>>> 96deefc4e8541b7e24b4ad9f874897c722950733
 /]
 
 [**
@@ -34,22 +26,14 @@
  * @param arg0
  */]
 [query public setLocale(arg0 : String) : OclVoid
-<<<<<<< HEAD
 	= invoke(getBeansApplicationFQN(), 'setLocale(java.lang.String)', Sequence{arg0})
-=======
-	= invoke(getFQN(), 'setLocale(java.lang.String)', Sequence{arg0})
->>>>>>> 96deefc4e8541b7e24b4ad9f874897c722950733
 /]
 
 [**
  * The documentation of the query
  */]
 [query public getAppConfig(anOclAny: OclAny) : String
-<<<<<<< HEAD
 	= invoke(getBeansApplicationFQN(), 'getAppConfig()', Sequence{})
-=======
-	= invoke(getFQN(), 'getAppConfig()', Sequence{})
->>>>>>> 96deefc4e8541b7e24b4ad9f874897c722950733
 /]
 
 [**
@@ -57,7 +41,6 @@
  * @param arg0
  */]
 [query public getAppConfigLines(arg0 : String) : String
-<<<<<<< HEAD
 	= invoke(getBeansApplicationFQN(), 'getAppConfigLines(java.lang.String)', Sequence{arg0})
 /]
 
@@ -71,21 +54,6 @@
 
 [query public setAppName(arg0: String, arg1:String) : String
 	= invoke(getBeansApplicationFQN(), 'setAppName(java.lang.String, java.lang.String)', Sequence{arg0, arg1})
-=======
-	= invoke(getFQN(), 'getAppConfigLines(java.lang.String)', Sequence{arg0})
-/]
-
-[query public getRoutes(anOclAny: OclAny) : String
-	= invoke(getFQN(), 'getRoutes()', Sequence{})
-/]
-
-[query public getDefaultAppName(arg0: String) : String
-	= invoke(getFQN(), 'getDefaultAppName(java.lang.String)', Sequence{arg0})
-/]
-
-[query public setAppName(arg0: String, arg1:String) : String
-	= invoke(getFQN(), 'setAppName(java.lang.String, java.lang.String)', Sequence{arg0, arg1})
->>>>>>> 96deefc4e8541b7e24b4ad9f874897c722950733
 /]
 
 

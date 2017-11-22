@@ -3,8 +3,7 @@
 [import edu::ifml2php::psm::lycmm::gen::laravel::services::helperFQN  /]
 
 [query public getFile(arg0 : String) : String
-	= invoke(getFileReaderFQN(), 'getFile(java.lang.String)', Sequence{arg0})
-              
+	= invoke(getFileReaderFQN(), 'getFile(java.lang.String)', Sequence{arg0})           
 /] 
 
 [query public getFile(arg0 : String, arg1 : String) : String

@@ -2,12 +2,8 @@
 [**
  * The documentation of the module.
  */]
-<<<<<<< HEAD
-[module helperLaravelOutputPaths('http://www.application.org')/]
-[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperFQN  /]
-=======
 [module helperLaravelOutputPaths('http://www.application.org/coreMVC')/]
->>>>>>> 96deefc4e8541b7e24b4ad9f874897c722950733
+[import edu::ifml2php::psm::lycmm::gen::laravel::services::helperFQN  /]
 
 [**
  * The documentation of the query
