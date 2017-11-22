@@ -123,12 +123,16 @@ Route::get('[nameController.toLowerCase()/]/[view.name/]', '[namePackage/]Contro
 	[/if]
 [/for]
 Route::resource('[nameController.toLowerCase()/]','[namePackage/]Controllers\[nameController/]Controller');
+[/file]
+[/template]
+
+[template public writeCatchAllRoute()]
+[file (self.getRoutesPath(), true, 'UTF-8')]
 /*Route::any( '{catchall}', function () {
     return view('welcome');
 })->where('catchall', '(.*)');*/
 [/file]
 [/template]
-
 [template public writeViewConstructors(path : String, controllerName : String, pv : PackageView)]
 [file (path + controllerName + 'Controller.php', true, 'UTF-8')]
 [for (view : View | pv.views) after ('}')]

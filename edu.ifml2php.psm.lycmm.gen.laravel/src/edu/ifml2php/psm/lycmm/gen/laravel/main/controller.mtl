@@ -31,6 +31,7 @@
         	[ writeControllerSkeleton(path, controller, anApp.name, anApp.aPackageModel.name) /]
         [/if]
 		  [ writeViewConstructors(path, controller.name, anApp.aPackageView ) /]
+		  [ writeCatchAllRoute()/]
 		  [ registerController(controller.name, anApp.aPackageController.name, anApp.aPackageView) /]
        [/for]
     [/let]
