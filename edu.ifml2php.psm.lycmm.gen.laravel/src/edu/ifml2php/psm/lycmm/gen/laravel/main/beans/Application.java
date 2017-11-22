@@ -84,7 +84,7 @@ public class Application {
 		Map<String,String> env = new HashMap<String,String>(System.getenv());
 		String phpPath = SystemUtils.IS_OS_LINUX ? 
 				"/usr/bin/php" : 
-				"C:/xampp/htdocs/php/php.exe";
+				"C:/xampp/php/php.exe";
 		env.put("php", phpPath);
 		String[] envp = new String[env.size()];
 		int index = 0;
