@@ -20,7 +20,7 @@ This project intended to facilitate the adoption of the MDD approach by Web Deve
  * [Composer](https://getcomposer.org/download/)
  * [Apache Commons Lang](https://commons.apache.org/proper/commons-lang/)
  * [Laravel Framework](https://laravel.com/)
- * [Laravel Colletive](https://laravelcollective.com/docs/5.0/html)
+ * [Laravel Collective](https://laravelcollective.com/docs/5.0/html)
  * [Yii2 Framework](http://www.yiiframework.com/)
 
 ### [Eclipse](https://www.eclipse.org/downloads/packages/eclipse-modeling-tools/lunasr2)
