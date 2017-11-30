@@ -24,7 +24,7 @@ class MovieController extends Controller
     $request->merge(['isSaga' => ($request->__isset('saga'))? 1 : 0]);
     
     Movie::where('title', $request->get('title'))
-           ->update(['title' => $request->get('title'),
+           ->update([
                      'year' => $request->get('year'),    
                      'audience' => $request->get('audience'),    
                      'isSaga' => $request->get('isSaga')
