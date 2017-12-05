@@ -17,18 +17,24 @@ namespace [ appName/]\Http\Controllers\[pmName+ 'Controllers'/];
 use [appName/]\Http\Controllers\Controller;
 use [appName/]\Http\Requests\[ pmName /]Requests\[controller.name/]Request;
 use [appName/]\[pmName/]Models\[controller.name/];
+// [protected ('controller_uses')]
+// [/protected]
+
 
 class [controller.name/]Controller extends Controller
 {
 [for (method : Method | controller.methods)]
-
+/**
+	@generated NOT
+**/
    protected function [ method.name /]([controller.name/]Request $request)
    {   
     [if ( method.outParameters->size() > 0)]
     	//Los parámetros ([for (parameter : Attribute | method.outParameters) separator(', ' )]$[parameter.name/][/for]) fueron modelados como de salida. Verifique si son retornados al módulo llamador o pasado a otro 
     [else]
 	
-	[/if] 
+	[/if]	
+ 
    }
 		
 [/for]	
@@ -117,6 +123,8 @@ Incluso, se podría poner a los métodos en un orden tal que sea significativo p
 [template public registerController(nameController : String, namePackage : String, pv : PackageView)]
 
 [file (self.getRoutesPath(), true, 'UTF-8')]
+//[protected ('routes')]
+//[/protected]
 [for (view : View | pv.views)]
 	[if (getSuffix(view.name).toString().matches(nameController))]
 Route::get('[nameController.toLowerCase()/]/[view.name/]', '[namePackage/]Controllers\[nameController/]Controller@createView[view.name/]')->name('[nameController.toLowerCase()/].[view.name/]');
@@ -139,7 +147,10 @@ Route::resource('[nameController.toLowerCase()/]','[namePackage/]Controllers\[na
 	[if (getSuffix(view.name).toString().matches(controllerName))]
     function createView[ view.name /]()
     {
+		 //[protected ('protected')]
+		 //[/protected]
          return view('[pv.name/]Views.[ view.name /]');
+
     }
 
 	[/if]
