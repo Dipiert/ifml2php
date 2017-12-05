@@ -179,7 +179,7 @@ In this repo, there are two Acceleo projects called:
 
 Do a manual register of the metamodel, add the following code on the ```registerPackages()``` method in the corresponding Java launcher. 
 
-If you change the content of any method of a Java Launcher, don't forget to change the ```@generated``` tag in the Javadoc of the method to ```@generated NOT```. Without this new tag, any compilation of the Acceleo module with the main template that has caused the creation of this class will revert your modifications.
+If you change the content of any method of a Java Launcher, don't forget to change the ```@generated``` tag in the Javadoc of the method to ```@generated NOT``` (preferable by consistency style) or ```@not-generated```. Without this new tag, any compilation of the Acceleo module with the main template that has caused the creation of this class will revert your modifications.
 
 ```
 URI uri = URI.createFileURI("../edu.ifml2php.pim.ifml.gen.lycmm/models/metamodels/Metamodel.ecore");
