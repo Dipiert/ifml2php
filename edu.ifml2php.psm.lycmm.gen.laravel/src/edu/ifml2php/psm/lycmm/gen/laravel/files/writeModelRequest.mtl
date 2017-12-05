@@ -10,7 +10,12 @@
 namespace [ appName /]\Http\Requests\[ pmName /]Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+//[protected ('request_uses')]
+//[/protected]
 
+/*
+@generated NOT
+*/
 class [ model.name /]Request extends FormRequest
 {
     /**

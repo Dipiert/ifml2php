@@ -15,6 +15,9 @@
 
 [template public writeView(path : String, view : View, pcName : String, pvName : String)]
 [file (path + view.name + '.blade.php', false, 'UTF-8')]
+<!--
+[protected ('HTMLView')]
+-->
 <!DOCTYPE html>
 <head>
 	<meta name="description" content="ifml2php">
@@ -104,7 +107,9 @@ formHandler : String = pcName + 'Controllers\\' + getSuffix(view.name.toUpperFir
 	[for (iv : View | view.innerViews)]
 @include('[pvName + 'Views/' + iv.name /]')
 	[/for]
-
+<!--
+[/protected]
+-->
 [/file]
 [/template]
 

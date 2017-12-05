@@ -18,7 +18,12 @@
 namespace [ appName /]\[(path.tokenize('/'))->asSequence()->last() /];
 	
 use Illuminate\Database\Eloquent\Model;
-		
+//[protected ('protected')]
+//[/protected]
+
+/*
+@generated NOT
+*/		
 class [model.name /] extends Model
 {
 	[if (not model.primaryKeys->select(e|e.oclIsTypeOf(Identifier))->isEmpty())]
