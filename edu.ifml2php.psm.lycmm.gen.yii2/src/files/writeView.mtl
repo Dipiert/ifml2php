@@ -17,6 +17,9 @@
 [template public writeView(path : String, view : View, pcName : String, pvName : String)]
 [file (path + view.name + '.php', false, 'UTF-8')]
 [comment]TODO: No es necesario pasarle la vista porque está dentro del package[/comment]
+<!--
+[protected ('HTMLView')]
+-->
 [ writeIncludes(view) /]
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="[ getStylesheetsHome() + 'ifml2php.css' /]">
@@ -89,7 +92,9 @@
 	[for (iv : View | view.innerViews)]
 <?php $this->render('[iv.name /]'); ?>
 	[/for]
-
+<!--
+[/protected]
+-->
 [/file]
 [/template]
 

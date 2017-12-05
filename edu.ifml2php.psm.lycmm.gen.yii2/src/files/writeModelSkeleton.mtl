@@ -19,33 +19,38 @@ namespace app\models\[(path.tokenize('/'))->asSequence()->last() /];
 use Yii;		
 use yii\base\Model;
 use yii\db\ActiveRecord;
+//[protected ('protected')]
+//[/protected]
 
+/*
+@generated NOT
+*/
 class [model.name /] extends ActiveRecord
 {
 [for (at : Attribute | model.attributes)]
 	protected $[ at.name /];
 [/for]
 
-public function rules()
-{
-	return ['['/]
-             [ '[' /][ '[' /][for (at : Attribute | model.attributes) separator(', ')]'[at.name/]'[/for][ ']' /], 'required'[']'/]
- 		   [']'/];
-}
+	public function rules()
+	{
+		return ['['/]
+        	     [ '[' /][ '[' /][for (at : Attribute | model.attributes) separator(', ')]'[at.name/]'[/for][ ']' /], 'required'[']'/]
+ 		   	[']'/];
+	}
 
-public static function tableName()
-{
-    return '[model.name.toLowerCase() /]';
-}
+	public static function tableName()
+	{
+    	return '[model.name.toLowerCase() /]';
+	}
 
-public function attributeLabels()
-{
+	public function attributeLabels()
+	{
         return ['['/]
 			[for (at : Attribute | model.attributes)]
 				'[ at.name /]' => '',
 			[/for]
         	   [']'/];
-}
+	}
 
 
 }

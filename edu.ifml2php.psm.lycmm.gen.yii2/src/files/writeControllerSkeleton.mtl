@@ -23,11 +23,16 @@ namespace app\controllers\[pmName/]Controllers;
 use Yii;
 use yii\web\Controller;
 use yii\db\Connection; [comment TODO: este import no debe ser un supuesto/]
+//[protected ('controller_uses')]
+//[/protected]
 
 class [controller.name/]Controller extends Controller
 {
-[for (method : Method | controller.methods)]
 
+[for (method : Method | controller.methods)]
+/*
+@generated NOT
+*/
    function action[ method.name.toUpperFirst() /]()
    {   
     [if ( method.outParameters->size() > 0)]

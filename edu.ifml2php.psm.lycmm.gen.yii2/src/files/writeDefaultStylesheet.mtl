@@ -12,7 +12,12 @@
 [template public writeDefaultStylesheet()]
 
 [file(getStylesheetsHome() + 'ifml2php.css', false, 'UTF-8')]
-
+/*
+[protected ('default_stylesheet')]
+*/
+/*
+[/protected]
+*/
 .ifml2php_content-area {
 	text-align: center;
 	border: 1px black solid;
