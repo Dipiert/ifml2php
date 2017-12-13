@@ -11,4 +11,7 @@ public class Yii2InputPaths extends Yii2Paths{
       this.configAppPath = configApp;
    }
 	
+   public String getFQN() {
+	   return this.getClass().getCanonicalName();
+   }
 }

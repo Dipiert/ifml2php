@@ -3,12 +3,13 @@
  * The documentation of the module.
  */]
 [module helperYii2Paths('http://www.application.org/coreMVC')/]
+[import helperFQN /]
 
 [**
  * The documentation of the query
  */]
 [query public getBaseDir(anOclAny: OclAny) : String
-	= invoke('services.Yii2Paths', 'getBaseDir()', Sequence{})
+	= invoke(getYii2PathsFQN(), 'getBaseDir()', Sequence{})
 /]
 
 [**
@@ -16,6 +17,6 @@
  * @param arg0
  */]
 [query public setBaseDir(arg0 : String) : OclVoid
-	= invoke('services.Yii2Paths', 'setBaseDir(java.lang.String)', Sequence{arg0})
+	= invoke(getYii2PathsFQN(), 'setBaseDir(java.lang.String)', Sequence{arg0})
 /]
 

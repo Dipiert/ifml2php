@@ -1,0 +1,54 @@
+[comment encoding = UTF-8 /]
+[module helperFQN('http://www.application.org')/]
+
+[**
+* Beans
+*/]
+
+[query public getBeansApplicationFQN(anOclAny: OclAny) : String
+	= invoke('main.beans.Application', 'getFQN()', Sequence{})
+/]
+
+[query public getBeansPackageFrameworkFQN(anOclAny: OclAny) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.laravel.main.beans.PackageFramework', 'getFQN()', Sequence{})
+/]
+
+[query public getBeansModelAttributeFQN(anOclAny: OclAny) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.laravel.main.beans.ModelAttribute', 'getFQN()', Sequence{})
+/]
+
+[query public getBeansLanguageFQN(anOclAny: OclAny) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.laravel.main.beans.Language', 'getFQN()', Sequence{})
+/]
+
+[query public getBeansControllerFQN(anOclAny: OclAny) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.laravel.main.beans.Controller', 'getFQN()', Sequence{})
+/]
+
+[query public getBeansAppTypeFQN(anOclAny: OclAny) : String
+	= invoke('edu.ifml2php.psm.lycmm.gen.laravel.main.beans.AppType', 'getFQN()', Sequence{})
+/]
+
+[**
+* Services
+*/]
+
+[query public getStringUtilFQN(anOclAny: OclAny) : String
+	= invoke('services.StringUtil', 'getFQN()', Sequence{})
+/]
+
+[query public getYii2PathsFQN(anOclAny: OclAny) : String
+	= invoke('services.Yii2Paths', 'getFQN()', Sequence{})
+/]
+
+[query public getYii2OutputPathsFQN(anOclAny: OclAny) : String
+	= invoke('services.Yii2OutputPaths', 'getFQN()', Sequence{})
+/]
+
+[query public getYii2InputPathsFQN(anOclAny: OclAny) : String
+	= invoke('services.Yii2InputPaths', 'getFQN()', Sequence{})
+/]
+
+[query public getFileReaderFQN(anOclAny: OclAny) : String
+	= invoke('services.FileReader', 'getFQN()', Sequence{})
+/]

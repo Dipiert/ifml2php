@@ -1,14 +1,15 @@
 [comment encoding = UTF-8 /]
 [module helperYii2InputPaths('http://www.application.org/coreMVC')/]
+[import helperFQN /]
 
 [query public getRoutesPath(anOclAny: OclAny) : String
-	= invoke('services.Yii2InputPaths', 'getRoutesPath()', Sequence{})
+	= invoke(getYii2InputPathsFQN(), 'getRoutesPath()', Sequence{})
 /]
 
 [query public setRoutesPath(arg0 : String) : OclVoid
-	= invoke('services.Yii2InputPaths', 'setRoutesPath(java.lang.String)', Sequence{arg0})
+	= invoke(getYii2InputPathsFQN(), 'setRoutesPath(java.lang.String)', Sequence{arg0})
 /]
 
 [query public getConfigAppPath(anOclAny: OclAny) : String
-	= invoke('services.Yii2InputPaths', 'getConfigAppPath()', Sequence{})
+	= invoke(getYii2InputPathsFQN(), 'getConfigAppPath()', Sequence{})
 /] 

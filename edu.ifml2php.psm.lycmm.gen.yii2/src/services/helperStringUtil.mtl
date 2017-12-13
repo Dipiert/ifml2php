@@ -1,14 +1,15 @@
 [comment encoding = UTF-8 /]
 [module helperStringUtil('http://www.application.org/coreMVC')/]
+[import helperFQN /]
 
 [query public getSuffix(arg0 : String) : String
-	= invoke('services.StringUtil', 'getSuffix(java.lang.String)', Sequence{arg0})
+	= invoke(getStringUtilFQN(), 'getSuffix(java.lang.String)', Sequence{arg0})
 /]
 
 [query public getPrefix(arg0 : String) : String
-	= invoke('services.StringUtil', 'getPrefix(java.lang.String)', Sequence{arg0})
+	= invoke(getStringUtilFQN(), 'getPrefix(java.lang.String)', Sequence{arg0})
 /]
 
 [query public separatePrefixSuffix(arg0 : String) : String
-	= invoke('services.StringUtil', 'separatePrefixSuffix(java.lang.String)', Sequence{arg0})
+	= invoke(getStringUtilFQN(), 'separatePrefixSuffix(java.lang.String)', Sequence{arg0})
 /]

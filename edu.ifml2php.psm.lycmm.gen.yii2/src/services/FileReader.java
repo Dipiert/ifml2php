@@ -72,4 +72,8 @@ public void removeReturnStmt(String varReturn, String path) {
 	}
 }
 
+public String getFQN() {
+	return this.getClass().getCanonicalName();
+}
+
 }

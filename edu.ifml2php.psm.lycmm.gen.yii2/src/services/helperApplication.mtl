@@ -3,7 +3,7 @@
  * The documentation of the module.
  */]
 [module helperApplication ('http://www.application.org/coreMVC')/]
-
+[import services::helperFQN /]
 [**
  * The documentation of the query
  * @param arg0
@@ -13,7 +13,7 @@
  */]
 
 [query public getLocale(anOclAny: OclAny) : String
-	= invoke('main.beans.Application', 'getLocale()', Sequence{})
+	= invoke(getBeansApplicationFQN(), 'getLocale()', Sequence{})
 /]
 
 [**
@@ -21,14 +21,14 @@
  * @param arg0
  */]
 [query public setLocale(arg0 : String) : OclVoid
-	= invoke('main.beans.Application', 'setLocale(java.lang.String)', Sequence{arg0})
+	= invoke(getBeansApplicationFQN(), 'setLocale(java.lang.String)', Sequence{arg0})
 /]
 
 [**
  * The documentation of the query
  */]
 [query public getAppConfig(anOclAny: OclAny) : String
-	= invoke('main.beans.Application', 'getAppConfig()', Sequence{})
+	= invoke(getBeansApplicationFQN(), 'getAppConfig()', Sequence{})
 /]
 
 [**
@@ -36,22 +36,22 @@
  * @param arg0
  */]
 [query public getAppConfigLines(arg0 : String) : String
-	= invoke('main.beans.Application', 'getAppConfigLines(java.lang.String)', Sequence{arg0})
+	= invoke(getBeansApplicationFQN(), 'getAppConfigLines(java.lang.String)', Sequence{arg0})
 /]
 
 [query public getRoutes(anOclAny: OclAny) : String
-	= invoke('main.beans.Application', 'getRoutes()', Sequence{})
+	= invoke(getBeansApplicationFQN(), 'getRoutes()', Sequence{})
 /]
 
 [query public getDefaultAppName(arg0: String) : String
-	= invoke('main.beans.Application', 'getDefaultAppName(java.lang.String)', Sequence{arg0})
+	= invoke(getBeansApplicationFQN(), 'getDefaultAppName(java.lang.String)', Sequence{arg0})
 /]
 
 [query public setAppName(arg0: String, arg1:String) : String
-	= invoke('main.beans.Application', 'setAppName(java.lang.String, java.lang.String)', Sequence{arg0, arg1})
+	= invoke(getBeansApplicationFQN(), 'setAppName(java.lang.String, java.lang.String)', Sequence{arg0, arg1})
 /]
 
 [query public isSet(arg0: String) : Boolean
-	= invoke('main.beans.Application', 'isSet(java.lang.String)', Sequence{arg0})
+	= invoke(getBeansApplicationFQN(), 'isSet(java.lang.String)', Sequence{arg0})
 /]
 

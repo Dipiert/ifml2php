@@ -20,4 +20,7 @@ public class Yii2Paths {
       this.yii2Version = yii2Version;
    }   
    
+   public String getFQN() {
+	   return this.getClass().getCanonicalName();
+   }
 }

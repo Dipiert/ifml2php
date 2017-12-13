@@ -1,8 +1,5 @@
 package services;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class StringUtil {
 	char[] chars;
 	
@@ -28,8 +25,10 @@ public class StringUtil {
 	
 	public String camelCase2CaterpillarCase(String camelCased) {
 		camelCased.replace("([a-z])([A-Z])", "$1 $2");
-		return camelCased.replace("\\s+|_+", "-").toLowerCase();
-		
-		
+		return camelCased.replace("\\s+|_+", "-").toLowerCase();		
+	}
+	
+	public String getFQN() {
+		return this.getClass().getCanonicalName();
 	}
 }

@@ -3,12 +3,12 @@
  * The documentation of the module.
  */]
 [module helperYii2OutputPaths('http://www.application.org/coreMVC')/]
-
+[import helperFQN /]
 [**
  * The documentation of the query
  */]
 [query public getYii2Version(anOclAny: OclAny) : String
-	= invoke('services.Yii2OutputPaths', 'getYii2Version()', Sequence{})
+	= invoke(getYii2OutputPathsFQN(), 'getYii2Version()', Sequence{})
 /]
 
 [**
@@ -16,14 +16,14 @@
  * @param arg0
  */]
 [query public setYii2Version(arg0 : String) : OclVoid
-	= invoke('services.Yii2OutputPaths', 'setYii2Version(java.lang.String)', Sequence{arg0})
+	= invoke(getYii2OutputPathsFQN(), 'setYii2Version(java.lang.String)', Sequence{arg0})
 /]
 
 [**
  * The documentation of the query
  */]
 [query public getModelsHome(anOclAny: OclAny) : String
-	= invoke('services.Yii2OutputPaths', 'getModelsHome()', Sequence{})
+	= invoke(getYii2OutputPathsFQN(), 'getModelsHome()', Sequence{})
 /]
 
 [**
@@ -31,14 +31,14 @@
  * @param arg0
  */]
 [query public setModelsHome(arg0 : String) : OclVoid
-	= invoke('services.Yii2OutputPaths', 'setModelsHome(java.lang.String)', Sequence{arg0})
+	= invoke(getYii2OutputPathsFQN(), 'setModelsHome(java.lang.String)', Sequence{arg0})
 /]
 
 [**
  * The documentation of the query
  */]
 [query public getViewsHome(anOclAny: OclAny) : String
-	= invoke('services.Yii2OutputPaths', 'getViewsHome()', Sequence{})
+	= invoke(getYii2OutputPathsFQN(), 'getViewsHome()', Sequence{})
 /]
 
 [**
@@ -46,14 +46,14 @@
  * @param arg0
  */]
 [query public setViewsHome(arg0 : String) : OclVoid
-	= invoke('services.Yii2OutputPaths', 'setViewsHome(java.lang.String)', Sequence{arg0})
+	= invoke(getYii2OutputPathsFQN(), 'setViewsHome(java.lang.String)', Sequence{arg0})
 /]
 
 [**
  * The documentation of the query
  */]
 [query public getControllersHome(anOclAny: OclAny) : String
-	= invoke('services.Yii2OutputPaths', 'getControllersHome()', Sequence{})
+	= invoke(getYii2OutputPathsFQN(), 'getControllersHome()', Sequence{})
 /]
 
 [**
@@ -61,14 +61,14 @@
  * @param arg0
  */]
 [query public setControllersHome(arg0 : String) : OclVoid
-	= invoke('services.Yii2OutputPaths', 'setControllersHome(java.lang.String)', Sequence{arg0})
+	= invoke(getYii2OutputPathsFQN(), 'setControllersHome(java.lang.String)', Sequence{arg0})
 /]
 
 [**
  * The documentation of the query
  */]
 [query public getWelcomeView(anOclAny: OclAny) : String
-	= invoke('services.Yii2OutputPaths', 'getWelcomeView()', Sequence{})
+	= invoke(getYii2OutputPathsFQN(), 'getWelcomeView()', Sequence{})
 /]
 
 [**
@@ -76,13 +76,13 @@
  * @param arg0
  */]
 [query public setWelcomeView(arg0 : String) : OclVoid
-	= invoke('services.Yii2OutputPaths', 'setWelcomeView(java.lang.String)', Sequence{arg0})
+	= invoke(getYii2OutputPathsFQN(), 'setWelcomeView(java.lang.String)', Sequence{arg0})
 /]
 
 [query public getStylesheetsHome(anOclAny: OclAny) : String
-	= invoke('services.Yii2OutputPaths', 'getStylesheetsHome()', Sequence{})
+	= invoke(getYii2OutputPathsFQN(), 'getStylesheetsHome()', Sequence{})
 /]
 
 [query public setStylesheetsHome(arg0 : String) : OclVoid
-	= invoke('services.Yii2OutputPaths', 'setStyleSheetHome(java.lang.String)', Sequence{arg0})
+	= invoke(getYii2OutputPathsFQN(), 'setStyleSheetHome(java.lang.String)', Sequence{arg0})
 /]
