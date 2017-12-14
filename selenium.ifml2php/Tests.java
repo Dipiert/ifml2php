@@ -11,25 +11,23 @@ import org.testng.annotations.AfterClass;
 public class Tests {
 	static FirefoxDriver driver;
 	static String URL;
-
+	static String[] pagesTitles;
+	static String[] anchorsLinks;
+	static String[] pagesWithImages;
+	
 	@BeforeClass
 	private static void setUp() {
 		System.setProperty("webdriver.gecko.driver", "/home/dam/Descargas/eclipse/luna/geckodriver");
 		driver = new FirefoxDriver();
 		URL = makeURL();
+		pagesTitles = new String[]{"MainMenuMovie", "AddFormMovie", "UpdateFormMovie", "DeleteFormMovie"};
+		anchorsLinks = new String[]{"Main Menu Movie", "Add Form Movie", "Update Form Movie", "Delete Form Movie"};
+		pagesWithImages = new String[]{"MainMenuMovie"};
 	}
 	
 	@AfterClass
 	private static void tearDown() {
 		driver.close();
-	}
-	
-	@Test(enabled = true)
-	public static void pagesShouldHaveSameTitle() {
-		String[] titles = {"MainMenuMovie", "AddFormMovie", "UpdateFormMovie", "DeleteFormMovie"};
-		for(String title : titles){
-			testATitle(URL, title);
-		}			
 	}
 	
 	private static String makeURL() {
@@ -38,38 +36,36 @@ public class Tests {
 		String controller = "movie";
 		return "http://" + server + "/" + project + "/public/" + controller + "/";
 	}
-		
-	private static void testATitle(String URL, String title) {
-		driver.get(URL + title);
-		AssertJUnit.assertEquals(title, driver.getTitle());
-	}
 	
-	@Test(enabled = true)
-	public static void pagesShouldHaveAllAnchors() {
-		String[] titles = {"Main Menu Movie", "Add Form Movie", "Update Form Movie", "Delete Form Movie"};
-		for(String title : titles){
-			testAPageAnchors(URL, titles);
-		}	
-	}
-	
-	private static void testAPageAnchors(String URL, String[] titles) {
-		for(String title : titles){
-			String _title = title.replaceAll("\\s+","");
-			driver.get(URL + _title);
-			if (! _title.equals(driver.getTitle())) {
-				WebElement el = driver.findElementByLinkText(title);
-				AssertJUnit.assertNotNull(el);
-			}
+	@Test(enabled = true)	
+	public static void pagesShouldHaveSameTitle() {
+		for(String title : pagesTitles) {
+			driver.get(URL + title);
+			AssertJUnit.assertEquals(title, driver.getTitle());
 		}		
 	}
 	
 	@Test(enabled = true)
-	public static void pagesShouldDisplayImages() {
-		String title = "MainMenuMovie";
-		driver.get(URL + title);		
-		WebElement img = driver.findElement(By.xpath("//img[contains(@alt,'logo')]"));
-		AssertJUnit.assertNotNull(img);
+	public static void testAPageAnchors() {
+		for(String anchorLink : anchorsLinks){
+			for(String title : anchorsLinks){
+				String _title = title.replaceAll("\\s+","");
+				driver.get(URL + _title);
+				if (! _title.equals(driver.getTitle())) {
+					WebElement el = driver.findElementByLinkText(title);
+					AssertJUnit.assertNotNull(el);
+				}
+			}	
+		}				
 	}
 	
+	@Test(enabled = true)
+	public static void pagesShouldDisplayImages() {
+		for(String pageWithImage : pagesWithImages) {
+			driver.get(URL + pageWithImage);		
+			WebElement img = driver.findElement(By.xpath("//img[contains(@alt,'logo')]"));
+			AssertJUnit.assertNotNull(img);	
+		}		
+	}
 }
 
