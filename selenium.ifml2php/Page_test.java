@@ -1,10 +1,12 @@
 package selenium.ifml2php;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.Assert;
 import org.testng.AssertJUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -100,8 +102,25 @@ public class Page_test {
 			page = entry.getKey();
 			title = entry.getValue();
 			driver.get(baseDirController + page);
-			frm =  driver.findElement(By.xpath("//form[contains(@name, " + title + ")]"));
-			AssertJUnit.assertNotNull(frm);	
+			Assert.assertEquals(driver.getTitle(),title);
+		}
+	}	
+	
+	@Test(enabled = true)
+	public static void pagesShouldHaveFormsWithSubmit() {
+		String title, formName, query;
+		List<WebElement> allFormChildElements;
+		String submit = null;
+		for (Map.Entry<String, String> entry : pagesWithForms.entrySet()) {
+			title = entry.getKey();
+			formName = entry.getValue();
+			driver.get(baseDirController + title);
+			query = "//form[contains(@name, " + formName + ")]";
+			allFormChildElements =  driver.findElements(By.xpath(query));
+			AssertJUnit.assertNotNull(allFormChildElements);
+			for(WebElement item : allFormChildElements)
+				if(item.getTagName().equals("input") && item.getAttribute("type").equals("submit"))
+					AssertJUnit.assertNotNull(item);			
 		}
 	}
 	
@@ -123,24 +142,12 @@ public class Page_test {
 	
 	@Test(enabled = true)
 	public static void pagesShouldDisplayImages() {
+		String query;
 		for(String pageWithImage : pagesWithImages) {
-			driver.get(baseDirController + pageWithImage);		
-			WebElement img = driver.findElement(By.xpath("//img[contains(@alt,'logo')]"));
+			driver.get(baseDirController + pageWithImage);	
+			query = "//img[contains(@alt,'logo')]";
+			WebElement img = driver.findElement(By.xpath(query));
 			AssertJUnit.assertNotNull(img);	
 		}		
-	}
-	
-	@Test(enabled = true)
-	public static void pagesShouldHaveForms() {
-		String title, formName;
-		WebElement frm;
-		for (Map.Entry<String, String> entry : pagesWithForms.entrySet()) {
-			title = entry.getKey();
-			formName = entry.getValue();
-			driver.get(baseDirController + title);
-			frm =  driver.findElement(By.xpath("//form[contains(@name, " + formName + ")]"));
-			AssertJUnit.assertNotNull(frm);	
-		}
 	}	
 }
-
