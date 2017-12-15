@@ -11,12 +11,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 
-public class Tests {
+public class Page_test {
+	
 	private static FirefoxDriver driver;
-	private static String URL;
-	private static String[] pagesTitles, pagesWithImages;
-	private static Map<String, String[]> anchorsLinks;
+	private static String baseDirController;
+	private static String[] pagesNames, pagesWithImages;
+	private static Map<String, String[]> anchorsLinks, inputTextsPage;
     private static Map<String, String> pagesWithForms;
+    private static Map<String, String> pagesTitles;
     private static String addFormMovie, updateFormMovie, deleteFormMovie, mainMenuMovie;
     private static String _addFormMovie, _updateFormMovie, _deleteFormMovie, _mainMenuMovie;
     
@@ -26,10 +28,11 @@ public class Tests {
 		driver = new FirefoxDriver();
 		makeURL();
 		getStrings();
-		getPagesTitles();		
+		getPagesNames();		
 		getAnchorsLinks();
 		getPagesWithImages();
-		getPagesWithForms();		
+		getPagesWithForms();
+		getPagesTitles();
 	}
 	
 	@AfterClass
@@ -38,18 +41,25 @@ public class Tests {
 	}
 	
 	private static void getStrings() {
-		addFormMovie = "Add Form Movie";
-		_addFormMovie = addFormMovie.replaceAll("\\s+", "");
-	    updateFormMovie = "Update Form Movie";
+		addFormMovie = "Add Form Movie";		
+	    updateFormMovie = "Update Form Movie";	    
+	    deleteFormMovie = "Delete Form Movie";	    
+	    mainMenuMovie = "Main Menu Movie";	    
+	    _addFormMovie = addFormMovie.replaceAll("\\s+", "");
 	    _updateFormMovie = updateFormMovie.replaceAll("\\s+", "");
-	    deleteFormMovie = "Delete Form Movie";
 	    _deleteFormMovie = deleteFormMovie.replaceAll("\\s+", "");
-	    mainMenuMovie = "Main Menu Movie";
 	    _mainMenuMovie = mainMenuMovie.replaceAll("\\s+", "");
 	}
-
+	
 	private static void getPagesTitles() {
-		pagesTitles = new String[]{_mainMenuMovie, _addFormMovie, _updateFormMovie, _deleteFormMovie};
+		pagesTitles = new HashMap<String, String>();
+		pagesTitles.put(_addFormMovie, _addFormMovie);
+		pagesTitles.put(_updateFormMovie, _updateFormMovie);
+		pagesTitles.put(_deleteFormMovie, _deleteFormMovie);
+	}
+
+	private static void getPagesNames() {
+		pagesNames = new String[]{_mainMenuMovie, _addFormMovie, _updateFormMovie, _deleteFormMovie};
 	}
 	
 	private static void getAnchorsLinks() {
@@ -60,9 +70,8 @@ public class Tests {
 		String[] anchorsDeleteForm = {mainMenuMovie , addFormMovie, updateFormMovie};		
 		String[] titles = {_mainMenuMovie,_addFormMovie,_updateFormMovie,_deleteFormMovie};
 		String[][] anchors = {anchorsMainMenu, anchorsAddForm, anchorsUpdateForm, anchorsDeleteForm};
-		for(int i = 0; i < titles.length; i++) {		
+		for(int i = 0; i < titles.length; i++)		
 			anchorsLinks.put(titles[i], anchors[i]);
-		}
 	}
 	
 	private static void getPagesWithForms() {
@@ -77,28 +86,33 @@ public class Tests {
 	}
 	
 	private static void makeURL() {
-		String server= "localhost";
+		String server = "localhost";
 		String project = "laravel5.4.15";
 		String controller = "movie";
-		URL = "http://" + server + "/" + project + "/public/" + controller + "/";
+		baseDirController = "http://" + server + "/" + project + "/public/" + controller + "/";
 	}
 	
 	@Test(enabled = true)	
-	public static void pagesShouldHaveSameTitle() {
-		for(String title : pagesTitles) {
-			driver.get(URL + title);
-			AssertJUnit.assertEquals(title, driver.getTitle());
-		}		
+	public static void pagesShouldHaveCorrectTitle() {
+		String page, title;
+		WebElement frm;
+		for (Map.Entry<String, String> entry : pagesTitles.entrySet()) {
+			page = entry.getKey();
+			title = entry.getValue();
+			driver.get(baseDirController + page);
+			frm =  driver.findElement(By.xpath("//form[contains(@name, " + title + ")]"));
+			AssertJUnit.assertNotNull(frm);	
+		}
 	}
 	
 	@Test(enabled = true)
-	public static void testAPageAnchors() {
+	public static void pagesShouldHaveAnchors() {
 		String title;
 		String[] anchorLinks;
 		WebElement anchor;
 		for (Map.Entry<String, String[]> entry : anchorsLinks.entrySet()) {
 			title = entry.getKey();
-			driver.get(URL + title);
+			driver.get(baseDirController + title);
 			anchorLinks = entry.getValue();			
 			for(String anchorLink : anchorLinks) {
 				anchor = driver.findElementByLinkText(anchorLink);
@@ -110,7 +124,7 @@ public class Tests {
 	@Test(enabled = true)
 	public static void pagesShouldDisplayImages() {
 		for(String pageWithImage : pagesWithImages) {
-			driver.get(URL + pageWithImage);		
+			driver.get(baseDirController + pageWithImage);		
 			WebElement img = driver.findElement(By.xpath("//img[contains(@alt,'logo')]"));
 			AssertJUnit.assertNotNull(img);	
 		}		
@@ -123,10 +137,10 @@ public class Tests {
 		for (Map.Entry<String, String> entry : pagesWithForms.entrySet()) {
 			title = entry.getKey();
 			formName = entry.getValue();
-			driver.get(URL + title);
+			driver.get(baseDirController + title);
 			frm =  driver.findElement(By.xpath("//form[contains(@name, " + formName + ")]"));
 			AssertJUnit.assertNotNull(frm);	
 		}
-	}
+	}	
 }
 
