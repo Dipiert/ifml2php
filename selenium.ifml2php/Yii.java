@@ -6,16 +6,20 @@ import java.util.Map;
 public class Yii {
 
 	private static Map<String, String[]> labelsPage, inputTextsPage, radiosPage;
-	private static String view_add_form_movie, view_update_form_movie, view_delete_form_movie;
+	private static String view_add_form_movie, view_update_form_movie, view_delete_form_movie, view_main_menu_movie;
 	private static String baseDirController;
+	private static String[] pagesWithImages;
 	private static Form form;
 	private static Label label;
 	
 	public Yii(String server, String controller) {		
 		form = new Form();
 		label = new Label();
+		makeViewsNames();
 		makeBaseDirController(server, controller);		
-		getStrings();
+		
+		makePagesWithImages();
+		
 		makeLabelsPage();	
 		makeInputTexts();
 		makeRadiosPage();
@@ -62,15 +66,15 @@ public class Yii {
 	public Map<String, String[]> getRadiosPage() {
 		return radiosPage;
 	}
-	
-	
-	public void getStrings() {
+		
+	public void makeViewsNames() {
 		view_add_form_movie = "view-add-form-movie";
 		view_update_form_movie = "view-update-form-movie";
 		view_delete_form_movie = "view-delete-form-movie";
+		view_main_menu_movie = "view-main-menu-movie";
 	}
 	
-	public static void makeBaseDirController(String server, String controller) {
+	private static void makeBaseDirController(String server, String controller) {
 		String project = "yii2.0.12";
 		String appHome = "web/index.php?r=";
 		baseDirController = "http://" + server + "/"
@@ -81,5 +85,13 @@ public class Yii {
 	
 	public String getBaseDirController() {
 		return baseDirController;
+	}
+	
+	private void makePagesWithImages() {
+		pagesWithImages = new String[]{view_main_menu_movie};
+	}
+	
+	public String[] getPagesWithImages() {
+		return pagesWithImages;
 	}
 }

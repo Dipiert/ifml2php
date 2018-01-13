@@ -4,9 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Laravel {
-	private static Map<String, String[]> labelsPage, inputTextsPage, radiosPage;
-	private static String addFormMovie, updateFormMovie, deleteFormMovie;
+	private static Map<String, String[]> labelsPage, inputTextsPage, radiosPage, anchorsLinks;
+	private static String addFormMovie, updateFormMovie, deleteFormMovie, mainMenuMovie;
 	private static String baseDirController;
+	private static String[] pagesWithImages;
 	private static Form form;
 	private static Label label;
 	
@@ -14,16 +15,18 @@ public class Laravel {
 		form = new Form();
 		label = new Label();
 		makeBaseDirController(server,controller);
-		getStrings();
+		makeViewsNames();
+		makePagesWithImages();
 		makeLabelsPage();
 		makeRadiosPage();
 		makeInputTexts();
 	}
 	
-	private void getStrings() {
+	private void makeViewsNames() {
 		addFormMovie = "AddFormMovie";
 		updateFormMovie = "UpdateFormMovie";
 		deleteFormMovie = "DeleteFormMovie";
+		mainMenuMovie = "MainMenuMovie";
 	}
 	
 	private void makeBaseDirController(String server, String controller) {
@@ -79,5 +82,17 @@ public class Laravel {
 	
 	public Map<String, String[]> getInputTexts() {
 		return inputTextsPage;
+	}
+	
+	private void makePagesWithImages() {
+		pagesWithImages = new String[]{mainMenuMovie};
+	}
+	
+	public String[] getPagesWithImages() {
+		return pagesWithImages;
+	}
+	
+	private void makeAnchorsLink() {
+		anchorsLinks = new HashMap<String, String[]>();
 	}
 }

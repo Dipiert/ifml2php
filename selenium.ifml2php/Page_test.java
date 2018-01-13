@@ -17,8 +17,6 @@ public class Page_test {
     
     private static FirefoxDriver driver;
     private static String yiiBaseDirController, lvlBaseDirController;
-    private static String server, controller;   
-    private static String[] yiiPagesWithImages, lvlPagesWithImages;
     private static Map<String, String[]> lvlAnchorsLinks;
     private static Map<String, String[]> yiiAnchorsLinks;
     private static Map<String, String> yiiPagesWithForms;
@@ -28,12 +26,18 @@ public class Page_test {
     private static String addFormMovie, updateFormMovie, deleteFormMovie, mainMenuMovie;
     private static String _addFormMovie, _updateFormMovie, _deleteFormMovie, _mainMenuMovie;
     private static String view_main_menu_movie, view_add_form_movie, view_update_form_movie, view_delete_form_movie;
+    private static Yii yii;
+    private static Laravel laravel;
     
-    public Page_test() {        
+    public Page_test() {    
+    	String server = "localhost";
+		String controller = "movie";
+    	yii = new Yii(server, controller);
+        laravel = new Laravel(server, controller);
+    	yiiBaseDirController = yii.getBaseDirController();
+		lvlBaseDirController = laravel.getBaseDirController();
         getStrings();
-        makeURLs();
         getAnchorsLinks();
-        getPagesWithImages();
         getPagesWithForms();
         getPagesTitles();
     }
@@ -62,8 +66,6 @@ public class Page_test {
         view_add_form_movie = "view-add-form-movie";
         view_update_form_movie = "view-update-form-movie";
         view_delete_form_movie = "view-delete-form-movie";
-        server = "localhost";
-        controller = "movie";
     }
     
     private static void getPagesTitles() {
@@ -81,11 +83,13 @@ public class Page_test {
     private static void getAnchorsLinks() {
         lvlAnchorsLinks = new HashMap<String, String[]>();
         yiiAnchorsLinks = new HashMap<String, String[]>();
-        
-        String[] anchorsMainMenu = {addFormMovie, updateFormMovie, deleteFormMovie};
-        String[] anchorsAddForm = {mainMenuMovie , updateFormMovie, deleteFormMovie};
-        String[] anchorsUpdateForm = {mainMenuMovie , addFormMovie, deleteFormMovie};
-        String[] anchorsDeleteForm = {mainMenuMovie , addFormMovie, updateFormMovie};       
+        Anchor anchor = new Anchor();
+        View view = new View();
+        String[] anchorsMainMenu = anchor.getMainMenuAnchors();
+        String[] anchorsAddForm = anchor.getAddFormAnchors();
+        String[] anchorsUpdateForm = anchor.getUpdateFormAnchors();
+        String[] anchorsDeleteForm = anchor.getDeleteFormAnchors();
+
         String[] lvlTitles = {_mainMenuMovie,_addFormMovie,_updateFormMovie,_deleteFormMovie};
         String[] yiiTitles = {view_main_menu_movie, view_add_form_movie, view_update_form_movie, view_delete_form_movie};
         
@@ -107,34 +111,6 @@ public class Page_test {
         yiiPagesWithForms.put(view_delete_form_movie, _deleteFormMovie);
     }
     
-    private static void getPagesWithImages() {
-        lvlPagesWithImages = new String[]{_mainMenuMovie};
-        yiiPagesWithImages = new String[]{view_main_menu_movie};
-    }
-    
-    private static void makeURLs() {
-        makeYii2URL();
-        makeLaravelURL();
-    }
-    
-    private static void makeYii2URL() {
-        String project = "yii2.0.12";
-        String appHome = "web/index.php?r=";
-        yiiBaseDirController = "http://" + server + "/"
-                                      + project + "/" 
-                                      + appHome
-                                      + controller + "/";
-    }
-    
-    private static void makeLaravelURL() {
-        String project = "laravel5.4.15";
-        String appHome = "public";
-        lvlBaseDirController = "http://" + server + "/"
-                                      + project + "/" 
-                                      + appHome + "/"
-                                      + controller + "/";   
-    }
-
     private static void pagesShouldHaveCorrectTitle(String baseDirController, Map<String, String> pagesTitles) {
         String page, title;
         WebElement frm;
@@ -220,11 +196,11 @@ public class Page_test {
     
     @Test(enabled = true)
     public static void lvlPagesShouldDisplayImages() {
-        pagesShouldDisplayImages(lvlBaseDirController, lvlPagesWithImages);
+        pagesShouldDisplayImages(lvlBaseDirController, laravel.getPagesWithImages());
     }
     
     @Test(enabled = true)
     public static void yiiPagesShouldDisplayImages() {
-        pagesShouldDisplayImages(yiiBaseDirController, yiiPagesWithImages);
+    	pagesShouldDisplayImages(yiiBaseDirController, yii.getPagesWithImages());
     }
 }
