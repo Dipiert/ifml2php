@@ -1,6 +1,5 @@
 package selenium.ifml2php;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,13 +16,6 @@ public class Page_test {
     
     private static FirefoxDriver driver;
     private static String yiiBaseDirController, lvlBaseDirController;    
-    private static Map<String, String> yiiPagesWithForms;
-    private static Map<String, String> lvlPagesWithForms;
-    private static Map<String, String> yiiPagesTitles;
-    private static Map<String, String> lvlPagesTitles;    
-    private static String addFormMovie, updateFormMovie, deleteFormMovie;
-    private static String _addFormMovie, _updateFormMovie, _deleteFormMovie;
-    private static String view_add_form_movie, view_update_form_movie, view_delete_form_movie;
     private static Yii yii;
     private static Laravel laravel;
     
@@ -34,9 +26,6 @@ public class Page_test {
         laravel = new Laravel(server, controller);
     	yiiBaseDirController = yii.getBaseDirController();
 		lvlBaseDirController = laravel.getBaseDirController();
-        getStrings();
-        getPagesWithForms();
-        getPagesTitles();
     }
     
     @BeforeClass
@@ -49,42 +38,7 @@ public class Page_test {
     private static void tearDown() {
         driver.close();
     }
-    
-    private static void getStrings() {
-        addFormMovie = "Add Form Movie";        
-        updateFormMovie = "Update Form Movie";      
-        deleteFormMovie = "Delete Form Movie";      
-        _addFormMovie = addFormMovie.replaceAll("\\s+", "");
-        _updateFormMovie = updateFormMovie.replaceAll("\\s+", "");
-        _deleteFormMovie = deleteFormMovie.replaceAll("\\s+", "");
-        view_add_form_movie = "view-add-form-movie";
-        view_update_form_movie = "view-update-form-movie";
-        view_delete_form_movie = "view-delete-form-movie";
-    }
-    
-    private static void getPagesTitles() {
-        lvlPagesTitles = new HashMap<String, String>();
-        yiiPagesTitles = new HashMap<String, String>();     
-        lvlPagesTitles.put(_addFormMovie, _addFormMovie);
-        lvlPagesTitles.put(_updateFormMovie, _updateFormMovie);
-        lvlPagesTitles.put(_deleteFormMovie, _deleteFormMovie);     
-        yiiPagesTitles.put(view_add_form_movie, _addFormMovie);
-        yiiPagesTitles.put(view_update_form_movie, _updateFormMovie);
-        yiiPagesTitles.put(view_delete_form_movie, _deleteFormMovie);
-        
-    }
- 
-    private static void getPagesWithForms() {
-        lvlPagesWithForms = new HashMap<String, String>();
-        yiiPagesWithForms = new HashMap<String, String>();      
-        lvlPagesWithForms.put(_addFormMovie, _addFormMovie);
-        lvlPagesWithForms.put(_updateFormMovie, _updateFormMovie);
-        lvlPagesWithForms.put(_deleteFormMovie, _deleteFormMovie);
-        yiiPagesWithForms.put(view_add_form_movie, _addFormMovie);
-        yiiPagesWithForms.put(view_update_form_movie, _updateFormMovie);
-        yiiPagesWithForms.put(view_delete_form_movie, _deleteFormMovie);
-    }
-    
+       
     private static void pagesShouldHaveCorrectTitle(String baseDirController, Map<String, String> pagesTitles) {
         String page, title;
         for (Map.Entry<String, String> entry : pagesTitles.entrySet()) {
@@ -138,27 +92,27 @@ public class Page_test {
     
     @Test(enabled = true)
     public static void lvlPagesShouldHaveCorrectTitle() {
-        pagesShouldHaveCorrectTitle(lvlBaseDirController, lvlPagesTitles);
+        pagesShouldHaveCorrectTitle(lvlBaseDirController, laravel.getPagesTitles());
     }
     
     @Test(enabled = true)
     public static void yiiPagesShouldHaveCorrectTitle() {
-        pagesShouldHaveCorrectTitle(yiiBaseDirController, yiiPagesTitles);
+        pagesShouldHaveCorrectTitle(yiiBaseDirController, yii.getPagesTitles());
     }
 
     @Test(enabled = true)
     public static void lvlPagesShouldHaveFormsWithSubmit() {
-        pagesShouldHaveFormsWithSubmit(lvlBaseDirController, lvlPagesWithForms);
+        pagesShouldHaveFormsWithSubmit(lvlBaseDirController, laravel.getPagesWithForms());
     }
     
     @Test(enabled = true)
     public static void yiiPagesShouldHaveFormsWithSubmit() {
-        pagesShouldHaveFormsWithSubmit(yiiBaseDirController, yiiPagesWithForms);
+        pagesShouldHaveFormsWithSubmit(yiiBaseDirController, yii.getPagesWithForms());
     }
     
     @Test(enabled = true)
     public static void lvlPagesShouldHaveAnchors() {
-        pagesShouldHaveAnchors(lvlBaseDirController, laravel.getAnchorsLink());
+        pagesShouldHaveAnchors(lvlBaseDirController, laravel.getAnchorsLinks());
     }
     
     @Test(enabled = true)

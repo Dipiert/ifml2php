@@ -27,5 +27,5 @@ public class View {
 	public String getMainMenuMovieSplit() {
 		return mainMenuMovieSplit;
 	}
-
+	
 }

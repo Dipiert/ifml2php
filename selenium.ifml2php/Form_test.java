@@ -88,12 +88,12 @@ public class Form_test {
 
 	@Test(enabled = true)
 	public static void lvlFormsShouldHaveInputs() {
-		formsShouldHaveInputs(lvlBaseDirController, laravel.getInputTexts());
+		formsShouldHaveInputs(lvlBaseDirController, laravel.getInputTextsPage());
 	}
 	
 	@Test(enabled = true)
 	public static void yiiFormsShouldHaveInputs() {
-		formsShouldHaveInputs(yiiBaseDirController, yii.getInputTexts());
+		formsShouldHaveInputs(yiiBaseDirController, yii.getInputTextsPage());
 	}
 	
 	@Test(enabled = true)

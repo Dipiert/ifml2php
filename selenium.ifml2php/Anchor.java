@@ -3,8 +3,7 @@ package selenium.ifml2php;
 public class Anchor {
 	private String[] mainMenuAnchors, addFormAnchors, updateFormAnchors, deleteFormAnchors;
 	private String addFormMovie, updateFormMovie, deleteFormMovie, mainMenuMovie;
-	private View view;
-	
+
 	public Anchor() {
 		addFormMovie = "Add Form Movie";
 		updateFormMovie = "Update Form Movie";
@@ -46,10 +45,6 @@ public class Anchor {
 
 	public String getMainMenuMovie() {
 		return mainMenuMovie;
-	}
-
-	public View getView() {
-		return view;
 	}
 		
 	public String[][] getAllAnchors() {
