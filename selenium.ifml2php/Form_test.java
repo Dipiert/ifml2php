@@ -37,7 +37,7 @@ public class Form_test {
 		driver.close();
 	}
 	
-	private static void formsShouldHaveInputs(String baseDirController, Map<String, String[]> inputTexts){
+	private static void formsShouldHaveTextInputs(String baseDirController, Map<String, String[]> inputTexts){
 		String name, query;
 		String[] inputsTextsName;
 		WebElement inputText;	
@@ -87,13 +87,13 @@ public class Form_test {
 	}
 
 	@Test(enabled = true)
-	public static void lvlFormsShouldHaveInputs() {
-		formsShouldHaveInputs(lvlBaseDirController, laravel.getInputTextsPage());
+	public static void lvlFormsShouldHaveTextInputs() {
+		formsShouldHaveTextInputs(lvlBaseDirController, laravel.getInputTextsPage());
 	}
 	
 	@Test(enabled = true)
-	public static void yiiFormsShouldHaveInputs() {
-		formsShouldHaveInputs(yiiBaseDirController, yii.getInputTextsPage());
+	public static void yiiFormsShouldHaveTextInputs() {
+		formsShouldHaveTextInputs(yiiBaseDirController, yii.getInputTextsPage());
 	}
 	
 	@Test(enabled = true)
