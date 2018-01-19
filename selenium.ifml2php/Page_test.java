@@ -16,16 +16,14 @@ import org.testng.annotations.AfterClass;
 public class Page_test {
     
     private static FirefoxDriver driver;
-    private static String yiiBaseDirController, lvlBaseDirController;
-    private static Map<String, String[]> lvlAnchorsLinks;
-    private static Map<String, String[]> yiiAnchorsLinks;
+    private static String yiiBaseDirController, lvlBaseDirController;    
     private static Map<String, String> yiiPagesWithForms;
     private static Map<String, String> lvlPagesWithForms;
     private static Map<String, String> yiiPagesTitles;
     private static Map<String, String> lvlPagesTitles;    
-    private static String addFormMovie, updateFormMovie, deleteFormMovie, mainMenuMovie;
-    private static String _addFormMovie, _updateFormMovie, _deleteFormMovie, _mainMenuMovie;
-    private static String view_main_menu_movie, view_add_form_movie, view_update_form_movie, view_delete_form_movie;
+    private static String addFormMovie, updateFormMovie, deleteFormMovie;
+    private static String _addFormMovie, _updateFormMovie, _deleteFormMovie;
+    private static String view_add_form_movie, view_update_form_movie, view_delete_form_movie;
     private static Yii yii;
     private static Laravel laravel;
     
@@ -37,7 +35,6 @@ public class Page_test {
     	yiiBaseDirController = yii.getBaseDirController();
 		lvlBaseDirController = laravel.getBaseDirController();
         getStrings();
-        getAnchorsLinks();
         getPagesWithForms();
         getPagesTitles();
     }
@@ -57,12 +54,9 @@ public class Page_test {
         addFormMovie = "Add Form Movie";        
         updateFormMovie = "Update Form Movie";      
         deleteFormMovie = "Delete Form Movie";      
-        mainMenuMovie = "Main Menu Movie";      
         _addFormMovie = addFormMovie.replaceAll("\\s+", "");
         _updateFormMovie = updateFormMovie.replaceAll("\\s+", "");
         _deleteFormMovie = deleteFormMovie.replaceAll("\\s+", "");
-        _mainMenuMovie = mainMenuMovie.replaceAll("\\s+", "");
-        view_main_menu_movie = "view-main-menu-movie";
         view_add_form_movie = "view-add-form-movie";
         view_update_form_movie = "view-update-form-movie";
         view_delete_form_movie = "view-delete-form-movie";
@@ -79,27 +73,7 @@ public class Page_test {
         yiiPagesTitles.put(view_delete_form_movie, _deleteFormMovie);
         
     }
-
-    private static void getAnchorsLinks() {
-        lvlAnchorsLinks = new HashMap<String, String[]>();
-        yiiAnchorsLinks = new HashMap<String, String[]>();
-        Anchor anchor = new Anchor();
-        View view = new View();
-        String[] anchorsMainMenu = anchor.getMainMenuAnchors();
-        String[] anchorsAddForm = anchor.getAddFormAnchors();
-        String[] anchorsUpdateForm = anchor.getUpdateFormAnchors();
-        String[] anchorsDeleteForm = anchor.getDeleteFormAnchors();
-
-        String[] lvlTitles = {_mainMenuMovie,_addFormMovie,_updateFormMovie,_deleteFormMovie};
-        String[] yiiTitles = {view_main_menu_movie, view_add_form_movie, view_update_form_movie, view_delete_form_movie};
-        
-        String[][] anchors = {anchorsMainMenu, anchorsAddForm, anchorsUpdateForm, anchorsDeleteForm};
-        for(int i = 0; i < lvlTitles.length; i++)       
-            lvlAnchorsLinks.put(lvlTitles[i], anchors[i]);
-        for(int i = 0; i < yiiTitles.length; i++)       
-            yiiAnchorsLinks.put(yiiTitles[i], anchors[i]);
-    }
-    
+ 
     private static void getPagesWithForms() {
         lvlPagesWithForms = new HashMap<String, String>();
         yiiPagesWithForms = new HashMap<String, String>();      
@@ -113,7 +87,6 @@ public class Page_test {
     
     private static void pagesShouldHaveCorrectTitle(String baseDirController, Map<String, String> pagesTitles) {
         String page, title;
-        WebElement frm;
         for (Map.Entry<String, String> entry : pagesTitles.entrySet()) {
             page = entry.getKey();
             title = entry.getValue();
@@ -125,7 +98,6 @@ public class Page_test {
     private static void pagesShouldHaveFormsWithSubmit(String baseDirController, Map<String, String> pagesWithForms) {
         String title, formName, query;
         List<WebElement> allFormChildElements;
-        String submit = null;
         for (Map.Entry<String, String> entry : pagesWithForms.entrySet()) {
             title = entry.getKey();
             formName = entry.getValue();
@@ -186,12 +158,12 @@ public class Page_test {
     
     @Test(enabled = true)
     public static void lvlPagesShouldHaveAnchors() {
-        pagesShouldHaveAnchors(lvlBaseDirController, lvlAnchorsLinks);
+        pagesShouldHaveAnchors(lvlBaseDirController, laravel.getAnchorsLink());
     }
     
     @Test(enabled = true)
     public static void yiiPagesShouldHaveAnchors() {
-        pagesShouldHaveAnchors(yiiBaseDirController, yiiAnchorsLinks);
+        pagesShouldHaveAnchors(yiiBaseDirController, yii.getAnchorsLinks());
     }
     
     @Test(enabled = true)

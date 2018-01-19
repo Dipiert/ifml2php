@@ -10,16 +10,19 @@ public class Laravel {
 	private static String[] pagesWithImages;
 	private static Form form;
 	private static Label label;
+	private static View view;
 	
 	public Laravel(String server, String controller) {
 		form = new Form();
 		label = new Label();
+		view = new View();
 		makeBaseDirController(server,controller);
 		makeViewsNames();
 		makePagesWithImages();
 		makeLabelsPage();
 		makeRadiosPage();
 		makeInputTexts();
+		makeAnchorsLink();
 	}
 	
 	private void makeViewsNames() {
@@ -94,5 +97,13 @@ public class Laravel {
 	
 	private void makeAnchorsLink() {
 		anchorsLinks = new HashMap<String, String[]>();
+        String[] titles = {view.getMainMenuMovieSplit(), view.getAddFormMovieSplit(), view.getUpdateFormMovieSplit(), view.getDeleteFormMovieSplit()};
+        String[][] anchors = new Anchor().getAllAnchors();
+        for(int i = 0; i < titles.length; i++)       
+            anchorsLinks.put(titles[i], anchors[i]);
+	}
+	
+	public Map<String, String[]> getAnchorsLink() {
+		return anchorsLinks;
 	}
 }

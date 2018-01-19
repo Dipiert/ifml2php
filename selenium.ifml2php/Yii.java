@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Yii {
 
-	private static Map<String, String[]> labelsPage, inputTextsPage, radiosPage;
+	private static Map<String, String[]> labelsPage, inputTextsPage, radiosPage, anchorsLinks;
 	private static String view_add_form_movie, view_update_form_movie, view_delete_form_movie, view_main_menu_movie;
 	private static String baseDirController;
 	private static String[] pagesWithImages;
@@ -16,13 +16,12 @@ public class Yii {
 		form = new Form();
 		label = new Label();
 		makeViewsNames();
-		makeBaseDirController(server, controller);		
-		
-		makePagesWithImages();
-		
+		makeBaseDirController(server, controller);			
+		makePagesWithImages();		
 		makeLabelsPage();	
 		makeInputTexts();
 		makeRadiosPage();
+		makeAnchorsLinks();
 	}
 	
 	private void makeLabelsPage() {
@@ -93,5 +92,17 @@ public class Yii {
 	
 	public String[] getPagesWithImages() {
 		return pagesWithImages;
+	}
+	
+	private static void makeAnchorsLinks() {
+		anchorsLinks = new HashMap<String, String[]>();
+		String[] titles = {view_main_menu_movie, view_add_form_movie, view_update_form_movie, view_delete_form_movie};
+		String[][] anchors = new Anchor().getAllAnchors();
+		for(int i = 0; i < titles.length; i++)       
+            anchorsLinks.put(titles[i], anchors[i]);
+	}
+	
+	public Map<String, String[]> getAnchorsLinks() {
+		return anchorsLinks;
 	}
 }

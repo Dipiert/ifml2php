@@ -6,7 +6,6 @@ public class Anchor {
 	private View view;
 	
 	public Anchor() {
-		//view = new View();
 		addFormMovie = "Add Form Movie";
 		updateFormMovie = "Update Form Movie";
 		deleteFormMovie = "Delete Form Movie";
@@ -53,4 +52,13 @@ public class Anchor {
 		return view;
 	}
 		
+	public String[][] getAllAnchors() {
+		Anchor anchor = new Anchor();
+		String[] anchorsMainMenu = anchor.getMainMenuAnchors();
+        String[] anchorsAddForm = anchor.getAddFormAnchors();
+        String[] anchorsUpdateForm = anchor.getUpdateFormAnchors();
+        String[] anchorsDeleteForm = anchor.getDeleteFormAnchors();
+		String[][] anchors = {anchorsMainMenu, anchorsAddForm, anchorsUpdateForm, anchorsDeleteForm};
+		return anchors;
+	}
 }
