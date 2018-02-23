@@ -28,7 +28,7 @@ public class Form_test {
 	
 	@BeforeClass
 	private void setUp() {
-		System.setProperty("webdriver.gecko.driver", "/home/dam/Descargas/eclipse/luna/geckodriver");
+		System.setProperty("webdriver.gecko.driver", "geckodriver");
 		driver = new FirefoxDriver();
 	}
 	

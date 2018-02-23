@@ -30,7 +30,7 @@ public class Page_test {
     
     @BeforeClass
     private static void setUp() {
-        System.setProperty("webdriver.gecko.driver", "/home/dam/Descargas/eclipse/luna/geckodriver");
+        System.setProperty("webdriver.gecko.driver", "geckodriver");
         driver = new FirefoxDriver();
     }
     
