@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.opera.OperaOptions;
 import org.testng.AssertJUnit;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -33,28 +35,32 @@ public class Form_test {
 	}
 	
 	@BeforeClass
-	private void setUp() {		
-		registerDrivers();
+	private void setUp() {				
 		loadDrivers();
 	}
 	
 	private void loadFirefoxDriver() {
+		System.setProperty("webdriver.gecko.driver", "drivers/geckodriver");
 		drivers.add(new FirefoxDriver());
 	}
 	
 	private void loadChromeDriver() {
+		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
 		ChromeOptions chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("--no-sandbox");
 		drivers.add(new ChromeDriver(chromeOptions));
 	}
 	private void loadDrivers() {
 		loadFirefoxDriver();
-		loadChromeDriver();		
+		loadChromeDriver();
+		loadOperaDriver();
 	}
 	
-	private void registerDrivers() {
-		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
-		System.setProperty("webdriver.gecko.driver", "drivers/geckodriver");
+	private void loadOperaDriver() {
+		System.setProperty("webdriver.opera.driver", "drivers/operadriver");
+		OperaOptions operaOptions = new OperaOptions();
+		operaOptions.addArguments("--no-sandbox");
+		drivers.add(new OperaDriver(operaOptions));
 	}
 	
 	@AfterClass
