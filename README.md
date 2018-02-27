@@ -163,6 +163,9 @@ In this repo, there are two Acceleo projects called:
  * **`edu.ifml2php.psm.lycmm.gen.laravel`**.
  * **`edu.ifml2php.psm.lycmm.gen.yii2`**.
 
+## Testing
+Selenium tests are using GeckoDriver v0.19.1, ChromeDriver v2.35 & OperaDriver v2.33
+
 ## Troubleshooting
 
 ### ATL
