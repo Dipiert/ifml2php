@@ -14,8 +14,12 @@ function getLaravelURLs() {
 }
 
 function getYiiURLs() {
-    var home = 'http://localhost/yii2.0.12/views/InteractionFlowModelViews';
-    var routes = [ 'MainMenuMovie', 'AddFormMovie', 'UpdateFormMovie', 'DeleteFormMovie'];
+    var home = 'http://localhost/yii2.0.12/web/index.php?r=movie/';
+    var routes = ['view-main-menu-movie',
+    	'view-add-form-movie',
+    	'view-update-form-movie',
+    	'view-delete-form-movie',
+    	];
     return makeURL(home, routes);
 }
 
