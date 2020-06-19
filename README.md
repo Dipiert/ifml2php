@@ -11,6 +11,8 @@ This project intended to facilitate the adoption of the MDD approach by Web Deve
 * [Sirius](https://eclipse.org/sirius/)
 * [Un caso de estudio sobre la aplicación de UWE para la generación de sistemas web](https://goo.gl/dozG7N)
 * [Enfoque MDWE soportando Modelo MVC Web para Frameworks PHP](https://goo.gl/wTcbjK)
+* [Generación semiautomática de aplicaciones Web De modelos en IFML a aplicaciones basadas en frameworks PHP Yii2 y Laravel
+](https://dipiert.neocities.org/degree_thesis.pdf)
 
 ## Setting up your development environment
 
